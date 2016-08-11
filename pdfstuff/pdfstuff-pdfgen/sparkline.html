@@ -1,0 +1,76 @@
+<html>
+<head>
+
+<!-- <link rel="stylesheet" type="text/css" href="dataTables.uikit.min.css"> -->
+<link rel="stylesheet" type="text/css" href="dataTables.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
+
+<script type="text/javascript" language="javascript" src="jquery.js">
+	</script>
+<script type="text/javascript" language="javascript" src="dataTables.min.js">
+	</script>
+  <script type="text/javascript" language="javascript" src="js/uikit.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="jquery.sparkline.min.js">
+	</script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "filter": false
+    } );
+		$('.bar-sparkline').sparkline('html', {
+    enableTagOptions: true,
+    chartRangeMin   : 0
+});
+} );
+</script>
+<style>
+table{
+	font: 400 10px/16px "Trebuchet MS" !important;
+}
+th{
+	text-align:right;
+	padding: 0px 0px !important;
+}
+td{
+	text-align:right;
+	padding: 2px 2px !important;
+}
+.total{
+	font: 800 10px/16px "Trebuchet MS" !important;
+}
+.left{
+	text-align:left;
+}
+.bar-sparkline{
+	/*float: left;*/
+-ms-transform: rotate(90deg);
+-webkit-transform: rotate(90deg);
+transform: rotate(90deg);
+zoom: 1;
+/*margin-top: 50px;
+margin-left: -30px;*/
+}
+
+
+#stuff{
+	width: 251;
+	height: 162;
+	left: 245;
+	bottom: 140;
+position: absolute;
+}
+</style>
+</head>
+<body>
+<div id="stuff">
+							 <div class="bar-sparkline" sparktype="bar" sparkbarcolor="#00CD66" sparkheight="122" sparkbarwidth="16" sparkbarspacing="5">
+									 <!-- 28,15,40,12,13 -->
+							 </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<html>
+<head>
+
+<!-- <link rel="stylesheet" type="text/css" href="dataTables.uikit.min.css"> -->
+<link rel="stylesheet" type="text/css" href="dataTables.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
+
+<script type="text/javascript" language="javascript" src="jquery.js">
+	</script>
+<script type="text/javascript" language="javascript" src="dataTables.min.js">
+	</script>
+  <script type="text/javascript" language="javascript" src="js/uikit.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="jquery.sparkline.min.js">
+	</script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "filter": false
+    } );
+		$('.bar-sparkline').sparkline('html', {
+    enableTagOptions: true,
+    chartRangeMin   : 0
+});
+} );
+</script>
+<style>
+table{
+	font: 400 10px/16px "Trebuchet MS" !important;
+}
+th{
+	text-align:right;
+	padding: 0px 0px !important;
+}
+td{
+	text-align:right;
+	padding: 2px 2px !important;
+}
+.total{
+	font: 800 10px/16px "Trebuchet MS" !important;
+}
+.left{
+	text-align:left;
+}
+.bar-sparkline{
+	float: right;
+-ms-transform: rotate(90deg);
+-webkit-transform: rotate(90deg);
+transform: rotate(90deg);
+zoom: 2;
+}
+.text-right{
+	position: absolute;
+    top: 263px;
+}
+/*# # c.drawImage(ImageReader(StringIO.StringIO(photo)), 48, 225, width=251, height=162, mask='auto')
+# c.drawImage('pdfstuff/pdfstuff-pdfgen/datatable.png', 48, 225, width=251, height=162, mask='auto')
+# c.drawImage(ImageReader(StringIO.StringIO(photo)), 305, 225, width=251, height=162, mask='auto')
+
+# c.drawImage('pdfstuff/pdfstuff-pdfgen/sparkline.png', 305, 225, width=251, height=162, mask='auto')*/
+#stuff{
+	width: 251;
+	height: 162;
+	left: 48;
+	bottom: 225;
+position: absolute;
+}
+</style>
+</head>
+<body>
+
+<div id = "stuff" class="uk-table uk-table-hover uk-table-striped uk-table-condensed uk-overflow-container">
+<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="left">Cannabinoid</th>
+                <th>LOQ<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;">%</i></span></th>
+                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;">%</i></span></th>
+                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;">mg/g</i></span></th>
+            </tr>
+						<!-- <tr>
+                <th>Cannabinoid<br></th>
+                <th>LOQ</th>
+                <th>Mass</th>
+                <th>Mass</th>
+            </tr> -->
+        </thead>
+        <!-- <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot> -->
+        <tbody>
+            <tr>
+                <td class="left">THCa</td>
+                <td>1.00%</td>
+                <td>8.00%</td>
+                <td>80.0</td>
+            </tr>
+            <tr>
+                <td class="left">delta9-THC</td>
+                <td>1.00%</td>
+                <td>21.00%</td>
+                <td>210.0</td>
+            </tr>
+            <tr>
+                <td class="left">delta8-THC</td>
+                <td>1.00%</td>
+                <td>18.00%</td>
+                <td>180.0</td>
+            </tr>
+            <tr>
+                <td class="left">THCV</td>
+                <td>1.00%</td>
+                <td>11.00%</td>
+                <td>110.0</td>
+            </tr>
+            <tr>
+                <td class="left">CBDa</td>
+                <td>1.00%</td>
+                <td>2.00%</td>
+                <td>20.0</td>
+            </tr>
+						<tr>
+                <td class="total left">Total THC</td>
+                <td></td>
+                <td class="total">28.02%</td>
+                <td class="total">280.2</td>
+            </tr>
+						<tr>
+                <td class="total left">Total CBD</td>
+                <td></td>
+                <td class="total">4.93%</td>
+                <td class="total">49.3</td>
+            </tr>
+						<tr>
+                <td class="total left">Total Cannabinoids</td>
+                <td></td>
+                <td class="total">78.80%</td>
+                <td class="total">788.0</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</body>
+</html>
