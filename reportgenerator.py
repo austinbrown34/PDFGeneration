@@ -11,9 +11,11 @@ from pdfminer.cmapdb import CMapDB
 from pdfminer.layout import LAParams
 from pdfminer.image import ImageWriter
 import lxml.etree
-import gi as gi
-gi.require_version('GExiv2', '0.10')
-from gi.repository.GExiv2 import Metadata
+# import gi as gi
+# gi.require_version('GExiv2', '0.10')
+# from gi.repository.GExiv2 import Metadata
+from PIL import Image
+import piexif
 from fdfgen import forge_fdf
 import subprocess
 from reportlab.pdfgen import canvas
@@ -92,13 +94,22 @@ def get_acroform_fields(filename):
         field_names.append(name)
     return field_names
 
+def set_image_tag(filename, tag):
+    exif_ifd = {
+                piexif.ExifIFD.UserComment: unicode(tag)
+                }
+    exif_dict = {"Exif":exif_ifd}
+    exif_bytes = piexif.dump(exif_dict)
+    im = Image.open(filename)
+    im.save(filename, exif=exif_bytes)
 
 def get_image_tag(filename):
     tag = None
     try:
-        m = Metadata()
-        m.open_path(filename)
-        tag = m.get_tag_string('Exif.Photo.UserComment')
+        exif_dict = piexif.load(filename)
+        if piexif.ExifIFD.UserComment in exif_dict['Exif']:
+            print exif_dict['Exif'][piexif.ExifIFD.UserComment]
+            tag = exif_dict['Exif'][piexif.ExifIFD.UserComment]
     except Exception as e:
         print filename + " has an unsupported format --- setting tag to None"
         print "Error: " + str(e)
