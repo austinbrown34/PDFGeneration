@@ -68,11 +68,11 @@ def setup(server_data):
     s3templates.download_config(
         'cc/coa/' + template_folder,
         'config.yaml',
-        'config.yaml'
+        'work/config.yaml'
     )
     template_keys = get_test_packages(server_data['test_packages'])
-    templates = s3templates.get_templates('config.yaml', '', template_keys)
-    s3templates.download_templates('', templates)
+    templates = s3templates.get_templates('work/config.yaml', '', template_keys)
+    s3templates.download_templates('cc/coa/' + template_folder, templates)
     response = {
         'templates': templates,
         'data': server_data

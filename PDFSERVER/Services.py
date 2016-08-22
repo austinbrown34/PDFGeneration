@@ -51,7 +51,7 @@ class S3TemplateService(object):
             self.s3.meta.client.download_file(
                 self.bucket,
                 os.path.join(template_folder, template),
-                template
+                os.path.join('work', template)
             )
 
     def get_presigned_url(self, pdf):

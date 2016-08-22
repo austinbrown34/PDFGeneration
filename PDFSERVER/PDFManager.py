@@ -51,7 +51,7 @@ class PDFManager(object):
         if delivery_method is None:
             delivery_method = self.delivery_method
         pdf = PDFMaker(templates, data)
-        pdf_response = pdf.make()
+        pdf_response = pdf.make_pages()
         self.status = pdf_response['status']
         if 'error' in pdf_response:
             self.error = pdf_response['error']

@@ -9,7 +9,6 @@ class PDFMaker(object):
         self.templates = templates
         self.server_data = server_data
         self.total_pages = len(templates)
-        self.work_dir = work_dir
 
     def make_pages(
             self,
@@ -44,7 +43,6 @@ class PDFMaker(object):
         if work_dir is None:
             work_dir = self.work_dir
         page_count = str(page_count)
-        pdftools.download_template(template)
         fields = pdftools.get_acroform_fields(os.path.join(work_dir, template))
         all_image_data = pdftools.get_placeholder_image_info(
             os.path.join(work_dir, template),
