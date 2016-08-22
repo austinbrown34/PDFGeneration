@@ -2,6 +2,7 @@ from PDFJobManager import PDFJobManager
 from PDFMaker import PDFMaker
 import boto3
 import requests
+import json
 
 
 class PDFManager(object):
@@ -73,7 +74,8 @@ class PDFManager(object):
             callback=None,
             redirect_url=None,
             api_key=None,
-            api_secret=None):
+            api_secret=None,
+            file_key=None):
         if callback is None:
             callback = self.callback
         if redirect_url is None:
@@ -82,9 +84,10 @@ class PDFManager(object):
             api_key = self.api_key
         if api_secret is None:
             api_secret = self.api_secret
+        if file_key is None:
+            file_key = self.payload['key']
         url = callback['url']
         fields = callback['fields']
-        file_key = callback['key']
         try:
             requests.post(
                 url,
@@ -93,11 +96,13 @@ class PDFManager(object):
                     'file': pdf
                 }
             )
+            this_data = {'key': file_key}
+            if api_key and api_secret:
+                this_data['API_KEY'] = api_key
+                this_data['API_SECRET'] = api_secret
             requests.post(
                 self.get_url(url, redirect_url),
-                dict(key=file_key),
-                api_key,
-                api_secret
+                this_data
             )
 
             self.status = 'Successfully Generated and Delivered PDF.'
@@ -136,25 +141,31 @@ class PDFManager(object):
         )
         s3 = session.resource('s3')
         saved_pdf = file('finalpdf.pdf', 'w')
-        saved_pdf.write(pdf.read())
+        saved_pdf.write(pdf)
         saved_pdf.close()
         s3.meta.client.upload_file(
-            'finalreport.pdf', 'pdfserver', 'finalreport.pdf'
+            'finalpdf.pdf', 'pdfserver', 'finalpdf.pdf'
         )
         client = session.client('s3')
         file_url = client.generate_presigned_url(
             ClientMethod='get_object',
             Params={
                 'Bucket': 'pdfserver',
-                'Key': 'finalreport.pdf'
+                'Key': 'finalpdf.pdf'
             }
         )
         try:
+            this_data = {'url': file_url}
+            new_url = self.get_url(url, redirect_url)
+            print "Posting to: " + new_url
+            if api_key and api_secret:
+                this_data['API_KEY'] = api_key
+                this_data['API_SECRET'] = api_secret
+            headers = {'Content-Type': 'application/json'}
             requests.post(
-                self.get_url(url, redirect_url),
-                dict(url=file_url),
-                api_key,
-                api_secret
+                new_url,
+                data=json.dumps(this_data),
+                headers=headers
             )
             self.status = 'Successfully Generated and Delivered PDF.'
             response = {
