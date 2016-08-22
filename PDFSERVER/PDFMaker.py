@@ -105,8 +105,8 @@ class PDFMaker(object):
 
         vizfiles = ['datatable3.html', 'sparkline3.html']
         vizpdfs = [
-            os.path.join(work_dir, 'temp', 'datatable.pdf'),
-            os.path.join(work_dir, 'temp', 'sparkline.pdf')
+            os.path.join(work_dir, 'temp', 'datatable3.pdf'),
+            os.path.join(work_dir, 'temp', 'sparkline3.pdf')
             ]
 
         fixed_vizpdfs = []

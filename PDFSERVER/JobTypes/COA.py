@@ -17,7 +17,7 @@ def setup(server_data):
         combined_list = []
         for data in data_list:
             for analyte in data:
-                if analyte.find('_total') != -1:
+                if 'total' not in analyte:
                     if viz_type == 'datatable':
                         combined_list.append(
                             [

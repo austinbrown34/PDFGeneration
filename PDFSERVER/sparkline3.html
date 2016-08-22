@@ -22,6 +22,8 @@
 	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg);
 	zoom: 1;
+	height: 100%;
+	width: 100%;
 	/*margin-top: 50px;
 	margin-left: -30px;*/
 	}
@@ -29,6 +31,7 @@
 
 	#stuff{
 		width: 100%;
+		height: 100%;
 		zoom: 1;
 	}
 	#stuff-wrapper{
@@ -47,24 +50,39 @@ $(document).ready(function() {
 $('#stuff-wrapper').css({
 	'width': reportdimensions[0],
 	'height': reportdimensions[1],
-	'left': reportcoords[0] - 60,
-	'bottom': reportcoords[1] - 85
+	'left': reportcoords[0] - 80,
+	'bottom': reportcoords[1] + 20
 });
-var HeightDiv = $('#stuff-wrapper').height();
-var HeightTable = $('#stuff').height();
+$('.bar-sparkline').attr({
+	'sparkheight': reportdimensions[1]
+});
+$('.bar-sparkline').css({
+	'width': reportdimensions[1],
+	'height': reportdimensions[0],
+	'top': reportcoords[1] + 20,
+	'right': reportcoords[0] - 80
 
-if (HeightTable > HeightDiv){
-	var ZoomAmount = $("#stuff.bar-sparkline").css("zoom");
-
-	while (HeightTable > HeightDiv && ZoomAmount > .1){
-		console.log('Zoom: ' + ZoomAmount)
-		console.log('HeightTable: ' + HeightTable)
-		console.log('HeightDiv: ' + HeightDiv)
-		ZoomAmount = ZoomAmount - .01;
-		$('#stuff.bar-sparkline').css("zoom", ZoomAmount);
-		HeightTable = $('#stuff').height();
-	}
-}
+});
+var canvas = document.querySelector('canvas');
+$(canvas).css({
+	//'width': 100%
+	'width': reportdimensions[1] - 47
+});
+// var HeightDiv = $('#stuff-wrapper').height();
+// var WidthSpark = $('.bar-sparkline').width();
+//
+// if (WidthSpark > HeightDiv){
+// 	var ZoomAmount = $("canvas").css("zoom");
+//
+// 	while (WidthSpark > HeightDiv && ZoomAmount > .1){
+// 		console.log('Zoom: ' + ZoomAmount)
+// 		console.log('WidthSpark: ' + WidthSpark)
+// 		console.log('HeightDiv: ' + HeightDiv)
+// 		ZoomAmount = ZoomAmount - .01;
+// 		$('canvas').css("zoom", ZoomAmount);
+// 		WidthSpark = $('.bar-sparkline').width();
+// 	}
+// }
 } );
 </script>
 
@@ -79,3 +97,4 @@ if (HeightTable > HeightDiv){
 </div>
 </body>
 </html>
+
