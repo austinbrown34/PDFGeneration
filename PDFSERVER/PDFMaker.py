@@ -89,7 +89,7 @@ class PDFMaker(object):
             page_count
         )
         DTdimensions = ph_translation['DTdimensions']
-        DTcoords ph_translation['DTcoords']
+        DTcoords = ph_translation['DTcoords']
         SLdimensions = ph_translation['SLdimensions']
         SLcoords = ph_translation['SLcoords']
         SeverImages = ph_translation['ServerImages']
