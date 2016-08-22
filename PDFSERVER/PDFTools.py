@@ -320,7 +320,7 @@ def draw_images_on_pdf(
             input_page.mergePage(imagepdf.getPage(0))
             output_file.addPage(input_page)
         with open(
-                work_dir + 'temp' + str(counter) + '.pdf',
+                os.path.join(work_dir, 'temp' + str(counter) + '.pdf'),
                 "wb") as outputStream:
             output_file.write(outputStream)
             completed_temps.append(
@@ -328,8 +328,11 @@ def draw_images_on_pdf(
         currentpdf = work_dir + 'temp' + str(counter) + '.pdf'
         counter += 1
 
-    os.rename(completed_temps[
-              len(completed_temps) - 1], pdf_with_images)
+    if len(completed_temps) > 0:
+        os.rename(completed_temps[
+                  len(completed_temps) - 1], pdf_with_images)
+    else:
+        shutil.copyfile(currentpdf, pdf_with_images)
 
 
 def draw_visualization_on_pdf(
@@ -403,7 +406,7 @@ def build_visualization(server_data):
     for i, data in enumerate(server_data):
         row = []
         row.append(data)
-        for j, specific in enumerate(server_data[data]):
+        for j, specific in enumerate(data):
             row.append(specific)
         VIZdata.append(row)
 

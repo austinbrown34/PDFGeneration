@@ -56,9 +56,8 @@ def setup(server_data):
         ],
         'sparkline')
 
-    server_data['datatable']['all_cannabinoids'] = (
-        combined_cannabinoids_dt + combined_cannabinoids_sl
-    )
+    server_data['datatable'] = combined_cannabinoids_dt
+    server_data['sparkline'] = combined_cannabinoids_sl
     credentials = {
         'aws_access_key_id': 'AKIAI5NYJC5SDJ3NKVIQ',
         'aws_secret_access_key': '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'

@@ -30,7 +30,11 @@ class PDFMaker(object):
 
         pdftools.merge_all_pages(pdfs, 'Final_PDF.pdf')
         final_pdf = open('Final_PDF.pdf', 'rb').read()
-        return final_pdf
+        response = {
+            'status': 'PDF Generated Successfully',
+            'pdf': final_pdf
+        }
+        return response
 
     def make_page(
             self,
@@ -75,7 +79,9 @@ class PDFMaker(object):
                 'temp',
                 'work_filled_noplaceholders' + page_count + '.pdf'
                 ),
-            placeholder_imgs)
+            placeholder_imgs,
+            os.path.join(work_dir, 'temp')
+        )
 
         DTdata = pdftools.build_visualization(server_data['datatable'])
         SLdata = pdftools.build_visualization(server_data['sparkline'])
@@ -90,7 +96,7 @@ class PDFMaker(object):
         DTcoords = ph_translation['DTcoords']
         SLdimensions = ph_translation['SLdimensions']
         SLcoords = ph_translation['SLcoords']
-        SeverImages = ph_translation['ServerImages']
+        ServerImages = ph_translation['ServerImages']
 
         pdftools.update_data_visualization(
             'datatable.js', DTdata, DTdimensions, DTcoords)
@@ -104,7 +110,7 @@ class PDFMaker(object):
             ]
 
         fixed_vizpdfs = []
-        pdftools.generate_visualizations(vizfiles)
+        pdftools.generate_visualizations(vizfiles, 'report3.js',  'work/temp/')
         for v in vizpdfs:
             new_v = v.split('.')[0] + '_fixed.pdf'
             pdftools.repair_pdf(v, new_v)
@@ -120,7 +126,8 @@ class PDFMaker(object):
                 work_dir,
                 'temp',
                 'work_filled_with_images' + page_count + '.pdf'
-            )
+            ),
+            os.path.join(work_dir, 'temp')
         )
 
         pdftools.draw_visualization_on_pdf(
@@ -133,7 +140,8 @@ class PDFMaker(object):
             os.path.join(
                 work_dir,
                 'work_complete' + page_count + '.pdf'
-            )
+            ),
+            os.path.join(work_dir, 'temp')
         )
 
         return os.path.join(work_dir, 'work_complete' + page_count + '.pdf')
