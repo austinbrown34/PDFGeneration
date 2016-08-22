@@ -7,6 +7,6 @@ uwsgi:
   python-path: .
   pidfile: /tmp/uwsgi.pid
   daemonize: /var/log/uwsgi.log
-  module: hello:app
+  module: PDFServerAPI:app
   enable-threads = true
   threads = 2
