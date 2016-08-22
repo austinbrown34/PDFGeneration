@@ -59,7 +59,7 @@ def get_image_tag(filename):
 def get_images(filename, jpg_names, jpg_dir):
     pdf = file(filename, "rb").read()
     startmark = "\xff\xd8"
-    startfix, i, njpg = 0
+    startfix, i, njpg = 0, 0, 0
     endmark = "\xff\xd9"
     endfix = 2
     while True:
@@ -90,10 +90,10 @@ def get_placeholder_image_info(filename, xmlfile, outputdir):
     if not os.path.isdir(outputdir):
         os.makedirs(outputdir)
 
-    image_info, placeholder_imgs = []
+    image_info, placeholder_imgs = [], []
     password = ''
     caching = True
-    rotation, maxpages, jpg_count = 0
+    rotation, maxpages, jpg_count = 0, 0, 0
     fname = filename
     pagenos = set()
     outfile = os.path.join(outputdir, xmlfile)
@@ -173,7 +173,7 @@ def remove_placeholder_images(
         jpg_dir):
     pdf = file(orig, "rb").read()
     startmark = "\xff\xd8"
-    startfix, i, njpg, placeholder = 0
+    startfix, i, njpg, placeholder = 0, 0, 0, 0
     endmark = "\xff\xd9"
     endfix = 2
     jpg_ranges = []
@@ -277,7 +277,7 @@ def draw_images_on_pdf(
         pdf_with_images,
         work_dir):
     counter = 1
-    temp_imgs, completed_temps = []
+    temp_imgs, completed_temps = [], []
     for image in images:
         ext = image['serversource'].split('.')[-1]
         if ext == "jpg":
