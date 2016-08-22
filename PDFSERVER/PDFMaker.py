@@ -83,8 +83,8 @@ class PDFMaker(object):
             os.path.join(work_dir, 'temp')
         )
 
-        DTdata = pdftools.build_visualization(server_data['datatable'])
-        SLdata = pdftools.build_visualization(server_data['sparkline'])
+        DTdata = server_data['datatable']
+        SLdata = server_data['sparkline']
 
         ph_translation = pdftools.translate_placeholders(
             image_info,

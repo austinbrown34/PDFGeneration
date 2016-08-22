@@ -29,7 +29,6 @@ def setup(server_data):
                 if viz_type == 'sparkline':
                     combined_list.append(
                         [
-                            str(analyte),
                             float(data[analyte]['display']['mg/g']['value'])
 
                         ]
