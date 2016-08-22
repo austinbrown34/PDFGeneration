@@ -1,4 +1,5 @@
 import imp
+import sys, os
 
 
 class PDFJobManager(object):
@@ -10,20 +11,26 @@ class PDFJobManager(object):
         if job_type is None:
             job_type = self.job_type
         if server_data is None:
-            server_data is self.server_data
+            server_data = self.server_data
         try:
             job = imp.load_source(
                 job_type,
                 'JobTypes/' + job_type + '.py')
             response = self.get_instructions(job, server_data)
         except Exception as e:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             response = {
                 'status': 'Issue loading job.',
-                'error': str(e)
+                'error': str(e) + ',' + str(exc_type) + ',' + str(fname) + ',' + str(exc_tb.tb_lineno)
             }
         return response
 
     def get_instructions(self, job, server_data):
+        f = file('output2.txt', 'w')
+        f.write(str(server_data))
+        f.write(str(type(server_data)))
+        f.close()
         templates_and_data = job.setup(server_data)
         response = {
             'status': 'Job loaded and instructions received.',

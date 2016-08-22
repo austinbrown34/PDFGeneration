@@ -23,6 +23,11 @@ class PDFManager(object):
             job_type = self.job_type
         if server_data is None:
             server_data = self.server_data
+        f = file('output3.txt', 'w')
+        f.write(str(self.server_data))
+        f.write(str(type(self.server_data)))
+        f.close()
+
         pdfjob = PDFJobManager(job_type, server_data)
         feedback = pdfjob.load_job()
         self.status = feedback['status']

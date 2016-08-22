@@ -20,7 +20,7 @@ class S3TemplateService(object):
 
     def download_config(self, config_folder, config, destination):
         self.s3.meta.client.download_file(
-            self.folder,
+            self.bucket,
             os.path.join(config_folder, config),
             destination
         )
@@ -49,7 +49,7 @@ class S3TemplateService(object):
     def download_templates(self, template_folder, templates):
         for template in templates:
             self.s3.meta.client.download_file(
-                self.folder,
+                self.bucket,
                 os.path.join(template_folder, template),
                 template
             )

@@ -1,10 +1,17 @@
+import sys
+sys.path.append('..')
+
 from Services import S3TemplateService
 
 
 def setup(server_data):
+    f = file('output.txt', 'w')
+    f.write(str(server_data))
+    f.write(str(type(server_data)))
+    f.close()
     server_data['datatable'] = {}
-    cannabinoid_data = server_data['sample_data']['lab_data']['cannabinoids']['tests']
-    thc_data = server_data['sample_data']['lab_data']['thc']['tests']
+    cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
+    thc_data = server_data['lab_data']['thc']['tests']
 
     def combine_tests_for_viz(data_list, viz_type):
         combined_list = []
@@ -56,14 +63,14 @@ def setup(server_data):
         'aws_access_key_id': 'AKIAI5NYJC5SDJ3NKVIQ',
         'aws_secret_access_key': 'WlnKj/6T4/kx9juBY/GUWOwpmtz8RKp+S5KrjSJM'
     }
-    template_folder = server_data['sample_data']['lab']['abbreviation']
+    template_folder = server_data['lab']['abbreviation']
     s3templates = S3TemplateService(credentials, 'pdfserver')
     s3templates.download_config(
         'cc/coa/' + template_folder,
         'config.yaml',
-        '.'
+        'config.yaml'
     )
-    template_keys = get_test_packages(server_data['sample_data']['test_packages'])
+    template_keys = get_test_packages(server_data['test_packages'])
     templates = s3templates.get_templates('config.yaml', '', template_keys)
     s3templates.download_templates('', templates)
     response = {
