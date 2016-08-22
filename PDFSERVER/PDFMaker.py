@@ -103,7 +103,7 @@ class PDFMaker(object):
         pdftools.update_data_visualization(
             'sparkline.js', SLdata, SLdimensions, SLcoords)
 
-        vizfiles = ['datatable.html', 'sparkline.html']
+        vizfiles = ['datatable3.html', 'sparkline3.html']
         vizpdfs = [
             os.path.join(work_dir, 'temp', 'datatable.pdf'),
             os.path.join(work_dir, 'temp', 'sparkline.pdf')

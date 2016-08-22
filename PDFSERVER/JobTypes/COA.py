@@ -17,22 +17,23 @@ def setup(server_data):
         combined_list = []
         for data in data_list:
             for analyte in data:
-                if viz_type == 'datatable':
-                    combined_list.append(
-                        [
-                            str(analyte),
-                            float(data[analyte]['display']['%']['loq']),
-                            float(data[analyte]['display']['%']['value']),
-                            float(data[analyte]['display']['mg/g']['value'])
-                        ]
-                    )
-                if viz_type == 'sparkline':
-                    combined_list.append(
-                        [
-                            float(data[analyte]['display']['mg/g']['value'])
+                if analyte.find('_total') != -1:
+                    if viz_type == 'datatable':
+                        combined_list.append(
+                            [
+                                str(analyte),
+                                float(data[analyte]['display']['%']['loq']),
+                                float(data[analyte]['display']['%']['value']),
+                                float(data[analyte]['display']['mg/g']['value'])
+                            ]
+                        )
+                    if viz_type == 'sparkline':
+                        combined_list.append(
+                            [
+                                float(data[analyte]['display']['mg/g']['value'])
 
-                        ]
-                    )
+                            ]
+                        )
 
         return combined_list
 
