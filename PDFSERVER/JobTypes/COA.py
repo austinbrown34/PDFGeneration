@@ -12,7 +12,9 @@ def setup(server_data):
     server_data['datatable'] = {}
     cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
     thc_data = server_data['lab_data']['thc']['tests']
-
+    image = server_data['images'][0]
+    server_data['images'] = {}
+    server_data['images']['0'] = image
     def combine_tests_for_viz(data_list, viz_type):
         combined_list = []
         for data in data_list:

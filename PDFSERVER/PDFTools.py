@@ -141,6 +141,7 @@ def get_placeholder_image_info(filename, xmlfile, outputdir):
             tag = None
         else:
             tag = get_image_tag(imgpth)
+            print tag
             image_info.append({
                 "id": i,
                 "src": imgpth,
