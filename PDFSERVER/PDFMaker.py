@@ -47,17 +47,32 @@ class PDFMaker(object):
         if work_dir is None:
             work_dir = self.work_dir
         page_count = str(page_count)
-        fields = pdftools.get_acroform_fields(os.path.join(work_dir, template))
+        fields = pdftools.get_acroform_fields_pdftk(os.path.join(work_dir, template))
+        #print fields
         all_image_data = pdftools.get_placeholder_image_info(
             os.path.join(work_dir, template),
             'work' + page_count + '.xml',
             os.path.join(work_dir, 'temp'))
         image_info = all_image_data['image_info']
         placeholder_imgs = all_image_data['placeholder_imgs']
+        #print "Placeholder images:"
+        #print placeholder_imgs
         fielddata = {}
         fieldvalues = pdftools.map_variables(fields, server_data)
+        #print "This is your fielddata"
+        #print str(fields)
         for i, e in enumerate(fields):
-            fielddata[e] = fieldvalues[i]
+           # print e
+            keys = e.split('.')
+            #print str(keys)
+            final_key = keys[-1]
+            if fieldvalues[i] is not None:
+               # print final_key
+               # print fieldvalues[i]
+                fielddata[e] = fieldvalues[i]
+            else:
+                fielddata[e] = fieldvalues[i]
+        #print str(fielddata)
         pdftools.generate_fdf(
             fields,
             fielddata,
@@ -92,29 +107,39 @@ class PDFMaker(object):
             work_dir,
             page_count
         )
+        print "ph_translation"
+        print ph_translation
+
         DTdimensions = ph_translation['DTdimensions']
         DTcoords = ph_translation['DTcoords']
         SLdimensions = ph_translation['SLdimensions']
         SLcoords = ph_translation['SLcoords']
         ServerImages = ph_translation['ServerImages']
+        vizfiles = []
+        vizpdfs = []
+        if DTcoords != []:
+            pdftools.update_data_visualization(
+                'datatable.js', DTdata, DTdimensions, DTcoords)
+            vizfiles.append('datatable3.html')
+            vizpdfs.append(os.path.join(work_dir, 'temp', 'datatable3.pdf'))
+        if SLcoords != []:
+            pdftools.update_data_visualization(
+                'sparkline.js', SLdata, SLdimensions, SLcoords)
+            vizfiles.append('sparkline3.html')
+            vizpdfs.append(os.path.join(work_dir, 'temp', 'sparkline3.pdf'))
 
-        pdftools.update_data_visualization(
-            'datatable.js', DTdata, DTdimensions, DTcoords)
-        pdftools.update_data_visualization(
-            'sparkline.js', SLdata, SLdimensions, SLcoords)
-
-        vizfiles = ['datatable3.html', 'sparkline3.html']
-        vizpdfs = [
-            os.path.join(work_dir, 'temp', 'datatable3.pdf'),
-            os.path.join(work_dir, 'temp', 'sparkline3.pdf')
-            ]
-
-        fixed_vizpdfs = []
-        pdftools.generate_visualizations(vizfiles, 'report3.js',  'work/temp/')
-        for v in vizpdfs:
-            new_v = v.split('.')[0] + '_fixed.pdf'
-            pdftools.repair_pdf(v, new_v)
-            fixed_vizpdfs.append(new_v)
+        #vizfiles = ['datatable3.html', 'sparkline3.html']
+       # vizpdfs = [
+       #     os.path.join(work_dir, 'temp', 'datatable3.pdf'),
+       #     os.path.join(work_dir, 'temp', 'sparkline3.pdf')
+       #     ]
+        if vizpdfs != []:
+            fixed_vizpdfs = []
+            pdftools.generate_visualizations(vizfiles, 'report3.js',  'work/temp/')
+            for v in vizpdfs:
+                new_v = v.split('.')[0] + '_fixed.pdf'
+                pdftools.repair_pdf(v, new_v)
+                fixed_vizpdfs.append(new_v)
         pdftools.draw_images_on_pdf(
             ServerImages,
             os.path.join(

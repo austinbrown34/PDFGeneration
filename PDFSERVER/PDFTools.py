@@ -19,6 +19,18 @@ import urllib2
 import shutil
 
 
+def get_acroform_fields_pdftk(filename):
+    print filename
+    args = ['pdftk', filename, 'dump_data_fields', 'output', 'work/dump_data_fields.txt']
+    subprocess.call(args)
+    field_names = []
+    with open('work/dump_data_fields.txt') as ddf:
+        for line in ddf:
+            if 'FieldName:' in line:
+                field_names.append(line.split('FieldName: ')[1].strip())
+    return field_names
+    
+
 def get_acroform_fields(filename):
     fp = open(filename, 'rb')
     parser = PDFParser(fp)
@@ -27,8 +39,10 @@ def get_acroform_fields(filename):
     fields = resolve1(doc.catalog['AcroForm'])['Fields']
     for i in fields:
         field = resolve1(i)
+        print field
         name = field.get('T')
         field_names.append(name)
+    fp.close()
     return field_names
 
 
@@ -382,21 +396,24 @@ def merge_all_pages(pages, final):
 def map_variables(var_list, data):
     value_list = []
     for i, var in enumerate(var_list):
-        var_parts = var.split('.')
-        data_chunk = data
-        for i2, var_part in enumerate(var_parts):
-            try:
-                if var_part in data_chunk:
-                    new_chunk = data_chunk[var_part]
-                    data_chunk = new_chunk
-                    if i2 == len(var_parts) - 1:
-                        value_list.append(data_chunk)
-                else:
+        if var is None:
+            value_list.append(None)
+        else:
+            var_parts = var.split('.')
+            data_chunk = data
+            for i2, var_part in enumerate(var_parts):
+                try:
+                    if var_part in data_chunk:
+                        new_chunk = data_chunk[var_part]
+                        data_chunk = new_chunk
+                        if i2 == len(var_parts) - 1:
+                            value_list.append(data_chunk)
+                    else:
+                        value_list.append(None)
+                        continue
+                except TypeError:
                     value_list.append(None)
                     continue
-            except TypeError:
-                value_list.append(None)
-                continue
 
     return value_list
 
