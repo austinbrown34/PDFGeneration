@@ -51,22 +51,22 @@ $('#stuff-wrapper').css({
 	'width': reportdimensions[0],
 	'height': reportdimensions[1],
 	'left': reportcoords[0] - 80,
-	'bottom': reportcoords[1] + 20
+	'bottom': reportcoords[1] - 30
 });
 $('.bar-sparkline').attr({
 	'sparkheight': reportdimensions[1]
 });
 $('.bar-sparkline').css({
 	'width': reportdimensions[1],
-	'height': reportdimensions[0],
-	'top': reportcoords[1] + 20,
+	'height': reportdimensions[0]-10,
+	'top': reportcoords[1] - 30,
 	'right': reportcoords[0] - 80
 
 });
 var canvas = document.querySelector('canvas');
 $(canvas).css({
 	//'width': 100%
-	'width': reportdimensions[1] - 47
+	'width': reportdimensions[1]
 });
 // var HeightDiv = $('#stuff-wrapper').height();
 // var WidthSpark = $('.bar-sparkline').width();

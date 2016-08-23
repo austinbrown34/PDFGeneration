@@ -339,11 +339,14 @@ def draw_images_on_pdf(
                 "wb") as outputStream:
             output_file.write(outputStream)
             completed_temps.append(
-                work_dir + 'temp' + str(counter) + '.pdf')
+                os.path.join(work_dir, 'temp' + str(counter) + '.pdf'))
         currentpdf = work_dir + 'temp' + str(counter) + '.pdf'
         counter += 1
 
     if len(completed_temps) > 0:
+        print completed_temps
+        print
+        print pdf_with_images
         os.rename(completed_temps[
                   len(completed_temps) - 1], pdf_with_images)
     else:
@@ -457,8 +460,9 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
             if value[0] is not None:
                 ext = '.' + \
                     value[0].split(".")[-1]
+                req = urllib2.Request(value[0], headers={'User-Agent' : "Magic Browser"})
                 remote_file = urllib2.urlopen(
-                    value[0])
+                    req)
                 with open(
                     os.path.join(
                         work_dir,
