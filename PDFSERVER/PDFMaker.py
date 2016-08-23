@@ -47,6 +47,8 @@ class PDFMaker(object):
         if work_dir is None:
             work_dir = self.work_dir
         page_count = str(page_count)
+        if not os.path.isdir(work_dir):
+            os.makedirs(work_dir)
         fields = pdftools.get_acroform_fields_pdftk(os.path.join(work_dir, template))
         #print fields
         all_image_data = pdftools.get_placeholder_image_info(
