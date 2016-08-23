@@ -4,8 +4,9 @@
 <!-- <link rel="stylesheet" type="text/css" href="dataTables.uikit.min.css"> -->
 <link rel="stylesheet" type="text/css" href="dataTables.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
+<!-- <script type='text/javascript' src='data.json'></script> -->
 <script type="text/javascript" language="javascript" src="sparkline.js">
-	</script>
+</script>
 <script type="text/javascript" language="javascript" src="jquery.js">
 	</script>
 <script type="text/javascript" language="javascript" src="dataTables.min.js">
@@ -15,20 +16,29 @@
 	<script type="text/javascript" language="javascript" src="jquery.sparkline.min.js">
 	</script>
 	<style>
+	table{
+		font: 400 10px/16px "Trebuchet MS" !important;
+	}
+	th{
 
-	.bar-sparkline{
-		/*float: left;*/
-	-ms-transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
-	transform: rotate(90deg);
-	zoom: 1;
-	height: 100%;
-	width: 100%;
-	/*margin-top: 50px;
-	margin-left: -30px;*/
+	}
+	td{
+		width: 30%;
+	}
+	.total{
+		font: 800 10px/16px "Trebuchet MS" !important;
+	}
+	.left{
+		text-align:left;
 	}
 
+	.text-right{
 
+	}
+	.right{
+		float: right;
+		width: 70%;
+	}
 	#stuff{
 		width: 100%;
 		zoom: 1;
@@ -39,201 +49,96 @@
 		overflow: hidden;
 		position: absolute;
 	}
-  *, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
- }
+	progress[value] {
+	-webkit-appearance: none;
+	appearance: none;
 
-body {
-  background: #999;
+ width: 100%;
+ height: 20px;
 }
-
-h2 {
-  margin: 0 0 20px 0;
-  padding: 0 0 5px 0;
-  border-bottom: 1px solid #999;
-  font-family: sans-serif;
-  font-weight: normal;
-  color: #333;
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
+progress[value]::-webkit-progress-value {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2ff52+0,91e842+100;Neon */
+/*background: -webkit-linear-gradient(top,  #d2ff52 0%,#91e842 100%); /* Chrome10-25,Safari5.1-6 */
+/*background: linear-gradient(to bottom,  #d2ff52 0%,#91e842 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842',GradientType=0 ); */
+/* IE6-9 */
 
-.container {
-  /*width: 500px;
-  margin: 20px;*/
-  background: #fff;
-  padding: 20px;
-  overflow: hidden;
-  float: left;
+  background-image:
+	   -webkit-linear-gradient(-45deg,
+	                           transparent 33%, rgba(0, 0, 0, .1) 33%,
+	                           rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, #91e842, #d2ff52);
+
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-
-.horizontal .progress-bar {
-  float: left;
-  height: 45px;
-  width: 100%;
-  padding: 12px 0;
-}
-
-.horizontal .progress-track {
-  position: relative;
-  width: 100%;
-  height: 20px;
-  background: #ebebeb;
-}
-
-.horizontal .progress-fill {
-  position: relative;
-  background: #666;
-  height: 20px;
-  width: 50%;
-  color: #fff;
-  text-align: center;
-  font-family: "Lato","Verdana",sans-serif;
-  font-size: 12px;
-  line-height: 20px;
-}
-
-.rounded .progress-track,
-.rounded .progress-fill {
-  border-radius: 3px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,.2);
-}
-
-
-
-/* Vertical */
-
-.vertical .progress-bar {
-  float: left;
-  height: 300px;
-  width: 40px;
-  margin-right: 25px;
-}
-
-.vertical .progress-track {
-  position: relative;
-  width: 40px;
-  height: 100%;
-  background: #ebebeb;
-}
-
-.vertical .progress-fill {
-  position: relative;
-  background: #825;
-  height: 50%;
-  width: 40px;
-  color: #fff;
-  text-align: center;
-  font-family: "Lato","Verdana",sans-serif;
-  font-size: 12px;
-  line-height: 20px;
-}
-
-.rounded .progress-track,
-.rounded .progress-fill {
-  box-shadow: inset 0 0 5px rgba(0,0,0,.2);
-  border-radius: 3px;
+progress:not([value]) {
+   /* Styling here */
 }
 	</style>
 <script>
 $(document).ready(function() {
-  $('.horizontal .progress-fill span').each(function(){
-    var percent = $(this).html();
-    $(this).parent().css('width', percent);
-  });
-$('#stuff-wrapper').css({
-	'width': reportdimensions[0],
-	'height': reportdimensions[1],
-	'left': reportcoords[0],
-	'bottom': reportcoords[1]
+	tabledata = "";
+	for(var i = 0; i < reportdata.length; i++){
+		tabledata += '<tr><td>' + reportdata[i][0] + '</td>';
+		tabledata += '<td class = "right"><progress max="' + reportdata[i][2] + '" value="' + reportdata[i][1] + '"></progress></td></tr>';
+	}
+	$('#example tbody').html(tabledata);
+	$('#stuff-wrapper').css({
+		'width': reportdimensions[0],
+		'height': reportdimensions[1],
+		'left': reportcoords[0],
+		'bottom': reportcoords[1]
+	});
+	var HeightDiv = $('#stuff-wrapper').height();
+	var HeightTable = $('#stuff').height();
+
+	if (HeightTable > HeightDiv){
+		var ZoomAmount = $("#stuff table").css("zoom");
+
+		while (HeightTable > HeightDiv && ZoomAmount > .1){
+			console.log('Zoom: ' + ZoomAmount)
+			console.log('HeightTable: ' + HeightTable)
+			console.log('HeightDiv: ' + HeightDiv)
+			ZoomAmount = ZoomAmount - .01;
+			$('#stuff table').css("zoom", ZoomAmount);
+			HeightTable = $('#stuff').height();
+		}
+	}
 });
-
-
-var HeightDiv = $('#stuff-wrapper').height();
-var HeightTable = $('#stuff').height();
-
-if (HeightTable > HeightDiv){
-  var ZoomAmount = $(".container").css("zoom");
-
-  while (HeightTable > HeightDiv && ZoomAmount > .1){
-    console.log('Zoom: ' + ZoomAmount)
-    console.log('HeightTable: ' + HeightTable)
-    console.log('HeightDiv: ' + HeightDiv)
-    ZoomAmount = ZoomAmount - .01;
-    $('.container').css("zoom", ZoomAmount);
-    HeightTable = $('#stuff').height();
-  }
-}
-// var HeightDiv = $('#stuff-wrapper').height();
-// var WidthSpark = $('.bar-sparkline').width();
-//
-// if (WidthSpark > HeightDiv){
-// 	var ZoomAmount = $("canvas").css("zoom");
-//
-// 	while (WidthSpark > HeightDiv && ZoomAmount > .1){
-// 		console.log('Zoom: ' + ZoomAmount)
-// 		console.log('WidthSpark: ' + WidthSpark)
-// 		console.log('HeightDiv: ' + HeightDiv)
-// 		ZoomAmount = ZoomAmount - .01;
-// 		$('canvas').css("zoom", ZoomAmount);
-// 		WidthSpark = $('.bar-sparkline').width();
-// 	}
-// }
-} );
 </script>
 
 </head>
 <body>
 <div id="stuff-wrapper">
-<div id="stuff">
-  <div class="container horizontal rounded">
-    <div class="progress-bar horizontal">
-      <div class="progress-track">
-        <div class="progress-fill">
-          <span>100%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="progress-bar horizontal">
-      <div class="progress-track">
-        <div class="progress-fill">
-          <span>75%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="progress-bar horizontal">
-      <div class="progress-track">
-        <div class="progress-fill">
-          <span>60%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="progress-bar horizontal">
-      <div class="progress-track">
-        <div class="progress-fill">
-          <span>20%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="progress-bar horizontal">
-      <div class="progress-track">
-        <div class="progress-fill">
-          <span>34%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="progress-bar horizontal">
-      <div class="progress-track">
-        <div class="progress-fill">
-          <span>82%</span>
-        </div>
-      </div>
-    </div>
+	<div id="stuff" class="uk-table uk-table-hover uk-table-striped uk-table-condensed uk-overflow-container">
+		<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="left">Analyte</th>
+                <th class="right">Relative Concentration</th>
+            </tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							THCa
+						</td>
+						<td class="right">
+							<progress max="100" value="80"></progress>
+						</td>
+					</tr>
+				</tbody>
+    </table>
   </div>
-</div>
 </div>
 </body>
 </html>

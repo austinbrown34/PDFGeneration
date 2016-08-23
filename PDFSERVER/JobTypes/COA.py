@@ -15,6 +15,15 @@ def setup(server_data):
     image = server_data['images'][0]
     server_data['images'] = {}
     server_data['images']['0'] = image
+    def get_concentration_total(data_list, display_value):
+        concentration_total = 0.0
+        for data in data_list:
+            for analyte in data:
+                if 'total' not in analyte:
+                    concentration_total += float(data[analyte]['display'][display_value]['value'])
+        return concentration_total
+
+    total_concentration = get_concentration_total([cannabinoid_data, thc_data], '%')
     def combine_tests_for_viz(data_list, viz_type):
         combined_list = []
         for data in data_list:
@@ -32,7 +41,10 @@ def setup(server_data):
                     if viz_type == 'sparkline':
                         combined_list.append(
                             [
-                                float(data[analyte]['display']['mg/g']['value'])
+                                str(analyte),
+                                float(data[analyte]['display']['%']['value']),
+                                float(total_concentration)
+
 
                             ]
                         )

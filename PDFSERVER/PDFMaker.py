@@ -125,8 +125,8 @@ class PDFMaker(object):
         if SLcoords != []:
             pdftools.update_data_visualization(
                 'sparkline.js', SLdata, SLdimensions, SLcoords)
-            vizfiles.append('sparkline3.html')
-            vizpdfs.append(os.path.join(work_dir, 'temp', 'sparkline3.pdf'))
+            vizfiles.append('sparkline5.html')
+            vizpdfs.append(os.path.join(work_dir, 'temp', 'sparkline5.pdf'))
 
         #vizfiles = ['datatable3.html', 'sparkline3.html']
        # vizpdfs = [
