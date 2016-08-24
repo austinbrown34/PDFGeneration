@@ -7,12 +7,17 @@ from Services import S3TemplateService
 def setup(server_data):
     f = file('output.txt', 'w')
     f.write(str(server_data))
-    f.write(str(type(server_data)))
+    #f.write(str(type(server_data)))
     f.close()
     server_data['datatable'] = {}
+    if 'lab_data' not in server_data:
+        server_data['lab_data'] = server_data['lab_data_latest']
     cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
     thc_data = server_data['lab_data']['thc']['tests']
-    image = server_data['images'][0]
+    if len(server_data['images']) == 0:
+        image = ''
+    else:
+        image = server_data['images'][0]
     server_data['images'] = {}
     server_data['images']['0'] = image
     def get_concentration_total(data_list, display_value):

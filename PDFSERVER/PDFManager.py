@@ -14,6 +14,7 @@ class PDFManager(object):
         self.callback = payload['post_data']
         self.server_data = payload['server_data']
         self.redirect_url = payload['redirect_url']
+        self.redirect_url_base = payload['redirect_url_base']
         self.api_key = payload['api_key']
         self.api_secret = payload['api_secret']
         self.status = ''
@@ -46,6 +47,9 @@ class PDFManager(object):
             'status': self.status,
             'error': self.error
         }
+        log = file('log.txt', 'w')
+        log.write(str(message))
+        log.close()
         return message
 
     def run_job(self, templates, data, delivery_method=None):
@@ -62,7 +66,7 @@ class PDFManager(object):
                 response = self.deliver_pdf_file(pdf_response['pdf'])
             if self.delivery_method == 'POST_LINK':
                 response = self.deliver_pdf_link(pdf_response['pdf'])
-
+        print str(response)
         return response
 
     def get_url(self, server_url, suffix):
@@ -73,6 +77,7 @@ class PDFManager(object):
             pdf,
             callback=None,
             redirect_url=None,
+            redirect_url_base=None,
             api_key=None,
             api_secret=None,
             file_key=None):
@@ -80,6 +85,8 @@ class PDFManager(object):
             callback = self.callback
         if redirect_url is None:
             redirect_url = self.redirect_url
+        if redirect_url_base is None:
+            redirect_url_base = self.redirect_url_base
         if api_key is None:
             api_key = self.api_key
         if api_secret is None:
@@ -89,21 +96,31 @@ class PDFManager(object):
         url = callback['url']
         fields = callback['fields']
         try:
-            requests.post(
+            first = requests.post(
                 url,
                 data=fields,
                 files={
                     'file': pdf
                 }
             )
+            print "first post info:"
+            print url
+            print str(fields)
+            #print str(pdf.seek(0,2).tell())
+            
+            print first
             this_data = {'key': file_key}
             if api_key and api_secret:
                 this_data['API_KEY'] = api_key
                 this_data['API_SECRET'] = api_secret
-            requests.post(
-                self.get_url(url, redirect_url),
+            second = requests.post(
+                self.get_url('https://' + redirect_url_base, redirect_url),
                 this_data
             )
+            print "second post info:"
+            print self.get_url(url, redirect_url)
+            print second.text
+            print callback
 
             self.status = 'Successfully Generated and Delivered PDF.'
             response = {
@@ -124,10 +141,13 @@ class PDFManager(object):
             pdf,
             callback=None,
             redirect_url=None,
+            redirect_url_base=None,
             api_key=None,
             api_secret=None):
         if redirect_url is None:
             redirect_url = self.redirect_url
+        if redirect_url_base is None:
+            redirect_url_base = self.redirect_url_base
         if callback is None:
             callback = self.callback
         if api_key is None:
@@ -156,7 +176,7 @@ class PDFManager(object):
         )
         try:
             this_data = {'url': file_url}
-            new_url = self.get_url(url, redirect_url)
+            new_url = self.get_url(redirect_url_base, redirect_url)
             print "Posting to: " + new_url
             if api_key and api_secret:
                 this_data['API_KEY'] = api_key

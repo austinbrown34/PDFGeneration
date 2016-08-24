@@ -1,8 +1,8 @@
 var reportdata =
-[['THCa', 399.9, 2294.8], ['THCv', 523.6, 2294.8], ['d9-THC', 94.8, 2294.8]];
+[['cbc', 10.0, 90.0], ['cbda', 10.0, 90.0], ['cbn', 10.0, 90.0], ['cbg', 10.0, 90.0], ['cbd', 10.0, 90.0], ['thca', 10.0, 90.0], ['d8_thc', 10.0, 90.0], ['d9_thc', 10.0, 90.0], ['thcv', 10.0, 90.0]];
 var reportdimensions =
-[156, 248];
+[267, 248];
 var reportcoords =
-[135, 118];
+[24, 118];
 
 var collection = [reportdata, reportdimensions, reportcoords]

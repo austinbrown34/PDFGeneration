@@ -8,5 +8,4 @@ uwsgi:
   pidfile: /tmp/uwsgi.pid
   daemonize: /var/log/uwsgi.log
   module: PDFServerAPI:app
-  enable-threads = true
-  threads = 2
+  logto2: /var/log/uwsgi/%n.log

@@ -460,22 +460,26 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
             if value[0] is not None:
                 ext = '.' + \
                     value[0].split(".")[-1]
-                req = urllib2.Request(value[0], headers={'User-Agent' : "Magic Browser"})
-                remote_file = urllib2.urlopen(
-                    req)
-                with open(
-                    os.path.join(
+                try:
+                    req = urllib2.Request(value[0], headers={'User-Agent' : "Magic Browser"})
+                    remote_file = urllib2.urlopen(
+                        req)
+                    with open(
+                        os.path.join(
+                            work_dir,
+                            'temp',
+                            img_spec['tag'] + page_count + ext
+                        ),
+                            'wb') as local_file:
+                        shutil.copyfileobj(remote_file, local_file)
+                    img_spec['serversource'] = os.path.join(
                         work_dir,
                         'temp',
                         img_spec['tag'] + page_count + ext
-                    ),
-                        'wb') as local_file:
-                    shutil.copyfileobj(remote_file, local_file)
-                img_spec['serversource'] = os.path.join(
-                    work_dir,
-                    'temp',
-                    img_spec['tag'] + page_count + ext
-                )
+                 )
+                except Exception as e:
+                    print "can't download " + str(value[0]) + str(e)
+                    img_spec['serversource'] = 'placeholders/sample.jpg'
                 server_images.append(img_spec)
     organized_image_info = {
         'DTdimensions': DTdimensions,

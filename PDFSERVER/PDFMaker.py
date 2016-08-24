@@ -29,11 +29,12 @@ class PDFMaker(object):
             page_count += 1
 
         pdftools.merge_all_pages(pdfs, 'Final_PDF.pdf')
-        final_pdf = open('Final_PDF.pdf', 'rb').read()
+        final_pdf = open('Final_PDF.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',
             'pdf': final_pdf
         }
+        print response['status']
         return response
 
     def make_page(
