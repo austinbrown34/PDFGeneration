@@ -4,8 +4,9 @@ sudo yum update
 
 # let's get python 2.7 installed with pip and source it
 
-sudo yum install python27
+sudo yum install -y python27
 sudo easy_install pip
+sudo pip install --upgrade pip
 echo "alias python='python27'" >> ~/.bashrc
 source ~/.bashrc
 
@@ -23,7 +24,7 @@ sudo yum install -y nginx
 
 # the following installs will help us work with images
 
-sudo yum install libjpeg-devel
+sudo yum install -y libjpeg-devel
 sudo pip install pillow
 sudo pip install piexif
 
@@ -36,8 +37,8 @@ sudo pip install pypdf2
 
 # we must install some helper dependencies that assist with fonts
 
-sudo yum install fontconfig freetype freetype-devel fontconfig-devel libstdc++
-sudo yum install fontconfig freetype freetype-devel fontconfig-devel libstdc++
+sudo yum install -y fontconfig freetype freetype-devel fontconfig-devel libstdc++
+sudo yum install -y fontconfig freetype freetype-devel fontconfig-devel libstdc++
 
 # in order to have flexibility over data visualizations, we need phantomjs
 
@@ -49,11 +50,11 @@ sudo ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs
 
 # let's get git
 
-sudo yum install git
+sudo yum install -y git
 
 # to take care of some xml parsing needs we'll need these as well
 
-sudo yum install libxslt-devel
+sudo yum install -y libxslt-devel
 sudo pip install lxml
 
 # to work with S3 we need to grab boto
