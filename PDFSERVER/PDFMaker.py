@@ -121,13 +121,13 @@ class PDFMaker(object):
         vizpdfs = []
         if DTcoords != []:
             pdftools.update_data_visualization(
-                'datatable.js', DTdata, DTdimensions, DTcoords)
-            vizfiles.append('datatable3.html')
+                'js/datatable.js', DTdata, DTdimensions, DTcoords)
+            vizfiles.append('html/datatable3.html')
             vizpdfs.append(os.path.join(work_dir, 'temp', 'datatable3.pdf'))
         if SLcoords != []:
             pdftools.update_data_visualization(
-                'sparkline.js', SLdata, SLdimensions, SLcoords)
-            vizfiles.append('sparkline5.html')
+                'js/sparkline.js', SLdata, SLdimensions, SLcoords)
+            vizfiles.append('html/sparkline5.html')
             vizpdfs.append(os.path.join(work_dir, 'temp', 'sparkline5.pdf'))
 
         #vizfiles = ['datatable3.html', 'sparkline3.html']
@@ -137,7 +137,7 @@ class PDFMaker(object):
        #     ]
         if vizpdfs != []:
             fixed_vizpdfs = []
-            pdftools.generate_visualizations(vizfiles, 'report3.js',  'work/temp/')
+            pdftools.generate_visualizations(vizfiles, 'js/report3.js',  'work/temp/')
             for v in vizpdfs:
                 new_v = v.split('.')[0] + '_fixed.pdf'
                 pdftools.repair_pdf(v, new_v)
