@@ -1,6 +1,4 @@
-<snippet>
-  <content><![CDATA[
-# ${1:PDFServer}
+# PDFServer
 
 PDFServer allows for dynamic PDF generation with server data utilizing templates created in Adobe Acrobat.
 
@@ -46,6 +44,3 @@ TODO: Write credits
 ## License
 
 TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
