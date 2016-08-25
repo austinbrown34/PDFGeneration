@@ -17,6 +17,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from Services import ImageExtractorService
 import urllib2
 import shutil
+import requests
 
 
 def get_acroform_fields_pdftk(filename):
@@ -277,11 +278,16 @@ def update_data_visualization(
 
 def generate_visualizations(viz_files, controljs, out_dir):
     for viz in viz_files:
+        print "from generate viz - viz, controljs, out_dir"
+        print viz
+        print controljs
+        print out_dir
+        
         call = [
             'phantomjs',
             controljs,
             viz,
-            out_dir + viz.replace('html', 'pdf')
+            out_dir + viz.split('/')[-1].replace('.html', '.pdf')
         ]
         subprocess.call(call)
 
@@ -458,25 +464,25 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
         else:
             value = map_variables([img_spec['tag']], server_data)
             if value[0] is not None:
+                
                 ext = '.' + \
                     value[0].split(".")[-1]
+                if ext not in ['jpg', 'png', 'gif']:
+                    ext = 'jpg'
+                print "ext: " + ext
                 try:
-                    req = urllib2.Request(value[0], headers={'User-Agent' : "Magic Browser"})
-                    remote_file = urllib2.urlopen(
-                        req)
+                    remote_file = requests.get(value[0])
                     with open(
                         os.path.join(
                             work_dir,
                             'temp',
                             img_spec['tag'] + page_count + ext
-                        ),
-                            'wb') as local_file:
-                        shutil.copyfileobj(remote_file, local_file)
+                        ),'wb') as local_file:
+                        local_file.write(remote_file.content)
                     img_spec['serversource'] = os.path.join(
                         work_dir,
                         'temp',
-                        img_spec['tag'] + page_count + ext
-                 )
+                        img_spec['tag'] + page_count + ext)
                 except Exception as e:
                     print "can't download " + str(value[0]) + str(e)
                     img_spec['serversource'] = 'placeholders/sample.jpg'

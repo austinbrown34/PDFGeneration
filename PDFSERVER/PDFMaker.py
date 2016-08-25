@@ -136,13 +136,21 @@ class PDFMaker(object):
        #     os.path.join(work_dir, 'temp', 'datatable3.pdf'),
        #     os.path.join(work_dir, 'temp', 'sparkline3.pdf')
        #     ]
+        print "vizpdfs: "
+        print vizpdfs
         if vizpdfs != []:
             fixed_vizpdfs = []
             pdftools.generate_visualizations(vizfiles, 'js/report3.js',  'work/temp/')
             for v in vizpdfs:
                 new_v = v.split('.')[0] + '_fixed.pdf'
+                print "---------------"
+                print v
+                print new_v
+                print "---------------"
                 pdftools.repair_pdf(v, new_v)
                 fixed_vizpdfs.append(new_v)
+        print "fixed_vizpdfs: "
+        print fixed_vizpdfs
         pdftools.draw_images_on_pdf(
             ServerImages,
             os.path.join(

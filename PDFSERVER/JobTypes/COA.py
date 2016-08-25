@@ -5,6 +5,12 @@ from Services import S3TemplateService
 
 
 def setup(server_data):
+    def make_number(data):
+        try:
+            data = float(data)
+        except ValueError:
+            data = float(0)
+        return data
     f = file('output.txt', 'w')
     f.write(str(server_data))
     #f.write(str(type(server_data)))
@@ -14,10 +20,13 @@ def setup(server_data):
         server_data['lab_data'] = server_data['lab_data_latest']
     cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
     thc_data = server_data['lab_data']['thc']['tests']
-    if len(server_data['images']) == 0:
+    if len(server_data['images']) == 0 and server_data['cover'] is None:
         image = ''
     else:
-        image = server_data['images'][0]
+        if server_data['cover'] is None:
+            image = ''
+        else:
+            image = 'https:' + server_data['cover']
     server_data['images'] = {}
     server_data['images']['0'] = image
     def get_concentration_total(data_list, display_value):
@@ -25,7 +34,7 @@ def setup(server_data):
         for data in data_list:
             for analyte in data:
                 if 'total' not in analyte:
-                    concentration_total += float(data[analyte]['display'][display_value]['value'])
+                    concentration_total += make_number(data[analyte]['display'][display_value]['value'])
         return concentration_total
 
     total_concentration = get_concentration_total([cannabinoid_data, thc_data], '%')
@@ -38,17 +47,17 @@ def setup(server_data):
                         combined_list.append(
                             [
                                 str(analyte),
-                                float(data[analyte]['display']['%']['loq']),
-                                float(data[analyte]['display']['%']['value']),
-                                float(data[analyte]['display']['mg/g']['value'])
+                                make_number(data[analyte]['display']['%']['loq']),
+                                make_number(data[analyte]['display']['%']['value']),
+                                make_number(data[analyte]['display']['mg/g']['value'])
                             ]
                         )
                     if viz_type == 'sparkline':
                         combined_list.append(
                             [
                                 str(analyte),
-                                float(data[analyte]['display']['%']['value']),
-                                float(total_concentration)
+                                make_number(data[analyte]['display']['%']['value']),
+                                make_number(total_concentration)
 
 
                             ]

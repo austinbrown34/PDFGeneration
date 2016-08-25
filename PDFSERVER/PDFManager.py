@@ -3,7 +3,7 @@ from PDFMaker import PDFMaker
 import boto3
 import requests
 import json
-
+import subprocess
 
 class PDFManager(object):
 
@@ -133,7 +133,7 @@ class PDFManager(object):
                 'status': self.status,
                 'error': str(self.error)
             }
-
+        subprocess.call('rm -rf /home/ec2-user/PDFServer/PDFSERVER/work/*', shell=True)
         return response
 
     def deliver_pdf_link(
