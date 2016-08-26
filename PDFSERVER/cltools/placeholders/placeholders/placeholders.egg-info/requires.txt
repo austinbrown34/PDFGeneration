@@ -1,0 +1,4 @@
+Click
+pyyaml
+piexif
+pillow

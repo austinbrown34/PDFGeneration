@@ -57,6 +57,9 @@ sudo yum install -y git
 sudo yum install -y libxslt-devel
 sudo pip install lxml
 
+# to help us make command line tools
+sudo pip install click
+
 # to work with S3 we need to grab boto
 
 sudo pip install boto3
