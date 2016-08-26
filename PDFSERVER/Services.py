@@ -39,12 +39,23 @@ class S3TemplateService(object):
         cfg_obj = yaml.safe_load(cfg)
         cfg.close()
         temp_templates = []
+        template_rules = cfg_obj['template_rules']
         for template_key in template_keys:
-            if template_key in cfg_obj:
-                temp_templates.append(cfg_obj[template_key])
+            if template_key in template_rules:
+                temp_templates.append(template_rules[template_key])
 
         template_list_builder(temp_templates)
         return templates
+
+    def get_scripts(self, config):
+        scripts = []
+        cfg = open(config)
+        cfg_obj = yaml.safe_load(cfg)
+        cfg.close()
+        template_scripts = cfg_obj['template_scripts']
+        for script in template_scripts:
+            scripts.append(script)
+        return scripts
 
     def download_templates(self, template_folder, templates):
         for template in templates:
@@ -52,6 +63,14 @@ class S3TemplateService(object):
                 self.bucket,
                 os.path.join(template_folder, template),
                 os.path.join('work', template)
+            )
+
+    def download_scripts(self, template_folder, scripts):
+        for script in scripts:
+            self.s3.meta.client.download_file(
+                self.bucket,
+                os.path.join(template_folder, script),
+                os.path.join('work', script)
             )
 
     def get_presigned_url(self, pdf):

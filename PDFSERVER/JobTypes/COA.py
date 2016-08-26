@@ -1,4 +1,5 @@
 import sys
+import imp
 sys.path.append('..')
 
 from Services import S3TemplateService
@@ -99,9 +100,17 @@ def setup(server_data):
     )
     template_keys = get_test_packages(server_data['test_packages'])
     templates = s3templates.get_templates('work/config.yaml', '', template_keys)
+    scripts = s3templates.get_scripts('work/config.yam.')
     s3templates.download_templates('cc/coa/' + template_folder, templates)
+    s3templates.download_scripts('cc/coa/' + template_folder, scripts)
+    data = server_data
+    for script in scripts:
+        job = imp.load_source(
+            '',
+            os.path.join('work', script))
+        data = job.run(data)
     response = {
         'templates': templates,
-        'data': server_data
+        'data': data
     }
     return response
