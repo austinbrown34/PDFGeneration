@@ -1,4 +1,4 @@
 
         [console_scripts]
-        placeholders=placeholders:make_placeholders
+        placeholders=placeholders:cli
     
