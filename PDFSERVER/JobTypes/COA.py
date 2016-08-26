@@ -1,5 +1,6 @@
 import sys
 import imp
+import os
 sys.path.append('..')
 
 from Services import S3TemplateService
@@ -12,10 +13,6 @@ def setup(server_data):
         except ValueError:
             data = float(0)
         return data
-    f = file('output.txt', 'w')
-    f.write(str(server_data))
-    #f.write(str(type(server_data)))
-    f.close()
     server_data['datatable'] = {}
     if 'lab_data' not in server_data:
         server_data['lab_data'] = server_data['lab_data_latest']
@@ -100,7 +97,7 @@ def setup(server_data):
     )
     template_keys = get_test_packages(server_data['test_packages'])
     templates = s3templates.get_templates('work/config.yaml', '', template_keys)
-    scripts = s3templates.get_scripts('work/config.yam.')
+    scripts = s3templates.get_scripts('work/config.yaml')
     s3templates.download_templates('cc/coa/' + template_folder, templates)
     s3templates.download_scripts('cc/coa/' + template_folder, scripts)
     data = server_data
@@ -113,4 +110,8 @@ def setup(server_data):
         'templates': templates,
         'data': data
     }
+    f = file('output.txt', 'w')
+    f.write(str(data))
+    #f.write(str(type(server_data)))
+    f.close()
     return response
