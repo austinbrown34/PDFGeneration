@@ -24,24 +24,33 @@
 		font: 400 8px "Trebuchet MS";
 	}
 	th{
-		font: 600 8px "Trebuchet MS";
+		font: 500 8px "Trebuchet MS";
 		font-size: 8px;
-		width: 30%;
+		width: 20%;
+		padding-bottom: 2%;
 	}
 	td{
-		width: 30%;
+		width: 20%;
+		color: slategray;
 	}
 
 	.left{
 		text-align:left;
+		padding-left: 2%;
+		padding-right:2%
 	}
 
 	.text-right{
 
 	}
 	.right{
+		text-align:right;
 		float: right;
 		width: 70%;
+	}
+	.right td{
+	padding-right: 2%;
+	padding-left: 2%;
 	}
 	#stuff{
 		width: 100%;
@@ -89,7 +98,7 @@ progress:not([value]) {
 $(document).ready(function() {
 	tabledata = "";
 	for(var i = 0; i < reportdata.length; i++){
-		tabledata += '<tr><td>' + reportdata[i][0] + '</td>';
+		tabledata += '<tr><td class="left">' + reportdata[i][0] + '</td>';
 		tabledata += '<td class = "right"><progress max="' + reportdata[i][2] + '" value="' + reportdata[i][1] + '"></progress></td></tr>';
 	}
 	$('#example tbody').html(tabledata);
