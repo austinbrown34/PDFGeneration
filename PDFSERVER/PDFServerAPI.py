@@ -15,10 +15,10 @@ def not_found(error):
 def generate_reports():
     if not (request.json):
         abort(400)
-    
-    with open('fullpost.txt', 'w') as p:
-        p.write(request.json)    
-    with open('log.txt', 'w') as f:
+
+    with open('tmp/fullpost.txt', 'w') as p:
+        p.write(request.json)
+    with open('tmp/log.txt', 'w') as f:
         sys.stdout = f
         pdf = PDFManager(request.json)
         response = pdf.get_job()

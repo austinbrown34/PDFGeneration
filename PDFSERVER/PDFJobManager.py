@@ -27,7 +27,7 @@ class PDFJobManager(object):
         return response
 
     def get_instructions(self, job, server_data):
-        f = file('output2.txt', 'w')
+        f = file('tmp/output2.txt', 'w')
         f.write(str(server_data))
         f.write(str(type(server_data)))
         f.close()

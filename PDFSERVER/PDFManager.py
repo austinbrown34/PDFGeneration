@@ -25,7 +25,7 @@ class PDFManager(object):
             job_type = self.job_type
         if server_data is None:
             server_data = self.server_data
-        f = file('output3.txt', 'w')
+        f = file('tmp/output3.txt', 'w')
         f.write(str(self.server_data))
         f.write(str(type(self.server_data)))
         f.close()
@@ -47,7 +47,7 @@ class PDFManager(object):
             'status': self.status,
             'error': self.error
         }
-        log = file('log.txt', 'w')
+        log = file('tmp/log.txt', 'w')
         log.write(str(message))
         log.close()
         return message
@@ -107,7 +107,7 @@ class PDFManager(object):
             print url
             print str(fields)
             #print str(pdf.seek(0,2).tell())
-            
+
             print first
             this_data = {'key': file_key}
             if api_key and api_secret:
@@ -133,7 +133,7 @@ class PDFManager(object):
                 'status': self.status,
                 'error': str(self.error)
             }
-        subprocess.call('rm -rf /home/ec2-user/PDFServer/PDFSERVER/work/*', shell=True)
+        # subprocess.call('rm -rf /home/ec2-user/PDFServer/PDFSERVER/work/*', shell=True)
         return response
 
     def deliver_pdf_link(

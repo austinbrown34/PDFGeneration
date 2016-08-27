@@ -110,7 +110,7 @@ def setup(server_data):
         'templates': templates,
         'data': data
     }
-    f = file('output.txt', 'w')
+    f = file('tmp/output.txt', 'w')
     f.write(str(data))
     #f.write(str(type(server_data)))
     f.close()
