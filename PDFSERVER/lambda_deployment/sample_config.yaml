@@ -1,0 +1,6 @@
+template_scripts:
+  - badges.py
+template_rules:
+  Everything:
+    - newstart.pdf
+    - newstart.pdf

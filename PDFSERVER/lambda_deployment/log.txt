@@ -1,0 +1,64 @@
+work/newstart.pdf
+None
+path doesnt exist - tag is none for work/temp/Im1.8.128x128.img
+images.0
+SparkLine
+None
+None
+ext: jpg
+ph_translation
+{'ServerImages': [{'src': 'work/temp/Im2.jpg', 'serversource': 'work/temp/images.01jpg', 'height': '141', 'width': '265', 'tag': 'images.0', 'bbox': '322.306,405.430,587.545,547.344', 'id': 2}], 'DTcoords': [], 'DTdimensions': [], 'SLdimensions': [267, 248], 'SLcoords': [24, 118]}
+vizpdfs: 
+['work/temp/sparkline5.pdf']
+from generate viz - viz, controljs, out_dir
+html/sparkline5.html
+js/report3.js
+work/temp/
+---------------
+work/temp/sparkline5.pdf
+work/temp/sparkline5_fixed.pdf
+---------------
+fixed_vizpdfs: 
+['work/temp/sparkline5_fixed.pdf']
+['work/temp/temp1.pdf']
+
+work/temp/work_filled_with_images1.pdf
+work/newstart.pdf
+None
+path doesnt exist - tag is none for work/temp/Im1.8.128x128.img
+images.0
+SparkLine
+None
+None
+ext: jpg
+ph_translation
+{'ServerImages': [{'src': 'work/temp/Im2.jpg', 'serversource': 'work/temp/images.02jpg', 'height': '141', 'width': '265', 'tag': 'images.0', 'bbox': '322.306,405.430,587.545,547.344', 'id': 2}], 'DTcoords': [], 'DTdimensions': [], 'SLdimensions': [267, 248], 'SLcoords': [24, 118]}
+vizpdfs: 
+['work/temp/sparkline5.pdf']
+from generate viz - viz, controljs, out_dir
+html/sparkline5.html
+js/report3.js
+work/temp/
+---------------
+work/temp/sparkline5.pdf
+work/temp/sparkline5_fixed.pdf
+---------------
+fixed_vizpdfs: 
+['work/temp/sparkline5_fixed.pdf']
+['work/temp/temp1.pdf']
+
+work/temp/work_filled_with_images2.pdf
+PDF Generated Successfully
+first post info:
+https://s3-us-west-1.amazonaws.com/uploads.st-orders.confidentcannabis.com
+{u'AWSAccessKeyId': u'AKIAJ4S5I3PTAHSHSIZA', u'x-amz-meta-filename': u"1608SQA0003.0004 - Steve's Grow Shack - the real deal.pdf", u'x-amz-meta-version': 4, u'key': u'samples/1608SQA0003.0004/coas/e6aa8b37-85ed-4ae1-918b-bc205b498d66', u'signature': u'w2dSApbqG37JRNCdXkDGTL6ExTQ=', u'policy': u'eyJjb25kaXRpb25zIjogW1siY29udGVudC1sZW5ndGgtcmFuZ2UiLCAxLCAyMDk3MTUyMF0sIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS1maWxlbmFtZSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS12ZXJzaW9uIiwgIiJdLCB7ImJ1Y2tldCI6ICJ1cGxvYWRzLnN0LW9yZGVycy5jb25maWRlbnRjYW5uYWJpcy5jb20ifSwgeyJrZXkiOiAic2FtcGxlcy8xNjA4U1FBMDAwMy4wMDA0L2NvYXMvZTZhYThiMzctODVlZC00YWUxLTkxOGItYmMyMDViNDk4ZDY2In1dLCAiZXhwaXJhdGlvbiI6ICIyMDE2LTA4LTI2VDE4OjAwOjA1WiJ9', u'Content-Type': u'application/pdf'}
+<Response [204]>
+second post info:
+https://s3-us-west-1.amazonaws.com/uploads.st-orders.confidentcannabis.com/samples/api/1608SQA0003.0004/file/complete
+{
+  "data": {
+    "success": true
+  }
+}
+{u'url': u'https://s3-us-west-1.amazonaws.com/uploads.st-orders.confidentcannabis.com', u'fields': {u'AWSAccessKeyId': u'AKIAJ4S5I3PTAHSHSIZA', u'x-amz-meta-filename': u"1608SQA0003.0004 - Steve's Grow Shack - the real deal.pdf", u'x-amz-meta-version': 4, u'key': u'samples/1608SQA0003.0004/coas/e6aa8b37-85ed-4ae1-918b-bc205b498d66', u'signature': u'w2dSApbqG37JRNCdXkDGTL6ExTQ=', u'policy': u'eyJjb25kaXRpb25zIjogW1siY29udGVudC1sZW5ndGgtcmFuZ2UiLCAxLCAyMDk3MTUyMF0sIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS1maWxlbmFtZSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS12ZXJzaW9uIiwgIiJdLCB7ImJ1Y2tldCI6ICJ1cGxvYWRzLnN0LW9yZGVycy5jb25maWRlbnRjYW5uYWJpcy5jb20ifSwgeyJrZXkiOiAic2FtcGxlcy8xNjA4U1FBMDAwMy4wMDA0L2NvYXMvZTZhYThiMzctODVlZC00YWUxLTkxOGItYmMyMDViNDk4ZDY2In1dLCAiZXhwaXJhdGlvbiI6ICIyMDE2LTA4LTI2VDE4OjAwOjA1WiJ9', u'Content-Type': u'application/pdf'}}
+{'status': 'Successfully Generated and Delivered PDF.'}

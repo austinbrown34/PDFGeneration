@@ -1,0 +1,10 @@
+#!/home/ec2-user/PDFServer/PDFSERVER/lambda_deployment/env/bin/python2.7
+# EASY-INSTALL-ENTRY-SCRIPT: 'base58==0.2.3','console_scripts','base58'
+__requires__ = 'base58==0.2.3'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('base58==0.2.3', 'console_scripts', 'base58')()
+    )

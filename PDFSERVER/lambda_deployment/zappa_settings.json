@@ -1,0 +1,8 @@
+{
+    "dev": {
+        "app_function": "PDFServerAPI.app", 
+        "s3_bucket": "zappa-gtve5gf74",
+	"parameter_depth": 5,
+	"use_precompiled_packages": true
+    }
+}

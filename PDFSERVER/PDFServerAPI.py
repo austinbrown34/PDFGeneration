@@ -3,6 +3,7 @@ from PDFManager import PDFManager
 
 app = Flask(__name__)
 import sys
+import json
 
 app.config['PROPAGATE_EXCEPTIONS'] = True
 @app.errorhandler(404)
@@ -15,6 +16,8 @@ def generate_reports():
     if not (request.json):
         abort(400)
     
+    with open('fullpost.txt', 'w') as p:
+        p.write(request.json)    
     with open('log.txt', 'w') as f:
         sys.stdout = f
         pdf = PDFManager(request.json)
