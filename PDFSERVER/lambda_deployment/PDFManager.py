@@ -25,10 +25,7 @@ class PDFManager(object):
             job_type = self.job_type
         if server_data is None:
             server_data = self.server_data
-        f = file('output3.txt', 'w')
-        f.write(str(self.server_data))
-        f.write(str(type(self.server_data)))
-        f.close()
+
 
         pdfjob = PDFJobManager(job_type, server_data)
         feedback = pdfjob.load_job()
@@ -47,9 +44,7 @@ class PDFManager(object):
             'status': self.status,
             'error': self.error
         }
-        log = file('log.txt', 'w')
-        log.write(str(message))
-        log.close()
+
         return message
 
     def run_job(self, templates, data, delivery_method=None):
@@ -107,7 +102,7 @@ class PDFManager(object):
             print url
             print str(fields)
             #print str(pdf.seek(0,2).tell())
-            
+
             print first
             this_data = {'key': file_key}
             if api_key and api_secret:
@@ -133,7 +128,7 @@ class PDFManager(object):
                 'status': self.status,
                 'error': str(self.error)
             }
-        subprocess.call('rm -rf /home/ec2-user/PDFServer/PDFSERVER/work/*', shell=True)
+        # subprocess.call('rm -rf /home/ec2-user/PDFServer/PDFSERVER/work/*', shell=True)
         return response
 
     def deliver_pdf_link(
@@ -160,11 +155,11 @@ class PDFManager(object):
             aws_secret_access_key='WlnKj/6T4/kx9juBY/GUWOwpmtz8RKp+S5KrjSJM'
         )
         s3 = session.resource('s3')
-        saved_pdf = file('finalpdf.pdf', 'w')
+        saved_pdf = file('/tmp/finalpdf.pdf', 'w')
         saved_pdf.write(pdf)
         saved_pdf.close()
         s3.meta.client.upload_file(
-            'finalpdf.pdf', 'pdfserver', 'finalpdf.pdf'
+            '/tmp/finalpdf.pdf', 'pdfserver', 'finalpdf.pdf'
         )
         client = session.client('s3')
         file_url = client.generate_presigned_url(

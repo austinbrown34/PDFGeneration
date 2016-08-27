@@ -5,7 +5,7 @@ import os
 class PDFMaker(object):
 
     def __init__(self, templates, server_data):
-        self.work_dir = 'work'
+        self.work_dir = '/tmp/work'
         self.templates = templates
         self.server_data = server_data
         self.total_pages = len(templates)
@@ -28,8 +28,8 @@ class PDFMaker(object):
             pdfs.append(pdf)
             page_count += 1
 
-        pdftools.merge_all_pages(pdfs, 'Final_PDF.pdf')
-        final_pdf = open('Final_PDF.pdf', 'rb')
+        pdftools.merge_all_pages(pdfs, '/tmp/Final_PDF.pdf')
+        final_pdf = open('/tmp/Final_PDF.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',
             'pdf': final_pdf

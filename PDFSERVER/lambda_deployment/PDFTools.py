@@ -25,12 +25,12 @@ def get_acroform_fields_pdftk(filename):
     args = ['pdftk', filename, 'dump_data_fields', 'output', 'work/dump_data_fields.txt']
     subprocess.call(args)
     field_names = []
-    with open('work/dump_data_fields.txt') as ddf:
+    with open('/tmp/work/dump_data_fields.txt') as ddf:
         for line in ddf:
             if 'FieldName:' in line:
                 field_names.append(line.split('FieldName: ')[1].strip())
     return field_names
-    
+
 
 def get_acroform_fields(filename):
     fp = open(filename, 'rb')
@@ -282,7 +282,7 @@ def generate_visualizations(viz_files, controljs, out_dir):
         print viz
         print controljs
         print out_dir
-        
+
         call = [
             'phantomjs',
             controljs,
@@ -464,7 +464,7 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
         else:
             value = map_variables([img_spec['tag']], server_data)
             if value[0] is not None:
-                
+
                 ext = '.' + \
                     value[0].split(".")[-1]
                 if ext not in ['jpg', 'png', 'gif']:

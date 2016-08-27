@@ -93,25 +93,22 @@ def setup(server_data):
     s3templates.download_config(
         'cc/coa/' + template_folder,
         'config.yaml',
-        'work/config.yaml'
+        '/tmp/work/config.yaml'
     )
     template_keys = get_test_packages(server_data['test_packages'])
-    templates = s3templates.get_templates('work/config.yaml', '', template_keys)
-    scripts = s3templates.get_scripts('work/config.yaml')
+    templates = s3templates.get_templates('/tmp/work/config.yaml', '', template_keys)
+    scripts = s3templates.get_scripts('/tmp/work/config.yaml')
     s3templates.download_templates('cc/coa/' + template_folder, templates)
     s3templates.download_scripts('cc/coa/' + template_folder, scripts)
     data = server_data
     for script in scripts:
         job = imp.load_source(
             '',
-            os.path.join('work', script))
+            os.path.join('tmp', 'work', script))
         data = job.run(data)
     response = {
         'templates': templates,
         'data': data
     }
-    f = file('output.txt', 'w')
-    f.write(str(data))
-    #f.write(str(type(server_data)))
-    f.close()
+
     return response
