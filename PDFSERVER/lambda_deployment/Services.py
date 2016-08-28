@@ -19,11 +19,32 @@ class S3TemplateService(object):
         self.s3_client = self.session.client('s3')
 
     def download_config(self, config_folder, config, destination):
-        self.s3.meta.client.download_file(
-            self.bucket,
-            os.path.join(config_folder, config),
-            destination
-        )
+        def lambda_handler(event, context):
+            print "made it to the lambda handler"
+            bucket_name = event['Records'][0]['s3']['bucket']['name']
+            key = event['Records'][0]['s3']['object']['key']
+            if not key.endswith('/'):
+                try:
+                    split_key = key.split('/')
+                    file_name = split_key[-1]
+                    s3templates.s3.meta.client.download_file(
+                        bucket_name,
+                        key,
+                        '/tmp/work/config.yaml'
+                        )
+                except Exception as e:
+                    print str(e)
+            return (bucket_name, key)
+        try:
+            self.s3.meta.client.download_file(
+                self.bucket,
+                os.path.join(config_folder, config),
+                destination
+                )
+        except Exception as e:
+            print str(e)
+            print "showing contents of tmp"
+            os.listdir('/tmp/')
 
     def get_templates(self, config, template_folder, template_keys):
         templates = []
@@ -59,20 +80,52 @@ class S3TemplateService(object):
 
     def download_templates(self, template_folder, templates):
         for template in templates:
+            def lambda_handler(event, context):
+                print "made it to the lambda handler"
+                bucket_name = event['Records'][0]['s3']['bucket']['name']
+                key = event['Records'][0]['s3']['object']['key']
+                if not key.endswith('/'):
+                    try:
+                        split_key = key.split('/')
+                        file_name = split_key[-1]
+                        s3templates.s3.meta.client.download_file(
+                            bucket_name,
+                            key,
+                            '/tmp/work/' + template
+                            )
+                    except Exception as e:
+                        print str(e)
+                return (bucket_name, key)
             self.s3.meta.client.download_file(
                 self.bucket,
                 os.path.join(template_folder, template),
-                os.path.join('work', template)
+                os.path.join('/tmp', 'work', template)
             )
 
     def download_scripts(self, template_folder, scripts):
         for script in scripts:
+            def lambda_handler(event, context):
+                print "made it to the lambda handler"
+                bucket_name = event['Records'][0]['s3']['bucket']['name']
+                key = event['Records'][0]['s3']['object']['key']
+                if not key.endswith('/'):
+                    try:
+                        split_key = key.split('/')
+                        file_name = split_key[-1]
+                        s3templates.s3.meta.client.download_file(
+                            bucket_name,
+                            key,
+                            '/tmp/work/' + script
+                            )
+                    except Exception as e:
+                        print str(e)
+                return (bucket_name, key)
             self.s3.meta.client.download_file(
                 self.bucket,
                 os.path.join(template_folder, script),
-                os.path.join('work', script)
+                os.path.join('/tmp', 'work', script)
             )
-
+        print "downloaded script--------------------------------------------------------------"
     def get_presigned_url(self, pdf):
         presigned_url = self.s3_client.generate_presigned_url(
             ClientMethod='get_object',

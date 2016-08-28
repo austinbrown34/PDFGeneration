@@ -22,13 +22,25 @@ import requests
 
 def get_acroform_fields_pdftk(filename):
     print filename
-    args = ['pdftk', filename, 'dump_data_fields', 'output', 'work/dump_data_fields.txt']
-    subprocess.call(args)
+    args = ['./pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
+    try:
+        #preargs = ['sudo', './setup_pdftk.sh']
+        #subprocess.call(preargs)
+        dirs = os.listdir('/opt/')
+        print str(dirs)
+        print "setup pdftk ran"
+        #subprocess.check_call('pdftk')
+        subprocess.call(args)
+    except Exception as e:
+        print str(e)
+        print "made it to the exception for pdftk"
     field_names = []
     with open('/tmp/work/dump_data_fields.txt') as ddf:
         for line in ddf:
             if 'FieldName:' in line:
                 field_names.append(line.split('FieldName: ')[1].strip())
+    print "field names:"
+    print field_names
     return field_names
 
 
@@ -142,6 +154,7 @@ def get_placeholder_image_info(filename, xmlfile, outputdir):
             tag = None
         else:
             tag = get_image_tag(imgpth)
+            print "printing tag:"
             print tag
             image_info.append({
                 "id": i,
@@ -173,7 +186,7 @@ def remove_all_images(filename, new_filename):
 
 def repair_pdf(broke_pdf, fixed_pdf):
     call = [
-        'pdftk',
+        './pdftk',
         broke_pdf,
         'output',
         fixed_pdf
@@ -248,7 +261,7 @@ def generate_fdf(fields, data, fdfname):
 def fill_out_form(fdfname, template, filledname):
 
     call = [
-        'pdftk',
+        './pdftk',
         template,
         'fill_form',
         fdfname,
@@ -267,14 +280,15 @@ def update_data_visualization(
         coordinates):
     with open(data_vis_name, 'r') as file:
         content = file.readlines()
-
+    print "read the js file"
     content[1] = str(data) + ';\n'
     content[3] = str(dimensions) + ';\n'
     content[5] = str(coordinates) + ';\n'
-
-    with open(data_vis_name, 'w') as file:
+    if not os.path.isdir('/tmp/js'):
+        os.makedirs('/tmp/js')
+    with open(os.path.join('/tmp', data_vis_name), 'w') as file:
         file.writelines(content)
-
+    print "wrote the js file"
 
 def generate_visualizations(viz_files, controljs, out_dir):
     for viz in viz_files:
@@ -282,14 +296,17 @@ def generate_visualizations(viz_files, controljs, out_dir):
         print viz
         print controljs
         print out_dir
-
-        call = [
-            'phantomjs',
-            controljs,
-            viz,
-            out_dir + viz.split('/')[-1].replace('.html', '.pdf')
-        ]
-        subprocess.call(call)
+        try:
+            call = [
+                './phantomjs',
+                controljs,
+                viz,
+                out_dir + viz.split('/')[-1].replace('.html', '.pdf')
+            ]
+            subprocess.call(call)
+        except Exception as e:
+            print str(e)
+            print "exception for phantomjs"
 
 
 def draw_images_on_pdf(
@@ -366,33 +383,35 @@ def draw_visualization_on_pdf(
         work_dir):
     counter = 1
     first = True
-    for viz in vizs:
-        if first is False:
-            currentpdf = work_dir + 'temp' + \
-                str(counter - 1) + '.pdf'
-        vizpdf = PdfFileReader(open(viz, "rb"))
-        output_file = PdfFileWriter()
-        input_file = PdfFileReader(open(currentpdf, "rb"))
-        page_count = input_file.getNumPages()
-        for page_number in range(page_count):
-            input_page = input_file.getPage(page_number)
-            input_page.mergePage(vizpdf.getPage(0))
-            output_file.addPage(input_page)
-        if counter == len(vizs):
-            with open(pdf_with_vizs, "wb") as outputStream:
-                output_file.write(outputStream)
-        else:
-            with open(
-                    work_dir + 'temp' + str(counter) + '.pdf',
-                    "wb") as outputStream:
-                output_file.write(outputStream)
-        counter += 1
-        first = False
+    try:
+        for viz in vizs:
+            if first is False:
+                currentpdf = work_dir + 'temp' + \
+                    str(counter - 1) + '.pdf'
+            vizpdf = PdfFileReader(open(viz, "rb"))
+            output_file = PdfFileWriter()
+            input_file = PdfFileReader(open(currentpdf, "rb"))
+            page_count = input_file.getNumPages()
+            for page_number in range(page_count):
+                input_page = input_file.getPage(page_number)
+                input_page.mergePage(vizpdf.getPage(0))
+                output_file.addPage(input_page)
+            if counter == len(vizs):
+                with open(pdf_with_vizs, "wb") as outputStream:
+                    output_file.write(outputStream)
+            else:
+                with open(work_dir + 'temp' + str(counter) + '.pdf',"wb") as outputStream:
+                    output_file.write(outputStream)
+            counter += 1
+            first = False
+    except Exception as e:
+        print str(e)
+        print "exception for drawing viz"
 
 
 def merge_all_pages(pages, final):
     call = [
-        'pdftk'
+        './pdftk'
     ]
     for page in pages:
         call.append(page)

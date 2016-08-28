@@ -27,8 +27,9 @@ class PDFMaker(object):
             pdf = self.make_page(template, page_count)
             pdfs.append(pdf)
             page_count += 1
-
+        print "about to merge"
         pdftools.merge_all_pages(pdfs, '/tmp/Final_PDF.pdf')
+        print "merged and trying to open"
         final_pdf = open('/tmp/Final_PDF.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',
@@ -50,19 +51,21 @@ class PDFMaker(object):
         page_count = str(page_count)
         if not os.path.isdir(work_dir):
             os.makedirs(work_dir)
+        print "about to get fields........................................."
         fields = pdftools.get_acroform_fields_pdftk(os.path.join(work_dir, template))
         #print fields
+        print "got fields..........................................."
         all_image_data = pdftools.get_placeholder_image_info(
             os.path.join(work_dir, template),
             'work' + page_count + '.xml',
             os.path.join(work_dir, 'temp'))
         image_info = all_image_data['image_info']
         placeholder_imgs = all_image_data['placeholder_imgs']
-        #print "Placeholder images:"
-        #print placeholder_imgs
+        print "Placeholder images:"
+        print placeholder_imgs
         fielddata = {}
         fieldvalues = pdftools.map_variables(fields, server_data)
-        #print "This is your fielddata"
+        print "This is your fielddata"
         #print str(fields)
         for i, e in enumerate(fields):
            # print e
@@ -75,16 +78,18 @@ class PDFMaker(object):
                 fielddata[e] = fieldvalues[i]
             else:
                 fielddata[e] = fieldvalues[i]
-        #print str(fielddata)
+        print str(fielddata)
         pdftools.generate_fdf(
             fields,
             fielddata,
             os.path.join(work_dir, 'temp', 'work' + page_count + '.fdf'))
+        print "generated fdf"
         pdftools.fill_out_form(
             os.path.join(work_dir, 'temp', 'work' + page_count + '.fdf'),
             os.path.join(work_dir, template),
             os.path.join(work_dir, 'temp', 'work_filled' + page_count + '.pdf')
             )
+        print "filled out form"
         pdftools.remove_placeholder_images(
             os.path.join(
                 work_dir,
@@ -100,7 +105,7 @@ class PDFMaker(object):
             placeholder_imgs,
             os.path.join(work_dir, 'temp')
         )
-
+        print "removed placeholder imgs"
         DTdata = server_data['datatable']
         SLdata = server_data['sparkline']
 
@@ -140,7 +145,7 @@ class PDFMaker(object):
         print vizpdfs
         if vizpdfs != []:
             fixed_vizpdfs = []
-            pdftools.generate_visualizations(vizfiles, 'js/report3.js',  'work/temp/')
+            pdftools.generate_visualizations(vizfiles, 'js/report3.js',  '/tmp/work/temp/')
             for v in vizpdfs:
                 new_v = v.split('.')[0] + '_fixed.pdf'
                 print "---------------"
@@ -165,7 +170,7 @@ class PDFMaker(object):
             ),
             os.path.join(work_dir, 'temp')
         )
-
+        print "images drawn and viz is starting"
         pdftools.draw_visualization_on_pdf(
             fixed_vizpdfs,
             os.path.join(
@@ -179,5 +184,5 @@ class PDFMaker(object):
             ),
             os.path.join(work_dir, 'temp')
         )
-
+        print "finised page"
         return os.path.join(work_dir, 'work_complete' + page_count + '.pdf')

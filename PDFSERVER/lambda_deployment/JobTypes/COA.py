@@ -89,26 +89,59 @@ def setup(server_data):
         'aws_secret_access_key': 'WlnKj/6T4/kx9juBY/GUWOwpmtz8RKp+S5KrjSJM'
     }
     template_folder = server_data['lab']['abbreviation']
+    print "Initializing S3TemplateService"
+    if not os.path.exists('/tmp/work'):
+        os.makedirs('/tmp/work')
     s3templates = S3TemplateService(credentials, 'pdfserver')
-    s3templates.download_config(
-        'cc/coa/' + template_folder,
-        'config.yaml',
-        '/tmp/work/config.yaml'
-    )
+    print "S3TemplateService initialized"
+    def lambda_handler(event, context):
+        print "made it to the lambda handler"
+        bucket_name = event['Records'][0]['s3']['bucket']['name']
+        key = event['Records'][0]['s3']['object']['key']
+        if not key.endswith('/'):
+            try:
+                split_key = key.split('/')
+                file_name = split_key[-1]
+                s3templates.s3.meta.client.download_file(
+                    bucket_name,
+                    key,
+                    '/tmp/work/config.yaml'
+                )
+            except Exception as e:
+                print str(e)
+        return (bucket_name, key)
+    try:
+        s3templates.download_config(
+            'cc/coa/' + template_folder,
+            'config.yaml',
+            '/tmp/work/config.yaml'
+        )
+    except Exception as e:
+        print str(e)
+        return
+    print "downloaded config"
     template_keys = get_test_packages(server_data['test_packages'])
-    templates = s3templates.get_templates('/tmp/work/config.yaml', '', template_keys)
+    templates = s3templates.get_templates('/tmp/work/config.yaml', '/tmp/', template_keys)
+    print "getting scripts"
     scripts = s3templates.get_scripts('/tmp/work/config.yaml')
-    s3templates.download_templates('cc/coa/' + template_folder, templates)
-    s3templates.download_scripts('cc/coa/' + template_folder, scripts)
+    try:
+        print "downloading templates"
+        s3templates.download_templates('cc/coa/' + template_folder, templates)
+        print "downloading scripts"
+        s3templates.download_scripts('cc/coa/' + template_folder, scripts)
+    except Exception as e:
+        print str(e)
+        print str(os.listdir('/tmp'))
+        return
     data = server_data
     for script in scripts:
         job = imp.load_source(
             '',
-            os.path.join('tmp', 'work', script))
+            os.path.join('/tmp', 'work', script))
         data = job.run(data)
     response = {
         'templates': templates,
         'data': data
     }
-
+    print "made it to the end of this section......................................."
     return response
