@@ -1,4 +1,4 @@
-#!/home/ec2-user/PDFServer/PDFSERVER/lambda_deployment/env/bin/python2.7
+#!/home/ec2-user/PDFServer/env/bin/python2.7
 """PILdriver, an image-processing calculator using PIL.
 
 An instance of class PILDriver is essentially a software stack machine

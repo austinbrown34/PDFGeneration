@@ -1,4 +1,4 @@
-#!/home/ec2-user/PDFServer/PDFSERVER/lambda_deployment/env/bin/python2.7
+#!/home/ec2-user/PDFServer/env/bin/python2.7
 #
 #  latin2ascii.py - converts latin1 characters into ascii.
 #

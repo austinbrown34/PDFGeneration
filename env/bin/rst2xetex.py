@@ -1,4 +1,4 @@
-#!/home/ec2-user/PDFServer/PDFSERVER/lambda_deployment/env/bin/python2.7
+#!/home/ec2-user/PDFServer/env/bin/python2.7
 
 # $Id: rst2xetex.py 7038 2011-05-19 09:12:02Z milde $
 # Author: Guenter Milde
