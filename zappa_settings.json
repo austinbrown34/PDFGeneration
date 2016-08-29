@@ -1,7 +1,7 @@
 {
-    "dev": {
+    "staging": {
         "app_function": "PDFServerAPI.app", 
-        "s3_bucket": "zappa-gtve5gf74",
+        "s3_bucket": "zappa-poyuk61kb",
 	"parameter_depth": 5,
 	"use_precompiled_packages": true,
 	"timeout": 300,

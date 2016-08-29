@@ -28,7 +28,6 @@ s3transfer==0.1.2
 six==1.10.0
 tqdm==4.8.3
 Unidecode==0.4.19
-uWSGI==2.0.13.1
 Werkzeug==0.11.10
 wsgi-request-logger==0.4.5
 zappa==0.21.0
