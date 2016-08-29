@@ -1,10 +1,14 @@
 {
-    "staging": {
+    "pro": {
         "app_function": "PDFServerAPI.app", 
-        "s3_bucket": "zappa-poyuk61kb",
+        "s3_bucket": "pdfserver-pro-lambda",
 	"parameter_depth": 5,
 	"use_precompiled_packages": true,
 	"timeout": 300,
 	"memory_size": 1024,
+	"aws_region": "us-west-2",
+	"profile_name": "austinbrown",
+	"project_name": "PDFServer",
+	"role_name": "Pdfgen"
     }
 }
