@@ -9,7 +9,10 @@ class PDFMaker(object):
         self.templates = templates
         self.server_data = server_data
         self.total_pages = len(templates)
-        os.environ['LD_LIBRARY_PATH'] = os.path.joing(os.getcwd(), 'bin', 'libgcj.so.10')
+        os.environ['LD_LIBRARY_PATH'] = os.path.join(
+            os.getcwd(),
+            'bin',
+            'libgcj.so.10')
 
     def make_pages(
             self,
