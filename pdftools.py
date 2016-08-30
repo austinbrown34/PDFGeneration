@@ -22,7 +22,7 @@ import requests
 
 def get_acroform_fields_pdftk(filename):
     print filename
-    args = ['./bin/pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
+    args = ['LD_LIBRARY_PATH=./bin/libgcj.so.10 ./bin/pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
     try:
         #preargs = ['sudo', './setup_pdftk.sh']
         #subprocess.call(preargs)
@@ -186,7 +186,7 @@ def remove_all_images(filename, new_filename):
 
 def repair_pdf(broke_pdf, fixed_pdf):
     call = [
-        './bin/pdftk',
+        'LD_LIBRARY_PATH=./bin/libgcj.so.10 ./bin/pdftk',
         broke_pdf,
         'output',
         fixed_pdf
@@ -261,7 +261,7 @@ def generate_fdf(fields, data, fdfname):
 def fill_out_form(fdfname, template, filledname):
 
     call = [
-        './bin/pdftk',
+        'LD_LIBRARY_PATH=./bin/libgcj.so.10 ./bin/pdftk',
         template,
         'fill_form',
         fdfname,
@@ -411,7 +411,7 @@ def draw_visualization_on_pdf(
 
 def merge_all_pages(pages, final):
     call = [
-        './bin/pdftk'
+        'LD_LIBRARY_PATH=./bin/libgcj.so.10 ./bin/pdftk'
     ]
     for page in pages:
         call.append(page)
