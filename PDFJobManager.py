@@ -13,9 +13,10 @@ class PDFJobManager(object):
         if server_data is None:
             server_data = self.server_data
         try:
+            job_type = job_type.lower()
             job = imp.load_source(
                 job_type,
-                os.path.join('job_types', job_type + '.py')
+                os.path.join('job_types', job_type, job_type + '.py')
                 )
             response = self.get_instructions(job, server_data)
         except Exception as e:

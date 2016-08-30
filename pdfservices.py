@@ -8,13 +8,19 @@ import yaml
 
 class S3TemplateService(object):
 
-    def __init__(self, credentials, bucket):
-        self.credentials = credentials
+    def __init__(self, credentials=None, bucket):
+        if credentials is None:
+            self.credentials = None
+        else:
+            self.credentials = credentials
         self.bucket = bucket
-        self.session = boto3.Session(
-            aws_access_key_id=credentials['aws_access_key_id'],
-            aws_secret_access_key=credentials['aws_secret_access_key']
-        )
+        if self.credentials is not None:
+            self.session = boto3.Session(
+                aws_access_key_id=credentials['aws_access_key_id'],
+                aws_secret_access_key=credentials['aws_secret_access_key']
+            )
+        else:
+            self.session = boto3.Session()
         self.s3 = self.session.resource('s3')
         self.s3_client = self.session.client('s3')
 

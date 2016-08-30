@@ -1,5 +1,5 @@
-from PDFJobManager import PDFJobManager
-from PDFMaker import PDFMaker
+from pdfjobmanager import PDFJobManager
+from pdfmaker import PDFMaker
 import boto3
 import requests
 import json
@@ -101,8 +101,6 @@ class PDFManager(object):
             print "first post info:"
             print url
             print str(fields)
-            #print str(pdf.seek(0,2).tell())
-
             print first
             this_data = {'key': file_key}
             if api_key and api_secret:
@@ -128,7 +126,7 @@ class PDFManager(object):
                 'status': self.status,
                 'error': str(self.error)
             }
-        # subprocess.call('rm -rf /home/ec2-user/PDFServer/PDFSERVER/work/*', shell=True)
+
         return response
 
     def deliver_pdf_link(
@@ -150,10 +148,7 @@ class PDFManager(object):
         if api_secret is None:
             api_secret = self.api_secret
         url = callback['url']
-        session = boto3.Session(
-            aws_access_key_id='AKIAI5NYJC5SDJ3NKVIQ',
-            aws_secret_access_key='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'
-        )
+        session = boto3.Session()
         s3 = session.resource('s3')
         saved_pdf = file('/tmp/finalpdf.pdf', 'w')
         saved_pdf.write(pdf)

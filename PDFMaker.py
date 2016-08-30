@@ -1,4 +1,4 @@
-import PDFTools as pdftools
+import pdftools as pdftools
 import os
 
 

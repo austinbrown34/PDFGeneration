@@ -1,9 +1,9 @@
 import sys
 import imp
 import os
-sys.path.append('..')
+sys.path.append('../..')
 
-from Services import S3TemplateService
+from pdfservices import S3TemplateService
 
 
 def setup(server_data):
@@ -84,15 +84,12 @@ def setup(server_data):
 
     server_data['datatable'] = combined_cannabinoids_dt
     server_data['sparkline'] = combined_cannabinoids_sl
-    credentials = {
-        'aws_access_key_id': 'AKIAI5NYJC5SDJ3NKVIQ',
-        'aws_secret_access_key': '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'
-    }
+
     template_folder = server_data['lab']['abbreviation']
     print "Initializing S3TemplateService"
     if not os.path.exists('/tmp/work'):
         os.makedirs('/tmp/work')
-    s3templates = S3TemplateService(credentials, 'pdfserver')
+    s3templates = S3TemplateService(bucket='cc-pdfserver')
     print "S3TemplateService initialized"
     def lambda_handler(event, context):
         print "made it to the lambda handler"
@@ -112,7 +109,7 @@ def setup(server_data):
         return (bucket_name, key)
     try:
         s3templates.download_config(
-            'cc/coa/' + template_folder,
+            os.path.join('coa', template_folder),
             'config.yaml',
             '/tmp/work/config.yaml'
         )
@@ -126,9 +123,9 @@ def setup(server_data):
     scripts = s3templates.get_scripts('/tmp/work/config.yaml')
     try:
         print "downloading templates"
-        s3templates.download_templates('cc/coa/' + template_folder, templates)
+        s3templates.download_templates(os.path.join('coa', template_folder), templates)
         print "downloading scripts"
-        s3templates.download_scripts('cc/coa/' + template_folder, scripts)
+        s3templates.download_scripts(os.path.join('coa', template_folder), scripts)
     except Exception as e:
         print str(e)
         print str(os.listdir('/tmp'))

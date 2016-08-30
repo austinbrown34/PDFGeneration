@@ -14,7 +14,7 @@ from fdfgen import forge_fdf
 import subprocess
 from reportlab.pdfgen import canvas
 from PyPDF2 import PdfFileWriter, PdfFileReader
-from Services import ImageExtractorService
+from pdfservices import ImageExtractorService
 import urllib2
 import shutil
 import requests
@@ -22,7 +22,7 @@ import requests
 
 def get_acroform_fields_pdftk(filename):
     print filename
-    args = ['./pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
+    args = ['./bin/pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
     try:
         #preargs = ['sudo', './setup_pdftk.sh']
         #subprocess.call(preargs)
@@ -186,7 +186,7 @@ def remove_all_images(filename, new_filename):
 
 def repair_pdf(broke_pdf, fixed_pdf):
     call = [
-        './pdftk',
+        './bin/pdftk',
         broke_pdf,
         'output',
         fixed_pdf
@@ -261,7 +261,7 @@ def generate_fdf(fields, data, fdfname):
 def fill_out_form(fdfname, template, filledname):
 
     call = [
-        './pdftk',
+        './bin/pdftk',
         template,
         'fill_form',
         fdfname,
@@ -298,7 +298,7 @@ def generate_visualizations(viz_files, controljs, out_dir):
         print out_dir
         try:
             call = [
-                './phantomjs',
+                './bin/phantomjs',
                 controljs,
                 viz,
                 out_dir + viz.split('/')[-1].replace('.html', '.pdf')
@@ -411,7 +411,7 @@ def draw_visualization_on_pdf(
 
 def merge_all_pages(pages, final):
     call = [
-        './pdftk'
+        './bin/pdftk'
     ]
     for page in pages:
         call.append(page)

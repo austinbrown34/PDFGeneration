@@ -1,6 +1,6 @@
 {
     "production": {
-        "app_function": "PDFServerAPI.app", 
+        "app_function": "pdfserverapi.app",
         "s3_bucket": "pdfserver-production-lambda",
 	"parameter_depth": 5,
 	"use_precompiled_packages": true,
