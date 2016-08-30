@@ -1,14 +1,14 @@
 {
-    "pro": {
+    "production": {
         "app_function": "PDFServerAPI.app", 
-        "s3_bucket": "pdfserver-pro-lambda",
+        "s3_bucket": "pdfserver-production-lambda",
 	"parameter_depth": 5,
 	"use_precompiled_packages": true,
 	"timeout": 300,
 	"memory_size": 1024,
 	"aws_region": "us-west-2",
-	"profile_name": "austinbrown",
 	"project_name": "PDFServer",
+	"manage_roles": false,
 	"role_name": "Pdfgen"
     }
 }

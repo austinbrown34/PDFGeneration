@@ -12,7 +12,7 @@ class PDFManager(object):
         self.job_type = payload['job_type']
         self.delivery_method = payload['delivery_method']
         self.callback = payload['post_data']
-        self.server_data = payload['server_data']
+        self.server_data = payload['pdf_data']
         self.redirect_url = payload['redirect_url']
         self.redirect_url_base = payload['redirect_url_base']
         self.api_key = payload['api_key']
