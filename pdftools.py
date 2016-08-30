@@ -22,7 +22,7 @@ import requests
 
 def get_acroform_fields_pdftk(filename):
     print filename
-    args = ['./bin/pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
+    args = ['LD_LIBRARY_PATH=./bin/libgcj.so.10', './bin/pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
     try:
         #preargs = ['sudo', './setup_pdftk.sh']
         #subprocess.call(preargs)
