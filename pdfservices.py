@@ -8,11 +8,13 @@ import yaml
 
 class S3TemplateService(object):
 
-    def __init__(self, credentials=None, bucket):
+    def __init__(self, credentials=None, bucket=None):
         if credentials is None:
             self.credentials = None
         else:
             self.credentials = credentials
+        if bucket is None:
+            return
         self.bucket = bucket
         if self.credentials is not None:
             self.session = boto3.Session(
