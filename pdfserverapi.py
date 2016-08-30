@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, make_response, request, abort
-from PDFManager import PDFManager
+from pdfmanager import PDFManager
 
 app = Flask(__name__)
 import sys
