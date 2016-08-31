@@ -1,0 +1,9 @@
+template_scripts:
+template_rules:
+	All the Tests:
+		- 5 Can.pdf
+		- 7 Mic.pdf
+		- 8 Sol.pdf
+		- 9 Ter.pdf
+		- B Myc.pdf
+
