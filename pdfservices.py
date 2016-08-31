@@ -81,9 +81,14 @@ class S3TemplateService(object):
         cfg = open(config)
         cfg_obj = yaml.safe_load(cfg)
         cfg.close()
-        template_scripts = cfg_obj['template_scripts']
-        for script in template_scripts:
-            scripts.append(script)
+        print str(cfg_obj)
+	if cfg_obj is not None:
+	    template_scripts = cfg_obj['template_scripts']
+            if template_scripts is None:
+                scripts = []
+	    else:
+                for script in template_scripts:
+                    scripts.append(script)
         return scripts
 
     def download_templates(self, template_folder, templates):
