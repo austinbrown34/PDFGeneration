@@ -110,8 +110,7 @@ class PDFMaker(object):
             os.path.join(work_dir, 'temp')
         )
         print "removed placeholder imgs"
-        DTdata = server_data['datatable']
-        SLdata = server_data['sparkline']
+
 
         ph_translation = pdftools.translate_placeholders(
             image_info,
@@ -122,35 +121,42 @@ class PDFMaker(object):
         print "ph_translation"
         print ph_translation
 
-        DTdimensions = ph_translation['DTdimensions']
-        DTcoords = ph_translation['DTcoords']
-        SLdimensions = ph_translation['SLdimensions']
-        SLcoords = ph_translation['SLcoords']
+        Visualizations = ph_translation['Visualizations']
         ServerImages = ph_translation['ServerImages']
         vizfiles = []
         vizpdfs = []
-        if DTcoords != []:
-            pdftools.update_data_visualization(
-                'js/datatable.js', DTdata, DTdimensions, DTcoords)
-            vizfiles.append('html/datatable3.html')
-            vizpdfs.append(os.path.join(work_dir, 'temp', 'datatable3.pdf'))
-        if SLcoords != []:
-            pdftools.update_data_visualization(
-                'js/sparkline.js', SLdata, SLdimensions, SLcoords)
-            vizfiles.append('html/sparkline5.html')
-            vizpdfs.append(os.path.join(work_dir, 'temp', 'sparkline5.pdf'))
+        if Visualizations != []:
+            for viz in Visualizations:
+                pdftools.update_data_visualization(
+                    os.path.join(
+                        'job_types',
+                        server_data['viz']['job_type'],
+                        'viz', viz['viz_type'],
+                        'js',
+                        viz['viz_type'] + '.js'),
+                    viz['viz_data'],
+                    viz['viz_dimensions'],
+                    viz['viz_coords']
+                )
+                vizfiles.append(
+                    os.path.join(
+                        'job_types',
+                        server_data['viz']['job_type'],
+                        viz['viz_type'],
+                        'html',
+                        viz['viz_file']))
+                vizpdfs.append(
+                    os.path.join(
+                        work_dir,
+                        'temp',
+                        viz['viz_specific'] + '.pdf'))
 
-        #vizfiles = ['datatable3.html', 'sparkline3.html']
-       # vizpdfs = [
-       #     os.path.join(work_dir, 'temp', 'datatable3.pdf'),
-       #     os.path.join(work_dir, 'temp', 'sparkline3.pdf')
-       #     ]
+
         print "vizpdfs: "
         print vizpdfs
         fixed_vizpdfs = []
         if vizpdfs != []:
-            #fixed_vizpdfs = []
-            pdftools.generate_visualizations(vizfiles, 'js/report3.js',  '/tmp/work/temp/')
+            pdftools.generate_visualizations(vizfiles, 'report.js',  '/tmp/work/temp/')
             for v in vizpdfs:
                 new_v = v.split('.')[0] + '_fixed.pdf'
                 print "---------------"
@@ -179,18 +185,19 @@ class PDFMaker(object):
         if fixed_vizpdfs == []:
             with open(os.path.join(work_dir, 'work_complete' + page_count + '.pdf'), 'wb') as output:
                 output.write(open(os.path.join(work_dir, 'temp', 'work_filled_with_images' + page_count + '.pdf'), 'rb').read())
-        pdftools.draw_visualization_on_pdf(
-            fixed_vizpdfs,
-            os.path.join(
-                work_dir,
-                'temp',
-                'work_filled_with_images' + page_count + '.pdf'
-            ),
-            os.path.join(
-                work_dir,
-                'work_complete' + page_count + '.pdf'
-            ),
-            os.path.join(work_dir, 'temp')
-        )
+        else:
+            pdftools.draw_visualization_on_pdf(
+                fixed_vizpdfs,
+                os.path.join(
+                    work_dir,
+                    'temp',
+                    'work_filled_with_images' + page_count + '.pdf'
+                ),
+                os.path.join(
+                    work_dir,
+                    'work_complete' + page_count + '.pdf'
+                ),
+                os.path.join(work_dir, 'temp')
+            )
         print "finised page"
         return os.path.join(work_dir, 'work_complete' + page_count + '.pdf')

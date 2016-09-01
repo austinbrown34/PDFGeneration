@@ -464,6 +464,7 @@ def build_visualization(server_data):
 
 
 def translate_placeholders(image_info, server_data, work_dir, page_count):
+    visualizations = []
     organized_image_info = {}
     server_images = []
     DTdimensions = []
@@ -472,22 +473,31 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
     SLcoords = []
     for image in image_info:
         img_spec = image
-        if img_spec['tag'] == 'DataTable':
-            DTdimensions = [int(img_spec['width']),
-                            int(img_spec['height'])]
-            x = img_spec['bbox'].split(",")[0].split('.')[0]
-            y = img_spec['bbox'].split(",")[1].split('.')[0]
-            DTcoords = [int(x), int(y)]
-        elif img_spec['tag'] == 'SparkLine':
-            SLdimensions = [int(img_spec['width']),
-                            int(img_spec['height'])]
-            x = img_spec['bbox'].split(",")[0].split('.')[0]
-            y = img_spec['bbox'].split(",")[1].split('.')[0]
-            SLcoords = [int(x), int(y)]
+        if img_spec['tag'].startswith('viz_'):
+            viz_pieces = img_spec['tag'].split('_')
+            if len(viz_pieces) == 3:
+                viz_folder = viz_pieces[0]
+                viz_type = viz_pieces[1]
+                viz_specific = viz_pieces[1] + '_' + viz_pieces[2]
+                viz_file = viz_specific + '.html'
+                viz_dimensions = [int(img_spec['width']),
+                                int(img_spec['height'])]
+                x = img_spec['bbox'].split(",")[0].split('.')[0]
+                y = img_spec['bbox'].split(",")[1].split('.')[0]
+                viz_coords = [int(x), int(y)]
+                viz_data = server_data['viz'][viz_specific]
+                visualizations.append({
+                    'viz_folder': viz_folder,
+                    'viz_type': viz_type,
+                    'viz_specific': viz_specific,
+                    'viz_file': viz_file,
+                    'viz_dimensions': viz_dimensions,
+                    'viz_coords': viz_coords,
+                    'viz_data': viz_data
+                })
         else:
             value = map_variables([img_spec['tag']], server_data)
             if value[0] is not None:
-
                 ext = '.' + \
                     value[0].split(".")[-1]
                 if ext not in ['jpg', 'png', 'gif']:
@@ -511,10 +521,7 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                     img_spec['serversource'] = 'placeholders/sample.jpg'
                 server_images.append(img_spec)
     organized_image_info = {
-        'DTdimensions': DTdimensions,
-        'DTcoords': DTcoords,
-        'SLdimensions': SLdimensions,
-        'SLcoords': SLcoords,
+        'Visualizations': visualizations,
         'ServerImages': server_images
     }
     return organized_image_info
