@@ -23,7 +23,7 @@ def get_concentration_total(data_list, display_value):
     return concentration_total
 
 
-def combine_tests_for_viz(data_list, viz_type, concentration_total=None):
+def combine_tests_for_viz(data_list, viz_type, total_concentration=None):
     combined_list = []
     for data in data_list:
         for analyte in data:
@@ -52,7 +52,9 @@ def combine_tests_for_viz(data_list, viz_type, concentration_total=None):
 def get_test_packages(server_data):
     test_names = []
     for i, package in enumerate(server_data):
-        test_names.append(package['name'])
+        if 'package_key' not in package:
+            package['package_key'] = None
+        test_names.append([package['package_key'], package['name']])
     return test_names
 
 
@@ -120,7 +122,7 @@ def setup(server_data):
             print str(e)
             pass
 
-
+    server_data['viz'] = viztypes
     print "Initializing S3TemplateService"
 
     if not os.path.exists('/tmp/work'):

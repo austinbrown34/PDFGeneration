@@ -285,11 +285,17 @@ def update_data_visualization(
     with open(data_vis_name, 'r') as file:
         content = file.readlines()
     print "read the js file"
+    print data_vis_name
     content[1] = str(data) + ';\n'
     content[3] = str(dimensions) + ';\n'
     content[5] = str(coordinates) + ';\n'
-    if not os.path.isdir('/tmp/js'):
-        os.makedirs('/tmp/js')
+    data_vis_name_split = data_vis_name.split("/")
+    data_vis_name_split.pop()
+    data_vis_location = '/tmp/'
+    for i, e in enumerate(data_vis_name_split):
+        data_vis_location += e + '/'
+        if not os.path.isdir(data_vis_location):
+            os.makedirs(data_vis_location)
     with open(os.path.join('/tmp', data_vis_name), 'w') as file:
         file.writelines(content)
     print "wrote the js file"
@@ -308,6 +314,9 @@ def generate_visualizations(viz_files, controljs, out_dir):
                 out_dir + viz.split('/')[-1].replace('.html', '.pdf')
             ]
             subprocess.call(call)
+            temp_dirs = os.listdir(out_dir)
+            print "out_dir"
+            print str(temp_dirs)
         except Exception as e:
             print str(e)
             print "exception for phantomjs"
@@ -425,8 +434,14 @@ def merge_all_pages(pages, final):
     call.append('cat')
     call.append('output')
     call.append(final)
+    print "this is the call"
+    print call
+    try:
+        subprocess.call(call)
+    except Exception as e:
+        print "made it to the merge_all_pages exception"
+        print str(e)
 
-    subprocess.call(call)
 
 
 def map_variables(var_list, data):
@@ -472,19 +487,44 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
     server_images = []
     for image in image_info:
         img_spec = image
+        print "tag:"
+        print img_spec['tag']
         if img_spec['tag'].startswith('viz_'):
+            print "tag starts with viz_"
             viz_pieces = img_spec['tag'].split('_')
             if len(viz_pieces) == 3:
+                print "tag has 3 pieces"
                 viz_folder = viz_pieces[0]
+                print "viz_folder:"
+                print viz_folder
                 viz_type = viz_pieces[1]
+                print "viz_type:"
+                print viz_type
                 viz_specific = viz_pieces[1] + '_' + viz_pieces[2]
+                print "viz_specific:"
+                print viz_specific
                 viz_file = viz_specific + '.html'
+                print "viz_file:"
+                print viz_file
                 viz_dimensions = [int(img_spec['width']),
                                 int(img_spec['height'])]
+                print "viz_dimensions:"
+                print viz_dimensions
                 x = img_spec['bbox'].split(",")[0].split('.')[0]
+                print "x:"
+                print x
                 y = img_spec['bbox'].split(",")[1].split('.')[0]
+                print "y:"
+                print y
                 viz_coords = [int(x), int(y)]
+                print "viz_coords:"
+                print viz_coords
+                print "serverdata['viz']:"
+                print server_data['viz']
                 viz_data = server_data['viz'][viz_specific]
+                print "viz_data:"
+                print viz_data
+
                 visualizations.append({
                     'viz_folder': viz_folder,
                     'viz_type': viz_type,
@@ -494,13 +534,18 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                     'viz_coords': viz_coords,
                     'viz_data': viz_data
                 })
+                print "appended to visualizations"
         else:
             value = map_variables([img_spec['tag']], server_data)
+            print "this is the value"
+            print value
             if value[0] is not None:
                 try:
+                    print "image value is:"
+                    print value[0]
                     ext = '.' + value[0].split(".")[-1]
-                    if ext not in ['jpg', 'png', 'gif']:
-                        ext = 'jpg'
+                    if ext not in ['.jpg', '.png', '.gif']:
+                        ext = '.jpg'
                     print "ext: " + ext
                     remote_file = requests.get(value[0])
                     with open(
@@ -508,18 +553,26 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                             work_dir,
                             'temp',
                             img_spec['tag'] + page_count + ext
-                        ),'wb') as local_file:
+                        ), 'wb') as local_file:
                         local_file.write(remote_file.content)
+                    print "wrote local file"
                     img_spec['serversource'] = os.path.join(
                         work_dir,
                         'temp',
                         img_spec['tag'] + page_count + ext)
+                    print "serversource is:"
+                    print img_spec['serversource']
                 except Exception as e:
                     print "can't download " + str(value[0]) + str(e)
                     img_spec['serversource'] = 'placeholders/sample.jpg'
-                server_images.append(img_spec)
+                    pass
+            else:
+                print "value is None"
+                img_spec['serversource'] = 'placeholders/sample.jpg'
+            server_images.append(img_spec)
     organized_image_info = {
         'Visualizations': visualizations,
         'ServerImages': server_images
     }
+    print "returning from translate_placeholders"
     return organized_image_info

@@ -56,7 +56,7 @@ class S3TemplateService(object):
 
     def get_templates(self, config, template_folder, template_keys):
         templates = []
-
+        print "getting templates"
         def template_list_builder(temp_templates):
             for temp in temp_templates:
                 if not isinstance(temp, (str, unicode)):
@@ -67,11 +67,22 @@ class S3TemplateService(object):
         cfg = open(config)
         cfg_obj = yaml.safe_load(cfg)
         cfg.close()
+        print "this is the yaml obj:"
+        print str(cfg_obj)
         temp_templates = []
         template_rules = cfg_obj['template_rules']
-        for template_key in template_keys:
-            if template_key in template_rules:
-                temp_templates.append(template_rules[template_key])
+        for i, rule in enumerate(template_rules):
+            print "rule:"
+            print rule
+            for j, template_key in enumerate(template_keys):
+                print "template_key"
+                print template_key
+                if rule['rule']['package_key'] is not None:
+                    if template_key[0] == rule['rule']['package_key']:
+                        temp_templates.append(rule['rule']['included_templates'])
+                else:
+                    if template_key[1] == rule['rule']['package_name']:
+                        temp_templates.append(rule['rule']['included_templates'])
 
         template_list_builder(temp_templates)
         return templates

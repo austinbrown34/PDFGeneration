@@ -131,7 +131,8 @@ class PDFMaker(object):
                     os.path.join(
                         'job_types',
                         server_data['viz']['job_type'],
-                        'viz', viz['viz_type'],
+                        viz['viz_folder'],
+                        viz['viz_type'],
                         'js',
                         viz['viz_type'] + '.js'),
                     viz['viz_data'],
@@ -142,6 +143,7 @@ class PDFMaker(object):
                     os.path.join(
                         'job_types',
                         server_data['viz']['job_type'],
+                        viz['viz_folder'],
                         viz['viz_type'],
                         'html',
                         viz['viz_file']))
