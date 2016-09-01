@@ -61,7 +61,7 @@ class PDFManager(object):
                 response = self.deliver_pdf_file(pdf_response['pdf'])
             if self.delivery_method == 'POST_LINK':
                 response = self.deliver_pdf_link(pdf_response['pdf'])
-        print str(response)
+        # print str(response)
         return response
 
     def get_url(self, server_url, suffix):
@@ -99,21 +99,30 @@ class PDFManager(object):
                 }
             )
             print "first post info:"
+            print "first post url"
             print url
+            print "first post fields"
             print str(fields)
-            print first
+            # print "printing first post"
+            # print first.text
             this_data = {'key': file_key}
             if api_key and api_secret:
                 this_data['API_KEY'] = api_key
                 this_data['API_SECRET'] = api_secret
+            print "this is this_data"
+            print this_data
+            if not redirect_url_base.startswith('http'):
+                redirect_url_base = 'https://' + redirect_url_base
             second = requests.post(
-                self.get_url('https://' + redirect_url_base, redirect_url),
+                self.get_url(redirect_url_base, redirect_url),
                 this_data
             )
             print "second post info:"
-            print self.get_url(url, redirect_url)
-            print second.text
-            print callback
+            print "this is the get_url result"
+            print self.get_url(redirect_url_base, redirect_url)
+            # print second.text
+            print "this is the post_data"
+            # print callback
 
             self.status = 'Successfully Generated and Delivered PDF.'
             response = {

@@ -28,10 +28,10 @@ class PDFMaker(object):
             pdfs.append(pdf)
             page_count += 1
         print "about to merge"
-	print "contents of work dir:"
-	print os.listdir('/tmp/work/')
-	print "contents of work/temp dir:"
-	print os.listdir('/tmp/work/temp/')
+        print "contents of work dir:"
+        print os.listdir('/tmp/work/')
+        print "contents of work/temp dir:"
+        print os.listdir('/tmp/work/temp/')
         pdftools.merge_all_pages(pdfs, '/tmp/Final_PDF.pdf')
         print "merged and trying to open"
         final_pdf = open('/tmp/Final_PDF.pdf', 'rb')
@@ -147,7 +147,7 @@ class PDFMaker(object):
        #     ]
         print "vizpdfs: "
         print vizpdfs
-	fixed_vizpdfs = []
+        fixed_vizpdfs = []
         if vizpdfs != []:
             #fixed_vizpdfs = []
             pdftools.generate_visualizations(vizfiles, 'js/report3.js',  '/tmp/work/temp/')
@@ -176,7 +176,7 @@ class PDFMaker(object):
             os.path.join(work_dir, 'temp')
         )
         print "images drawn and viz is starting"
-	if fixed_vizpdfs == []:
+        if fixed_vizpdfs == []:
             with open(os.path.join(work_dir, 'work_complete' + page_count + '.pdf'), 'wb') as output:
                 output.write(open(os.path.join(work_dir, 'temp', 'work_filled_with_images' + page_count + '.pdf'), 'rb').read())
         pdftools.draw_visualization_on_pdf(

@@ -23,19 +23,18 @@ def not_found(error):
 
 @app.route('/v1/generate', methods=['POST'])
 def generate_reports():
-    print request
+    # print request
     if not (request.json):
         abort(400)
     print "this is request.json"
     if not os.path.exists('/tmp'):
         os.makedirs('/tmp')
-    with open('/tmp/fullpost.txt', 'w') as p:
-        p.write(str(request.json))
+    # print str(request.json)
     print "wrote to some files"
     pdf = PDFManager(request.json)
     print "pdfmanager initialized"
     response = pdf.get_job()
-
+    print "made it to the end"
     return jsonify(response)
 
 
