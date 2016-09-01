@@ -321,16 +321,16 @@ def draw_images_on_pdf(
     counter = 1
     temp_imgs, completed_temps = [], []
     for image in images:
-        ext = image['serversource'].split('.')[-1]
-        if ext == "jpg":
+        ext = '.' + image['serversource'].split('.')[-1]
+        if ext == ".jpg":
             im = IMG.open(image['serversource'])
             size = int(image['width']), int(image['height'])
             im.thumbnail(size, IMG.ANTIALIAS)
-            im.save(image['serversource'].replace('.jpg', '') +
-                    '_temp' + ext, "JPEG")
+            im.save(os.path.join(work_dir, image['serversource'].replace('.jpg', '').replace('/', '-') +
+                    '_temp' + ext), "JPEG")
             with IMG.open(
-                    image['serversource'].replace('.jpg', '') +
-                    '_temp' + ext) as im:
+                    os.path.join(work_dir, image['serversource'].replace('.jpg', '').replace('/', '-') +
+                    '_temp' + ext)) as im:
                 width, height = im.size
             diff = int(image['width']) - width
             if diff != 0:
@@ -353,6 +353,8 @@ def draw_images_on_pdf(
         counter += 1
     counter = 1
     for tempimg in temp_imgs:
+        print "printing tempimg"
+        print tempimg
         imagepdf = PdfFileReader(open(tempimg, 'rb'))
         output_file = PdfFileWriter()
         input_file = PdfFileReader(open(currentpdf, "rb"))
@@ -367,7 +369,7 @@ def draw_images_on_pdf(
             output_file.write(outputStream)
             completed_temps.append(
                 os.path.join(work_dir, 'temp' + str(counter) + '.pdf'))
-        currentpdf = work_dir + 'temp' + str(counter) + '.pdf'
+        currentpdf = os.path.join(work_dir, 'temp' + str(counter) + '.pdf')
         counter += 1
 
     if len(completed_temps) > 0:
@@ -378,6 +380,7 @@ def draw_images_on_pdf(
                   len(completed_temps) - 1], pdf_with_images)
     else:
         shutil.copyfile(currentpdf, pdf_with_images)
+
 
 
 def draw_visualization_on_pdf(
@@ -467,10 +470,6 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
     visualizations = []
     organized_image_info = {}
     server_images = []
-    DTdimensions = []
-    DTcoords = []
-    SLdimensions = []
-    SLcoords = []
     for image in image_info:
         img_spec = image
         if img_spec['tag'].startswith('viz_'):
@@ -498,12 +497,11 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
         else:
             value = map_variables([img_spec['tag']], server_data)
             if value[0] is not None:
-                ext = '.' + \
-                    value[0].split(".")[-1]
-                if ext not in ['jpg', 'png', 'gif']:
-                    ext = 'jpg'
-                print "ext: " + ext
                 try:
+                    ext = '.' + value[0].split(".")[-1]
+                    if ext not in ['jpg', 'png', 'gif']:
+                        ext = 'jpg'
+                    print "ext: " + ext
                     remote_file = requests.get(value[0])
                     with open(
                         os.path.join(
