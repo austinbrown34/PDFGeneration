@@ -74,115 +74,51 @@ def setup(server_data):
     server_data['images']['0'] = image
     server_data['cover'] = image
     template_folder = server_data['lab']['abbreviation']
-    cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
-    thc_data = server_data['lab_data']['thc']['tests']
-    terpenes_data = server_data['lab_data']['terpenes']['tests']
-    solvents_data = server_data['lab_data']['solvents']['tests']
-    microbials_data = server_data['lab_data']['microbials']['tests']
-    mycotoxins_data = server_data['lab_data']['mycotoxins']['tests']
-    pesticides_data = server_data['lab_data']['pesticides']['tests']
-    metals_data = server_data['lab_data']['metals']['tests']
-    total_cannabinoid_concentration = get_concentration_total([cannabinoid_data, thc_data], '%')
-    total_terpene_concentration = get_concentration_total([terpenes_data], '%')
-    total_solvent_concentration = get_concentration_total([solvents_data], '%')
-    total_microbial_concentration = get_concentration_total([microbials_data], '%')
-    total_mycotoxin_concentration = get_concentration_total([mycotoxins_data], '%')
-    total_pesticide_concentration = get_concentration_total([pesticides_data], '%')
-    total_metal_concentration = get_concentration_total([metals_data], '%')
-    combined_cannabinoids_dt = combine_tests_for_viz(
-        [
-            cannabinoid_data,
-            thc_data
-        ],
-        'datatable')
-    combined_cannabinoids_sl = combine_tests_for_viz(
-        [
-            cannabinoid_data,
-            thc_data
-        ],
-        'sparkline',
-        total_cannabinoid_concentration)
-    terpenes_dt = combine_tests_for_viz(
-        [
-            terpenes_data
-        ],
-        'datatable')
-    terpenes_sl = combine_tests_for_viz(
-        [
-            terpenes_data
-        ],
-        'sparkline',
-        total_terpene_concentration)
-    solvents_dt = combine_tests_for_viz(
-        [
-            solvents_data
-        ],
-        'datatable')
-    solvents_sl = combine_tests_for_viz(
-        [
-            solvents_data
-        ],
-        'sparkline',
-        total_solvent_concentration)
-    microbials_dt = combine_tests_for_viz(
-        [
-            microbials_data
-        ],
-        'datatable')
-    microbials_sl = combine_tests_for_viz(
-        [
-            microbials_data
-        ],
-        'sparkline',
-        total_microbial_concentration)
-    mycotoxins_dt = combine_tests_for_viz(
-        [
-            mycotoxins_dt
-        ],
-        'datatable')
-    mycotoxins_sl = combine_tests_for_viz(
-        [
-            mycotoxins_data
-        ],
-        'sparkline',
-        total_mycotoxin_concentration)
-    pesticides_dt = combine_tests_for_viz(
-        [
-            pesticides_data
-        ],
-        'datatable')
-    pesticides_sl = combine_tests_for_viz(
-        [
-            pesticides_data
-        ],
-        'sparkline',
-        total_pesticide_concentration)
-    metals_dt = combine_tests_for_viz(
-        [
-            metals_data
-        ],
-        'datatable')
-    metals_sl = combine_tests_for_viz(
-        [
-            metals_data
-        ],
-        'sparkline',
-        total_metal_concentration)
-    viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
-    viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
-    viztypes['datatable_terpenes'] = terpenes_dt
-    viztypes['sparkline_terpenes'] = terpenes_sl
-    viztypes['datatable_mycotoxins'] = mycotoxins_dt
-    viztypes['sparkline_mycotoxins'] = mycotoxins_sl
-    viztypes['datatable_microbials'] = microbials_dt
-    viztypes['sparkline_microbials'] = microbials_sl
-    viztypes['datatable_solvents'] = solvents_dt
-    viztypes['sparkline_solvents'] = solvents_sl
-    viztypes['datatable_pesticides'] = pesticides_dt
-    viztypes['sparkline_pesticides'] = pesticides_sl
-    viztypes['datatable_metals'] = metals_dt
-    viztypes['sparkline_metals'] = metals_sl
+    test_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals']
 
+    for category in test_categories:
+        try:
+            if category == 'cannabinoids':
+                cbd_data =  server_data['lab_data']['cannabinoids']['tests']
+                thc_data = server_data['lab_data']['thc']['tests']
+                cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
+                total_cannabinoid_concentration = get_concentration_total([cannabinoid_data, thc_data], '%')
+                combined_cannabinoids_dt = combine_tests_for_viz(
+                    [
+                        cannabinoid_data,
+                        thc_data
+                    ],
+                    'datatable')
+                combined_cannabinoids_sl = combine_tests_for_viz(
+                    [
+                        cannabinoid_data,
+                        thc_data
+                    ],
+                    'sparkline',
+                    total_cannabinoid_concentration)
+                viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
+                viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
+            else:
+                category_data = server_data['lab_data'][category]['tests']
+                total_category_concentration = get_concentration_total([category_data], '%')
+                category_dt = combine_tests_for_viz(
+                    [
+                        category_data
+                    ],
+                    'datatable')
+                category_sl = combine_tests_for_viz(
+                    [
+                        category_data
+                    ],
+                    'sparkline',
+                    total_category_concentration
+                )
+                viztypes['datatable_' + category] = category_dt
+                viztypes['sparkline_' + category] = category_sl
+        except Exception as e:
+            print "made it to the coa exception"
+            print str(e)
+            pass
 
 
     print "Initializing S3TemplateService"
