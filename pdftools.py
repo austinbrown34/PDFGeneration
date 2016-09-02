@@ -519,22 +519,27 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                 viz_coords = [int(x), int(y)]
                 print "viz_coords:"
                 print viz_coords
-                print "serverdata['viz']:"
-                print server_data['viz']
-                viz_data = server_data['viz'][viz_specific]
-                print "viz_data:"
-                print viz_data
+                # print "serverdata['viz']:"
+                # print server_data['viz']
+                try:
+                    viz_data = server_data['viz'][viz_specific]
+                    print "viz_data:"
+                    print viz_data
 
-                visualizations.append({
-                    'viz_folder': viz_folder,
-                    'viz_type': viz_type,
-                    'viz_specific': viz_specific,
-                    'viz_file': viz_file,
-                    'viz_dimensions': viz_dimensions,
-                    'viz_coords': viz_coords,
-                    'viz_data': viz_data
-                })
-                print "appended to visualizations"
+                    visualizations.append({
+                        'viz_folder': viz_folder,
+                        'viz_type': viz_type,
+                        'viz_specific': viz_specific,
+                        'viz_file': viz_file,
+                        'viz_dimensions': viz_dimensions,
+                        'viz_coords': viz_coords,
+                        'viz_data': viz_data
+                    })
+                    print "appended to visualizations"
+                except Exception as e:
+                    print "issue with a viz"
+                    print str(e)
+                    continue
         else:
             value = map_variables([img_spec['tag']], server_data)
             print "this is the value"

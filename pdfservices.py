@@ -87,6 +87,12 @@ class S3TemplateService(object):
         template_list_builder(temp_templates)
         return templates
 
+    def get_logo(self, config):
+        cfg = open(config)
+        cfg_obj = yaml.safe_load(cfg)
+        cfg.close()
+        logo = cfg_obj['template_logo']
+        return logo
     def get_scripts(self, config):
         scripts = []
         cfg = open(config)
