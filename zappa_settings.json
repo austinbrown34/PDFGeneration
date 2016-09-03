@@ -4,11 +4,11 @@
     "s3_bucket": "pdfserver-production-lambda",
     "parameter_depth": 5,
     "use_precompiled_packages": true,
-    "timeout": 300,
-    "memory_size": 1024,
+    "memory_size": 1536,
+    "timeout_seconds": 300,
     "aws_region": "us-west-2",
     "project_name": "PDFServer",
     "manage_roles": false,
-    "role_name": "Pdfgen"
+    "role_name": "Pdfgen",
   }
 }

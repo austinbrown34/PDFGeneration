@@ -30,26 +30,48 @@ def get_concentration_total(data_list, display_value):
     return concentration_total
 
 
-def combine_tests_for_viz(data_list, viz_type, total_concentration=None):
+def combine_tests_for_viz(data_list, category, viz_type, display_unit='%', display_unit2='mg/g', total_concentration=None):
     combined_list = []
     for data in data_list:
         for analyte in data:
             if 'total' not in analyte:
                 if viz_type == 'datatable':
-                    combined_list.append(
-                        [
-                            str(analyte),
-                            make_number(data[analyte]['display']['%']['loq']),
-                            make_number(data[analyte]['display']['%']['value']),
-                            make_number(data[analyte]['display']['mg/g']['value'])
-                        ]
-                    )
+                    status = ''
+                    if category in ['microbials', 'solvents', 'mycotoxins', 'pesticides', 'metals']:
+                        if 'limit' in data[analyte]['display'][display_unit]:
+                            if data[analyte]['display'][display_unit]['limit'] == '':
+                                status = 'Tested'
+                            else:
+                                if make_number(data[analyte]['display'][display_unit]['value']) > make_number(data[analyte]['display'][display_unit]['limit']):
+                                    status = 'Fail'
+                                else:
+                                    status = 'Pass'
+                        else:
+                            data[analyte]['display'][display_unit]['limit'] = ''
+                            status = 'Tested'
+                        combined_list.append(
+                            [
+                                str(analyte),
+                                make_number(data[analyte]['display'][display_unit]['limit']),
+                                make_number(data[analyte]['display'][display_unit]['value']),
+                                status
+                            ]
+                        )
+                    else:
+                        combined_list.append(
+                            [
+                                str(analyte),
+                                make_number(data[analyte]['display'][display_unit]['loq']),
+                                make_number(data[analyte]['display'][display_unit]['value']),
+                                make_number(data[analyte]['display'][display_unit2]['value'])
+                            ]
+                        )
                 if viz_type == 'sparkline':
 
                     combined_list.append(
                         [
                             str(analyte),
-                            make_number(data[analyte]['display']['%']['value']),
+                            make_number(data[analyte]['display'][display_unit]['value']),
                             make_number(total_concentration)
                         ]
                     )
@@ -105,9 +127,16 @@ def setup(server_data):
     server_data['qr_code'] = qr_base + public_profile_base + public_key
     template_folder = server_data['lab']['abbreviation']
     test_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals']
-
+    server_data['category_units'] = {}
     for category in test_categories:
+        print "we're on category ------------------->  " + category
         try:
+            report_units = server_data['lab_data'][category]['report_units']
+            secondary_report_units = ''
+            if report_units == 'mg/g':
+                secondary_report_units = '%'
+            if report_units == '%':
+                secondary_report_units = 'mg/g'
             if category == 'cannabinoids':
                 cbd_data = server_data['lab_data']['cannabinoids']['tests']
                 thc_data = server_data['lab_data']['thc']['tests']
@@ -124,69 +153,85 @@ def setup(server_data):
                 cannabinoid_data = server_data['lab_data']['cannabinoids']['tests']
                 print "cannabinoid_data"
                 print cannabinoid_data
-                total_cannabinoid_concentration = get_concentration_total([cannabinoid_data, thc_data], '%')
+                total_cannabinoid_concentration = get_concentration_total([cannabinoid_data, thc_data], str(report_units))
                 print "total_cannabinoid_concentration"
                 print total_cannabinoid_concentration
+                print "report_units"
+                print report_units
                 combined_cannabinoids_dt = combine_tests_for_viz(
                     [
                         cannabinoid_data,
                         thc_data
                     ],
-                    'datatable')
+                    category, 'datatable', report_units, secondary_report_units)
                 print "combined cannabinoid dt"
                 combined_cannabinoids_sl = combine_tests_for_viz(
                     [
                         cannabinoid_data,
                         thc_data
                     ],
-                    'sparkline',
-                    total_cannabinoid_concentration)
+                    category, 'sparkline', report_units, secondary_report_units,
+                    total_concentration=total_cannabinoid_concentration)
                 print "combined cannabinoid sl"
                 viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
                 viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
+                server_data['category_units'][category] = [
+                    report_units,
+                    secondary_report_units
+                ]
             elif category == 'microbials':
+                print "----------------------------------------------------------------"
+                print server_data['lab_data'][category]
+                print "----------------------------------------------------------------"
                 category_data = server_data['lab_data'][category]['tests']
-                report_units = server_data['lab_data'][category]['report_units']
                 print "yay for category data"
-                total_category_concentration = get_concentration_total([category_data], report_units)
+                total_category_concentration = get_concentration_total([category_data], str(report_units))
                 print "yay for total_category_concentration"
                 category_dt = combine_tests_for_viz(
                     [
                         category_data
                     ],
-                    'datatable')
+                    category, 'datatable', report_units, secondary_report_units)
                 print "yay for category dt"
                 category_sl = combine_tests_for_viz(
                     [
                         category_data
                     ],
-                    'sparkline',
-                    total_category_concentration
+                    category, 'sparkline', report_units, secondary_report_units,
+                    total_concentration=total_category_concentration
                 )
                 print "yay for category sl"
                 viztypes['datatable_' + category] = category_dt
                 viztypes['sparkline_' + category] = category_sl
+                server_data['category_units'][category] = [
+                    report_units,
+                    secondary_report_units
+                ]
             else:
                 category_data = server_data['lab_data'][category]['tests']
                 print "yay for category data"
-                total_category_concentration = get_concentration_total([category_data], '%')
+                total_category_concentration = get_concentration_total([category_data], str(report_units))
                 print "yay for total_category_concentration"
                 category_dt = combine_tests_for_viz(
                     [
                         category_data
                     ],
-                    'datatable')
+                    category, 'datatable', report_units, secondary_report_units)
                 print "yay for category dt"
                 category_sl = combine_tests_for_viz(
                     [
                         category_data
                     ],
-                    'sparkline',
-                    total_category_concentration
+                    category, 'sparkline', report_units, secondary_report_units,
+                    total_concentration=total_category_concentration
                 )
                 print "yay for category sl"
                 viztypes['datatable_' + category] = category_dt
                 viztypes['sparkline_' + category] = category_sl
+                server_data['category_units'][category] = [
+                    report_units,
+                    secondary_report_units
+                ]
         except Exception as e:
             print "made it to the coa exception"
             print str(e)

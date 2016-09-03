@@ -137,7 +137,9 @@ class PDFMaker(object):
                         viz['viz_type'] + '.js'),
                     viz['viz_data'],
                     viz['viz_dimensions'],
-                    viz['viz_coords']
+                    viz['viz_coords'],
+                    server_data['category_units'][viz['viz_specific'].split('_')[1]][0],
+                    server_data['category_units'][viz['viz_specific'].split('_')[1]][1]
                 )
                 vizfiles.append(
                     os.path.join(

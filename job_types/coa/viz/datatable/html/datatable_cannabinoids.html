@@ -79,6 +79,9 @@ $(document).ready(function() {
 				HeightTable = $('#stuff').height();
 			}
 		}
+		$("#example tr td:first-child").addClass("left");
+		$(".report_units").html(report_units)
+		$(".secondary_report_units").html(secondary_report_units)
 } );
 </script>
 
@@ -90,9 +93,9 @@ $(document).ready(function() {
         <thead>
             <tr>
                 <th class="left">Cannabinoid</th>
-                <th>LOQ<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;">%</i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;">%</i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;">mg/g</i></span></th>
+                <th>LOQ<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
             </tr>
 				</thead>
     </table>

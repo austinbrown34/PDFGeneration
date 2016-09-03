@@ -6,3 +6,8 @@ var reportcoords =
 [24, 119];
 
 var collection = [reportdata, reportdimensions, reportcoords]
+
+var report_units =
+'%';
+var secondary_report_units =
+'mg/g';

@@ -281,7 +281,9 @@ def update_data_visualization(
         data_vis_name,
         data,
         dimensions,
-        coordinates):
+        coordinates,
+        report_units,
+        secondary_report_units):
     with open(data_vis_name, 'r') as file:
         content = file.readlines()
     print "read the js file"
@@ -289,6 +291,8 @@ def update_data_visualization(
     content[1] = str(data) + ';\n'
     content[3] = str(dimensions) + ';\n'
     content[5] = str(coordinates) + ';\n'
+    content[10] = '"' + str(report_units) + '"' + ';\n'
+    content[12] = '"' + str(secondary_report_units) + '"' + ';\n'
     data_vis_name_split = data_vis_name.split("/")
     data_vis_name_split.pop()
     data_vis_location = '/tmp/'
@@ -299,6 +303,9 @@ def update_data_visualization(
     with open(os.path.join('/tmp', data_vis_name), 'w') as file:
         file.writelines(content)
     print "wrote the js file"
+    with open(os.path.join('/tmp', data_vis_name), 'r') as file:
+        content = file.readlines()
+    print content
 
 def generate_visualizations(viz_files, controljs, out_dir):
     for viz in viz_files:
