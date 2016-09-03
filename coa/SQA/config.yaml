@@ -3,7 +3,7 @@ template_scripts:
 template_rules:
   - rule:
       package_key:
-      package_name: Everything
+      package_name: Potency Analysis GC-FID
       included_templates:
         - 5-Can.pdf
         - 7-Mic.pdf
