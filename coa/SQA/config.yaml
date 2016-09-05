@@ -8,7 +8,7 @@ template_rules:
         - new5Can.pdf
         - 7-Mic.pdf
         - 8-Sol.pdf
-        - new9Ter-2.pdf
+        - new9Ter-3.pdf
         - B-Myc.pdf
   - rule:
       package_key:
