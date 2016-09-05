@@ -5,10 +5,10 @@ template_rules:
       package_key:
       package_name: Potency Analysis GC-FID
       included_templates:
-        - 5-Can-1.pdf
+        - new5Can.pdf
         - 7-Mic.pdf
         - 8-Sol.pdf
-        - 9-Ter.pdf
+        - new9Ter.pdf
         - B-Myc.pdf
   - rule:
       package_key:
