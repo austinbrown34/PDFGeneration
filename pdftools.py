@@ -453,15 +453,29 @@ def merge_all_pages(pages, final):
 
 def map_variables(var_list, data):
     value_list = []
+    p_o_p = 0
+    print "checking out page_of_pages for issues"
     for i, var in enumerate(var_list):
+        if var == 'page_of_pages':
+            print "on page_of_pages"
+            p_o_p = 1
+        else:
+            p_o_p = 0
         if var is None:
             value_list.append(None)
         else:
             var_parts = var.split('.')
+            if p_o_p == 1:
+                print "var_parts"
+                print var_parts
             data_chunk = data
             for i2, var_part in enumerate(var_parts):
                 try:
                     if var_part in data_chunk:
+                        if p_o_p == 1:
+                            print "var_part"
+                            print var_part
+                            print "this is in data_chunk"
                         new_chunk = data_chunk[var_part]
                         data_chunk = new_chunk
                         if i2 == len(var_parts) - 1:
@@ -472,7 +486,8 @@ def map_variables(var_list, data):
                 except TypeError:
                     value_list.append(None)
                     continue
-
+    print "this is the value list:"
+    print value_list
     return value_list
 
 
@@ -496,6 +511,8 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
         img_spec = image
         print "tag:"
         print img_spec['tag']
+        if img_spec['tag'] is None:
+            continue
         if img_spec['tag'].startswith('viz_'):
             print "tag starts with viz_"
             viz_pieces = img_spec['tag'].split('_')

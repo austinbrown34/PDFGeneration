@@ -29,7 +29,7 @@ def generate_reports():
     print "this is request.json"
     if not os.path.exists('/tmp'):
         os.makedirs('/tmp')
-    # print str(request.json)
+    print str(request.json)
     print "wrote to some files"
     pdf = PDFManager(request.json)
     print "pdfmanager initialized"

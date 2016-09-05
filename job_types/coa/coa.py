@@ -6,6 +6,7 @@ sys.path.append('../..')
 from pdfservices import S3TemplateService
 from collections import OrderedDict
 from operator import itemgetter
+import yaml
 
 def make_number(data):
     try:
@@ -78,11 +79,11 @@ def combine_tests_for_viz(data_list, category, viz_type, display_unit='%', displ
 
     return combined_list
 
-def high_to_low(tested_analytes):
+def high_to_low(tested_analytes, report_units):
     analytes_and_values = {}
     for test in tested_analytes:
         for analyte in test:
-            analytes_and_values[str(analyte)] = make_number(test[analyte]['display']['%']['value'])
+            analytes_and_values[str(analyte)] = make_number(test[analyte]['display'][report_units]['value'])
     sorted_analytes_and_values = OrderedDict(sorted(analytes_and_values.items(), key=itemgetter(1), reverse=True))
     return sorted_analytes_and_values.items()
 
@@ -96,11 +97,30 @@ def get_test_packages(server_data):
         test_names.append([package['package_key'], package['name']])
     return test_names
 
-def numberize(ordered_tuples):
-    ordered_and_numbered = {}
-    for i, e in enumerate(ordered_tuples):
-        ordered_and_numbered[str(i)] = {}
-        ordered_and_numbered[str(i)] = {"name": e[0], "value": e[1]}
+
+def get_aromas():
+    aroma_file = open('aromas.yaml')
+    aromas = yaml.safe_load(aroma_file)
+    aroma_file.close()
+    return aromas
+
+def numberize(ordered_tuples, category):
+    if category == 'terpenes':
+        aromas = get_aromas()
+        ordered_and_numbered = {}
+        for i, e in enumerate(ordered_tuples):
+            smell = ''
+            if e[0] in aromas:
+                smell = 'https://orders.confidentcannabis.com/assets/img/terpenes/' + aromas[e[0]].lower() + '.png'
+
+
+            ordered_and_numbered[str(i + 1)] = {}
+            ordered_and_numbered[str(i + 1)] = {"name": e[0], "value": e[1], "aroma": smell, "aroma_name": aromas[e[0]]}
+    else:
+        ordered_and_numbered = {}
+        for i, e in enumerate(ordered_tuples):
+            ordered_and_numbered[str(i + 1)] = {}
+            ordered_and_numbered[str(i + 1)] = {"name": e[0], "value": e[1]}
     return ordered_and_numbered
 
 
@@ -129,9 +149,10 @@ def setup(server_data):
     test_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals']
     server_data['category_units'] = {}
     try:
+        server_data['client']['full_address'] = str(server_data['client_info']['address_line_1']) + ' ' + str(server_data['client_info']['address_line_2']) + ', ' + str(server_data['client_info']['city']) + ', ' + str(server_data['client_info']['state']) + ' ' + str(server_data['client_info']['zipcode'])
         server_data['lab']['full_address'] = str(server_data['lab']['address_line_1']) + ' ' + str(server_data['lab']['address_line_2']) + ', ' + str(server_data['lab']['city']) + ', ' + str(server_data['lab']['state']) + ' ' + str(server_data['lab']['zipcode'])
         # server_data['lab']['license'] = server_data['lab_license']
-        server_data['page_of_pages'] = ''
+        #server_data['page_of_pages'] = ''
         server_data['batch_info'] = 'Batch #: ' + '' + '; Batch Size: ' + str(server_data['initial_weight']) + ' - grams'
         if server_data['date_received'] is None or server_data['date_received'] == 'null':
             date_received = ''
@@ -176,10 +197,10 @@ def setup(server_data):
             if category == 'cannabinoids':
                 cbd_data = server_data['lab_data']['cannabinoids']['tests']
                 thc_data = server_data['lab_data']['thc']['tests']
-                ordered = high_to_low([cbd_data, thc_data])
+                ordered = high_to_low([cbd_data, thc_data], report_units)
                 print "ordered:"
                 print ordered
-                ordered_and_numbered = numberize(ordered)
+                ordered_and_numbered = numberize(ordered, category)
                 print "ordered_and_numbered:"
                 print ordered_and_numbered
                 server_data[category + '_ordered'] = {}
@@ -220,6 +241,16 @@ def setup(server_data):
                 print server_data['lab_data'][category]
                 print "----------------------------------------------------------------"
                 category_data = server_data['lab_data'][category]['tests']
+                ordered = high_to_low([category_data], report_units)
+                print "ordered:"
+                print ordered
+                ordered_and_numbered = numberize(ordered, category)
+                print "ordered_and_numbered:"
+                print ordered_and_numbered
+                server_data[category + '_ordered'] = {}
+                server_data[category + '_ordered'] = ordered_and_numbered
+                print "server_data[category + '_ordered']:"
+                print server_data[category + '_ordered']
                 print "yay for category data"
                 total_category_concentration = get_concentration_total([category_data], str(report_units))
                 print "yay for total_category_concentration"
@@ -245,7 +276,18 @@ def setup(server_data):
                 ]
             else:
                 category_data = server_data['lab_data'][category]['tests']
+
                 print "yay for category data"
+                ordered = high_to_low([category_data], report_units)
+                print "ordered:"
+                print ordered
+                ordered_and_numbered = numberize(ordered, category)
+                print "ordered_and_numbered:"
+                print ordered_and_numbered
+                server_data[category + '_ordered'] = {}
+                server_data[category + '_ordered'] = ordered_and_numbered
+                print "server_data[category + '_ordered']:"
+                print server_data[category + '_ordered']
                 total_category_concentration = get_concentration_total([category_data], str(report_units))
                 print "yay for total_category_concentration"
                 category_dt = combine_tests_for_viz(
