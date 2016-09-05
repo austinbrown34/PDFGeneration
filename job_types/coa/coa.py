@@ -83,7 +83,7 @@ def high_to_low(tested_analytes):
     for test in tested_analytes:
         for analyte in test:
             analytes_and_values[str(analyte)] = make_number(test[analyte]['display']['%']['value'])
-    sorted_analytes_and_values = OrderedDict(sorted(analytes_and_values.items(), key=itemgetter(1)))
+    sorted_analytes_and_values = OrderedDict(sorted(analytes_and_values.items(), key=itemgetter(1), reverse=True))
     return sorted_analytes_and_values.items()
 
 
@@ -105,7 +105,7 @@ def numberize(ordered_tuples):
 
 
 def setup(server_data):
-
+    server_data['date_received'] = server_data['date_recieved']
     server_data['viz'] = {}
     viztypes = server_data['viz']
     viztypes['job_type'] = 'coa'
@@ -128,6 +128,42 @@ def setup(server_data):
     template_folder = server_data['lab']['abbreviation']
     test_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals']
     server_data['category_units'] = {}
+    try:
+        server_data['lab']['full_address'] = str(server_data['lab']['address_line_1']) + ' ' + str(server_data['lab']['address_line_2']) + ', ' + str(server_data['lab']['city']) + ', ' + str(server_data['lab']['state']) + ' ' + str(server_data['lab']['zipcode'])
+        # server_data['lab']['license'] = server_data['lab_license']
+        server_data['page_of_pages'] = ''
+        server_data['batch_info'] = 'Batch #: ' + '' + '; Batch Size: ' + str(server_data['initial_weight']) + ' - grams'
+        if server_data['date_received'] is None or server_data['date_received'] == 'null':
+            date_received = ''
+        else:
+            date_received = server_data['date_received'].split(',')[1].split(' ')
+            date_received = date_received[:-2]
+            date_received = date_received[2] + ' ' + date_received[1] + ', ' + date_received[3]
+        if server_data['last_modified'] is None or server_data['last_modified'] == 'null':
+            last_modified = ''
+        else:
+            last_modified = server_data['last_modified'].split(',')[1].split(' ')
+            last_modified = last_modified[:-2]
+            last_modified = last_modified[2] + ' ' + last_modified[1] + ', ' + last_modified[3]
+        if server_data['date_completed'] is None or server_data['date_completed'] == 'null':
+            date_completed = ''
+            expires = ''
+        else:
+            date_completed = server_data['date_completed'].split(',')[1].split(' ')
+            date_completed = date_completed[:-3]
+            expires = server_data['date_completed'].split(',')[1].split(' ')
+            year = server_data['date_completed'].split(',')[1].split(' ')
+            year = year[:-2]
+            year = str(year[-1])
+            expires = str(expires[:-3]) + ' ' + str(int(year) + 1)
+            date_completed = date_completed[2] + ' ' + date_completed[1] + ', '
+        server_data['bunch_of_dates'] = 'Ordered: ' + date_received + '; Sampled: ' + last_modified + '; Completed: ' + date_completed + '; Expires: ' + expires
+        server_data['type_and_method'] = server_data['type']['name'] + ', ' + server_data['method']['name']
+        server_data['lab']['full_street_address'] = server_data['lab']['address_line_1'] + ' ' + server_data['lab']['address_line_2']
+        server_data['lab']['city_state_zip'] = server_data['lab']['city'] + ', ' + server_data['lab']['state'] + ' ' + server_data['lab']['zipcode']
+    except Exception as e:
+        print str(e)
+        print "this is a concat section issue"
     for category in test_categories:
         print "we're on category ------------------->  " + category
         try:
