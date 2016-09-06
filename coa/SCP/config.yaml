@@ -1,0 +1,49 @@
+template_logo: http://orders.confidentcannabis.com/assets/img/labs/SCP/color.png
+template_scripts:
+template_rules:
+  - rule:
+      package_key:
+      package_name: Micro Combo
+        - 7-Mic.pdf
+  - rule:
+      package_key:
+      package_name: State Required Cannabinoid Profile (GC Test)
+        - new5Can.pdf
+  - rule:
+      package_key:
+      package_name: State Required Cannabinoid Profile (HPLC Test)
+        - new5Can.pdf
+  - rule:
+      package_key:
+      package_name: Full Cannabinoid Profile
+        - new5Can.pdf
+  - rule:
+      package_key:
+      package_name: Micro Combo
+        - 7-Mic.pdf
+  - rule:
+      package_key:
+      package_name: State Required Cannabinoid Profile (GC + Micro)
+        - new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key:
+      package_name: State Required Cannabinoid Profile (HPLC + Micro)
+        - new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key:
+      package_name: Mycotoxins - Quick
+        - B-Myc.pdf
+  - rule:
+      package_key:
+      package_name: Mycotoxins - Full
+        - B-Myc.pdf
+  - rule:
+      package_key:
+      package_name: Terpenes Profile
+        - new9Ter-3.pdf
+  - rule:
+      package_key:
+      package_name: Residual Solvents
+        - 8-Sol.pdf
