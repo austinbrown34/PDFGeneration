@@ -4,46 +4,57 @@ template_rules:
   - rule:
       package_key:
       package_name: Micro Combo
-          - 7-Mic.pdf
+      included_templates:
+        - 7-Mic.pdf
   - rule:
       package_key:
       package_name: State Required Cannabinoid Profile (GC Test)
-          - new5Can.pdf
+      included_templates:
+        - new5Can.pdf
   - rule:
       package_key:
       package_name: State Required Cannabinoid Profile (HPLC Test)
-          - new5Can.pdf
+      included_templates:
+        - new5Can.pdf
   - rule:
       package_key:
       package_name: Full Cannabinoid Profile
-          - new5Can.pdf
+      included_templates:
+        - new5Can.pdf
   - rule:
       package_key:
       package_name: Micro Combo
-          - 7-Mic.pdf
+      included_templates:
+        - 7-Mic.pdf
   - rule:
       package_key:
       package_name: State Required Cannabinoid Profile (GC + Micro)
-          - new5Can.pdf
-          - 7-Mic.pdf
+      included_templates:
+        - new5Can.pdf
+        - 7-Mic.pdf
   - rule:
       package_key:
       package_name: State Required Cannabinoid Profile (HPLC + Micro)
-          - new5Can.pdf
-          - 7-Mic.pdf
+      included_templates:
+        - new5Can.pdf
+        - 7-Mic.pdf
   - rule:
       package_key:
       package_name: Mycotoxins - Quick
-          - B-Myc.pdf
+      included_templates:
+        - B-Myc.pdf
   - rule:
       package_key:
       package_name: Mycotoxins - Full
-          - B-Myc.pdf
+      included_templates:
+        - B-Myc.pdf
   - rule:
       package_key:
       package_name: Terpenes Profile
-          - new9Ter-3.pdf
+      included_templates:
+        - new9Ter-3.pdf
   - rule:
       package_key:
       package_name: Residual Solvents
-          - 8-Sol.pdf
+      included_templates:
+        - 8-Sol.pdf
