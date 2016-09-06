@@ -52,7 +52,7 @@ def combine_tests_for_viz(data_list, category, viz_type, display_unit='%', displ
                             status = 'Tested'
                         combined_list.append(
                             [
-                                str(analyte),
+                                str(data[analyte]['display']['name']),
                                 make_number(data[analyte]['display'][display_unit]['limit']),
                                 make_number(data[analyte]['display'][display_unit]['value']),
                                 status
@@ -61,7 +61,7 @@ def combine_tests_for_viz(data_list, category, viz_type, display_unit='%', displ
                     else:
                         combined_list.append(
                             [
-                                str(analyte),
+                                str(data[analyte]['display']['name']),
                                 make_number(data[analyte]['display'][display_unit]['loq']),
                                 make_number(data[analyte]['display'][display_unit]['value']),
                                 make_number(data[analyte]['display'][display_unit2]['value'])
@@ -71,7 +71,7 @@ def combine_tests_for_viz(data_list, category, viz_type, display_unit='%', displ
 
                     combined_list.append(
                         [
-                            str(analyte),
+                            str(data[analyte]['display']['name']),
                             make_number(data[analyte]['display'][display_unit]['value']),
                             make_number(total_concentration)
                         ]

@@ -23,10 +23,16 @@ class PDFMaker(object):
             directory = self.work_dir
         pdfs = []
         page_count = 1
+        server_data['total_pages'] = len(templates)
+        server_data['current_page'] = 1
+
         for i, template in enumerate(templates):
+            server_data['page_of_pages'] = str(server_data['current_page']) + ' of ' + str(server_data['total_pages'])
             pdf = self.make_page(template, page_count)
             pdfs.append(pdf)
             page_count += 1
+            cur_page = server_data['current_page'] + 1
+            server_data['current_page'] = cur_page
         print "about to merge"
         print "contents of work dir:"
         print os.listdir('/tmp/work/')

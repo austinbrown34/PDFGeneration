@@ -338,32 +338,43 @@ def draw_images_on_pdf(
     temp_imgs, completed_temps = [], []
     for image in images:
         ext = '.' + image['serversource'].split('.')[-1]
-        if ext == ".jpg":
-            im = IMG.open(image['serversource'])
-            size = int(image['width']), int(image['height'])
-            im.thumbnail(size, IMG.ANTIALIAS)
-            im.save(os.path.join(work_dir, image['serversource'].replace('.jpg', '').replace('/', '-') +
-                    '_temp' + ext), "JPEG")
-            with IMG.open(
-                    os.path.join(work_dir, image['serversource'].replace('.jpg', '').replace('/', '-') +
-                    '_temp' + ext)) as im:
-                width, height = im.size
-            diff = int(image['width']) - width
-            if diff != 0:
-                diff = diff/2
-        else:
-            diff = 0
-            width = int(image['width'])
-            height = int(image['height'])
+        # if ext == ".jpg":
+        print "opening serversource img"
+        im = IMG.open(image['serversource'])
+        size = int(image['width']), int(image['height'])
+        im.thumbnail(size, IMG.ANTIALIAS)
+        im.save(os.path.join(work_dir, image['serversource'].replace(ext, '') +
+                '_temp' + ext))
+        print "saving thumbnail @ " + os.path.join(work_dir, image['serversource'].replace(ext, '') +
+                '_temp' + ext)
+        # image['serversource'] = os.path.join(work_dir, image['serversource'].replace(ext, '') +
+        #         '_temp' + ext)
+        # print "setting serversource"
+        with IMG.open(os.path.join(work_dir, image['serversource'].replace(ext, '') + '_temp' + ext)) as im:
+            width, height = im.size
+        print "opened the new serversource to set width and height -> " + image['serversource']
+        diff = int(image['width']) - width
+        if diff != 0:
+            diff = diff/2
+        diff2 = int(image['height']) - height
+        if diff2 != 0:
+            diff2 = diff2/2
+
+        # else:
+        #     diff = 0
+        # width = int(image['width'])
+        # height = int(image['height'])
+
         c = canvas.Canvas(
             work_dir + 'tempimage' + str(counter) + '.pdf')
         c.drawImage(image['serversource'],
                     int(image['bbox'].split(',')[0].split('.')[0]) + diff,
-                    int(image['bbox'].split(',')[1].split('.')[0]),
+                    int(image['bbox'].split(',')[1].split('.')[0]) + diff2,
                     width=int(width),
                     height=int(height),
                     mask='auto')
         c.save()
+        print "drew canvas image"
         temp_imgs.append(work_dir + 'tempimage' +
                          str(counter) + '.pdf')
         counter += 1
@@ -462,7 +473,7 @@ def map_variables(var_list, data):
         else:
             p_o_p = 0
         if var is None:
-            value_list.append(None)
+            value_list.append('')
         else:
             var_parts = var.split('.')
             if p_o_p == 1:
@@ -479,12 +490,14 @@ def map_variables(var_list, data):
                         new_chunk = data_chunk[var_part]
                         data_chunk = new_chunk
                         if i2 == len(var_parts) - 1:
+                            if data_chunk in [{},[],'null',()] or data_chunk is None:
+                                data_chunk = ''
                             value_list.append(data_chunk)
                     else:
-                        value_list.append(None)
+                        value_list.append('')
                         continue
                 except TypeError:
-                    value_list.append(None)
+                    value_list.append('')
                     continue
     print "this is the value list:"
     print value_list
