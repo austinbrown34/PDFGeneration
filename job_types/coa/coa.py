@@ -1,3 +1,6 @@
+#_*_ coding: utf-8 _*_
+# python 2
+
 import sys
 import imp
 import os

@@ -1,3 +1,5 @@
+#_*_ coding: utf-8 _*_
+# python 2
 import os
 import sys
 from pdfminer.pdfparser import PDFParser
@@ -21,6 +23,8 @@ import requests
 
 os.environ['PATH'] = os.environ['PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/bin'
 os.environ['LD_LIBRARY_PATH'] = os.environ['LAMBDA_TASK_ROOT'] + '/bin'
+# os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + '/tmp/fontconfig/usr/lib'
+os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/fontconfig/usr/lib'
 
 def test_binaries():
     args = ['pdftk', '--version']

@@ -19,6 +19,12 @@ class PDFManager(object):
         self.api_secret = payload['api_secret']
         self.status = ''
         self.error = None
+        args = ['cp', '-r', 'fontconfig', '/tmp']
+        subprocess.call(args)
+        args = ['/tmp/fontconfig/usr/bin/fc-cache', '-fs']
+        subprocess.call(args)
+        args = ['/tmp/fontconfig/usr/bin/fc-cache', '-fv']
+        subprocess.call(args)
 
     def get_job(self, job_type=None, server_data=None):
         if job_type is None:
