@@ -10,17 +10,17 @@ template_rules:
       package_key:
       package_name: State Required Cannabinoid Profile (GC Test)
       included_templates:
-        - A-new5Can.pdf
+        - 1-new5Can.pdf
   - rule:
       package_key:
       package_name: State Required Cannabinoid Profile (HPLC Test)
       included_templates:
-        - A-new5Can.pdf
+        - 1-new5Can.pdf
   - rule:
       package_key:
       package_name: Full Cannabinoid Profile
       included_templates:
-        - A-new5Can.pdf
+        - 1-new5Can.pdf
   - rule:
       package_key:
       package_name: Micro Combo
@@ -36,7 +36,7 @@ template_rules:
       package_key:
       package_name: State Required Cannabinoid Profile (HPLC + Micro)
       included_templates:
-        - A-new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key:
