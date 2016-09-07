@@ -581,7 +581,7 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
             value = map_variables([img_spec['tag']], server_data)
             print "this is the value"
             print value
-            if value[0] is not None:
+            if value[0] is not None and value[0] != '':
                 try:
                     print "image value is:"
                     print value[0]
@@ -606,11 +606,47 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                     print img_spec['serversource']
                 except Exception as e:
                     print "can't download " + str(value[0]) + str(e)
+                    if not os.path.isdir('/tmp/work'):
+                        os.makedirs('/tmp/work')
+                    if not os.path.isdir('/tmp/work/temp'):
+                        os.makedirs('/tmp/work/temp')
+                    if not os.path.isdir('/tmp/work/temp/placeholders'):
+                        os.makedirs('/tmp/work/temp/placeholders')
+                    shutil.copyfile(
+                        os.path.join(
+                            'placeholders',
+                            'sample.jpg'
+                        ), os.path.join(
+                            work_dir,
+                            'temp',
+                            'placeholders',
+                            'sample.jpg'
+                        )
+                    )
+
                     img_spec['serversource'] = 'placeholders/sample.jpg'
                     pass
             else:
                 print "value is None"
+                if not os.path.isdir('/tmp/work'):
+                    os.makedirs('/tmp/work')
+                if not os.path.isdir('/tmp/work/temp'):
+                    os.makedirs('/tmp/work/temp')
+                if not os.path.isdir('/tmp/work/temp/placeholders'):
+                    os.makedirs('/tmp/work/temp/placeholders')
                 img_spec['serversource'] = 'placeholders/sample.jpg'
+
+                shutil.copyfile(
+                    os.path.join(
+                        'placeholders',
+                        'sample.jpg'
+                    ), os.path.join(
+                        work_dir,
+                        'temp',
+                        'placeholders',
+                        'sample.jpg'
+                    )
+                )
             server_images.append(img_spec)
     organized_image_info = {
         'Visualizations': visualizations,

@@ -75,6 +75,18 @@ class S3TemplateService(object):
             print "rule:"
             print rule
             for j, template_key in enumerate(template_keys):
+                # template_key[0] = unicode(template_key[0], 'utf-8')
+                try:
+                    template_key[0] = template_key[0].replace(u'\u2013', '-')
+                except Exception as e:
+                    print str(e)
+                    pass
+                    # template_key[1] = unicode(template_key[1], 'utf-8')
+                try:
+                    template_key[1] = template_key[1].replace(u'\u2013', '-')
+                except Exception as e:
+                    print str(e)
+                    pass
                 print "template_key"
                 print template_key
                 if rule['rule']['package_key'] is not None:

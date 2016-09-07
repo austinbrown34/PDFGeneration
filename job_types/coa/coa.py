@@ -30,6 +30,21 @@ def get_concentration_total(data_list, display_value):
                     continue
     return concentration_total
 
+def add_units_to_values(tests):
+    formatted_tests = tests
+    for analyte in tests:
+        print analyte
+        for display_chunk in tests[analyte]['display']:
+            print display_chunk
+            if display_chunk not in ['name', 'aroma']:
+                for value_type in tests[analyte]['display'][display_chunk]:
+                    print value_type
+                    formatted_tests[analyte]['display'][display_chunk][value_type] = str(tests[analyte]['display'][display_chunk][value_type]) + str(value_type)
+
+    return formatted_tests
+
+
+
 
 def combine_tests_for_viz(data_list, category, viz_type, display_unit='%', display_unit2='mg/g', total_concentration=None):
     combined_list = []
@@ -181,7 +196,34 @@ def setup(server_data):
         server_data['bunch_of_dates'] = 'Ordered: ' + date_received + '; Sampled: ' + last_modified + '; Completed: ' + date_completed + '; Expires: ' + expires
         server_data['type_and_method'] = server_data['type']['name'] + ', ' + server_data['method']['name']
         server_data['lab']['full_street_address'] = server_data['lab']['address_line_1'] + ' ' + server_data['lab']['address_line_2']
-        server_data['lab']['city_state_zip'] = server_data['lab']['city'] + ', ' + server_data['lab']['state'] + ' ' + server_data['lab']['zipcode']
+        server_data['lab']['city_state_zip'] = server_data['lab']['city'].title() + ', ' + server_data['lab']['state'] + ' ' + server_data['lab']['zipcode']
+        server_data['client']['city_state_zip'] = server_data['client_info']['city'].title() + ', ' + server_data['client_info']['state'] + ' ' + server_data['client_info']['zipcode']
+        server_data['special'] = {}
+        r_units = server_data['lab_data']['cannabinoids']['report_units']
+        try:
+            server_data['client_license']['license_number'] = 'Lic. # ' + server_data['client_license']['license_number']
+        except Exception as e:
+            print str(e)
+            pass
+        try:
+            special_cbd_total = str(server_data['lab_data']['cannabinoids']['cbd_total']['display'][r_units]['value']) + str(r_units)
+            special_thc_total = str(server_data['lab_data']['thc']['thc_total']['display'][r_units]['value']) + str(r_units)
+        except Exception as e:
+            print str(e)
+            special_cbd_total = ''
+            special_thc_total = ''
+            pass
+        try:
+            special_moisture = str(server_data['lab_data']['moisture']['tests']['percent_moisture']['display']['%']['value'])
+        except Exception as e:
+            print str(e)
+            pass
+            special_moisture = ''
+        server_data['special'] = {
+            'total_thc': special_thc_total,
+            'total_cbd': special_cbd_total,
+            'moisture': special_moisture
+        }
     except Exception as e:
         print str(e)
         print "this is a concat section issue"
@@ -236,6 +278,8 @@ def setup(server_data):
                     report_units,
                     secondary_report_units
                 ]
+                new_test_data = add_units_to_values(cannabinoid_data)
+                server_data['lab_data']['cannabinoids']['tests'] = new_test_data
             elif category == 'microbials':
                 print "----------------------------------------------------------------"
                 print server_data['lab_data'][category]
@@ -274,6 +318,8 @@ def setup(server_data):
                     report_units,
                     secondary_report_units
                 ]
+                new_test_data = add_units_to_values(category_data)
+                server_data['lab_data'][category]['tests'] = new_test_data
             else:
                 category_data = server_data['lab_data'][category]['tests']
 
@@ -310,11 +356,16 @@ def setup(server_data):
                     report_units,
                     secondary_report_units
                 ]
+                new_test_data = add_units_to_values(category_data)
+                server_data['lab_data'][category]['tests'] = new_test_data
         except Exception as e:
             print "made it to the coa exception"
             print str(e)
             continue
+        # category_data = server_data['lab_data'][category]['tests']
 
+
+    server_data['lab_data_latest'] = server_data['lab_data']
     server_data['viz'] = viztypes
     print "Initializing S3TemplateService"
 
@@ -352,6 +403,8 @@ def setup(server_data):
     print "downloaded config"
     template_keys = get_test_packages(server_data['test_packages'])
     templates = s3templates.get_templates('/tmp/work/config.yaml', '/tmp/', template_keys)
+    templates = list(set(templates))
+    templates.sort()
     lab_logo = s3templates.get_logo('/tmp/work/config.yaml')
     server_data['lab_logo'] = lab_logo
     print "getting scripts"
@@ -376,6 +429,7 @@ def setup(server_data):
         'templates': templates,
         'data': data
     }
-
+    print "these are the templates: "
+    print str(templates)
     print "made it to the end of this section......................................."
     return response
