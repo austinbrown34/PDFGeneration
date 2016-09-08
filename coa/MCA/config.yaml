@@ -6,7 +6,6 @@ template_rules:
       package_name: Everything
       included_templates:
         - 1-new5Can.pdf
-        - new9Ter-3.pdf
         - B-Myc.pdf
         - 7-Mic.pdf
         - Pest.pdf
