@@ -1,0 +1,27 @@
+template_logo: http://orders.confidentcannabis.com/assets/img/labs/MCA/color.png
+template_scripts:
+template_rules:
+  - rule:
+      package_key:
+      package_name: Everything
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key:
+      package_name: State Required Cannabinoid Profile (GC Test)
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key:
+      package_name: State Required Cannabinoid Profile (HPLC Test)
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key:
+      package_name: Full Cannabinoid Profile
+      included_templates:
+        - 1-new5Can.pdf
+	- new9Ter-3.pdf
+	- B-Myc.pdf
+	- 7-Mic.pdf
+	- Pest.pdf
