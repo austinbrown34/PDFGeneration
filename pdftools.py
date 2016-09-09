@@ -20,6 +20,7 @@ from pdfservices import ImageExtractorService
 import urllib2
 import shutil
 import requests
+import json
 
 os.environ['PATH'] = os.environ['PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/bin'
 os.environ['LD_LIBRARY_PATH'] = os.environ['LAMBDA_TASK_ROOT'] + '/bin'
@@ -292,7 +293,7 @@ def update_data_visualization(
         content = file.readlines()
     print "read the js file"
     print data_vis_name
-    content[1] = str(data) + ';\n'
+    content[1] = json.dumps(data) + ';\n'
     content[3] = str(dimensions) + ';\n'
     content[5] = str(coordinates) + ';\n'
     content[10] = '"' + str(report_units) + '"' + ';\n'
