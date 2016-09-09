@@ -3,6 +3,12 @@ template_scripts:
 template_rules:
   - rule:
       package_key:
+      package_name: State Required Cannabinoids (HPLC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key:
       package_name: Micro Combo
       included_templates:
         - 7-Mic.pdf
