@@ -75,7 +75,7 @@ template_rules:
       package_key:
       package_name: Terpene Analysis
       included_templates:
-        - GC Report Page1 Form.pdf
+        - GC Report.pdf
   - rule:
       package_key:
       package_name: Terpene Analysis (Tincture)
