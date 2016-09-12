@@ -80,9 +80,25 @@ $(document).ready(function() {
 			}
 		}
 		$("#example tr td:first-child").addClass("left");
-		$('#example tr td:nth-child(2)').append(report_units);
-		$('#example tr td:nth-child(3)').append(report_units);
-		$('#example tr td:nth-child(4)').append(secondary_report_units);
+		if(report_units == '%'){
+			$('#example tr td:nth-child(2)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(report_units)
+				}
+			})
+			$('#example tr td:nth-child(3)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(report_units)
+				}
+			})
+		}
+		if(secondary_report_units == '%'){
+			$('#example tr td:nth-child(4)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(secondary_report_units)
+				}
+			})
+		}
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
 } );

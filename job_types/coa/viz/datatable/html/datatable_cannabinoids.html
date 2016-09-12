@@ -27,8 +27,30 @@
 		text-align:right;
 		padding: 2px 2px !important;
 	}
+	/*th{
+		text-align:right;
+		padding: 0px 0px !important;
+		font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 25px;
+		width: 20%;
+		padding-bottom: 2%;
+	}
+	td{
+		font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+		text-align:right;
+		padding: 2px 2px !important;
+	}*/
 	.total{
-		font: 800 10px/16px "Trebuchet MS" !important;
+		/*font: 800 10px/16px "Trebuchet MS" !important;*/
 	}
 	.left{
 		text-align:left;
@@ -80,9 +102,45 @@ $(document).ready(function() {
 			}
 		}
 		$("#example tr td:first-child").addClass("left");
-		$('#example tr td:nth-child(2)').append(report_units);
-		$('#example tr td:nth-child(3)').append(report_units);
-		$('#example tr td:nth-child(4)').append(secondary_report_units);
+		if(report_units == '%'){
+			$('#example tr td:nth-child(2)').each(function(){
+				if(!$(this).text() == ''){
+					if(!$(this).text().match(/[a-z]/i)){
+						$(this).append(report_units)
+					}
+				}
+
+			})
+			$('#example tr td:nth-child(3)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(report_units)
+				}
+			})
+		}
+		if(secondary_report_units == '%'){
+			$('#example tr td:nth-child(4)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(secondary_report_units)
+				}
+			})
+		}
+		$("#example td:contains(Total)").each(function(){
+			$(this).css({
+				'font-weight': 'bold'
+			})
+			var td2 = $(this).closest("td").next()
+			td2.css({
+				'font-weight': 'bold'
+			})
+			var td3 = $(td2).closest("td").next()
+			td3.css({
+				'font-weight': 'bold'
+			})
+			var td4 = $(td3).closest("td").next()
+			td4.css({
+				'font-weight': 'bold'
+			})
+		})
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
 } );

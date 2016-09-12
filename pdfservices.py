@@ -69,6 +69,8 @@ class S3TemplateService(object):
         cfg.close()
         print "this is the yaml obj:"
         print str(cfg_obj)
+        print "these are our template keys:"
+        print str(template_keys)
         temp_templates = []
         template_rules = cfg_obj['template_rules']
         for i, rule in enumerate(template_rules):
