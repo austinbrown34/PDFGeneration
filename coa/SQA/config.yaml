@@ -45,7 +45,7 @@ template_rules:
       package_key:
       package_name: Pesticide Analysis
       included_templates:
-        - HPLC Report Report Page 2 Form.pdf
+        - HPLC Report Page 2 Form.pdf
   - rule:
       package_key:
       package_name: Pesticide Analysis (Tincture)
@@ -55,7 +55,7 @@ template_rules:
       package_key:
       package_name: Microbiological Analysis
       included_templates:
-        - HPLC Report Report Page 2 Form.pdf
+        - HPLC Report Page 2 Form.pdf
   - rule:
       package_key:
       package_name: Microbiological Analysis (Edible)
@@ -85,7 +85,7 @@ template_rules:
       package_key:
       package_name: Residual Solvent Analysis
       included_templates:
-        - HPLC Reporting Page 2 Form.pdf
+        - HPLC Report Page 2 Form.pdf
   - rule:
       package_key:
       package_name: Residual Solvent Analysis (Tincture)
