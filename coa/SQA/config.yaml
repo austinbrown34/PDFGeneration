@@ -1,5 +1,6 @@
 template_logo: http://orders.confidentcannabis.com/assets/img/labs/SQA/color.png
-template_scripts: badges_and_grades.py
+template_scripts:
+  - badges_and_grades.py
 template_rules:
   - rule:
       package_key:
