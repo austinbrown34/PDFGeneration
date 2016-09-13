@@ -5,7 +5,7 @@ template_rules:
       package_key:
       package_name: Everything
       included_templates:
-        - 1-new5Can.pdf
-        - B-Myc.pdf
-        - 7-Mic.pdf
-        - Pest.pdf
+        - 5-can-rev-1.pdf
+        - b-myc-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 6-pest-rev-1.pdf
