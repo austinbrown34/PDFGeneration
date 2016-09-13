@@ -1,11 +1,11 @@
 template_logo: http://orders.confidentcannabis.com/assets/img/labs/MCA/black.png
 template_scripts:
 template_rules:
-    - rule:
-        package_key:
-        package_name: Everything
-        included_templates:
-            - 5-can-rev-1.pdf
-            - b-myc-rev-1.pdf
-            - 7-mic-rev-1.pdf
-            - 6-pest-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Everything
+      included_templates:
+        - 5-can-rev-1.pdf
+        - b-myc-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 6-pest-rev-1.pdf
