@@ -1,14 +1,31 @@
 def run(data):
     new_data = data
     try:
-        new_data['general_micro_grade'] = 'Fail'
+        new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
         new_data['advanced_micro_grade'] = 'A'
-        new_data['solvents_grade'] = '5 Tree'
+        new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFiveTree.png'
+        new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/Silver+Edit.png'
         automatic_fail = False
+        if 'tests' in data['lab_data']['pesticides']:
+            total_ppms = 0.0
+            for analyte in data['lab_data']['pesticides']['tests']:
+                value = data['lab_data']['pesticides']['tests'][analyte]['display']['ppm']['value']
+                value = value.replace('ppm', '')
+                try:
+                    value = float(value)
+                except Exception as e:
+                    print str(e)
+                    value = 0.0
+                    pass
+
+                total_ppms += value
+        if total_ppms > 20:
+            new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
         if 'tests' in data['lab_data']['solvents']:
             total_ppms = 0.0
             for analyte in data['lab_data']['solvents']['tests']:
                 value = data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value']
+                value = value.replace('ppm', '')
                 try:
                     value = float(value)
                 except Exception as e:
@@ -18,38 +35,39 @@ def run(data):
 
                 total_ppms += value
                 if analyte in ['acetone', 'n_butane', 'ethanol', 'heptane', 'iso_butane', 'isopentane', 'isoproponol', 'pentane', 'propane']:
-                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 5000:
+                    if value > 5000:
                         automatic_fail = True
                 if analyte == 'acetonitrile':
-                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 410:
+                    if value > 410:
                         automatic_fail = True
                 if analyte == 'hexane':
-                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 280:
+                    if value > 280:
                         automatic_fail = True
                 if analyte == 'methanol':
-                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 3000:
+                    if value > 3000:
                         automatic_fail = True
 
 
             if total_ppms > 0 and total_ppms < 51:
-                new_data['solvents_grade'] = '4 Tree'
+                new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFourTree.png'
             if total_ppms > 50 and total_ppms < 501:
-                new_data['solvents_grade'] = '3 Tree'
+                new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaThreeTree.png'
             if total_ppms > 500 and total_ppms < 5001:
-                new_data['solvents_grade'] = '2 Tree'
+                new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaTwoTree.png'
             if total_ppms > 5000:
-                new_data['solvents_grade'] = '1 Tree'
+                new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaOneTree.png'
 
             if automatic_fail is True:
                     new_data['advanced_micro_grade'] = 'F'
         automatic_fail = False
         if 'tests' in data['lab_data']['microbials']:
             if 'mold' in data['lab_data']['microbials']['tests'] and 'aerobic_bacteria' in data['lab_data']['microbials']['tests']:
-                if data['lab_data']['microbials']['tests']['mold']['display']['cfu/g']['value'] < 10000 and data['lab_data']['microbials']['tests']['aerobic_bacteria']['display']['cfu/g']['value'] < 100000:
-                    new_data['general_micro_grade'] = 'Pass'
+                if float(data['lab_data']['microbials']['tests']['mold']['display']['cfu/g']['value'].replace('cfu/g', '')) < 10000 and float(data['lab_data']['microbials']['tests']['aerobic_bacteria']['display']['cfu/g']['value'].replace('cfu/g', '')) < 100000:
+                    new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/Gold+Edit.png'
             total_cfus = 0.0
             for analyte in data['lab_data']['microbials']['tests']:
                 value = data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value']
+                value = value.replace('cfu/g', '')
                 try:
                     value = float(value)
                 except Exception as e:
@@ -59,22 +77,22 @@ def run(data):
 
                 total_cfus += value
                 if analyte == 'ecoli':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value'] > 10:
+                    if value> 10:
                         automatic_fail = True
                 if analyte == 'salmonella':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value'] > 10:
+                    if value > 10:
                         automatic_fail = True
                 if analyte == 'lysteria':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value'] > 100:
+                    if value > 100:
                         automatic_fail = True
                 if analyte == 'pseudomonas':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value'] > 100:
+                    if value > 100:
                         automatic_fail = True
                 if analyte == 'mold':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value'] > 10000:
+                    if value > 10000:
                         automatic_fail = True
                 if analyte == 'aerobic_bacteria':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value'] > 100000:
+                    if value > 100000:
                         automatic_fail = True
 
             if total_cfus > 0 and total_cfus < 1000:
@@ -88,6 +106,10 @@ def run(data):
 
             if automatic_fail is True:
                 new_data['advanced_micro_grade'] = 'F'
+
+        new_data['microbials_badge'] = new_data['general_micro_grade']
+        new_data['solvents_badge'] = new_data['solvents_grade']
+        new_data['sgs_score'] = new_data['advanced_micro_grade']
 
     except Exception as e:
         print str(e)
