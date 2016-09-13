@@ -1,12 +1,13 @@
 def run(data):
     new_data = data
     try:
-        new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
-        new_data['advanced_micro_grade'] = 'A'
-        new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFiveTree.png'
-        new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/Silver+Edit.png'
+        new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
+        new_data['advanced_micro_grade'] = ''
+        new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
+        new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
         automatic_fail = False
         if 'tests' in data['lab_data']['pesticides']:
+            new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/Silver+Edit.png'
             total_ppms = 0.0
             for analyte in data['lab_data']['pesticides']['tests']:
                 value = data['lab_data']['pesticides']['tests'][analyte]['display']['ppm']['value']
@@ -22,6 +23,7 @@ def run(data):
         if total_ppms > 20:
             new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
         if 'tests' in data['lab_data']['solvents']:
+            new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFiveTree.png'
             total_ppms = 0.0
             for analyte in data['lab_data']['solvents']['tests']:
                 value = data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value']
@@ -61,6 +63,8 @@ def run(data):
                     new_data['advanced_micro_grade'] = 'F'
         automatic_fail = False
         if 'tests' in data['lab_data']['microbials']:
+            new_data['advanced_micro_grade'] = 'A'
+            new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
             if 'mold' in data['lab_data']['microbials']['tests'] and 'aerobic_bacteria' in data['lab_data']['microbials']['tests']:
                 if float(data['lab_data']['microbials']['tests']['mold']['display']['cfu/g']['value'].replace('cfu/g', '')) < 10000 and float(data['lab_data']['microbials']['tests']['aerobic_bacteria']['display']['cfu/g']['value'].replace('cfu/g', '')) < 100000:
                     new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/Gold+Edit.png'
