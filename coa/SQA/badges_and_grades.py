@@ -5,9 +5,9 @@ def run(data):
         new_data['advanced_micro_grade'] = 'A'
         new_data['solvents_grade'] = '5 Tree'
         automatic_fail = False
-        if 'solvents' in data['lab_data']:
+        if 'tests' in data['lab_data']['solvents']:
             total_ppms = 0.0
-            for analyte in data['lab_data']['solvents']:
+            for analyte in data['lab_data']['solvents']['tests']:
                 value = data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value']
                 try:
                     value = float(value)
@@ -18,16 +18,16 @@ def run(data):
 
                 total_ppms += value
                 if analyte in ['acetone', 'n_butane', 'ethanol', 'heptane', 'iso_butane', 'isopentane', 'isoproponol', 'pentane', 'propane']:
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['ppm']['value'] > 5000:
+                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 5000:
                         automatic_fail = True
                 if analyte == 'acetonitrile':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['ppm']['value'] > 410:
+                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 410:
                         automatic_fail = True
                 if analyte == 'hexane':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['ppm']['value'] > 280:
+                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 280:
                         automatic_fail = True
                 if analyte == 'methanol':
-                    if data['lab_data']['microbials']['tests'][analyte]['display']['ppm']['value'] > 3000:
+                    if data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value'] > 3000:
                         automatic_fail = True
 
 
@@ -43,12 +43,12 @@ def run(data):
             if automatic_fail is True:
                     new_data['advanced_micro_grade'] = 'F'
         automatic_fail = False
-        if 'microbials' in data['lab_data']:
+        if 'tests' in data['lab_data']['microbials']:
             if 'mold' in data['lab_data']['microbials']['tests'] and 'aerobic_bacteria' in data['lab_data']['microbials']['tests']:
                 if data['lab_data']['microbials']['tests']['mold']['display']['cfu/g']['value'] < 10000 and data['lab_data']['microbials']['tests']['aerobic_bacteria']['display']['cfu/g']['value'] < 100000:
                     new_data['general_micro_grade'] = 'Pass'
             total_cfus = 0.0
-            for analyte in data['lab_data']['microbials']:
+            for analyte in data['lab_data']['microbials']['tests']:
                 value = data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value']
                 try:
                     value = float(value)
@@ -87,15 +87,8 @@ def run(data):
                 new_data['advanced_micro_grade'] = 'F'
 
             if automatic_fail is True:
-                    new_data['advanced_micro_grade'] = 'F'
+                new_data['advanced_micro_grade'] = 'F'
 
-
-
-
-        new_data['badges'] = {
-            'good': True,
-            'bad': False
-            }
     except Exception as e:
         print str(e)
         print "made it to the badges_and_grades exception"
