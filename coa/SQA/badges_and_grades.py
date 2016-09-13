@@ -109,6 +109,7 @@ def run(data):
 
         new_data['microbials_badge'] = new_data['general_micro_grade']
         new_data['solvents_badge'] = new_data['solvents_grade']
+        new_data['sgs_score'] = new_data['advanced_micro_grade']
 
     except Exception as e:
         print str(e)
