@@ -1,24 +1,26 @@
+import os
 def run(data, templates, s3templates):
     new_data = data
     new_templates = templates
-    if '1HPLCEdible.pdf' in templates or '2HPLCReport.pdf' in templates:
-        new_templates = []
-        for template in templates:
-            if template == '1GCEdible.pdf':
-                new_templates.append('1HPLCEdible.pdf')
-            elif template == '1GCReport.pdf':
-                new_templates.append('1HPLCReport.pdf')
-            elif template == '3GCReport2.pdf':
-                new_templates.append('2HPLCReport2.pdf')
-            else:
-                new_templates.append(template)
-        new_templates = list(set(new_templates))
-        new_templates.sort()
-        template_folder = new_data['lab']['abbreviation']
-        print "downloading templates"
-        print str(new_templates)
-        s3templates.download_templates(os.path.join('coa', template_folder), new_templates)
+
     try:
+        if '1HPLCEdible.pdf' in templates or '2HPLCReport.pdf' in templates:
+            new_templates = []
+            for template in templates:
+                if template == '1GCEdible.pdf':
+                    new_templates.append('1HPLCEdible.pdf')
+                elif template == '1GCReport.pdf':
+                    new_templates.append('1HPLCReport.pdf')
+                elif template == '3GCReport2.pdf':
+                    new_templates.append('2HPLCReport2.pdf')
+                else:
+                    new_templates.append(template)
+            new_templates = list(set(new_templates))
+            new_templates.sort()
+            template_folder = new_data['lab']['abbreviation']
+            print "downloading templates"
+            print str(new_templates)
+            s3templates.download_templates(os.path.join('coa', template_folder), new_templates)
         new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
         new_data['advanced_micro_grade'] = ''
         new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
