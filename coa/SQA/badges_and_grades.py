@@ -10,7 +10,7 @@ def run(data, templates, s3templates):
                 if template == '1GCEdible.pdf':
                     new_templates.append('1HPLCEdible.pdf')
                 elif template == '1GCReport.pdf':
-                    new_templates.append('1HPLCReport.pdf')
+                    new_templates.append('2HPLCReport.pdf')
                 elif template == '3GCReport2.pdf':
                     new_templates.append('2HPLCReport2.pdf')
                 else:
