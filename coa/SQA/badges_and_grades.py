@@ -4,12 +4,44 @@ def run(data, templates, s3templates):
     new_templates = templates
 
     try:
+        new_data['misc']['insects_value'] = new_data['lab_data']['misc']['misc_insects']
+        new_data['misc']['mites_value'] = new_data['lab_data']['misc']['misc_Mites']
+        new_data['misc']['mold_value'] = new_data['lab_data']['misc']['misc_mold']
+        new_data['misc']['other_value'] = new_data['lab_data']['misc']['misc_other']
+        foreign_matter_score = new_data['lab_data']['misc']['misc_1']
+        if int(foreign_matter_score) == 5:
+            foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFiveTree.png'
+        elif int(foreign_matter_score) == 4:
+            foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFourTree.png'
+        elif int(foreign_matter_score) == 3:
+            foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaThreeTree.png'
+        elif int(foreign_matter_score) == 2:
+            foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaTwoTree.png'
+        elif int(foreign_matter_score) == 1:
+            foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaOneTree.png'
+        else:
+            foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
+
+        new_data['foreign_matter_badge'] = foreign_matter_badge
         if 'tests' in data['lab_data']['cannabinoids']:
             if data['lab_data']['cannabinoids']['tests'] != {}:
                 new_data['lab_data']['thc']['thc_total']['display']['%']['value'] = str(new_data['lab_data']['thc']['thc_total']['display']['%']['value']) + '%'
                 new_data['lab_data']['cannabinoids']['cbd_total']['display']['%']['value'] = str(new_data['lab_data']['cannabinoids']['cbd_total']['display']['%']['value']) + '%'
                 total_other_cannabinoids = 0.0
                 total_cannabinoids = 0.0
+                total_thc_analytes = 0.0
+                for analyte in data['lab_data']['thc']['tests']:
+                    value = data['lab_data']['thc']['tests'][analyte]['display']['%']['value']
+                    value = value.replace('%', '')
+                    try:
+                        value = float(value)
+                    except Exception as e:
+                        print str(e)
+                        value = 0.0
+                        pass
+                    if analyte in ['thc', 'thca', 'cbd', 'cbda', 'cbg', 'cbga', 'cbc', 'cbn']:
+                        total_thc_analytes += value
+
                 for analyte in data['lab_data']['cannabinoids']['tests']:
                     value = data['lab_data']['cannabinoids']['tests'][analyte]['display']['%']['value']
                     value = value.replace('%', '')
@@ -19,11 +51,13 @@ def run(data, templates, s3templates):
                         print str(e)
                         value = 0.0
                         pass
-                    total_cannabinoids += value
+                    if analyte in ['thc', 'thca', 'cbd', 'cbda', 'cbg', 'cbga', 'cbc', 'cbn']:
+                        total_cannabinoids += value
                     if analyte in ['cbg', 'cbga', 'cbc', 'cbn']:
                         total_other_cannabinoids += value
                 new_data['cbg_cbga_cbc_cbn_total'] = str(total_other_cannabinoids) + '%'
-                new_data['total_cannabinoids'] = str(total_cannabinoids) + '%'
+                combined_cannabinoids = total_thc_analytes + total_cannabinoids
+                new_data['total_cannabinoids'] = str(combined_cannabinoids) + '%'
                 try:
                     moisture = str(data['special']['moisture']).replace('%', '')
                     moisture = float(moisture)
@@ -31,7 +65,7 @@ def run(data, templates, s3templates):
                     print str(e)
                     moisture = 0.0
                     pass
-                other_matter_value = 1 - moisture - total_cannabinoids
+                other_matter_value = 100 - moisture - total_cannabinoids
                 new_data['other_matter'] = str(other_matter_value) + '%'
 
         if '1HPLCEdible.pdf' in templates or '2HPLCReport.pdf' in templates:
@@ -73,7 +107,7 @@ def run(data, templates, s3templates):
                         pass
 
                     total_ppms += value
-                new_data['total_pesticide_ppms'] = str(total_ppms) + ' PPM'
+                new_data['total_pesticide_ppms'] = str(int(round(total_ppms, 0))) + ' PPM'
                 if total_ppms > 20:
                     new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
         if 'tests' in data['lab_data']['solvents']:
@@ -104,7 +138,7 @@ def run(data, templates, s3templates):
                         if value > 3000:
                             automatic_fail = True
 
-                new_data['total_solvent_ppms'] = str(total_ppms) + ' PPM'
+                new_data['total_solvent_ppms'] = str(int(round(total_ppms, 0))) + ' PPM'
                 if total_ppms > 0 and total_ppms < 51:
                     new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFourTree.png'
                 if total_ppms > 50 and total_ppms < 501:
