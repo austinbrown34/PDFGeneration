@@ -1,3 +1,4 @@
+import os
 def run(data, templates, s3templates):
     new_data = data
     new_templates = templates
