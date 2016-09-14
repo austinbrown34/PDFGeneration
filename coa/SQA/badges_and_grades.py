@@ -64,7 +64,7 @@ def run(data, templates, s3templates):
                 total_ppms = 0.0
                 for analyte in data['lab_data']['pesticides']['tests']:
                     value = data['lab_data']['pesticides']['tests'][analyte]['display']['ppm']['value']
-                    value = value.replace('ppm', '').strip()
+                    value = value.lower().replace('ppm', '').strip()
                     try:
                         value = float(value)
                     except Exception as e:
@@ -73,7 +73,7 @@ def run(data, templates, s3templates):
                         pass
 
                     total_ppms += value
-                new_data['total_pesticide_ppms'] = str(total_ppms) + ' ppms'
+                new_data['total_pesticide_ppms'] = str(total_ppms) + ' PPM'
                 if total_ppms > 20:
                     new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
         if 'tests' in data['lab_data']['solvents']:
@@ -82,7 +82,7 @@ def run(data, templates, s3templates):
                 total_ppms = 0.0
                 for analyte in data['lab_data']['solvents']['tests']:
                     value = data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value']
-                    value = value.replace('ppm', '').strip()
+                    value = value.lower().replace('ppm', '').strip()
                     try:
                         value = float(value)
                     except Exception as e:
@@ -104,7 +104,7 @@ def run(data, templates, s3templates):
                         if value > 3000:
                             automatic_fail = True
 
-                new_data['total_solvent_ppms'] = str(total_ppms) + ' ppms'
+                new_data['total_solvent_ppms'] = str(total_ppms) + ' PPM'
                 if total_ppms > 0 and total_ppms < 51:
                     new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFourTree.png'
                 if total_ppms > 50 and total_ppms < 501:
@@ -127,7 +127,7 @@ def run(data, templates, s3templates):
                 total_cfus = 0.0
                 for analyte in data['lab_data']['microbials']['tests']:
                     value = data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value']
-                    value = value.replace('cfu/g', '').strip()
+                    value = value.lower().replace('cfu/g', '').strip()
                     try:
                         value = float(value)
                     except Exception as e:
