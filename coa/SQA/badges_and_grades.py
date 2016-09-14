@@ -4,6 +4,7 @@ def run(data, templates, s3templates):
     new_templates = templates
 
     try:
+        # new_data['foreign_matter_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
         new_data['misc']['insects_value'] = new_data['lab_data']['misc']['misc_insects']
         new_data['misc']['mites_value'] = new_data['lab_data']['misc']['misc_Mites']
         new_data['misc']['mold_value'] = new_data['lab_data']['misc']['misc_mold']
@@ -100,7 +101,7 @@ def run(data, templates, s3templates):
         new_data['advanced_micro_grade'] = ''
         new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
         new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
-        new_data['foreign_matter_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
+
         new_data['solvents_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
         automatic_fail = False
         if 'tests' in data['lab_data']['pesticides']:
