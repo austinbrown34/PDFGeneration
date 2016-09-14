@@ -76,10 +76,9 @@ class PDFMaker(object):
         fielddata = {}
         fieldvalues = pdftools.map_variables(fields, server_data)
         print "This is your fielddata"
-        #print str(fields)
         for i, e in enumerate(fields):
-           # print e
-            keys = e.split('.')
+            e = e.replace('.', '::')
+            keys = e.split(':')
             #print str(keys)
             final_key = keys[-1]
             if fieldvalues[i] is not None:

@@ -27,6 +27,20 @@ def make_number(data, digits=None, labels=False):
         output = round(dec,int(digits))
     return output
 
+def get_winner(data_list, display_value):
+    highest = 0.0
+    for data in data_list:
+        for analyte in data:
+            if 'total' not in analyte:
+                try:
+                    value = make_number(data[analyte]['display'][display_value]['value'])
+                    if value > highest:
+                        highest = value
+                except Exception as e:
+                    print str(e)
+                    print "get_winner exception"
+                    continue
+    return highest
 
 def get_concentration_total(data_list, display_value):
     concentration_total = 0.0
@@ -51,7 +65,28 @@ def add_units_to_values(tests):
             if display_chunk not in ['name', 'aroma']:
                 for value_type in tests[analyte]['display'][display_chunk]:
                     print value_type
-                    formatted_tests[analyte]['display'][display_chunk][value_type] = str(tests[analyte]['display'][display_chunk][value_type]) + str(value_type)
+                    try:
+                        converted_value = float(str(tests[analyte]['display'][display_chunk][value_type]))
+                        dec = Decimal(converted_value).quantize(Decimal(10) ** -2)
+                        output = dec
+                        if str(display_chunk) in ['ppm', 'ppb', 'cfu/g']:
+                            output = int(round(dec, 0))
+                        new_display_chunk = display_chunk
+                        if str(display_chunk) != '%':
+                            if str(display_chunk) in ['ppm','ppb']:
+                                new_display_chunk = str(display_chunk).upper()
+                            if str(display_chunk) == 'cfu/g':
+                                new_display_chunk = 'CFU/g'
+                        units = ' ' + str(new_display_chunk)
+                        formatted_tests[analyte]['display'][display_chunk][value_type] = str(output) + str(units)
+                    except Exception as e:
+                        print str(e)
+                        print "made it to the add_units exception"
+                        converted_value = str(tests[analyte]['display'][display_chunk][value_type])
+                        formatted_tests[analyte]['display'][display_chunk][value_type] = str(converted_value)
+                        print "converterd to: " + str(formatted_tests[analyte]['display'][display_chunk][value_type])
+                        continue
+
     return formatted_tests
 
 
@@ -225,6 +260,7 @@ def setup(server_data):
         # server_data['lab']['license'] = server_data['lab_license']
         #server_data['page_of_pages'] = ''
         server_data['batch_info'] = 'Batch #: ' + '' + '; Batch Size: ' + str(server_data['initial_weight']) + ' - grams'
+        server_data['initial_weight'] = str(server_data['initial_weight']) + ' grams'
         if server_data['date_received'] is None or server_data['date_received'] == 'null':
             date_received = ''
         else:
@@ -249,15 +285,42 @@ def setup(server_data):
             year = str(year[-1])
             expires = str(expires[:-3]) + ' ' + str(int(year) + 1)
             date_completed = date_completed[2] + ' ' + date_completed[1] + ', '
-        server_data['bunch_of_dates'] = 'Ordered: ' + date_received + '; Sampled: ' + last_modified + '; Completed: ' + date_completed + '; Expires: ' + expires
-        server_data['type_and_method'] = server_data['type']['name'] + ', ' + server_data['method']['name']
-        server_data['lab']['full_street_address'] = server_data['lab']['address_line_1'] + ' ' + server_data['lab']['address_line_2']
-        server_data['lab']['city_state_zip'] = server_data['lab']['city'].title() + ', ' + server_data['lab']['state'] + ' ' + server_data['lab']['zipcode']
-        server_data['client']['city_state_zip'] = server_data['client_info']['city'].title() + ', ' + server_data['client_info']['state'] + ' ' + server_data['client_info']['zipcode']
+        server_data['bunch_of_dates'] = 'Ordered: ' + str(date_received) + '; Sampled: ' + str(last_modified) + '; Completed: ' + str(date_completed) + '; Expires: ' + str(expires)
+        server_data['type_and_method'] = str(server_data['type']['name']) + ', ' + str(server_data['method']['name'])
+        server_data['lab']['full_street_address'] = str(server_data['lab']['address_line_1']) + ' ' + str(server_data['lab']['address_line_2'])
+        server_data['lab']['city_state_zip'] = str(server_data['lab']['city'].title()) + ', ' + str(server_data['lab']['state']) + ' ' + str(server_data['lab']['zipcode'])
+        server_data['client']['city_state_zip'] = str(server_data['client_info']['city'].title()) + ', ' + str(server_data['client_info']['state']) + ' ' + str(server_data['client_info']['zipcode'])
         server_data['special'] = {}
+        server_data['date_received'] = date_received
+        server_data['last_modified'] = last_modified
+
+        ###################################
+        server_data['sample_collection'] = ''
+        server_data['environment'] = ''
+        server_data['total_pesticide_ppms'] = ''
+        server_data['notes'] = ''
+        server_data['microscope_image'] = ''
+        server_data['total_solvent_ppms'] = ''
+        server_data['total_cannabinoids'] = ''
+        server_data['special']['foreign_matter'] = ''
+        server_data['misc'] = {}
+        server_data['misc']['insects_value'] = ''
+        server_data['misc']['mites_value'] = ''
+        server_data['misc']['mold_value'] = ''
+        server_data['misc']['other_value'] = ''
+        server_data['cbg_cbga_cbc_cbn_total'] = ''
+        server_data['special']['water_activity'] = ''
+        ############################################
+        server_data['pesticides_badge'] = ''
+        server_data['microbials_badge'] = ''
+        server_data['sgs_score'] = ''
+        server_data['solvents_badge'] = ''
+        server_data['foreign_matter_badge'] = ''
+        ############################################
+
         r_units = server_data['lab_data']['cannabinoids']['report_units']
         try:
-            server_data['client_license']['license_number'] = 'Lic. # ' + server_data['client_license']['license_number']
+            server_data['client_license']['license_number'] = 'Lic. # ' + str(server_data['client_license']['license_number'])
         except Exception as e:
             print str(e)
             pass
@@ -278,11 +341,12 @@ def setup(server_data):
         server_data['special'] = {
             'total_thc': special_thc_total,
             'total_cbd': special_cbd_total,
-            'moisture': special_moisture
+            'moisture': str(special_moisture) + '%'
         }
     except Exception as e:
         print str(e)
         print "this is a concat section issue"
+
     for category in test_categories:
         print "we're on category ------------------->  " + category
         try:
@@ -314,6 +378,7 @@ def setup(server_data):
                 print total_cannabinoid_concentration
                 print "report_units"
                 print report_units
+                highest = get_winner([cannabinoid_data, thc_data], str(report_units))
                 combined_cannabinoids_dt = combine_tests_for_viz(
                     [
                         cannabinoid_data,
@@ -329,7 +394,7 @@ def setup(server_data):
                         thc_data
                     ],
                     category, 'sparkline', digits, report_units, secondary_report_units,
-                    total_concentration=total_cannabinoid_concentration)
+                    total_concentration=highest)
                 print "combined cannabinoid sl"
                 viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
                 viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
@@ -337,6 +402,8 @@ def setup(server_data):
                     report_units,
                     secondary_report_units
                 ]
+                print "cannabinoid_data again:"
+                print cannabinoid_data
                 new_test_data = add_units_to_values(cannabinoid_data)
                 server_data['lab_data']['cannabinoids']['tests'] = new_test_data
             elif category == 'microbials':
@@ -357,6 +424,7 @@ def setup(server_data):
                 print "yay for category data"
                 total_category_concentration = get_concentration_total([category_data], str(report_units))
                 print "yay for total_category_concentration"
+                highest = get_winner([category_data], str(report_units))
                 category_dt = combine_tests_for_viz(
                     [
                         category_data
@@ -369,7 +437,7 @@ def setup(server_data):
                         category_data
                     ],
                     category, 'sparkline', digits, report_units, secondary_report_units,
-                    total_concentration=total_category_concentration
+                    total_concentration=highest
                 )
                 print "yay for category sl"
                 viztypes['datatable_' + category] = category_dt
@@ -396,6 +464,7 @@ def setup(server_data):
                 print server_data[category + '_ordered']
                 total_category_concentration = get_concentration_total([category_data], str(report_units))
                 print "yay for total_category_concentration"
+                highest = get_winner([category_data], str(report_units))
                 category_dt = combine_tests_for_viz(
                     [
                         category_data
@@ -411,7 +480,7 @@ def setup(server_data):
                         category_data
                     ],
                     category, 'sparkline', digits, report_units, secondary_report_units,
-                    total_concentration=total_category_concentration
+                    total_concentration=highest
                 )
                 print "yay for category sl"
                 viztypes['datatable_' + category] = category_dt
@@ -428,7 +497,11 @@ def setup(server_data):
             continue
         # category_data = server_data['lab_data'][category]['tests']
 
-
+    if 'thc' in server_data['lab_data']:
+        if 'tests' in server_data['lab_data']['thc']:
+            thc_data = server_data['lab_data']['thc']['tests']
+            new_test_data = add_units_to_values(thc_data)
+            server_data['lab_data']['thc']['tests'] = new_test_data
     server_data['lab_data_latest'] = server_data['lab_data']
     server_data['viz'] = viztypes
     print "Initializing S3TemplateService"
@@ -475,6 +548,7 @@ def setup(server_data):
     scripts = s3templates.get_scripts('/tmp/work/config.yaml')
     try:
         print "downloading templates"
+        print str(templates)
         s3templates.download_templates(os.path.join('coa', template_folder), templates)
         print "downloading scripts"
         s3templates.download_scripts(os.path.join('coa', template_folder), scripts)
@@ -488,7 +562,9 @@ def setup(server_data):
         job = imp.load_source(
             '',
             os.path.join('/tmp', 'work', script))
-        data = job.run(data)
+        response = job.run(data, templates, s3templates)
+        data = response['data']
+        templates = response['templates']
     response = {
         'templates': templates,
         'data': data
@@ -496,4 +572,5 @@ def setup(server_data):
     print "these are the templates: "
     print str(templates)
     print "made it to the end of this section......................................."
+    print str(data)
     return response

@@ -45,7 +45,7 @@ def get_acroform_fields_pdftk(filename):
         print "made it to the exception for pdftk"
     field_names = []
     with open('/tmp/work/dump_data_fields.txt') as ddf:
-        for line in ddf:
+        for i, line in enumerate(ddf):
             if 'FieldName:' in line:
                 field_names.append(line.split('FieldName: ')[1].strip())
     print "field names:"
@@ -472,15 +472,21 @@ def map_variables(var_list, data):
     p_o_p = 0
     print "checking out page_of_pages for issues"
     for i, var in enumerate(var_list):
+        print "this is the var:"
+        print var
         if var == 'page_of_pages':
             print "on page_of_pages"
             p_o_p = 1
         else:
             p_o_p = 0
         if var is None:
+            print "var is none so appending blank "
             value_list.append('')
         else:
+            var = var.replace('::', '.')
             var_parts = var.split('.')
+            print "these are the var parts:"
+            print str(var_parts)
             if p_o_p == 1:
                 print "var_parts"
                 print var_parts
@@ -496,14 +502,17 @@ def map_variables(var_list, data):
                         data_chunk = new_chunk
                         if i2 == len(var_parts) - 1:
                             if data_chunk in [{},[],'null',()] or data_chunk is None:
+                                print "value was empty or null or none - setting value to blank"
                                 data_chunk = ''
                             value_list.append(data_chunk)
                     else:
+                        print "var part not in server data - adding blank"
                         value_list.append('')
-                        continue
+                        break
                 except TypeError:
+                    print "There was a type error... adding blank"
                     value_list.append('')
-                    continue
+                    break
     print "this is the value list:"
     print value_list
     return value_list

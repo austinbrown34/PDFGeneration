@@ -35,6 +35,8 @@ def generate_reports():
     print "pdfmanager initialized"
     response = pdf.get_job()
     print "made it to the end"
+    ghostdir = os.listdir('/usr/share/fonts/default/ghostscript')
+    print str(ghostdir)
     return jsonify(response)
 
 
