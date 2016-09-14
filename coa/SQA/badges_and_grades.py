@@ -6,6 +6,8 @@ def run(data, templates, s3templates):
     try:
         if 'tests' in data['lab_data']['cannabinoids']:
             if data['lab_data']['cannabinoids']['tests'] != {}:
+                new_data['lab_data']['thc']['thc_total']['display']['%']['value'] = str(new_data['lab_data']['thc']['thc_total']['display']['%']['value']) + '%'
+                new_data['lab_data']['cannabinoids']['cbd_total']['display']['%']['value'] = str(new_data['lab_data']['cannabinoids']['cbd_total']['display']['%']['value']) + '%'
                 total_other_cannabinoids = 0.0
                 total_cannabinoids = 0.0
                 for analyte in data['lab_data']['cannabinoids']['tests']:
@@ -62,7 +64,7 @@ def run(data, templates, s3templates):
                 total_ppms = 0.0
                 for analyte in data['lab_data']['pesticides']['tests']:
                     value = data['lab_data']['pesticides']['tests'][analyte]['display']['ppm']['value']
-                    value = value.replace('ppm', '')
+                    value = value.replace('ppm', '').strip()
                     try:
                         value = float(value)
                     except Exception as e:
@@ -80,7 +82,7 @@ def run(data, templates, s3templates):
                 total_ppms = 0.0
                 for analyte in data['lab_data']['solvents']['tests']:
                     value = data['lab_data']['solvents']['tests'][analyte]['display']['ppm']['value']
-                    value = value.replace('ppm', '')
+                    value = value.replace('ppm', '').strip()
                     try:
                         value = float(value)
                     except Exception as e:
@@ -125,7 +127,7 @@ def run(data, templates, s3templates):
                 total_cfus = 0.0
                 for analyte in data['lab_data']['microbials']['tests']:
                     value = data['lab_data']['microbials']['tests'][analyte]['display']['cfu/g']['value']
-                    value = value.replace('cfu/g', '')
+                    value = value.replace('cfu/g', '').strip()
                     try:
                         value = float(value)
                     except Exception as e:
