@@ -9,6 +9,8 @@ def run(data, templates, s3templates):
         new_data['misc']['mold_value'] = new_data['lab_data']['misc']['misc_mold']
         new_data['misc']['other_value'] = new_data['lab_data']['misc']['misc_other']
         foreign_matter_score = new_data['lab_data']['misc']['misc_1']
+        print "this is the foreign_matter_score:"
+        print foreign_matter_score
         if int(foreign_matter_score) == 5:
             foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFiveTree.png'
         elif int(foreign_matter_score) == 4:
@@ -21,7 +23,8 @@ def run(data, templates, s3templates):
             foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaOneTree.png'
         else:
             foreign_matter_badge = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
-
+        print "this is the foreign_matter_badge:"
+        print foreign_matter_badge
         new_data['foreign_matter_badge'] = foreign_matter_badge
         if 'tests' in data['lab_data']['cannabinoids']:
             if data['lab_data']['cannabinoids']['tests'] != {}:
@@ -30,6 +33,7 @@ def run(data, templates, s3templates):
                 total_other_cannabinoids = 0.0
                 total_cannabinoids = 0.0
                 total_thc_analytes = 0.0
+                gc_total_cannabinoids = 0.0
                 for analyte in data['lab_data']['thc']['tests']:
                     value = data['lab_data']['thc']['tests'][analyte]['display']['%']['value']
                     value = value.replace('%', '')
@@ -39,8 +43,10 @@ def run(data, templates, s3templates):
                         print str(e)
                         value = 0.0
                         pass
-                    if analyte in ['thc', 'thca', 'cbd', 'cbda', 'cbg', 'cbga', 'cbc', 'cbn']:
+                    if analyte in ['d9_thc', 'thca', 'cbd', 'cbda', 'cbg', 'cbga', 'cbc', 'cbn']:
                         total_thc_analytes += value
+                    if analyte in ['d9_thc', 'cbd', 'cbg', 'thcv', 'cbc', 'cbn']:
+                        gc_total_cannabinoids += value
 
                 for analyte in data['lab_data']['cannabinoids']['tests']:
                     value = data['lab_data']['cannabinoids']['tests'][analyte]['display']['%']['value']
@@ -51,13 +57,18 @@ def run(data, templates, s3templates):
                         print str(e)
                         value = 0.0
                         pass
-                    if analyte in ['thc', 'thca', 'cbd', 'cbda', 'cbg', 'cbga', 'cbc', 'cbn']:
+                    if analyte in ['d9_thc', 'thca', 'cbd', 'cbda', 'cbg', 'cbga', 'cbc', 'cbn']:
                         total_cannabinoids += value
                     if analyte in ['cbg', 'cbga', 'cbc', 'cbn']:
                         total_other_cannabinoids += value
+                    if analyte in ['d9_thc', 'cbd', 'cbg', 'thcv', 'cbc', 'cbn']:
+                        gc_total_cannabinoids += value
+
+                new_data['gc_total_cannabinoids'] = str(gc_total_cannabinoids) + '%'
                 new_data['cbg_cbga_cbc_cbn_total'] = str(total_other_cannabinoids) + '%'
                 combined_cannabinoids = total_thc_analytes + total_cannabinoids
                 new_data['total_cannabinoids'] = str(combined_cannabinoids) + '%'
+                new_data['hplc_total_cannabinoids'] = str(combined_cannabinoids) + '%'
                 try:
                     moisture = str(data['special']['moisture']).replace('%', '')
                     moisture = float(moisture)
