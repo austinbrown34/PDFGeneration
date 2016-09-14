@@ -4,6 +4,34 @@ def run(data, templates, s3templates):
     new_templates = templates
 
     try:
+        if 'tests' in data['lab_data']['cannabinoids']:
+            if data['lab_data']['cannabinoids']['tests'] != {}:
+                total_other_cannabinoids = 0.0
+                total_cannabinoids = 0.0
+                for analyte in data['lab_data']['cannabinoids']['tests']:
+                    value = data['lab_data']['cannabinoids']['tests'][analyte]['display']['%']['value']
+                    value = value.replace('%', '')
+                    try:
+                        value = float(value)
+                    except Exception as e:
+                        print str(e)
+                        value = 0.0
+                        pass
+                    total_cannabinoids += value
+                    if analyte in ['cbg', 'cbga', 'cbc', 'cbn']:
+                        total_other_cannabinoids += value
+                new_data['cbg_cbga_cbc_cbn_total'] = str(total_other_cannabinoids) + '%'
+                new_data['total_cannabinoids'] = str(total_cannabinoids) + '%'
+                try:
+                    moisture = str(data['special']['moisture']).replace('%', '')
+                    moisture = float(moisture)
+                except Exception as e:
+                    print str(e)
+                    moisture = 0.0
+                    pass
+                other_matter_value = 1 - moisture - total_cannabinoids
+                new_data['other_matter'] = str(other_matter_value) + '%'
+
         if '1HPLCEdible.pdf' in templates or '2HPLCReport.pdf' in templates:
             new_templates = []
             for template in templates:
@@ -43,6 +71,7 @@ def run(data, templates, s3templates):
                         pass
 
                     total_ppms += value
+                new_data['total_pesticide_ppms'] = str(total_ppms) + ' ppms'
                 if total_ppms > 20:
                     new_data['pesticides_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
         if 'tests' in data['lab_data']['solvents']:
@@ -73,7 +102,7 @@ def run(data, templates, s3templates):
                         if value > 3000:
                             automatic_fail = True
 
-
+                new_data['total_solvent_ppms'] = str(total_ppms) + ' ppms'
                 if total_ppms > 0 and total_ppms < 51:
                     new_data['solvents_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/SequoiaFourTree.png'
                 if total_ppms > 50 and total_ppms < 501:
