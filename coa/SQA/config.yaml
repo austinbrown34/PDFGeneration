@@ -6,114 +6,114 @@ template_rules:
       package_key: potency_gc_plant
       package_name: Potency Analysis GC-FID
       included_templates:
-        - GC Report.pdf
+        - 1GCReport.pdf
   - rule:
       package_key: potency_gc_concentrate
       package_name: Potency Analysis GC-FID
       included_templates:
-        - GC Report.pdf
+        - 1GCReport.pdf
   - rule:
       package_key: potency_gc_edible
       package_name: Potency Analysis GC-FID (Edible)
       included_templates:
-        - GC Edible Form.pdf
+        - 1GCEdible.pdf
   - rule:
       package_key: potency_gc_tincture
       package_name: Potency Analysis GC-FID (Tincture)
       included_templates:
-        - GC Report.pdf
+        - 1GCReport.pdf
   - rule:
       package_key: potency_gc_infusion
       package_name: Potency Analysis GC-FID (Infusion)
       included_templates:
-        - GC Edible Form.pdf
+        - 1GCEdible.pdf
   - rule:
       package_key: potency_hplc_plant
       package_name: Potency Analysis HPLC
       included_templates:
-        - HPLC Report Page 1 Form.pdf
+        - 2HPLCReport.pdf
   - rule:
       package_key: potency_hplc_concentrate
       package_name: Potency Analysis HPLC
       included_templates:
-        - HPLC Report Page 1 Form.pdf
+        - 2HPLCReport.pdf
   - rule:
       package_key: potency_hplc_edible
       package_name: Potency Analysis HPLC (Edible)
       included_templates:
-        - HPLC Report Edible Form.pdf
+        - 1HPLCEdible.pdf
   - rule:
       package_key: potency_hplc_tincture
       package_name: Potency Analysis HPLC (Tincture)
       included_templates:
-        - HPLC Report Page 1 Form.pdf
+        - 2HPLCReport.pdf
   - rule:
       package_key: potency_hplc_infusion
       package_name: Potency Analysis HPLC (Infusion)
       included_templates:
-        - HPLC Report Edible Form.pdf
+        - 1HPLCEdible.pdf
   - rule:
       package_key: pesticide_plant
       package_name: Pesticide Analysis
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: pesticide_concentrate
       package_name: Pesticide Analysis
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: pesticide_tincture
       package_name: Pesticide Analysis (Tincture)
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: microbial_plant
       package_name: Microbiological Analysis
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: microbial_concentrate
       package_name: Microbiological Analysis
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: microbial_edible
       package_name: Microbiological Analysis (Edible)
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: microbial_tincture
       package_name: Microbiological Analysis (Tincture)
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: microbial_infusion
       package_name: Microbiological Analysis (Infusion)
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: terpene_plant
       package_name: Terpene Analysis
       included_templates:
-        - GC Report.pdf
+        - 1GCReport.pdf
   - rule:
       package_key: terpene_concentrate
       package_name: Terpene Analysis
       included_templates:
-        - GC Report.pdf
+        - 1GCReport.pdf
   - rule:
       package_key: terpene_tincture
       package_name: Terpene Analysis (Tincture)
       included_templates:
-        - GC Report.pdf
+        - 1GCReport.pdf
   - rule:
       package_key: solvent_concentrate
       package_name: Residual Solvent Analysis
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
   - rule:
       package_key: solvent_tincture
       package_name: Residual Solvent Analysis (Tincture)
       included_templates:
-        - GC Report Page 2 Form.pdf
+        - 3GCReport2.pdf
