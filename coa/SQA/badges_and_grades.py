@@ -122,7 +122,7 @@ def run(data, templates, s3templates):
                 new_data['advanced_micro_grade'] = 'A'
                 new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/fail.png'
                 if 'mold' in data['lab_data']['microbials']['tests'] and 'aerobic_bacteria' in data['lab_data']['microbials']['tests']:
-                    if float(data['lab_data']['microbials']['tests']['mold']['display']['cfu/g']['value'].replace('cfu/g', '')) < 10000 and float(data['lab_data']['microbials']['tests']['aerobic_bacteria']['display']['cfu/g']['value'].replace('cfu/g', '')) < 100000:
+                    if float(data['lab_data']['microbials']['tests']['mold']['display']['cfu/g']['value'].lower().replace('cfu/g', '')) < 10000 and float(data['lab_data']['microbials']['tests']['aerobic_bacteria']['display']['cfu/g']['value'].lower().replace('cfu/g', '')) < 100000:
                         new_data['general_micro_grade'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/Gold+Edit.png'
                 total_cfus = 0.0
                 for analyte in data['lab_data']['microbials']['tests']:
