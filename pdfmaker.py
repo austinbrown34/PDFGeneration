@@ -77,10 +77,10 @@ class PDFMaker(object):
         fieldvalues = pdftools.map_variables(fields, server_data)
         print "This is your fielddata"
         for i, e in enumerate(fields):
-            e = e.replace('.', '::')
-            keys = e.split(':')
+            # e = e.replace('.', '::')
+            # keys = e.split(':')
             #print str(keys)
-            final_key = keys[-1]
+            # final_key = keys[-1]
             if fieldvalues[i] is not None:
                # print final_key
                # print fieldvalues[i]
@@ -130,8 +130,24 @@ class PDFMaker(object):
         ServerImages = ph_translation['ServerImages']
         vizfiles = []
         vizpdfs = []
+        js_data = []
+        pdfcounter = 1
         if Visualizations != []:
             for viz in Visualizations:
+                js_data.append([
+                    os.path.join(
+                        'job_types',
+                        server_data['viz']['job_type'],
+                        viz['viz_folder'],
+                        viz['viz_type'],
+                        'js',
+                        viz['viz_type'] + '.js'),
+                    viz['viz_data'],
+                    viz['viz_dimensions'],
+                    viz['viz_coords'],
+                    server_data['category_units'][viz['viz_specific'].split('_')[1]][0],
+                    server_data['category_units'][viz['viz_specific'].split('_')[1]][1]
+                ])
                 pdftools.update_data_visualization(
                     os.path.join(
                         'job_types',
@@ -146,26 +162,30 @@ class PDFMaker(object):
                     server_data['category_units'][viz['viz_specific'].split('_')[1]][0],
                     server_data['category_units'][viz['viz_specific'].split('_')[1]][1]
                 )
-                vizfiles.append(
-                    os.path.join(
-                        'job_types',
-                        server_data['viz']['job_type'],
-                        viz['viz_folder'],
-                        viz['viz_type'],
-                        'html',
-                        viz['viz_file']))
-                vizpdfs.append(
-                    os.path.join(
-                        work_dir,
-                        'temp',
-                        viz['viz_specific'] + '.pdf'))
+                viz_file = os.path.join(
+                    'job_types',
+                    server_data['viz']['job_type'],
+                    viz['viz_folder'],
+                    viz['viz_type'],
+                    'html',
+                    viz['viz_file'])
+                vizfiles.append(viz_file)
+                name_of_pdf = os.path.join(work_dir, 'temp', viz['viz_specific'] + '.pdf')
+                if name_of_pdf in vizpdfs:
+                    pdfcounter += 1
+                    name_of_pdf = os.path.join(work_dir, 'temp', viz['viz_specific'] + str(pdfcounter) + '.pdf')
+                vizpdfs.append(name_of_pdf)
+                pdftools.generate_visualization(viz_file, 'report.js', '/tmp/work/temp/', name_of_pdf)
 
 
         print "vizpdfs: "
         print vizpdfs
         fixed_vizpdfs = []
         if vizpdfs != []:
-            pdftools.generate_visualizations(vizfiles, 'report.js',  '/tmp/work/temp/')
+            # if pdfcounter > 1:
+            #     pdftools.generate_visualizations(vizfiles, 'report.js',  '/tmp/work/temp/', vizpdfs)
+            # else:
+            #     pdftools.generate_visualizations(vizfiles, 'report.js',  '/tmp/work/temp/')
             for v in vizpdfs:
                 new_v = v.split('.')[0] + '_fixed.pdf'
                 print "---------------"

@@ -312,18 +312,22 @@ def update_data_visualization(
         content = file.readlines()
     print content
 
-def generate_visualizations(viz_files, controljs, out_dir):
-    for viz in viz_files:
+def generate_visualizations(viz_files, controljs, out_dir, vizpdfs=None):
+    for i, viz in enumerate(viz_files):
         print "from generate viz - viz, controljs, out_dir"
         print viz
         print controljs
         print out_dir
         try:
+            pdfout = out_dir + viz.split('/')[-1].replace('.html', '.pdf')
+            if vizpdfs is not None:
+                pdfout = out_dir + vizpdfs[i].split('/')[-1]
+
             call = [
                 'phantomjs',
                 controljs,
                 viz,
-                out_dir + viz.split('/')[-1].replace('.html', '.pdf')
+                pdfout
             ]
             subprocess.call(call)
             temp_dirs = os.listdir(out_dir)
@@ -332,6 +336,31 @@ def generate_visualizations(viz_files, controljs, out_dir):
         except Exception as e:
             print str(e)
             print "exception for phantomjs"
+
+
+def generate_visualization(viz_file, controljs, out_dir, vizpdf):
+    print "from generate viz - viz, controljs, out_dir"
+    print viz_file
+    print controljs
+    print out_dir
+    try:
+        # pdfout = out_dir + viz_file.split('/')[-1].replace('.html', '.pdf')
+
+        pdfout = out_dir + vizpdf.split('/')[-1]
+
+        call = [
+            'phantomjs',
+            controljs,
+            viz_file,
+            pdfout
+        ]
+        subprocess.call(call)
+        temp_dirs = os.listdir(out_dir)
+        print "out_dir"
+        print str(temp_dirs)
+    except Exception as e:
+        print str(e)
+        print "exception for phantomjs"
 
 
 def draw_images_on_pdf(
@@ -424,6 +453,7 @@ def draw_visualization_on_pdf(
     first = True
     try:
         for viz in vizs:
+            print "working on " + str(viz)
             if first is False:
                 currentpdf = work_dir + 'temp' + \
                     str(counter - 1) + '.pdf'
@@ -529,11 +559,28 @@ def build_visualization(server_data):
 
     return VIZdata
 
+def split_viz_into_parts(viz_data, split_code):
+    new_viz_data = []
+    viz_length = len(viz_data)
+    num_of_parts = int(split_code.split('/')[1])
+    chunk_pos = int(split_code.split('/')[0])
+    viz_chunk = int(viz_length / num_of_parts)
+    start = (viz_chunk * (chunk_pos - 1))
+    if chunk_pos == num_of_parts:
+        for x in range(start, len(viz_data)):
+            new_viz_data.append(viz_data[x])
+    else:
+        for x in range(start, (start + viz_chunk)):
+            new_viz_data.append(viz_data[x])
+
+    return new_viz_data
 
 def translate_placeholders(image_info, server_data, work_dir, page_count):
     visualizations = []
     organized_image_info = {}
     server_images = []
+    split_code = None
+
     for image in image_info:
         img_spec = image
         print "tag:"
@@ -543,6 +590,9 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
         if img_spec['tag'].startswith('viz_'):
             print "tag starts with viz_"
             viz_pieces = img_spec['tag'].split('_')
+            if img_spec['tag'].endswith('_split'):
+                split_code = viz_pieces[len(viz_pieces) - 2]
+                viz_pieces = viz_pieces[:-2]
             if len(viz_pieces) == 3:
                 print "tag has 3 pieces"
                 viz_folder = viz_pieces[0]
@@ -575,8 +625,10 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                 try:
                     viz_data = server_data['viz'][viz_specific]
                     print "viz_data:"
-                    print viz_data
 
+                    if split_code is not None:
+                        viz_data = split_viz_into_parts(viz_data, split_code)
+                    print viz_data
                     visualizations.append({
                         'viz_folder': viz_folder,
                         'viz_type': viz_type,

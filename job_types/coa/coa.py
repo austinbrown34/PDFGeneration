@@ -255,6 +255,25 @@ def setup(server_data):
     test_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals']
     server_data['category_units'] = {}
     try:
+        def formatted_phone(phone):
+
+            formatted_phone = ''
+            if len(phone) < 10:
+                formatted_phone = phone
+            else:
+                for i, e in enumerate(phone):
+                    if i == 0:
+                        formatted_phone += '(' + str(e)
+                    elif i == 2:
+                        formatted_phone += str(e) + ') '
+                    elif i == 6:
+                        formatted_phone += '-' + str(e)
+                    else:
+                        formatted_phone += str(e)
+            return formatted_phone
+
+        server_data['formatted_client_phone'] = formatted_phone(server_data['client_info']['phone'])
+        server_data['formatted_lab_phone'] = formatted_phone(server_data['lab']['phone'])
         server_data['client']['full_address'] = str(server_data['client_info']['address_line_1']) + ' ' + str(server_data['client_info']['address_line_2']) + ', ' + str(server_data['client_info']['city']) + ', ' + str(server_data['client_info']['state']) + ' ' + str(server_data['client_info']['zipcode'])
         server_data['lab']['full_address'] = str(server_data['lab']['address_line_1']) + ' ' + str(server_data['lab']['address_line_2']) + ', ' + str(server_data['lab']['city']) + ', ' + str(server_data['lab']['state']) + ' ' + str(server_data['lab']['zipcode'])
         # server_data['lab']['license'] = server_data['lab_license']
@@ -285,7 +304,10 @@ def setup(server_data):
             year = str(year[-1])
             expires = str(expires[:-3]) + ' ' + str(int(year) + 1)
             date_completed = date_completed[2] + ' ' + date_completed[1] + ', '
-        server_data['bunch_of_dates'] = 'Ordered: ' + str(date_received) + '; Sampled: ' + str(last_modified) + '; Completed: ' + str(date_completed) + '; Expires: ' + str(expires)
+        if str(date_completed) == '':
+            server_data['bunch_of_dates'] = 'Ordered: ' + str(date_received) + '; Sampled: ' + str(last_modified)
+        else:
+            server_data['bunch_of_dates'] = 'Ordered: ' + str(date_received) + '; Sampled: ' + str(last_modified) + '; Completed: ' + str(date_completed) + '; Expires: ' + str(expires)
         server_data['type_and_method'] = str(server_data['type']['name']) + ', ' + str(server_data['method']['name'])
         server_data['lab']['full_street_address'] = str(server_data['lab']['address_line_1']) + ' ' + str(server_data['lab']['address_line_2'])
         server_data['lab']['city_state_zip'] = str(server_data['lab']['city'].title()) + ', ' + str(server_data['lab']['state']) + ' ' + str(server_data['lab']['zipcode'])
@@ -338,9 +360,13 @@ def setup(server_data):
             print str(e)
             pass
             special_moisture = ''
+        new_unit = str(r_units)
+        if r_units != '%':
+            new_unit = ' ' + r_units
+
         server_data['special'] = {
-            'total_thc': special_thc_total,
-            'total_cbd': special_cbd_total,
+            'total_thc': str(special_thc_total),
+            'total_cbd': str(special_cbd_total),
             'moisture': str(special_moisture) + '%'
         }
     except Exception as e:
