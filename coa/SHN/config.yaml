@@ -1,0 +1,85 @@
+template_logo: http://orders.confidentcannabis.com/assets/img/labs/MCA/report.png
+template_scripts:
+template_rules:
+  - rule:
+      package_key:
+      package_name: Cannabis Compliance Testing - Potency, Pesticide, & Mold Testing
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Recreational Cannabis Compliance Testing - Potency, Pesticide, & E.coli, & Salmonella Testing
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Batch Bagging 1lb Bags Sealed & Labeled - 10lbs or Less
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Potency Testing
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Pesticide Testing
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Microbial Testing - Mold
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Microbial Testing - E.coli
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Microbial Testing - Salmonella
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Potency Testing - Concentrate
+      included_templates:
+        - 1-bas-rev-1.pdf
+        - 5-can-rev-1.pdf
+        - 6-pest-rev-1.pdf
+        - 7-mic-rev-1.pdf
+        - 8-sol-rev-1.pdf
+        
