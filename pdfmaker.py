@@ -39,7 +39,9 @@ class PDFMaker(object):
         print "contents of work/temp dir:"
         print os.listdir('/tmp/work/temp/')
         pdftools.merge_all_pages(pdfs, '/tmp/Final_PDF.pdf')
+        pdftools.get_fonts()
         print "merged and trying to open"
+        pdftools.repair_pdf('/tmp/Final_PDF.pdf', '/tmp/Final_PDF.pdf')
         final_pdf = open('/tmp/Final_PDF.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',
@@ -134,14 +136,24 @@ class PDFMaker(object):
         pdfcounter = 1
         if Visualizations != []:
             for viz in Visualizations:
-                js_data.append([
-                    os.path.join(
+                js_filename = os.path.join(
+                    'job_types',
+                    server_data['viz']['job_type'],
+                    viz['viz_folder'],
+                    viz['viz_type'],
+                    'js',
+                    viz['viz_type'] + '.js')
+                if viz['viz_file'].endswith('_with_sparkline.html'):
+                    js_filename = os.path.join(
                         'job_types',
                         server_data['viz']['job_type'],
                         viz['viz_folder'],
                         viz['viz_type'],
                         'js',
-                        viz['viz_type'] + '.js'),
+                        viz['viz_type'] + '_sparkline.js')
+
+                js_data.append([
+                    js_filename,
                     viz['viz_data'],
                     viz['viz_dimensions'],
                     viz['viz_coords'],
@@ -149,13 +161,7 @@ class PDFMaker(object):
                     server_data['category_units'][viz['viz_specific'].split('_')[1]][1]
                 ])
                 pdftools.update_data_visualization(
-                    os.path.join(
-                        'job_types',
-                        server_data['viz']['job_type'],
-                        viz['viz_folder'],
-                        viz['viz_type'],
-                        'js',
-                        viz['viz_type'] + '.js'),
+                    js_filename,
                     viz['viz_data'],
                     viz['viz_dimensions'],
                     viz['viz_coords'],

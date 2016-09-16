@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../css/dataTables.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
 <!-- <script type='text/javascript' src='data.json'></script> -->
-<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable.js">
+<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable_sparkline.js">
 </script>
 <script type="text/javascript" language="javascript" src="../js/jquery.js">
 	</script>
@@ -44,8 +44,30 @@ font-family: treb;
 		text-align:right;
 		padding: 2px 2px !important;
 	}
+	/*th{
+		text-align:right;
+		padding: 0px 0px !important;
+		font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 25px;
+		width: 20%;
+		padding-bottom: 2%;
+	}
+	td{
+		font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+		text-align:right;
+		padding: 2px 2px !important;
+	}*/
 	.total{
-		font: 800 10px/16px "Trebuchet MS" !important;
+		/*font: 800 10px/16px "Trebuchet MS" !important;*/
 	}
 	.left{
 		text-align:left;
@@ -54,6 +76,15 @@ font-family: treb;
 	.text-right{
 		position: absolute;
 	    top: 263px;
+	}
+  .right{
+		text-align:right;
+		float: right;
+		width: 70%;
+	}
+	.right td{
+	padding-right: 2%;
+	padding-left: 2%;
 	}
 	#stuff{
 		width: 100%;
@@ -65,6 +96,37 @@ font-family: treb;
 		overflow: hidden;
 		position: absolute;
 	}
+  progress[value] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+
+ width: 100%;
+ height: 10px;
+}
+progress[value]::-webkit-progress-bar {
+  background-color: #DDE3E0 !important;
+  /*border-radius: 2px;*/
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
+}
+progress[value]::-webkit-progress-value {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2ff52+0,91e842+100;Neon */
+/*background: -webkit-linear-gradient(top,  #d2ff52 0%,#91e842 100%); /* Chrome10-25,Safari5.1-6 */
+/*background: linear-gradient(to bottom,  #d2ff52 0%,#91e842 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842',GradientType=0 ); */
+/* IE6-9 */
+
+
+
+  /*background: rgba(202,240,97,1);*/
+    background: #c1d0a7;
+    /*border-radius: 2px;*/
+    background-size: 25px 10px, 100% 100%, 100% 100%;
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
+}
+progress:not([value]) {
+   /* Styling here */
+}
+/*}*/
 	</style>
 <script>
 $(document).ready(function() {
@@ -99,9 +161,12 @@ $(document).ready(function() {
 		$("#example tr td:first-child").addClass("left");
 		if(report_units == '%'){
 			$('#example tr td:nth-child(2)').each(function(){
-				if(!$(this).text().match(/[a-z]/i)){
-					$(this).append(report_units)
+				if(!$(this).text() == ''){
+					if(!$(this).text().match(/[a-z]/i)){
+						$(this).append(report_units)
+					}
 				}
+
 			})
 			$('#example tr td:nth-child(3)').each(function(){
 				if(!$(this).text().match(/[a-z]/i)){
@@ -109,6 +174,30 @@ $(document).ready(function() {
 				}
 			})
 		}
+		if(secondary_report_units == '%'){
+			$('#example tr td:nth-child(4)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(secondary_report_units)
+				}
+			})
+		}
+		$("#example td:contains(Total)").each(function(){
+			$(this).css({
+					'font-family': 'btreb'
+			})
+			var td2 = $(this).closest("td").next()
+			td2.css({
+				'font-family': 'btreb'
+			})
+			var td3 = $(td2).closest("td").next()
+			td3.css({
+				'font-family': 'btreb'
+			})
+			var td4 = $(td3).closest("td").next()
+			td4.css({
+				'font-family': 'btreb'
+			})
+		})
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
 } );
@@ -121,10 +210,11 @@ $(document).ready(function() {
 		<table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="left">Solvent</th>
-                <th>Limit<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th class="left">Cannabinoid</th>
+                <th>LOQ<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
                 <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
-                <th>Status<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;"></i></span></th>
+                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
+                <th>Relative Concentration</th>
             </tr>
 				</thead>
     </table>

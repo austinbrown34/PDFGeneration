@@ -98,6 +98,55 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
     for data in data_list:
         for analyte in data:
             if 'total' not in analyte:
+                if viz_type == 'datatable_sparkline':
+                    status = ''
+                    if category in ['microbials', 'solvents', 'mycotoxins', 'pesticides', 'metals']:
+                        if 'limit' in data[analyte]['display'][display_unit]:
+                            if data[analyte]['display'][display_unit]['limit'] == '':
+                                status = 'Tested'
+                            else:
+                                if make_number(data[analyte]['display'][display_unit]['value']) > make_number(data[analyte]['display'][display_unit]['limit']):
+                                    status = 'Fail'
+                                else:
+                                    status = 'Pass'
+                        else:
+                            data[analyte]['display'][display_unit]['limit'] = ''
+                            status = 'Tested'
+                        combined_list.append(
+                            [
+                                str(data[analyte]['display']['name']),
+                                make_number(data[analyte]['display'][display_unit]['limit'], digits, labels=True),
+                                make_number(data[analyte]['display'][display_unit]['value'], digits, labels=True),
+                                status,
+                                '<progress max="' + str(make_number(total_concentration, digits)) + '" value="' + str(make_number(data[analyte]['display'][display_unit]['value'], digits)) + '"></progress>'
+                            ]
+                        )
+                        # make_number(data[analyte]['display'][display_unit]['value'], digits),
+                        # make_number(total_concentration, digits)
+                    else:
+                        report_data = [
+                            str(data[analyte]['display']['name']),
+                            make_number(data[analyte]['display'][display_unit]['loq'], digits, labels=True),
+                            make_number(data[analyte]['display'][display_unit]['value'], digits, labels=True),
+                            make_number(data[analyte]['display'][display_unit2]['value'], digits, labels=True),
+                            '<progress max="' + str(make_number(total_concentration, digits)) + '" value="' + str(make_number(data[analyte]['display'][display_unit]['value'], digits)) + '"></progress>'
+                        ]
+
+                        if analyte == "thca":
+                            # new_list = combined_list[:0] + report_data + combined_list[0:]
+                            special_list[0:0] = [report_data]
+
+                        elif analyte == "d9_thc":
+                            special_list[1:1] = [report_data]
+
+                        elif analyte == "cbda":
+                            special_list[2:2] = [report_data]
+                        elif analyte == "cbd":
+                            special_list[3:3] = [report_data]
+                        else:
+                            combined_list.append(
+                                report_data
+                            )
                 if viz_type == 'datatable':
                     status = ''
                     if category in ['microbials', 'solvents', 'mycotoxins', 'pesticides', 'metals']:
@@ -167,24 +216,44 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
     combined_list = special_list + combined_list
     return combined_list
 
-def add_cannabinoid_totals(server_data, combined_list, display_unit, display_unit2, digits):
-    combined_list.append(
-        [
-            'Total THC',
-            '',
-            make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit]['value'], digits, labels=True),
-            make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit2]['value'], digits, labels=True)
-        ]
-    )
-    combined_list.append(
-        [
-            'Total CBD',
-            '',
-            make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit]['value'], digits, labels=True),
-            make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit2]['value'], digits, labels=True)
-        ]
-    )
-    return combined_list
+def add_cannabinoid_totals(server_data, combined_list, display_unit, display_unit2, digits, combined=False):
+    if combined:
+        combined_list.append(
+            [
+                'Total THC',
+                '',
+                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit]['value'], digits, labels=True),
+                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit2]['value'], digits, labels=True),
+                ''
+            ]
+        )
+        combined_list.append(
+            [
+                'Total CBD',
+                '',
+                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit]['value'], digits, labels=True),
+                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit2]['value'], digits, labels=True),
+                ''
+            ]
+        )
+    else:
+        combined_list.append(
+            [
+                'Total THC',
+                '',
+                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit]['value'], digits, labels=True),
+                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit2]['value'], digits, labels=True)
+            ]
+        )
+        combined_list.append(
+            [
+                'Total CBD',
+                '',
+                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit]['value'], digits, labels=True),
+                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit2]['value'], digits, labels=True)
+            ]
+        )
+        return combined_list
 def high_to_low(tested_analytes, report_units):
     analytes_and_values = {}
     for test in tested_analytes:
@@ -422,8 +491,17 @@ def setup(server_data):
                     category, 'sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
                 print "combined cannabinoid sl"
+                combined_cannabinoids_dt_sl = combine_tests_for_viz(
+                    [
+                        cannabinoid_data,
+                        thc_data
+                    ],
+                    category, 'datatable_sparkline', digits, report_units, secondary_report_units,
+                    total_concentration=highest)
+                add_cannabinoid_totals(server_data, combined_cannabinoids_dt_sl, report_units, secondary_report_units, digits, combined=True)
                 viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
                 viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
+                viztypes['datatable_cannabinoids_with_sparkline'] = combined_cannabinoids_dt_sl
                 server_data['category_units'][category] = [
                     report_units,
                     secondary_report_units
@@ -465,6 +543,13 @@ def setup(server_data):
                     category, 'sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest
                 )
+                combined_category_dt_sl = combine_tests_for_viz(
+                    [
+                        category_data
+                    ],
+                    category, 'datatable_sparkline', digits, report_units, secondary_report_units,
+                    total_concentration=highest)
+                viztypes['datatable_' + category + '_with_sparkline'] = combined_category_dt_sl
                 print "yay for category sl"
                 viztypes['datatable_' + category] = category_dt
                 viztypes['sparkline_' + category] = category_sl
@@ -496,10 +581,7 @@ def setup(server_data):
                         category_data
                     ],
                     category, 'datatable', digits, report_units, secondary_report_units)
-                if category == 'terpenes':
-                    category_dt.sort(key=lambda x: x[2])
-                else:
-                    category_dt.sort(key=lambda x: x[0])
+
                 print "yay for category dt"
                 category_sl = combine_tests_for_viz(
                     [
@@ -508,7 +590,20 @@ def setup(server_data):
                     category, 'sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest
                 )
+                if category == 'terpenes':
+                    category_dt.sort(key=lambda x: x[2], reverse=True)
+                    category_sl.sort(key=lambda x: x[1], reverse=True)
+                else:
+                    category_dt.sort(key=lambda x: x[0], reverse=True)
+                    category_sl.sort(key=lambda x: x[0], reverse=True)
                 print "yay for category sl"
+                combined_category_dt_sl = combine_tests_for_viz(
+                    [
+                        category_data
+                    ],
+                    category, 'datatable_sparkline', digits, report_units, secondary_report_units,
+                    total_concentration=highest)
+                viztypes['datatable_' + category + '_with_sparkline'] = combined_category_dt_sl
                 viztypes['datatable_' + category] = category_dt
                 viztypes['sparkline_' + category] = category_sl
                 server_data['category_units'][category] = [

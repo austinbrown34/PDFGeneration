@@ -16,12 +16,29 @@
 	<script type="text/javascript" language="javascript" src="../js/jquery.sparkline.min.js">
 	</script>
 	<style>
+	@font-face {
+    font-family: treb;
+    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS.ttf');
+}
+@font-face {
+    font-family: btreb;
+    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS Bold.ttf');
+    font-weight: bold;
+}
+
+	body{
+color:#000000;
+font-family: treb;
+	}
 	table{
-		font: 400 10px/16px "Trebuchet MS" !important;
+		/*font: 400 10px/16px !important;*/
+
+		/*font-family:"trebuchet MS", sans-serif !important;*/
 	}
 	th{
 		text-align:right;
 		padding: 0px 0px !important;
+			font-family: btreb;
 	}
 	td{
 		text-align:right;

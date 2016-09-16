@@ -27,6 +27,12 @@ os.environ['LD_LIBRARY_PATH'] = os.environ['LAMBDA_TASK_ROOT'] + '/bin'
 # os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + '/tmp/fontconfig/usr/lib'
 os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/fontconfig/usr/lib'
 
+def get_fonts():
+    args = ['fc-list']
+    process = subprocess.Popen(args, stdout=subprocess.PIPE)
+    out, err = process.communicate()
+    print(out)
+
 def test_binaries():
     args = ['pdftk', '--version']
     args2 = ['phantomjs', '--help']
@@ -582,6 +588,7 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
     split_code = None
 
     for image in image_info:
+        with_spark = False
         img_spec = image
         print "tag:"
         print img_spec['tag']
@@ -592,6 +599,10 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
             viz_pieces = img_spec['tag'].split('_')
             if img_spec['tag'].endswith('_split'):
                 split_code = viz_pieces[len(viz_pieces) - 2]
+                viz_pieces = viz_pieces[:-2]
+            if img_spec['tag'].endswith('_with_sparkline'):
+                # split_code = viz_pieces[len(viz_pieces) - 2]
+                with_spark = True
                 viz_pieces = viz_pieces[:-2]
             if len(viz_pieces) == 3:
                 print "tag has 3 pieces"
@@ -605,6 +616,8 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                 print "viz_specific:"
                 print viz_specific
                 viz_file = viz_specific + '.html'
+                if with_spark:
+                    viz_file = viz_specific + '_with_sparkline.html'
                 print "viz_file:"
                 print viz_file
                 viz_dimensions = [int(img_spec['width']),
@@ -624,6 +637,8 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                 # print server_data['viz']
                 try:
                     viz_data = server_data['viz'][viz_specific]
+                    if with_spark:
+                        viz_data = server_data['viz'][viz_specific + '_with_sparkline']
                     print "viz_data:"
 
                     if split_code is not None:
