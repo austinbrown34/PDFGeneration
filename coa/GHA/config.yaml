@@ -6,34 +6,25 @@ template_rules:
       package_name: Potency
       included_templates:
         - 5-can-rev-1.pdf
-        - 6-pest-rev-1.pdf
-        - 7-mic-rev-1.pdf
-        - 8-sol-rev-1.pdf
-        - 9-ter-rev-1.pdf
   - rule:
       package_key:
       package_name: Pesticides
       included_templates:
-        - 5-can-rev-1.pdf
         - 6-pest-rev-1.pdf
-        - 7-mic-rev-1.pdf
-        - 8-sol-rev-1.pdf
-        - 9-ter-rev-1.pdf
   - rule:
       package_key:
       package_name: Microbial & Percent Moisture
       included_templates:
         - 5-can-rev-1.pdf
-        - 6-pest-rev-1.pdf
         - 7-mic-rev-1.pdf
-        - 8-sol-rev-1.pdf
-        - 9-ter-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: Microbial
+      included_templates:
+        - 5-can-rev-1.pdf
+        - 7-mic-rev-1.pdf
   - rule:
       package_key:
       package_name: Terpene
       included_templates:
-        - 5-can-rev-1.pdf
-        - 6-pest-rev-1.pdf
-        - 7-mic-rev-1.pdf
-        - 8-sol-rev-1.pdf
         - 9-ter-rev-1.pdf
