@@ -1,5 +1,6 @@
 template_logo: http://orders.confidentcannabis.com/assets/img/labs/SCP/color.png
-template_scripts: scepterformatting.py
+template_scripts:
+  - scepterformatting.py
 template_rules:
   - rule:
       package_key: SRCGCM1
