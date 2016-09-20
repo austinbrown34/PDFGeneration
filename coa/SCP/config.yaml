@@ -5,19 +5,19 @@ template_rules:
       package_key: SRCGCM1
       package_name: State Required Cannabinoids (GC + MIcro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCGCM2
       package_name: State Required Cannabinoids (GC + MIcro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCGCM3
       package_name: State Required Cannabinoids (GC + MIcro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCHPLCM1
@@ -146,25 +146,25 @@ template_rules:
       package_key: SRCPGCM2
       package_name: State Required Cannabinoid Profile (GC + Micro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCPGCM3
       package_name: State Required Cannabinoid Profile (GC + Micro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCPGCM4
       package_name: State Required Cannabinoid Profile (GC + Micro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCPGCM5
       package_name: State Required Cannabinoid Profile (GC + Micro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
       package_key: SRCPHPLCM1
