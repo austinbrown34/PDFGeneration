@@ -19,7 +19,7 @@ template_rules:
       included_templates:
         - 7-Mic.pdf
   - rule:
-      package_key:
+      package_key: SRCPGC4
       package_name: State Required Cannabinoid Profile (GC Test)
       included_templates:
         - 1-new5Can.pdf
