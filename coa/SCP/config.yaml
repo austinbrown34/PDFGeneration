@@ -1,7 +1,7 @@
 template_logo: http://orders.confidentcannabis.com/assets/img/labs/SCP/color.png
 template_scripts:
 template_rules:
-  -rule:
+  - rule:
       package_key:
       package_name: State Required Cannabinoids (GC + MIcro)
       included_templates:
