@@ -20,7 +20,7 @@ def run(data, templates, s3templates):
     new_templates = templates
     try:
         special_moisture = str(data['special']['moisture'])
-        special_moisture = make_number(special_moisture.replace('%', ''), 2, True)
+        special_moisture = make_number(special_moisture.replace('%', ''), 3, True)
         if str(special_moisture) != '' and str(special_moisture) not in ['ND', 'NR']:
                 special_moisture = str(special_moisture) + '%'
         data['special']['moisture'] = special_moisture
