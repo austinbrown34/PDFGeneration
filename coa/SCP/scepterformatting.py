@@ -1,5 +1,9 @@
 import os
-from decimal import Decimal
+from decimal import getcontext, Decimal
+
+# Set the precision.
+getcontext().prec = 2
+
 def make_number(data, digits=None, labels=False):
     try:
         data = float(data)
