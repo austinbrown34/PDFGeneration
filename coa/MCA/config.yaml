@@ -2,7 +2,7 @@ template_logo: http://orders.confidentcannabis.com/assets/img/labs/MCA/report.pn
 template_scripts:
 template_rules:
   - rule:
-      package_key:
+      package_key: 2
       package_name: Everything
       included_templates:
         - 5-can-rev-1.pdf
