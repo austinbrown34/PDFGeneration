@@ -2,7 +2,7 @@ import os
 from decimal import getcontext, Decimal
 
 # Set the precision.
-getcontext().prec = 2
+getcontext().prec = 3
 
 def make_number(data, digits=None, labels=False):
     try:
