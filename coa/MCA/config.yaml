@@ -19,3 +19,8 @@ template_rules:
         - b-myc-rev-1.pdf
         - 7-mic-rev-1.pdf
         - 6-pest-rev-1.pdf
+  - rule:
+      package_key:
+      package_name: I-502 + Medical - Potency, Solvents, Pesticides, Heavy Metals, Mycotoxins
+      included_templates:
+        - 1-combo2.pdf
