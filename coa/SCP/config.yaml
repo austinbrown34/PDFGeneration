@@ -1,66 +1,237 @@
 template_logo: http://orders.confidentcannabis.com/assets/img/labs/SCP/color.png
 template_scripts:
+  - scepterformatting.py
 template_rules:
   - rule:
-      package_key:
+      package_key: SRCGCM1
+      package_name: State Required Cannabinoids (GC + MIcro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCGCM2
+      package_name: State Required Cannabinoids (GC + MIcro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCGCM3
+      package_name: State Required Cannabinoids (GC + MIcro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCHPLCM1
       package_name: State Required Cannabinoids (HPLC + Micro)
       included_templates:
         - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
-      package_key:
+      package_key: SRCHPLCM3
+      package_name: State Required Cannabinoids (HPLC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCHPLCM2
+      package_name: State Required Cannabinoids (HPLC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: MC1
       package_name: Micro Combo
       included_templates:
         - 7-Mic.pdf
   - rule:
-      package_key:
+      package_key: MC2
+      package_name: Micro Combo
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key: MC3
+      package_name: Micro Combo
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key: MC4
+      package_name: Micro Combo
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key: MC5
+      package_name: Micro Combo
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key: MC6
+      package_name: Micro Combo
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key: MC7
+      package_name: Micro Combo
+      included_templates:
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPGC4
       package_name: State Required Cannabinoid Profile (GC Test)
       included_templates:
         - 1-new5Can.pdf
+        - 7-Mic.pdf
   - rule:
-      package_key:
+      package_key: SRCPGC3
+      package_name: State Required Cannabinoid Profile (GC Test)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPGC2
+      package_name: State Required Cannabinoid Profile (GC Test)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPGC1
+      package_name: State Required Cannabinoid Profile (GC Test)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPGCT1
+      package_name: State Required Cannabinoid Profile (GC Test)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPHPLC1
       package_name: State Required Cannabinoid Profile (HPLC Test)
       included_templates:
         - 1-new5Can.pdf
   - rule:
-      package_key:
+      package_key: SRCPHPLC2
+      package_name: State Required Cannabinoid Profile (HPLC Test)
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key: SRCPHPLC3
+      package_name: State Required Cannabinoid Profile (HPLC Test)
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key: SRCPHPLC4
+      package_name: State Required Cannabinoid Profile (HPLC Test)
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key: SRCPHPLC5
+      package_name: State Required Cannabinoid Profile (HPLC Test)
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key: FCP1
       package_name: Full Cannabinoid Profile
       included_templates:
         - 1-new5Can.pdf
   - rule:
-      package_key:
-      package_name: Micro Combo
+      package_key: FCP2
+      package_name: Full Cannabinoid Profile
       included_templates:
-        - 7-Mic.pdf
+        - 1-new5Can.pdf
   - rule:
-      package_key:
+      package_key: FCP3
+      package_name: Full Cannabinoid Profile
+      included_templates:
+        - 1-new5Can.pdf
+  - rule:
+      package_key: SRCPGCM2
       package_name: State Required Cannabinoid Profile (GC + Micro)
       included_templates:
-        - new5Can.pdf
+        - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
-      package_key:
+      package_key: SRCPGCM3
+      package_name: State Required Cannabinoid Profile (GC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPGCM4
+      package_name: State Required Cannabinoid Profile (GC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPGCM5
+      package_name: State Required Cannabinoid Profile (GC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPHPLCM1
       package_name: State Required Cannabinoid Profile (HPLC + Micro)
       included_templates:
         - 1-new5Can.pdf
         - 7-Mic.pdf
   - rule:
-      package_key:
+      package_key: SRCPHPLCM2
+      package_name: State Required Cannabinoid Profile (HPLC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: SRCPHPLCM3
+      package_name: State Required Cannabinoid Profile (HPLC + Micro)
+      included_templates:
+        - 1-new5Can.pdf
+        - 7-Mic.pdf
+  - rule:
+      package_key: MQ1
       package_name: Mycotoxins - Quick
       included_templates:
         - B-Myc.pdf
   - rule:
-      package_key:
+      package_key: MQ2
+      package_name: Mycotoxins - Quick
+      included_templates:
+        - B-Myc.pdf
+  - rule:
+      package_key: MQ3
+      package_name: Mycotoxins - Quick
+      included_templates:
+        - B-Myc.pdf
+  - rule:
+      package_key: MF1
       package_name: Mycotoxins - Full
       included_templates:
         - B-Myc.pdf
   - rule:
-      package_key:
+      package_key: MF2
+      package_name: Mycotoxins - Full
+      included_templates:
+        - B-Myc.pdf
+  - rule:
+      package_key: MF3
+      package_name: Mycotoxins - Full
+      included_templates:
+        - B-Myc.pdf
+  - rule:
+      package_key: TP1
       package_name: Terpenes Profile
       included_templates:
         - new9Ter-3.pdf
   - rule:
-      package_key:
+      package_key: TP2
+      package_name: Terpenes Profile
+      included_templates:
+        - new9Ter-3.pdf
+  - rule:
+      package_key: RS1
+      package_name: Residual Solvents
+      included_templates:
+        - 8-Sol.pdf
+  - rule:
+      package_key: RS2
       package_name: Residual Solvents
       included_templates:
         - 8-Sol.pdf

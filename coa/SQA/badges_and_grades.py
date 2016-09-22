@@ -5,11 +5,17 @@ def run(data, templates, s3templates):
 
     try:
         # new_data['foreign_matter_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
-        new_data['misc']['insects_value'] = new_data['lab_data']['misc']['misc_insects']
-        new_data['misc']['mites_value'] = new_data['lab_data']['misc']['misc_Mites']
-        new_data['misc']['mold_value'] = new_data['lab_data']['misc']['misc_mold']
-        new_data['misc']['other_value'] = new_data['lab_data']['misc']['misc_other']
-        foreign_matter_score = new_data['lab_data']['misc']['misc_1']
+        foreign_matter_score = 0
+        try:
+            new_data['misc']['insects_value'] = new_data['lab_data']['misc']['misc_insects']
+            new_data['misc']['mites_value'] = new_data['lab_data']['misc']['misc_Mites']
+            new_data['misc']['mold_value'] = new_data['lab_data']['misc']['misc_mold']
+            new_data['misc']['other_value'] = new_data['lab_data']['misc']['misc_other']
+            foreign_matter_score = new_data['lab_data']['misc']['misc_1']
+        except Exception as e:
+            print str(e)
+            print "made it to the misc exception"
+            pass
         print "this is the foreign_matter_score:"
         print foreign_matter_score
         if int(foreign_matter_score) == 5:
