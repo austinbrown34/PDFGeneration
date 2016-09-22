@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="../css/dataTables.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
 <!-- <script type='text/javascript' src='data.json'></script> -->
+<!-- <script type="text/javascript" language="javascript" src="../js/datatable_sparkline.js"> -->
+
 <script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable_sparkline.js">
 </script>
 <script type="text/javascript" language="javascript" src="../js/jquery.js">
@@ -37,7 +39,9 @@ font-family: treb;
 	}
 	th{
 		text-align:right;
-		padding: 0px 0px !important;
+		/*padding: 2px 2px !important;*/
+    /*padding-left: 2%;
+    padding-right: 2%;*/
 			font-family: btreb;
 	}
 	td{
@@ -71,6 +75,8 @@ font-family: treb;
 	}
 	.left{
 		text-align:left;
+    position: relative;margin-left: 8px;
+    padding-left: 0 !important;
 	}
 
 	.text-right{
@@ -101,10 +107,11 @@ font-family: treb;
   appearance: none !important;
 
  width: 100%;
- height: 10px;
+ height: 15px;
 }
 progress[value]::-webkit-progress-bar {
-  background-color: #DDE3E0 !important;
+  /*background-color: #DDE3E0 !important;*/
+	background-color: rgba(0, 0, 0, 0);
   /*border-radius: 2px;*/
   /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
 }
@@ -118,9 +125,9 @@ progress[value]::-webkit-progress-value {
 
 
   /*background: rgba(202,240,97,1);*/
-    background: #c1d0a7;
+    background: #1AB394;
     /*border-radius: 2px;*/
-    background-size: 25px 10px, 100% 100%, 100% 100%;
+    background-size: 25px 15px, 100% 100%, 100% 100%;
     /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
 }
 progress:not([value]) {
@@ -198,6 +205,38 @@ $(document).ready(function() {
 				'font-family': 'btreb'
 			})
 		})
+    if(report_units == 'mg/mL'){
+      report_units = 'mg/mL';
+    }
+    if(report_units == 'ppm'){
+      report_units = 'PPM';
+    }
+    if(report_units == 'ppb'){
+      report_units = 'PPB';
+    }
+    if(report_units == 'cfu/g'){
+      report_units = 'CFU/g';
+    }
+    if(secondary_report_units == 'mg/mL'){
+      secondary_report_units = 'mg/mL';
+    }
+    if(secondary_report_units == 'ppm'){
+      secondary_report_units = 'PPM';
+    }
+    if(secondary_report_units == 'ppb'){
+      secondary_report_units = 'PPB';
+    }
+    if(secondary_report_units == 'cfu/g'){
+      secondary_report_units = 'CFU/g';
+    }
+    $('#example tr td:nth-child(2)').each(function(){
+
+        $(this).css({
+          'color': '#808080',
+          'font-size': '10px'
+        });
+
+    })
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
 } );
@@ -206,15 +245,15 @@ $(document).ready(function() {
 </head>
 <body>
 <div id="stuff-wrapper">
-	<div id="stuff" class="uk-table uk-table-hover uk-table-striped uk-table-condensed uk-overflow-container">
-		<table id="example" class="display" cellspacing="0" width="100%">
+	<div id="stuff" class="uk-table uk-table-hover uk-table-condensed uk-overflow-container">
+		<table id="example" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="left">Cannabinoid</th>
-                <th>LOQ<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
-                <th>Relative Concentration</th>
+                <th class="left" style="width: 20%; text-align: left;">Cannabinoid</th>
+                <th style="color: #808080; font-size: 10px;">LOQ<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
+                <th style="width: 50%; text-align: left !important; position: relative;margin-left: 8px; padding-left: 0 !important;">Relative Concentration</th>
             </tr>
 				</thead>
     </table>

@@ -41,8 +41,8 @@ class PDFMaker(object):
         pdftools.merge_all_pages(pdfs, '/tmp/Final_PDF.pdf')
         pdftools.get_fonts()
         print "merged and trying to open"
-        pdftools.repair_pdf('/tmp/Final_PDF.pdf', '/tmp/Final_PDF.pdf')
-        final_pdf = open('/tmp/Final_PDF.pdf', 'rb')
+        pdftools.repair_pdf('/tmp/Final_PDF.pdf', '/tmp/Final_PDF_fixed.pdf')
+        final_pdf = open('/tmp/Final_PDF_fixed.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',
             'pdf': final_pdf

@@ -422,22 +422,27 @@ def draw_images_on_pdf(
     for tempimg in temp_imgs:
         print "printing tempimg"
         print tempimg
-        imagepdf = PdfFileReader(open(tempimg, 'rb'))
-        output_file = PdfFileWriter()
-        input_file = PdfFileReader(open(currentpdf, "rb"))
-        page_count = input_file.getNumPages()
-        for page_number in range(page_count):
-            input_page = input_file.getPage(page_number)
-            input_page.mergePage(imagepdf.getPage(0))
-            output_file.addPage(input_page)
-        with open(
-                os.path.join(work_dir, 'temp' + str(counter) + '.pdf'),
-                "wb") as outputStream:
-            output_file.write(outputStream)
-            completed_temps.append(
-                os.path.join(work_dir, 'temp' + str(counter) + '.pdf'))
-        currentpdf = os.path.join(work_dir, 'temp' + str(counter) + '.pdf')
-        counter += 1
+        try:
+            imagepdf = PdfFileReader(open(tempimg, 'rb'))
+            output_file = PdfFileWriter()
+            input_file = PdfFileReader(open(currentpdf, "rb"))
+            page_count = input_file.getNumPages()
+            for page_number in range(page_count):
+                input_page = input_file.getPage(page_number)
+                input_page.mergePage(imagepdf.getPage(0))
+                output_file.addPage(input_page)
+            with open(
+                    os.path.join(work_dir, 'temp' + str(counter) + '.pdf'),
+                    "wb") as outputStream:
+                output_file.write(outputStream)
+                completed_temps.append(
+                    os.path.join(work_dir, 'temp' + str(counter) + '.pdf'))
+            currentpdf = os.path.join(work_dir, 'temp' + str(counter) + '.pdf')
+            counter += 1
+        except Exception as e:
+            print str(e)
+            print "made it to the draw_images_on_pdf exception"
+            pass
 
     if len(completed_temps) > 0:
         print completed_temps

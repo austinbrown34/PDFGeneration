@@ -5,6 +5,7 @@ import sys
 import imp
 import os
 sys.path.append('../..')
+import time
 
 from pdfservices import S3TemplateService
 from collections import OrderedDict
@@ -16,15 +17,15 @@ def make_number(data, digits=None, labels=False):
     try:
         data = float(data)
     except ValueError:
-        if not labels:
-            data = float(0)
         if data == "<LOQ":
             data = "&ltLOQ"
+        if not labels:
+            data = float(0)
 
     output = data
     if digits is not None and isinstance(data, float):
         dec = Decimal(data)
-        output = round(dec,int(digits))
+        output = round(dec, int(digits))
     return output
 
 def get_winner(data_list, display_value):
@@ -68,16 +69,19 @@ def add_units_to_values(tests):
                     try:
                         converted_value = float(str(tests[analyte]['display'][display_chunk][value_type]))
                         dec = Decimal(converted_value).quantize(Decimal(10) ** -2)
+                        # dec = Decimal(converted_value)
                         output = dec
                         if str(display_chunk) in ['ppm', 'ppb', 'cfu/g']:
                             output = int(round(dec, 0))
                         new_display_chunk = display_chunk
                         if str(display_chunk) != '%':
                             if str(display_chunk) in ['ppm','ppb']:
-                                new_display_chunk = str(display_chunk).upper()
+                                new_display_chunk = ' ' + str(display_chunk).upper()
                             if str(display_chunk) == 'cfu/g':
-                                new_display_chunk = 'CFU/g'
-                        units = ' ' + str(new_display_chunk)
+                                new_display_chunk = ' CFU/g'
+                            if str(display_chunk) == 'mg/ml':
+                                new_display_chunk = ' mg/mL'
+                        units = str(new_display_chunk)
                         formatted_tests[analyte]['display'][display_chunk][value_type] = str(output) + str(units)
                     except Exception as e:
                         print str(e)
@@ -216,43 +220,42 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
     combined_list = special_list + combined_list
     return combined_list
 
-def add_cannabinoid_totals(server_data, combined_list, display_unit, display_unit2, digits, combined=False):
+def add_cannabinoid_totals(combined_list, display_unit, display_unit2, digits, combined=False):
+    primary_total = 0.0
+    secondary_total = 0.0
+    for row in combined_list:
+        primary = make_number(row[2])
+        secondary = make_number(row[3])
+        primary_total += primary
+        secondary_total += secondary
+
+    primary_total = str(primary_total)
+    secondary_total = str(secondary_total)
+    # if display_unit == '%':
+    #     primary_total = str(primary_total) + '%'
+    # if display_unit2 == '%':
+    #     secondary_total = str(secondary_total) + '%'
     if combined:
         combined_list.append(
             [
-                'Total THC',
+                'Total Cannabinoids',
                 '',
-                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit]['value'], digits, labels=True),
-                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit2]['value'], digits, labels=True),
+                primary_total,
+                secondary_total,
                 ''
             ]
         )
-        combined_list.append(
-            [
-                'Total CBD',
-                '',
-                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit]['value'], digits, labels=True),
-                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit2]['value'], digits, labels=True),
-                ''
-            ]
-        )
+
     else:
         combined_list.append(
             [
-                'Total THC',
+                'Total Cannabinoids',
                 '',
-                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit]['value'], digits, labels=True),
-                make_number(server_data['lab_data']['thc']['thc_total']['display'][display_unit2]['value'], digits, labels=True)
+                primary_total,
+                secondary_total
             ]
         )
-        combined_list.append(
-            [
-                'Total CBD',
-                '',
-                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit]['value'], digits, labels=True),
-                make_number(server_data['lab_data']['cannabinoids']['cbd_total']['display'][display_unit2]['value'], digits, labels=True)
-            ]
-        )
+
         return combined_list
 def high_to_low(tested_analytes, report_units):
     analytes_and_values = {}
@@ -327,26 +330,65 @@ def setup(server_data):
         def formatted_phone(phone):
 
             formatted_phone = ''
-            if len(phone) < 10:
-                formatted_phone = phone
+            if phone is not None:
+                if len(phone) < 10:
+                    formatted_phone = phone
+                else:
+                    for i, e in enumerate(phone):
+                        if i == 0:
+                            formatted_phone += '(' + str(e)
+                        elif i == 2:
+                            formatted_phone += str(e) + ') '
+                        elif i == 6:
+                            formatted_phone += '-' + str(e)
+                        else:
+                            formatted_phone += str(e)
             else:
-                for i, e in enumerate(phone):
-                    if i == 0:
-                        formatted_phone += '(' + str(e)
-                    elif i == 2:
-                        formatted_phone += str(e) + ') '
-                    elif i == 6:
-                        formatted_phone += '-' + str(e)
-                    else:
-                        formatted_phone += str(e)
+                formatted_phone = ''
             return formatted_phone
-
+        months = {
+            'Jan': '01',
+            'Feb': '02',
+            'Mar': '03',
+            'Apr': '04',
+            'May': '05',
+            'Jun': '06',
+            'Jul': '07',
+            'Aug': '08',
+            'Sep': '09',
+            'Oct': '10',
+            'Nov': '11',
+            'Dec': '12'
+        }
         server_data['formatted_client_phone'] = formatted_phone(server_data['client_info']['phone'])
         server_data['formatted_lab_phone'] = formatted_phone(server_data['lab']['phone'])
         server_data['client']['full_address'] = str(server_data['client_info']['address_line_1']) + ' ' + str(server_data['client_info']['address_line_2']) + ', ' + str(server_data['client_info']['city']) + ', ' + str(server_data['client_info']['state']) + ' ' + str(server_data['client_info']['zipcode'])
         server_data['lab']['full_address'] = str(server_data['lab']['address_line_1']) + ' ' + str(server_data['lab']['address_line_2']) + ', ' + str(server_data['lab']['city']) + ', ' + str(server_data['lab']['state']) + ' ' + str(server_data['lab']['zipcode'])
+        ## dd/mm/yyyy format
+        server_data['date_completed'] = str(time.strftime("%m/%d/%Y"))
+        date_completed = server_data['date_completed']
         # server_data['lab']['license'] = server_data['lab_license']
         #server_data['page_of_pages'] = ''
+        special_category = ''
+        special_type = ''
+        special_production = ''
+        if 'category' in server_data:
+            if 'name' in server_data['category']:
+                special_category = server_data['category']['name']
+        if 'type' in server_data:
+            if 'name' in server_data['type']:
+                special_type = server_data['type']['name']
+        if 'method' in server_data:
+            if 'name' in server_data['method']:
+                special_production = server_data['method']['name']
+        category_type_production = ''
+        if special_category != '':
+            category_type_production = str(special_category) + ', '
+        if special_type != '':
+            category_type_production += str(special_type) + ', '
+        if special_production != '':
+            category_type_production += str(special_production)
+        server_data['category_type_production'] = category_type_production
         server_data['batch_info'] = 'Batch #: ' + '' + '; Batch Size: ' + str(server_data['initial_weight']) + ' - grams'
         server_data['initial_weight'] = str(server_data['initial_weight']) + ' grams'
         if server_data['date_received'] is None or server_data['date_received'] == 'null':
@@ -354,25 +396,31 @@ def setup(server_data):
         else:
             date_received = server_data['date_received'].split(',')[1].split(' ')
             date_received = date_received[:-2]
-            date_received = date_received[2] + ' ' + date_received[1] + ', ' + date_received[3]
+            date_received = months[date_received[2]] + '/' + date_received[1] + '/' + date_received[3]
         if server_data['last_modified'] is None or server_data['last_modified'] == 'null':
             last_modified = ''
         else:
             last_modified = server_data['last_modified'].split(',')[1].split(' ')
             last_modified = last_modified[:-2]
-            last_modified = last_modified[2] + ' ' + last_modified[1] + ', ' + last_modified[3]
+            last_modified = months[last_modified[2]] + '/' + last_modified[1] + '/' + last_modified[3]
         if server_data['date_completed'] is None or server_data['date_completed'] == 'null':
             date_completed = ''
             expires = ''
         else:
-            date_completed = server_data['date_completed'].split(',')[1].split(' ')
-            date_completed = date_completed[:-3]
-            expires = server_data['date_completed'].split(',')[1].split(' ')
-            year = server_data['date_completed'].split(',')[1].split(' ')
-            year = year[:-2]
-            year = str(year[-1])
-            expires = str(expires[:-3]) + ' ' + str(int(year) + 1)
-            date_completed = date_completed[2] + ' ' + date_completed[1] + ', '
+            complete_split = server_data['date_completed'].split('/')
+            year = complete_split[2]
+            year2 = int(year) + 1
+            year3 = str(year2)
+            expires = str(complete_split[0]) + '/' + str(complete_split[1]) + '/' + year3
+            # date_completed = server_data['date_completed'].split(',')[1].split(' ')
+            # date_completed = date_completed[:-2]
+            # expires = server_data['date_completed'].split(',')[1].split(' ')
+            # year = server_data['date_completed'].split(',')[1].split(' ')
+            # year = year[:-2]
+            # year = str(year[-1])
+            # expires = str(expires[:-3]) + ' ' + str(int(year) + 1)
+            # date_completed = date_completed[2] + ' ' + date_completed[1] + ', '
+        date_completed = server_data['date_completed']
         if str(date_completed) == '':
             server_data['bunch_of_dates'] = 'Ordered: ' + str(date_received) + '; Sampled: ' + str(last_modified)
         else:
@@ -416,8 +464,16 @@ def setup(server_data):
             print str(e)
             pass
         try:
-            special_cbd_total = str(server_data['lab_data']['cannabinoids']['cbd_total']['display'][r_units]['value']) + str(r_units)
-            special_thc_total = str(server_data['lab_data']['thc']['thc_total']['display'][r_units]['value']) + str(r_units)
+            special_cbd_total = str(server_data['lab_data']['cannabinoids']['cbd_total']['display'][r_units]['value'])
+            if special_cbd_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
+                special_cbd_total = round(float(special_cbd_total), 1)
+                special_cbd_total = str(special_cbd_total)
+                special_cbd_total = special_cbd_total + str(r_units)
+            special_thc_total = str(server_data['lab_data']['thc']['thc_total']['display'][r_units]['value'])
+            if special_thc_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
+                special_thc_total = round(float(special_thc_total), 1)
+                special_thc_total = str(special_thc_total)
+                special_thc_total = special_thc_total + str(r_units)
         except Exception as e:
             print str(e)
             special_cbd_total = ''
@@ -425,10 +481,15 @@ def setup(server_data):
             pass
         try:
             special_moisture = str(server_data['lab_data']['moisture']['tests']['percent_moisture']['display']['%']['value'])
+            if str(special_moisture) != '' and str(special_moisture) not in ['ND', 'NR']:
+                special_moisture = round(float(special_moisture), 1)
+                special_moisture = str(special_moisture)
+                special_moisture = str(special_moisture) + '%'
         except Exception as e:
             print str(e)
             pass
             special_moisture = ''
+
         new_unit = str(r_units)
         if r_units != '%':
             new_unit = ' ' + r_units
@@ -436,7 +497,7 @@ def setup(server_data):
         server_data['special'] = {
             'total_thc': str(special_thc_total),
             'total_cbd': str(special_cbd_total),
-            'moisture': str(special_moisture) + '%'
+            'moisture': str(special_moisture)
         }
     except Exception as e:
         print str(e)
@@ -481,7 +542,7 @@ def setup(server_data):
                     ],
                     category, 'datatable', digits, report_units, secondary_report_units)
 
-                add_cannabinoid_totals(server_data, combined_cannabinoids_dt, report_units, secondary_report_units, digits)
+                add_cannabinoid_totals(combined_cannabinoids_dt, report_units, secondary_report_units, digits)
                 print "combined cannabinoid dt"
                 combined_cannabinoids_sl = combine_tests_for_viz(
                     [
@@ -498,13 +559,27 @@ def setup(server_data):
                     ],
                     category, 'datatable_sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
-                add_cannabinoid_totals(server_data, combined_cannabinoids_dt_sl, report_units, secondary_report_units, digits, combined=True)
+                add_cannabinoid_totals(combined_cannabinoids_dt_sl, report_units, secondary_report_units, digits, combined=True)
                 viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
                 viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
                 viztypes['datatable_cannabinoids_with_sparkline'] = combined_cannabinoids_dt_sl
+                ru = report_units
+                sru = secondary_report_units
+                if report_units in ['ppm', 'ppb']:
+                    ru = report_units.upper()
+                if report_units == 'cfu/g':
+                    ru = 'CFU/g'
+                if report_units == 'mg/ml':
+                    ru = 'mg/mL'
+                if secondary_report_units in ['ppm', 'ppb']:
+                    sru = secondary_report_units.upper()
+                if secondary_report_units == 'cfu/g':
+                    sru = 'CFU/g'
+                if secondary_report_units == 'mg/ml':
+                    sru = 'mg/mL'
                 server_data['category_units'][category] = [
-                    report_units,
-                    secondary_report_units
+                    ru,
+                    sru
                 ]
                 print "cannabinoid_data again:"
                 print cannabinoid_data
@@ -659,6 +734,8 @@ def setup(server_data):
         return
 
     print "downloaded config"
+    print "test_packages:"
+    print server_data['test_packages']
     template_keys = get_test_packages(server_data['test_packages'])
     templates = s3templates.get_templates('/tmp/work/config.yaml', '/tmp/', template_keys)
     templates = list(set(templates))
