@@ -14,6 +14,7 @@ template_rules:
       package_key: '1'
       package_name:
       included_templates:
+        - 1-combo.pdf
         - 5-can-rev-1.pdf
         - b-myc-rev-1.pdf
         - 7-mic-rev-1.pdf
