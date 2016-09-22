@@ -3,6 +3,129 @@ from decimal import getcontext, Decimal
 
 # Set the precision.
 getcontext().prec = 3
+def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%', display_unit2='mg/g', total_concentration=None):
+    combined_list = []
+    special_list = []
+    for data in data_list:
+        for analyte in data:
+            if 'total' not in analyte:
+                if viz_type == 'datatable_sparkline':
+                    status = ''
+                    if category in ['microbials', 'solvents', 'mycotoxins', 'pesticides', 'metals']:
+                        if 'limit' in data[analyte]['display'][display_unit]:
+                            if data[analyte]['display'][display_unit]['limit'] == '':
+                                status = 'Tested'
+                            else:
+                                if make_number(data[analyte]['display'][display_unit]['value']) > make_number(data[analyte]['display'][display_unit]['limit']):
+                                    status = 'Fail'
+                                else:
+                                    status = 'Pass'
+                        else:
+                            data[analyte]['display'][display_unit]['limit'] = ''
+                            status = 'Tested'
+                        combined_list.append(
+                            [
+                                str(data[analyte]['display']['name']),
+                                make_number(data[analyte]['display'][display_unit]['limit'], digits, labels=True),
+                                make_number(data[analyte]['display'][display_unit]['value'], digits, labels=True),
+                                status,
+                                '<progress max="' + str(make_number(total_concentration, digits)) + '" value="' + str(make_number(data[analyte]['display'][display_unit]['value'], digits)) + '"></progress>'
+                            ]
+                        )
+                        # make_number(data[analyte]['display'][display_unit]['value'], digits),
+                        # make_number(total_concentration, digits)
+                    else:
+                        report_data = [
+                            str(data[analyte]['display']['name']),
+                            make_number(data[analyte]['display'][display_unit]['loq'], digits, labels=True),
+                            make_number(data[analyte]['display'][display_unit]['value'], digits, labels=True),
+                            make_number(data[analyte]['display'][display_unit2]['value'], digits, labels=True),
+                            '<progress max="' + str(make_number(total_concentration, digits)) + '" value="' + str(make_number(data[analyte]['display'][display_unit]['value'], digits)) + '"></progress>'
+                        ]
+
+                        if analyte == "thca":
+                            # new_list = combined_list[:0] + report_data + combined_list[0:]
+                            special_list[0:0] = [report_data]
+
+                        elif analyte == "d9_thc":
+                            special_list[1:1] = [report_data]
+
+                        elif analyte == "cbda":
+                            special_list[2:2] = [report_data]
+                        elif analyte == "cbd":
+                            special_list[3:3] = [report_data]
+                        else:
+                            combined_list.append(
+                                report_data
+                            )
+                if viz_type == 'datatable':
+                    status = ''
+                    if category in ['microbials', 'solvents', 'mycotoxins', 'pesticides', 'metals']:
+                        if 'limit' in data[analyte]['display'][display_unit]:
+                            if data[analyte]['display'][display_unit]['limit'] == '':
+                                status = 'Tested'
+                            else:
+                                if make_number(data[analyte]['display'][display_unit]['value']) > make_number(data[analyte]['display'][display_unit]['limit']):
+                                    status = 'Fail'
+                                else:
+                                    status = 'Pass'
+                        else:
+                            data[analyte]['display'][display_unit]['limit'] = ''
+                            status = 'Tested'
+                        combined_list.append(
+                            [
+                                str(data[analyte]['display']['name']),
+                                make_number(data[analyte]['display'][display_unit]['limit'], digits, labels=True),
+                                make_number(data[analyte]['display'][display_unit]['value'], digits, labels=True),
+                                status
+                            ]
+                        )
+                    else:
+                        report_data = [
+                            str(data[analyte]['display']['name']),
+                            make_number(data[analyte]['display'][display_unit]['loq'], digits, labels=True),
+                            make_number(data[analyte]['display'][display_unit]['value'], digits, labels=True),
+                            make_number(data[analyte]['display'][display_unit2]['value'], digits, labels=True)
+                        ]
+
+                        if analyte == "thca":
+                            # new_list = combined_list[:0] + report_data + combined_list[0:]
+                            special_list[0:0] = [report_data]
+
+                        elif analyte == "d9_thc":
+                            special_list[1:1] = [report_data]
+
+                        elif analyte == "cbda":
+                            special_list[2:2] = [report_data]
+                        elif analyte == "cbd":
+                            special_list[3:3] = [report_data]
+                        else:
+                            combined_list.append(
+                                report_data
+                            )
+                if viz_type == 'sparkline':
+                    report_data = [
+                        str(data[analyte]['display']['name']),
+                        make_number(data[analyte]['display'][display_unit]['value'], digits),
+                        make_number(total_concentration, digits)
+                    ]
+                    if analyte == "thca":
+                        # new_list = combined_list[:0] + report_data + combined_list[0:]
+                        special_list[0:0] = [report_data]
+
+                    elif analyte == "d9_thc":
+                        special_list[1:1] = [report_data]
+
+                    elif analyte == "cbda":
+                        special_list[2:2] = [report_data]
+                    elif analyte == "cbd":
+                        special_list[3:3] = [report_data]
+                    else:
+                        combined_list.append(
+                            report_data
+                        )
+    combined_list = special_list + combined_list
+    return combined_list
 
 def make_number(data, digits=None, labels=False):
     try:
@@ -28,16 +151,16 @@ def run(data, templates, s3templates):
                     'mg/g',
                     'mg/unit'
             ]
-            revised_dt_data = []
-            for analyte_data in data['viz']['datatable_cannabinoids']:
-                if analyte_data[0].startswith('C'):
-                    mgunit = str(data['lab_data_latest']['cannabinoids']['tests'][analyte_data[0]]['display']['mg/unit']['value'])
-                elif analyte_data[0].startswith('T'):
-                    mgunit = ''
-                else:
-                    mgunit = str(data['lab_data_latest']['thc']['tests'][analyte_data[0]]['display']['mg/unit']['value'])
-                revised_dt_data.append([analyte_data[0], analyte_data[1], analyte_data[2], mgunit])
-            new_data['viz']['datatable_cannabinoids'] = revised_dt_data
+            digits = data['lab_data']['cannabinoids']['digits']
+            cannabinoid_data = data['lab_data']['cannabinoids']['tests']
+            thc_data = data['lab_data']['thc']['tests']
+            combined_cannabinoids_dt = combine_tests_for_viz(
+                    [
+                        cannabinoid_data,
+                        thc_data
+                    ],
+                    'cannabinoids', 'datatable', digits, 'mg/g', 'mg/unit')
+            new_data['viz']['datatable_cannabinoids'] = combined_cannabinoids_dt
         except Exception as e:
             print str(e)
             print "made it to the modifying data for mca exception"
