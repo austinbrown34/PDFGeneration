@@ -43,8 +43,8 @@ def run(data, templates, s3templates):
             print "made it to the modifying data for mca exception"
             pass
         try:
-            special_cbd_total = str(server_data['lab_data']['cannabinoids']['cbd_total']['display']['mg/unit']['value'])
-            special_thc_total = str(server_data['lab_data']['thc']['thc_total']['display']['mg/unit']['value'])
+            special_cbd_total = str(data['lab_data']['cannabinoids']['cbd_total']['display']['mg/unit']['value'])
+            special_thc_total = str(data['lab_data']['thc']['thc_total']['display']['mg/unit']['value'])
             if special_cbd_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
                 special_cbd_total = special_cbd_total + str('mg/unit')
             if special_thc_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
