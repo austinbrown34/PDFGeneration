@@ -145,7 +145,7 @@ def make_number(data, digits=None, labels=False):
 def run(data, templates, s3templates):
     new_data = data
     new_templates = templates
-    if '1-combo2.pdf' in templates:
+    if '1-combo2.pdf' in templates or '1-combo4.pdf' in templates:
         try:
             new_data['category_units']['cannabinoids'] = [
                     'mg/g',

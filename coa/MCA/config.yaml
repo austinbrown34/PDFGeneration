@@ -25,3 +25,13 @@ template_rules:
       package_name: I-502 + Medical - Potency, Solvents, Pesticides, Heavy Metals, Mycotoxins
       included_templates:
         - 1-combo2.pdf
+  - rule:
+      package_key:
+      package_name: I-502 Potency, Solvents
+      included_templates:
+        - 1-combo3.pdf
+  - rule:
+      package_key:
+      package_name: I-502 + Medical - Potency, Foreign Matter, Microbials, Moisture, Pesticides, Heavy Metals, Mycotoxins,
+      included_templates:
+        - 1-combo4.pdf
