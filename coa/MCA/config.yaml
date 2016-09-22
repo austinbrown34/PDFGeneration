@@ -1,5 +1,6 @@
 template_logo: http://orders.confidentcannabis.com/assets/img/labs/MCA/report.png
 template_scripts:
+  - mca-special.py
 template_rules:
   - rule:
       package_key: '2'
