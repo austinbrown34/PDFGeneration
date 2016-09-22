@@ -5,6 +5,7 @@ def run(data, templates, s3templates):
 
     try:
         # new_data['foreign_matter_badge'] = 'https://s3-us-west-2.amazonaws.com/cc-pdfserver/coa/SQA/assets/blank.png'
+        foreign_matter_score = 0
         try:
             new_data['misc']['insects_value'] = new_data['lab_data']['misc']['misc_insects']
             new_data['misc']['mites_value'] = new_data['lab_data']['misc']['misc_Mites']
