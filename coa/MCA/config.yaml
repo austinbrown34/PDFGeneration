@@ -5,6 +5,7 @@ template_rules:
       package_key: '2'
       package_name: Everything
       included_templates:
+        - 1-combo.pdf
         - 5-can-rev-1.pdf
         - b-myc-rev-1.pdf
         - 7-mic-rev-1.pdf
