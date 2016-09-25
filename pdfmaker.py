@@ -1,5 +1,6 @@
 import pdftools as pdftools
 import os
+import shutil
 
 
 class PDFMaker(object):
@@ -61,6 +62,8 @@ class PDFMaker(object):
         if work_dir is None:
             work_dir = self.work_dir
         page_count = str(page_count)
+        # if os.path.isdir(work_dir):
+        #     shutil.rmtree('/tmp/work')
         if not os.path.isdir(work_dir):
             os.makedirs(work_dir)
         print "about to get fields........................................."

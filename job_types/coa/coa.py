@@ -6,7 +6,7 @@ import imp
 import os
 sys.path.append('../..')
 import time
-
+import shutil
 from pdfservices import S3TemplateService
 from collections import OrderedDict
 from operator import itemgetter
@@ -320,7 +320,8 @@ def setup(server_data):
     server_data['images']['0'] = image
     server_data['cover'] = image
     qr_base = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl="
-    public_profile_base = 'https%3A%2F%2Forders.confidentcannabis.com%2Fadvancedherbal%2F%23!%2Freport%2Fpublic%2Fsample%2F'
+    lab_slug = server_data['lab']['slug']
+    public_profile_base = 'https%3A%2F%2Forders.confidentcannabis.com%2F' + str(lab_slug) + '%2F%23!%2Freport%2Fpublic%2Fsample%2F'
     public_key = server_data['public_key']
     server_data['qr_code'] = qr_base + public_profile_base + public_key
     template_folder = server_data['lab']['abbreviation']
@@ -508,11 +509,12 @@ def setup(server_data):
         try:
             digits = server_data['lab_data'][category]['digits']
             report_units = server_data['lab_data'][category]['report_units']
-            secondary_report_units = ''
+            secondary_report_units = 'mg/g'
             if report_units == 'mg/g':
                 secondary_report_units = '%'
             if report_units == '%':
                 secondary_report_units = 'mg/g'
+
             if category == 'cannabinoids':
                 cbd_data = server_data['lab_data']['cannabinoids']['tests']
                 thc_data = server_data['lab_data']['thc']['tests']
@@ -702,6 +704,8 @@ def setup(server_data):
     server_data['viz'] = viztypes
     print "Initializing S3TemplateService"
 
+    if os.path.exists('/tmp/work'):
+        shutil.rmtree('/tmp/work')
     if not os.path.exists('/tmp/work'):
         os.makedirs('/tmp/work')
     s3templates = S3TemplateService(bucket='cc-pdfserver')
