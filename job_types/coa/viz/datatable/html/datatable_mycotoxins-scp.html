@@ -44,30 +44,8 @@ font-family: treb;
 		text-align:right;
 		padding: 2px 2px !important;
 	}
-	/*th{
-		text-align:right;
-		padding: 0px 0px !important;
-		font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 25px;
-		width: 20%;
-		padding-bottom: 2%;
-	}
-	td{
-		font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-	font-size: 10px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 20px;
-		text-align:right;
-		padding: 2px 2px !important;
-	}*/
 	.total{
-		/*font: 800 10px/16px "Trebuchet MS" !important;*/
+		font: 800 10px/16px "Trebuchet MS" !important;
 	}
 	.left{
 		text-align:left;
@@ -120,44 +98,31 @@ $(document).ready(function() {
 		}
 		$("#example tr td:first-child").addClass("left");
 		if(report_units == '%'){
-		// 	$('#example tr td:nth-child(2)').each(function(){
-		// 		if(!$(this).text() == ''){
-		// 			if(!$(this).text().match(/[a-z]/i)){
-		// 				$(this).append(report_units)
-		// 			}
-		// 		}
-		//
-		// 	})
 			$('#example tr td:nth-child(2)').each(function(){
 				if(!$(this).text().match(/[a-z]/i)){
 					$(this).append(report_units)
 				}
 			})
-		}
-		if(secondary_report_units == '%'){
 			$('#example tr td:nth-child(3)').each(function(){
 				if(!$(this).text().match(/[a-z]/i)){
-					$(this).append(secondary_report_units)
+					$(this).append(report_units)
 				}
 			})
+
 		}
-		$("#example td:contains(Total)").each(function(){
-			$(this).css({
-				'font-family': 'btreb'
-			})
-			var td2 = $(this).closest("td").next()
-			td2.css({
-				'font-family': 'btreb'
-			})
-			var td3 = $(td2).closest("td").next()
-			td3.css({
-				'font-family': 'btreb'
-			})
-			var td4 = $(td3).closest("td").next()
-			td4.css({
-				'font-family': 'btreb'
-			})
+		$('#example tr td:nth-child(4)').each(function(){
+			if($(this).text().match('Fail')){
+				$(this).css('color', 'red');
+			}
 		})
+		$('#example tr td:nth-child(2)').each(function(){
+
+        $(this).css({
+          'color': '#808080',
+          'font-size': '10px'
+        });
+
+    })
 		if(report_units == 'mg/mL'){
 			report_units = 'mg/mL';
 		}
@@ -194,10 +159,10 @@ $(document).ready(function() {
 		<table id="example" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="left">Cannabinoid</th>
-                <!-- <th style="color: #808080; font-size: 10px;">LOQ<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th> -->
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 9px;color: #808080;" class='report_units'></i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 9px;color: #808080;" class='secondary_report_units'></i></span></th>
+                <th class="left"></th>
+                <th style="color: #808080; font-size: 10px;">Limit<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'>%</i></span></th>
+                <th>Mass<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'>%</i></span></th>
+                <th>Status<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;"></i></span></th>
             </tr>
 				</thead>
     </table>

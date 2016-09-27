@@ -154,22 +154,25 @@ class PDFMaker(object):
                         viz['viz_type'],
                         'js',
                         viz['viz_type'] + '_sparkline.js')
+                viz_specific = viz['viz_specific']
+                if viz['viz_specific'].find('-') != -1:
+                    viz_specific = viz_specific.split('-')[0]
 
                 js_data.append([
                     js_filename,
                     viz['viz_data'],
                     viz['viz_dimensions'],
                     viz['viz_coords'],
-                    server_data['category_units'][viz['viz_specific'].split('_')[1]][0],
-                    server_data['category_units'][viz['viz_specific'].split('_')[1]][1]
+                    server_data['category_units'][viz_specific.split('_')[1]][0],
+                    server_data['category_units'][viz_specific.split('_')[1]][1]
                 ])
                 pdftools.update_data_visualization(
                     js_filename,
                     viz['viz_data'],
                     viz['viz_dimensions'],
                     viz['viz_coords'],
-                    server_data['category_units'][viz['viz_specific'].split('_')[1]][0],
-                    server_data['category_units'][viz['viz_specific'].split('_')[1]][1]
+                    server_data['category_units'][viz_specific.split('_')[1]][0],
+                    server_data['category_units'][viz_specific.split('_')[1]][1]
                 )
                 viz_file = os.path.join(
                     'job_types',

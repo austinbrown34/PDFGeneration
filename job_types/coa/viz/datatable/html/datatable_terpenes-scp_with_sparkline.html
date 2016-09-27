@@ -5,7 +5,9 @@
 <link rel="stylesheet" type="text/css" href="../css/dataTables.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
 <!-- <script type='text/javascript' src='data.json'></script> -->
-<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable.js">
+<!-- <script type="text/javascript" language="javascript" src="../js/datatable_sparkline.js"> -->
+
+<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable_sparkline.js">
 </script>
 <script type="text/javascript" language="javascript" src="../js/jquery.js">
 	</script>
@@ -37,7 +39,9 @@ font-family: treb;
 	}
 	th{
 		text-align:right;
-		padding: 0px 0px !important;
+		/*padding: 2px 2px !important;*/
+    /*padding-left: 2%;
+    padding-right: 2%;*/
 			font-family: btreb;
 	}
 	td{
@@ -71,11 +75,22 @@ font-family: treb;
 	}
 	.left{
 		text-align:left;
+    position: relative;margin-left: 8px;
+    padding-left: 0 !important;
 	}
 
 	.text-right{
 		position: absolute;
 	    top: 263px;
+	}
+  .right{
+		text-align:right;
+		float: right;
+		width: 70%;
+	}
+	.right td{
+	padding-right: 2%;
+	padding-left: 2%;
 	}
 	#stuff{
 		width: 100%;
@@ -87,6 +102,38 @@ font-family: treb;
 		overflow: hidden;
 		position: absolute;
 	}
+  progress[value] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+
+ width: 100%;
+ height: 15px;
+}
+progress[value]::-webkit-progress-bar {
+  /*background-color: #DDE3E0 !important;*/
+	background-color: rgba(0, 0, 0, 0);
+  /*border-radius: 2px;*/
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
+}
+progress[value]::-webkit-progress-value {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2ff52+0,91e842+100;Neon */
+/*background: -webkit-linear-gradient(top,  #d2ff52 0%,#91e842 100%); /* Chrome10-25,Safari5.1-6 */
+/*background: linear-gradient(to bottom,  #d2ff52 0%,#91e842 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842',GradientType=0 ); */
+/* IE6-9 */
+
+
+
+  /*background: rgba(202,240,97,1);*/
+    background: #1AB394;
+    /*border-radius: 2px;*/
+    background-size: 25px 15px, 100% 100%, 100% 100%;
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
+}
+progress:not([value]) {
+   /* Styling here */
+}
+/*}*/
 	</style>
 <script>
 $(document).ready(function() {
@@ -120,22 +167,22 @@ $(document).ready(function() {
 		}
 		$("#example tr td:first-child").addClass("left");
 		if(report_units == '%'){
-		// 	$('#example tr td:nth-child(2)').each(function(){
-		// 		if(!$(this).text() == ''){
-		// 			if(!$(this).text().match(/[a-z]/i)){
-		// 				$(this).append(report_units)
-		// 			}
-		// 		}
-		//
-		// 	})
 			$('#example tr td:nth-child(2)').each(function(){
+				if(!$(this).text() == ''){
+					if(!$(this).text().match(/[a-z]/i)){
+						$(this).append(report_units)
+					}
+				}
+
+			})
+			$('#example tr td:nth-child(3)').each(function(){
 				if(!$(this).text().match(/[a-z]/i)){
 					$(this).append(report_units)
 				}
 			})
 		}
 		if(secondary_report_units == '%'){
-			$('#example tr td:nth-child(3)').each(function(){
+			$('#example tr td:nth-child(4)').each(function(){
 				if(!$(this).text().match(/[a-z]/i)){
 					$(this).append(secondary_report_units)
 				}
@@ -143,7 +190,7 @@ $(document).ready(function() {
 		}
 		$("#example td:contains(Total)").each(function(){
 			$(this).css({
-				'font-family': 'btreb'
+					'font-family': 'btreb'
 			})
 			var td2 = $(this).closest("td").next()
 			td2.css({
@@ -158,30 +205,38 @@ $(document).ready(function() {
 				'font-family': 'btreb'
 			})
 		})
-		if(report_units == 'mg/mL'){
-			report_units = 'mg/mL';
-		}
-		if(report_units == 'ppm'){
-			report_units = 'PPM';
-		}
-		if(report_units == 'ppb'){
-			report_units = 'PPB';
-		}
-		if(report_units == 'cfu/g'){
-			report_units = 'CFU/g';
-		}
-		if(secondary_report_units == 'mg/mL'){
-			secondary_report_units = 'mg/mL';
-		}
-		if(secondary_report_units == 'ppm'){
-			secondary_report_units = 'PPM';
-		}
-		if(secondary_report_units == 'ppb'){
-			secondary_report_units = 'PPB';
-		}
-		if(secondary_report_units == 'cfu/g'){
-			secondary_report_units = 'CFU/g';
-		}
+    if(report_units == 'mg/mL'){
+      report_units = 'mg/mL';
+    }
+    if(report_units == 'ppm'){
+      report_units = 'PPM';
+    }
+    if(report_units == 'ppb'){
+      report_units = 'PPB';
+    }
+    if(report_units == 'cfu/g'){
+      report_units = 'CFU/g';
+    }
+    if(secondary_report_units == 'mg/mL'){
+      secondary_report_units = 'mg/mL';
+    }
+    if(secondary_report_units == 'ppm'){
+      secondary_report_units = 'PPM';
+    }
+    if(secondary_report_units == 'ppb'){
+      secondary_report_units = 'PPB';
+    }
+    if(secondary_report_units == 'cfu/g'){
+      secondary_report_units = 'CFU/g';
+    }
+    $('#example tr td:nth-child(2)').each(function(){
+
+        $(this).css({
+          'color': '#808080',
+          'font-size': '10px'
+        });
+
+    })
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
 } );
@@ -194,10 +249,11 @@ $(document).ready(function() {
 		<table id="example" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="left">Cannabinoid</th>
-                <!-- <th style="color: #808080; font-size: 10px;">LOQ<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th> -->
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 9px;color: #808080;" class='report_units'></i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 9px;color: #808080;" class='secondary_report_units'></i></span></th>
+                <th class="left" style="width: 20%; text-align: left;">Terpene</th>
+                <th style="color: #808080; font-size: 10px;">LOQ<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+                <th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
+                <th style="width: 50%; text-align: left !important; position: relative;margin-left: 8px; padding-left: 0 !important;">Relative Concentration</th>
             </tr>
 				</thead>
     </table>
