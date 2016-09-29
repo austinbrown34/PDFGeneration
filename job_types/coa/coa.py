@@ -33,6 +33,14 @@ def update_color_list(color_list, filename):
     with open('job_types/coa/viz/piechart/js/colors.js', 'r') as file:
         content = file.readlines()
     content[1] = json.dumps(color_list) + ';\n'
+    data_vis_name = 'job_types/coa/viz/piechart/js/' + filename
+    data_vis_name_split = data_vis_name.split("/")
+    data_vis_name_split.pop()
+    data_vis_location = '/tmp/'
+    for i, e in enumerate(data_vis_name_split):
+        data_vis_location += e + '/'
+        if not os.path.isdir(data_vis_location):
+            os.makedirs(data_vis_location)
     with open(os.path.join('/tmp', 'job_types', 'coa', 'viz', 'piechart', 'js', filename), 'w') as file:
         file.writelines(content)
     print "wrote the js file"

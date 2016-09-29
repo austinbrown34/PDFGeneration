@@ -22,10 +22,6 @@ import shutil
 import requests
 import json
 
-os.environ['PATH'] = os.environ['PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/bin'
-os.environ['LD_LIBRARY_PATH'] = os.environ['LAMBDA_TASK_ROOT'] + '/bin'
-# os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + '/tmp/fontconfig/usr/lib'
-os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/fontconfig/usr/lib'
 
 def get_fonts():
     args = ['fc-list']

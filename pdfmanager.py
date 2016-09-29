@@ -19,6 +19,14 @@ class PDFManager(object):
         self.api_secret = payload['api_secret']
         self.status = ''
         self.error = None
+
+        if 'run_local' not in self.server_data:
+            os.environ['PATH'] = os.environ['PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/bin'
+            os.environ['LD_LIBRARY_PATH'] = os.environ['LAMBDA_TASK_ROOT'] + '/bin'
+            # os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + '/tmp/fontconfig/usr/lib'
+            os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/fontconfig/usr/lib'
+
+
         args = ['cp', '-r', 'fontconfig', '/tmp']
         subprocess.call(args)
         args = ['/tmp/fontconfig/usr/bin/fc-cache', '-fs']
@@ -63,10 +71,16 @@ class PDFManager(object):
             self.error = pdf_response['error']
             response = self.report_failure()
         else:
-            if self.delivery_method == 'POST_FILE':
-                response = self.deliver_pdf_file(pdf_response['pdf'])
-            if self.delivery_method == 'POST_LINK':
-                response = self.deliver_pdf_link(pdf_response['pdf'])
+            if 'run_local' in self.server_data:
+                self.status = 'Successfully Generated PDF.'
+                response = {
+                    'status': self.status
+                }
+            else:
+                if self.delivery_method == 'POST_FILE':
+                    response = self.deliver_pdf_file(pdf_response['pdf'])
+                if self.delivery_method == 'POST_LINK':
+                    response = self.deliver_pdf_link(pdf_response['pdf'])
         # print str(response)
         return response
 
