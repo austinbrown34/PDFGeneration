@@ -536,6 +536,7 @@ def setup(server_data):
                 print total_cannabinoid_concentration
                 print "report_units"
                 print report_units
+                server_data['special']['total_cannabinoids'] = str(total_cannabinoid_concentration) + str(report_units)
                 highest = get_winner([cannabinoid_data, thc_data], str(report_units))
                 combined_cannabinoids_dt = combine_tests_for_viz(
                     [
