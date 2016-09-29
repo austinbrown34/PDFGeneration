@@ -4,6 +4,115 @@ from pdfminer.pdfcolor import LITERAL_DEVICE_RGB
 import boto3
 import os
 import yaml
+from shutil import copyfile
+
+
+class TemplateService(object):
+    def __init__(self, directory):
+        self.directory = directory
+
+    def download_config(self, config_folder, config, destination):
+        copyfile(os.path.join(self.directory, config_folder, config), destination)
+
+    def get_templates(self, config, template_folder, template_keys):
+        templates = []
+
+        def template_list_builder(temp_templates):
+            for temp in temp_templates:
+                if not isinstance(temp, (str, unicode)):
+                    template_list_builder(temp)
+                    continue
+                templates.append(temp)
+
+        cfg = open(config)
+        cfg_obj = yaml.safe_load(cfg)
+        cfg.close()
+        print "this is the yaml obj:"
+        print str(cfg_obj)
+        print "these are our template keys:"
+        print str(template_keys)
+        temp_templates = []
+        template_rules = cfg_obj['template_rules']
+        for i, rule in enumerate(template_rules):
+            print "rule:"
+            print rule
+            for j, template_key in enumerate(template_keys):
+                # template_key[0] = unicode(template_key[0], 'utf-8')
+                try:
+                    template_key[0] = template_key[0].replace(u'\u2013', '-')
+                except Exception as e:
+                    print str(e)
+                    pass
+                    # template_key[1] = unicode(template_key[1], 'utf-8')
+                try:
+                    template_key[1] = template_key[1].replace(u'\u2013', '-')
+                except Exception as e:
+                    print str(e)
+                    pass
+                print "template_key"
+                print template_key
+                if rule['rule']['package_key'] is not None:
+                    if template_key[0] == rule['rule']['package_key']:
+                        temp_templates.append(rule['rule']['included_templates'])
+                else:
+                    if template_key[1] == rule['rule']['package_name']:
+                        temp_templates.append(rule['rule']['included_templates'])
+
+        template_list_builder(temp_templates)
+        return templates
+
+    def get_logo(self, config):
+        cfg = open(config)
+        cfg_obj = yaml.safe_load(cfg)
+        cfg.close()
+        logo = cfg_obj['template_logo']
+        return logo
+
+    def get_scripts(self, config):
+        scripts = []
+        cfg = open(config)
+        cfg_obj = yaml.safe_load(cfg)
+        cfg.close()
+        print str(cfg_obj)
+        if cfg_obj is not None:
+            template_scripts = cfg_obj['template_scripts']
+        if template_scripts is None:
+            scripts = []
+        else:
+            for script in template_scripts:
+                scripts.append(script)
+        return scripts
+
+    def download_templates(self, template_folder, templates):
+        for template in templates:
+            copyfile(
+                os.path.join(
+                    self.directory,
+                    template_folder,
+                    template
+                    ),
+                os.path.join(
+                    '/tmp',
+                    'work',
+                    template
+                    )
+                )
+
+    def download_scripts(self, template_folder, scripts):
+        for script in scripts:
+            copyfile(
+                os.path.join(
+                    self.directory,
+                    template_folder,
+                    script
+                    ),
+                os.path.join(
+                    '/tmp',
+                    'work',
+                    script
+                    )
+                )
+        print "downloaded script--------------------------------------------------------------"
 
 
 class S3TemplateService(object):
