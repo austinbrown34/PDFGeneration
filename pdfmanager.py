@@ -4,6 +4,7 @@ import boto3
 import requests
 import json
 import subprocess
+import os
 
 class PDFManager(object):
 
