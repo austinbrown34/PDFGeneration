@@ -224,7 +224,7 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
                         combined_list.append(
                             [
                                 str(value_for(analyte + '.display.name', data, encoding='utf-8')),
-                                make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits, labels=True)
+                                make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits)
 
                             ]
                         )
