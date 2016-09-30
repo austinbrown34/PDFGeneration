@@ -124,18 +124,19 @@ def make_number(data, digits=None, labels=False):
 
     output = new_data
     if digits is not None and isinstance(new_data, float):
-        quantizer = '1.'
-        if int(digits) > 0:
-            zeros = '.'
-            for i in range(int(digits - 1)):
-                zeros += '0'
-            quantizer = zeros + '1'
-        dec = Decimal(new_data).quantize(Decimal(quantizer), rounding=ROUND_UP)
-        print "decimal is: "
-        print dec
-        # dec = Decimal(new_data)
-        output = dec
-        output = round(dec, int(digits + 1))
+        # quantizer = '1.'
+        # if int(digits) > 0:
+        #     zeros = '.'
+        #     for i in range(int(digits - 1)):
+        #         zeros += '0'
+        #     quantizer = zeros + '1'
+        # dec = Decimal(new_data).quantize(Decimal(quantizer), rounding=ROUND_UP)
+        dec = Decimal(new_data)
+        # print "decimal is: "
+        # print dec
+        # # dec = Decimal(new_data)
+        # output = dec
+        output = round(dec, int(digits))
         print "float is: "
         print output
     return output

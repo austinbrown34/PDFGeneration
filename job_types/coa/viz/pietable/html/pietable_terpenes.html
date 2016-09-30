@@ -213,14 +213,14 @@ $(document).ready(function() {
 	if(secondary_report_units == 'cfu/g'){
 		secondary_report_units = 'CFU/g';
 	}
-	$('#example tr td:nth-child(2)').each(function(){
-
-			$(this).css({
-				'color': '#808080',
-				'font-size': '10px'
-			});
-
-	})
+	// $('#example tr td:nth-child(2)').each(function(){
+	//
+	// 		$(this).css({
+	// 			'color': '#808080',
+	// 			'font-size': '10px'
+	// 		});
+	//
+	// })
 	$(".report_units").html(report_units)
 	$(".secondary_report_units").html(secondary_report_units)
 } );
