@@ -260,9 +260,9 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
                         color_counter += 1
                         combined_list.append(
                             [
-                                str(value_for(analyte + '.display.name', data, encoding='utf-8')),
-                                make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits, labels=True),
-                                make_number(value_for(analyte + '.display.' + display_unit2 + '.value', data), digits, labels=True),
+                                '<span>' + str(value_for(analyte + '.display.name', data, encoding='utf-8')) + '</span>',
+                                '<span>' + str(make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits, labels=True)) + '</span>',
+                                '<span>' + str(make_number(value_for(analyte + '.display.' + display_unit2 + '.value', data), digits, labels=True)) + '</span>',
                                 '<div id="colorkey" class="right" style="background:' + color + ';"></div>'
                             ]
                         )

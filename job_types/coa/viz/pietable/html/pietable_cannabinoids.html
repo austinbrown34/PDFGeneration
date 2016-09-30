@@ -157,7 +157,10 @@ $(document).ready(function() {
 			"paging":   false,
 			"ordering": false,
 			"info":     false,
-			"filter": false
+			"filter": false,
+			"columnDefs": [
+    { className: "datatd", "targets": [ 0, 1, 2 ] }
+  ]
 	} );
 	$('#stuff-wrapper').css({
 		'width': reportdimensions[0],
