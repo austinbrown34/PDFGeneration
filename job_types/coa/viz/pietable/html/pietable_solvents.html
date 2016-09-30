@@ -1,0 +1,341 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- <link rel="stylesheet" type="text/css" href="dataTables.uikit.min.css"> -->
+<link rel="stylesheet" type="text/css" href="../css/c3.css">
+<link rel="stylesheet" type="text/css" href="../css/dataTables.min.css">
+
+<!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
+<!-- <script type='text/javascript' src='data.json'></script> -->
+<!-- <script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/sparkline/js/piechart.js"> -->
+<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/pietable/js/pietable.js">
+
+</script>
+<script type="text/javascript" language="javascript" src="../js/jquery.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="../js/dataTables.min.js">
+	</script>
+	<script src="../js/d3pie.min.js"></script>
+	<script src="../js/d3.v3.min.js" charset="utf-8"></script>
+	<script src="../js/c3.min.js"></script>
+  <script type="text/javascript" language="javascript" src="../js/uikit.min.js">
+	</script>
+
+	<style>
+	/*@media all{
+		body{
+			-webkit-print-color-adjust: exact;
+		}*/
+		@font-face {
+	    font-family: treb;
+	    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS.ttf');
+	}
+	@font-face {
+	    font-family: btreb;
+	    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS Bold.ttf');
+	    font-weight: bold;
+	}
+
+		body{
+	color:#000000;
+	font-family: treb;
+		}
+		table{
+			/*font: 400 10px/16px !important;*/
+
+			/*font-family:"trebuchet MS", sans-serif !important;*/
+		}
+		th{
+			text-align:right;
+			padding: 0px 0px !important;
+				font-family: btreb;
+		}
+	td{
+		text-align:right;
+		/*padding: 2px 2px !important;*/
+		width: 20%;
+	}
+
+	.left{
+		text-align:left;
+		padding-left: 2%;
+		padding-right:2%
+	}
+
+	.text-right{
+		text-align:right;
+	}
+	.right{
+		text-align:right;
+		float: right;
+		/*width: 70%;*/
+	}
+	.right td{
+	padding-right: 2%;
+	padding-left: 2%;
+	}
+	#stuff{
+		width: 100%;
+		zoom: 1;
+	}
+	#stuff-wrapper{
+		width: 400;
+		height: 250;
+		overflow: hidden;
+		position: absolute;
+	}
+	progress[value] {
+	-webkit-appearance: none !important;
+	appearance: none !important;
+
+ width: 100%;
+ height: 15px;
+}
+progress[value]::-webkit-progress-bar {
+  /*background-color: #DDE3E0 !important;*/
+	background-color: rgba(0, 0, 0, 0);
+  /*border-radius: 2px;*/
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
+}
+progress[value]::-webkit-progress-value {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2ff52+0,91e842+100;Neon */
+/*background: -webkit-linear-gradient(top,  #d2ff52 0%,#91e842 100%); /* Chrome10-25,Safari5.1-6 */
+/*background: linear-gradient(to bottom,  #d2ff52 0%,#91e842 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842',GradientType=0 ); */
+/* IE6-9 */
+
+
+
+	/*background: rgba(202,240,97,1);*/
+	background: #1AB394;
+		/*background: #c1d0a7;*/
+    /*border-radius: 2px;*/
+		background-size: 25px 15px, 100% 100%, 100% 100%;
+    /*background-size: 25px 10px, 100% 100%, 100% 100%;*/
+		/*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset !important;*/
+}
+progress:not([value]) {
+   /* Styling here */
+}
+/*}*/
+#colorkey {
+	width: 100px;
+	height: 50px;
+	display: block;
+}
+	</style>
+
+
+</head>
+<body>
+<div id="stuff-wrapper">
+	<div id="stuff" class="uk-table uk-table-hover uk-table-striped uk-table-condensed uk-overflow-container">
+
+		<table id="example" cellspacing="0" width="100%">
+			<thead>
+					<tr>
+							<th class="left" style="width: 20%; text-align: left;">Solvent</th>
+							<th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
+							<th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
+							<th class="text-right">Key</th>
+					</tr>
+			</thead>
+    </table>
+
+  </div>
+</div>
+<!-- <div id="chart"></div> -->
+</body>
+<script>
+$(document).ready(function() {
+	$('#example').DataTable( {
+			"data": reportdata,
+			"paging":   false,
+			"ordering": false,
+			"info":     false,
+			"filter": false
+	} );
+	$('#stuff-wrapper').css({
+		'width': reportdimensions[0],
+		'height': reportdimensions[1],
+		'left': reportcoords[0],
+		'bottom': reportcoords[1]
+	});
+	var HeightDiv = $('#stuff-wrapper').height();
+	var HeightTable = $('#stuff').height();
+
+	if (HeightTable > HeightDiv){
+		var ZoomAmount = $("#stuff table").css("zoom");
+
+		while (HeightTable > HeightDiv && ZoomAmount > .1){
+			console.log('Zoom: ' + ZoomAmount)
+			console.log('HeightTable: ' + HeightTable)
+			console.log('HeightDiv: ' + HeightDiv)
+			ZoomAmount = ZoomAmount - .01;
+			$('#stuff table').css("zoom", ZoomAmount);
+			HeightTable = $('#stuff').height();
+		}
+	}
+	$("#example tr td:first-child").addClass("left");
+	if(report_units == '%'){
+		$('#example tr td:nth-child(2)').each(function(){
+			if(!$(this).text() == ''){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(report_units)
+				}
+			}
+
+		})
+
+	}
+
+	if(report_units == 'mg/mL'){
+		report_units = 'mg/mL';
+	}
+	if(report_units == 'ppm'){
+		report_units = 'PPM';
+	}
+	if(report_units == 'ppb'){
+		report_units = 'PPB';
+	}
+	if(report_units == 'cfu/g'){
+		report_units = 'CFU/g';
+	}
+	if(secondary_report_units == 'mg/mL'){
+		secondary_report_units = 'mg/mL';
+	}
+	if(secondary_report_units == 'ppm'){
+		secondary_report_units = 'PPM';
+	}
+	if(secondary_report_units == 'ppb'){
+		secondary_report_units = 'PPB';
+	}
+	if(secondary_report_units == 'cfu/g'){
+		secondary_report_units = 'CFU/g';
+	}
+	$('#example tr td:nth-child(2)').each(function(){
+
+			$(this).css({
+				'color': '#808080',
+				'font-size': '10px'
+			});
+
+	})
+	$(".report_units").html(report_units)
+	$(".secondary_report_units").html(secondary_report_units)
+} );
+// 	var w = 400,
+//     h = 400,
+//     r = Math.min(w, h) / 2,
+//     labelr = r + 30, // radius for label anchor
+//     color = d3.scale.category20(),
+//     donut = d3.layout.pie(),
+//     arc = d3.svg.arc().innerRadius(r * .6).outerRadius(r);
+//
+// var vis = d3.select("#chart")
+//   .append("svg:svg")
+//     .data([reportdata])
+//     .attr("width", w + 150)
+//     .attr("height", h);
+//
+// var arcs = vis.selectAll("g.arc")
+//     .data(donut.value(function(d) { return d[1] }))
+//   .enter().append("svg:g")
+//     .attr("class", "arc")
+//     .attr("transform", "translate(" + (r + 30) + "," + r + ")");
+//
+// arcs.append("svg:path")
+//     .attr("fill", function(d, i) { return color(i); })
+//     .attr("d", arc);
+//
+// arcs.append("svg:text")
+//     .attr("transform", function(d) {
+//         var c = arc.centroid(d),
+//             x = c[0],
+//             y = c[1],
+//             // pythagorean theorem for hypotenuse
+//             h = Math.sqrt(x*x + y*y);
+//         return "translate(" + (x/h * labelr) +  ',' +
+//            (y/h * labelr) +  ")";
+//     })
+//     .attr("dy", ".35em")
+//     .attr("text-anchor", function(d) {
+//         // are we past the center?
+//         return (d.endAngle + d.startAngle)/2 > Math.PI ?
+//             "end" : "start";
+//     })
+//     .text(function(d, i) { return d[1]; });
+// var pie = new d3pie("chart", {
+// 	"header": {
+// 		"title": {
+// 			"fontSize": 24,
+// 			"font": "open sans"
+// 		},
+// 		"subtitle": {
+// 			"color": "#999999",
+// 			"fontSize": 12,
+// 			"font": "open sans"
+// 		},
+// 		"titleSubtitlePadding": 9
+// 	},
+// 	"footer": {
+// 		"color": "#999999",
+// 		"fontSize": 10,
+// 		"font": "open sans",
+// 		"location": "bottom-left"
+// 	},
+// 	"size": {
+// 		"canvasWidth": reportdimensions[0],
+// 		"pieOuterRadius": "90%"
+// 	},
+// 	"data": {
+// 		"sortOrder": "value-desc",
+// 		"content": piedata
+// 	},
+// 	"labels": {
+// 		"outer": {
+// 			"format": "none",
+// 			"pieDistance": 32
+// 		},
+// 		"inner": {
+// 			"hideWhenLessThanPercentage": 100
+// 		},
+// 		"mainLabel": {
+// 			"font": "open sans",
+// 			"fontSize": 6
+// 		},
+// 		"percentage": {
+// 			"color": "#ffffff",
+// 			"decimalPlaces": 0
+// 		},
+// 		"value": {
+// 			"color": "#adadad",
+// 			"fontSize": 11
+// 		},
+// 		"lines": {
+// 			"enabled": false
+// 		},
+// 		"truncation": {
+// 			"enabled": true
+// 		}
+// 	},
+// 	"effects": {
+// 		"load": {
+// 			"effect": "none"
+// 		},
+// 		"pullOutSegmentOnClick": {
+// 			"effect": "none",
+// 			"speed": 400,
+// 			"size": 8
+// 		},
+// 		"highlightSegmentOnMouseover": false,
+// 		"highlightLuminosity": -0.5
+// 	},
+// 	"misc": {
+// 		"gradient": {
+// 			"enabled": true,
+// 			"percentage": 100
+// 		}
+// 	}
+</script>
+</html>

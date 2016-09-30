@@ -1,0 +1,171 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- <link rel="stylesheet" type="text/css" href="dataTables.uikit.min.css"> -->
+<link rel="stylesheet" type="text/css" href="../css/dataTables.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
+<!-- <script type='text/javascript' src='data.json'></script> -->
+<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable.js">
+</script>
+<script type="text/javascript" language="javascript" src="../js/jquery.js">
+	</script>
+<script type="text/javascript" language="javascript" src="../js/dataTables.min.js">
+	</script>
+  <script type="text/javascript" language="javascript" src="../js/uikit.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="../js/jquery.sparkline.min.js">
+	</script>
+	<style>
+	@font-face {
+    font-family: treb;
+    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS.ttf');
+}
+@font-face {
+    font-family: btreb;
+    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS Bold.ttf');
+    font-weight: bold;
+}
+
+	body{
+color:#000000;
+font-family: treb;
+	}
+	table{
+		/*font: 400 10px/16px !important;*/
+
+		/*font-family:"trebuchet MS", sans-serif !important;*/
+	}
+	th{
+		text-align:right;
+		padding: 0px 0px !important;
+			font-family: btreb;
+	}
+	td{
+		text-align:right;
+		padding: 2px 2px !important;
+	}
+	.total{
+		font: 800 10px/16px "Trebuchet MS" !important;
+	}
+	.left{
+		text-align:left;
+	}
+
+	.text-right{
+		position: absolute;
+	    top: 263px;
+	}
+	#stuff{
+		width: 100%;
+		zoom: 1;
+	}
+	#stuff-wrapper{
+		width: 400;
+		height: 250;
+		overflow: hidden;
+		position: absolute;
+	}
+	</style>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+				"data": reportdata,
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "filter": false
+    } );
+		$('#stuff-wrapper').css({
+			'width': reportdimensions[0],
+			'height': reportdimensions[1],
+			'left': reportcoords[0],
+			'bottom': reportcoords[1]
+		});
+		var HeightDiv = $('#stuff-wrapper').height();
+		var HeightTable = $('#stuff').height();
+
+		if (HeightTable > HeightDiv){
+			var ZoomAmount = $("#stuff table").css("zoom");
+
+			while (HeightTable > HeightDiv && ZoomAmount > .1){
+				console.log('Zoom: ' + ZoomAmount)
+				console.log('HeightTable: ' + HeightTable)
+				console.log('HeightDiv: ' + HeightDiv)
+				ZoomAmount = ZoomAmount - .01;
+				$('#stuff table').css("zoom", ZoomAmount);
+				HeightTable = $('#stuff').height();
+			}
+		}
+		$("#example tr td:first-child").addClass("left");
+		if(report_units == '%'){
+			$('#example tr td:nth-child(2)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(report_units)
+				}
+			})
+			$('#example tr td:nth-child(3)').each(function(){
+				if(!$(this).text().match(/[a-z]/i)){
+					$(this).append(report_units)
+				}
+			})
+		}
+		$('#example tr td:nth-child(4)').each(function(){
+			if($(this).text().match('Fail')){
+				$(this).css('color', 'red');
+			}
+		})
+		$('#example tr td:nth-child(2)').each(function(){
+
+        $(this).css({
+          'color': '#808080',
+          'font-size': '10px'
+        });
+
+    })
+		if(report_units == 'mg/mL'){
+			report_units = 'mg/mL';
+		}
+		if(report_units == 'ppm'){
+			report_units = 'PPM';
+		}
+		if(report_units == 'ppb'){
+			report_units = 'PPB';
+		}
+		if(report_units == 'cfu/g'){
+			report_units = 'CFU/g';
+		}
+		if(secondary_report_units == 'mg/mL'){
+			secondary_report_units = 'mg/mL';
+		}
+		if(secondary_report_units == 'ppm'){
+			secondary_report_units = 'PPM';
+		}
+		if(secondary_report_units == 'ppb'){
+			secondary_report_units = 'PPB';
+		}
+		if(secondary_report_units == 'cfu/g'){
+			secondary_report_units = 'CFU/g';
+		}
+		$(".report_units").html(report_units)
+		$(".secondary_report_units").html(secondary_report_units)
+} );
+</script>
+
+</head>
+<body>
+<div id="stuff-wrapper">
+	<div id="stuff" class="uk-table uk-table-hover uk-table-condensed uk-overflow-container">
+		<table id="example" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="left"></th>
+                <th style="color: #808080; font-size: 10px;">Limit<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'>%</i></span></th>
+                <th>Mass<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'>%</i></span></th>
+                <th>Status<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;"></i></span></th>
+            </tr>
+				</thead>
+    </table>
+  </div>
+</div>
+</body>
+</html>

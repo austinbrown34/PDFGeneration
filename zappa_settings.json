@@ -1,0 +1,17 @@
+{
+  "production2": {
+    "app_function": "pdfserverapi.app",
+    "s3_bucket": "pdfserver-production-lambda",
+    "parameter_depth": 5,
+    "use_precompiled_packages": true,
+    "memory_size": 1536,
+    "timeout_seconds": 300,
+    "aws_region": "us-west-2",
+    "project_name": "PDFServer",
+    "manage_roles": false,
+    "role_name": "Pdfgen",
+    "cloudwatch_log_level": "OFF",
+    "cloudwatch_data_trace": false,
+    "cloudwatch_metrics_enabled": false,
+  }
+}
