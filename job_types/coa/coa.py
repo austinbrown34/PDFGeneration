@@ -707,7 +707,7 @@ def setup(server_data):
                 print "----------------------------------------------------------------"
                 print value_for('lab_data.' + category, server_data)
                 print "----------------------------------------------------------------"
-                category_data = value_for('lab_data.' + category + '.tests', server_data)
+                category_data = value_for('lab_data.' + category + '.tests', server_data, default={})
                 ordered = high_to_low([category_data], report_units)
                 print "ordered:"
                 print ordered
@@ -793,7 +793,7 @@ def setup(server_data):
                 new_test_data = add_units_to_values(category_data)
                 server_data = set_value('lab_data.' + category + '.tests', new_test_data, server_data)
             else:
-                category_data = value_for('lab_data.' + category + '.tests', server_data)
+                category_data = value_for('lab_data.' + category + '.tests', server_data, default={})
 
 
                 print "yay for category data"
