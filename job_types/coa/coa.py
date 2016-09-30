@@ -13,7 +13,7 @@ from pdfservices import TemplateService
 from collections import OrderedDict
 from operator import itemgetter
 import yaml
-from decimal import Decimal
+from decimal import *
 import copy
 from random import *
 import json
@@ -79,6 +79,20 @@ def set_value(endpoint, value, data, initial=True):
 
     return current_data
 
+def get_total_cannabinoids(tests, units, digits, display=False):
+    total = 0.0
+    for test in tests:
+        for analyte in test:
+            if 'total' not in analyte:
+                value = make_number(value_for(analyte + '.display.' + units + '.value', test), digits)
+                total += value
+    if display:
+        if units == '%':
+            total = str(total) + units
+        else:
+            total = str(total) + ' ' + units
+    return total
+
 def formatted_phone(phone):
     formatted_phone = ''
     if phone is not None:
@@ -110,8 +124,20 @@ def make_number(data, digits=None, labels=False):
 
     output = new_data
     if digits is not None and isinstance(new_data, float):
-        dec = Decimal(new_data)
-        output = round(dec, int(digits))
+        quantizer = '1.'
+        if int(digits) > 0:
+            zeros = '.'
+            for i in range(int(digits - 1)):
+                zeros += '0'
+            quantizer = zeros + '1'
+        dec = Decimal(new_data).quantize(Decimal(quantizer), rounding=ROUND_UP)
+        print "decimal is: "
+        print dec
+        # dec = Decimal(new_data)
+        output = dec
+        output = round(dec, int(digits + 1))
+        print "float is: "
+        print output
     return output
 
 def get_winner(data_list, display_value):
@@ -508,6 +534,7 @@ def setup(server_data):
     if special_production != '':
         category_type_production += str(special_production)
 
+
     server_data = set_value('category_type_production', category_type_production, server_data)
 
     initial_weight = value_for('initial_weight', server_data)
@@ -562,18 +589,21 @@ def setup(server_data):
     r_units = value_for('lab_data.cannabinoids.report_units', server_data)
     client_license_number = 'Lic. # ' + str(value_for('client_license.license_number', server_data))
     server_data = set_value('client_license.license_number', client_license_number, server_data)
-
+    digits = value_for('lab_data.cannabinoids.digits', server_data)
+    special_total_cannabinoids = get_total_cannabinoids([value_for('lab_data.cannabinoids.tests', server_data), value_for('lab_data.thc.tests', server_data)], r_units, digits, display=True)
     special_cbd_total = str(value_for('lab_data.cannabinoids.cbd_total.display.' + str(r_units) + '.value', server_data))
-
+    new_unit = str(r_units)
+    if r_units != '%':
+        new_unit = ' ' + r_units
     if special_cbd_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
         special_cbd_total = round(float(special_cbd_total), 1)
         special_cbd_total = str(special_cbd_total)
-        special_cbd_total = special_cbd_total + str(r_units)
+        special_cbd_total = special_cbd_total + str(new_unit)
     special_thc_total = str(value_for('lab_data.thc.thc_total.display.' + r_units + '.value', server_data))
     if special_thc_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
         special_thc_total = round(float(special_thc_total), 1)
         special_thc_total = str(special_thc_total)
-        special_thc_total = special_thc_total + str(r_units)
+        special_thc_total = special_thc_total + str(new_unit)
 
 
     special_moisture = str(value_for('lab_data.moisture.tests.percent_moisture.display.%.value', server_data))
@@ -583,17 +613,29 @@ def setup(server_data):
         special_moisture = str(special_moisture) + '%'
 
 
-    new_unit = str(r_units)
-    if r_units != '%':
-        new_unit = ' ' + r_units
+
 
 
     special = {
         'total_thc': str(special_thc_total),
         'total_cbd': str(special_cbd_total),
-        'moisture': str(special_moisture)
+        'moisture': str(special_moisture),
+        'total_cannabinoids': str(special_total_cannabinoids),
+        'water_activity': str(value_for('lab_data.water_activity.tests.aw.value', server_data))
     }
 
+    status_map = {
+        '-1': 'Not Tested',
+        '0': 'In Progress',
+        '1': 'Pass',
+        '2': 'Fail',
+        '3': 'Complete'
+        }
+
+    status_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals', 'thc', 'foreign_matter']
+    for category in status_categories:
+        status_value = str(value_for('lab_data.' + category + '.status', server_data))
+        server_data = set_value('lab_data.' + category + '.status', str(value_for(status_value, status_map)), server_data)
     server_data = set_value('special', special, server_data)
 
     for category in test_categories:
