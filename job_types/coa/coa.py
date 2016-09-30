@@ -266,9 +266,9 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
                         color_counter += 1
                         combined_list.append(
                             [
-                                '<span>' + str(value_for(analyte + '.display.name', data, encoding='utf-8')) + '</span>',
-                                '<span>' + str(make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits, labels=True)) + '</span>',
-                                '<span>' + str(make_number(value_for(analyte + '.display.' + display_unit2 + '.value', data), digits, labels=True)) + '</span>',
+                                str(value_for(analyte + '.display.name', data, encoding='utf-8')),
+                                str(make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits, labels=True)),
+                                str(make_number(value_for(analyte + '.display.' + display_unit2 + '.value', data), digits, labels=True)),
                                 '<div id="colorkey" class="right" style="background:' + color + ';"></div>'
                             ]
                         )
@@ -888,9 +888,9 @@ def setup(server_data):
                     category, 'piechart', digits, report_units, secondary_report_units,
                     total_concentration=highest, color_list=color_list)
                 if category == 'terpenes':
-                    category_dt.sort(key=lambda x: x[2], reverse=True)
-                    category_sl.sort(key=lambda x: x[1], reverse=True)
-                    combined_category_pie.sort(key=lambda x: x[1], reverse=True)
+                    category_dt.sort(key=lambda x: make_number(x[2]), reverse=True)
+                    category_sl.sort(key=lambda x: make_number(x[1]), reverse=True)
+                    combined_category_pie.sort(key=lambda x: make_number(x[1]), reverse=True)
                 else:
                     category_dt.sort(key=lambda x: x[0])
                     category_sl.sort(key=lambda x: x[0])

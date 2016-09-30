@@ -229,6 +229,7 @@ $(document).ready(function() {
 	//
 	// })
 	$('#example td').attr('id', 'valuetd');
+	$("#example td").wrapInner("<span></span>");
 	$(".report_units").html('<div id="valuetd"><span>' + report_units + '</span></div>')
 	$(".secondary_report_units").html('<div id="valuetd"><span>' + secondary_report_units + '</span></div>')
 	$('#example #valuetd').textfill({
