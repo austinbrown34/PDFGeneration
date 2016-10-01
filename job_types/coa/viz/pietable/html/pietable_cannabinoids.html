@@ -7,14 +7,14 @@
 
 <!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
 <!-- <script type='text/javascript' src='data.json'></script> -->
-<!-- <script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/sparkline/js/piechart.js"> -->
-<script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/pietable/js/pietable.js">
+<script type="text/javascript" language="javascript" src="../js/pietable.js">
+// <script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/pietable/js/pietable.js">
 
 
 </script>
 <script type="text/javascript" language="javascript" src="../js/jquery.js">
 	</script>
-	<script src="jquery.textfill.min.js"></script>
+	<script src="../js/jquery.textfill.min.js"></script>
 
 	<script type="text/javascript" language="javascript" src="../js/dataTables.min.js">
 	</script>
@@ -56,8 +56,8 @@
 	td{
 		text-align:right;
 		/*padding: 2px 2px !important;*/
-		width: 20%;
-		height: 50px
+		width: 200px;
+		height: 50px;
 	}
 
 	.left{
@@ -138,10 +138,10 @@ progress:not([value]) {
 		<table id="example" cellspacing="0" width="100%">
 			<thead>
 					<tr>
-							<th class="left" style="width: 20%; text-align: left;">Cannabinoid</th>
-							<th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th>
-							<th style="width: 10%;">Mass<span><br><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='secondary_report_units'></i></span></th>
-							<th class="text-right">Key</th>
+							<th id="valuetd" class="left" style="width: 20%; text-align: left;"><span>Cannabinoid</span></th>
+							<th id="valuetd" style="width: 10%;"><span>Mass</span><br><span class='report_units'></span></th>
+							<th id="valuetd" style="width: 10%;"><span>Mass</span><br><span class='secondary_report_units'></span></th>
+							<th id="valuetd" class="text-right"><span>Key</span></th>
 					</tr>
 			</thead>
     </table>
@@ -159,8 +159,8 @@ $(document).ready(function() {
 			"info":     false,
 			"filter": false,
 			"columnDefs": [
-    { className: "datatd", "targets": [ 0, 1, 2 ] }
-  ]
+    		{ className: "datatd", "targets": [ 0, 1, 2 ] }
+  		]
 	} );
 	$('#stuff-wrapper').css({
 		'width': reportdimensions[0],
@@ -185,7 +185,7 @@ $(document).ready(function() {
 	}
 	$("#example tr td:first-child").addClass("left");
 	if(report_units == '%'){
-		$('#example tr td:nth-child(2)').each(function(){
+		$('#example tr td:nth-child(2) span').each(function(){
 			if(!$(this).text() == ''){
 				if(!$(this).text().match(/[a-z]/i)){
 					$(this).append(report_units)
@@ -228,11 +228,12 @@ $(document).ready(function() {
 	// 		});
 	//
 	// })
-	$(".report_units").html(report_units)
-	$(".secondary_report_units").html(secondary_report_units)
-	$('.datatd').textfill({
-		minFontPixels: 10
-    maxFontPixels: 18
+	$('#example td').attr('id', 'valuetd');
+	$(".report_units").html('<div id="valuetd"><span>' + report_units + '</span></div>')
+	$(".secondary_report_units").html('<div id="valuetd"><span>' + secondary_report_units + '</span></div>')
+	$('#example #valuetd').textfill({
+		minFontPixels: 22,
+    maxFontPixels: 38
 });
 } );
 // 	var w = 400,
