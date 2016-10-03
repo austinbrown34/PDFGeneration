@@ -127,21 +127,23 @@ def make_number(data, digits=None, labels=False):
 
     output = new_data
     if digits is not None and isinstance(new_data, float):
-        # quantizer = '1.'
-        # if int(digits) > 0:
-        #     zeros = '.'
-        #     for i in range(int(digits - 1)):
-        #         zeros += '0'
-        #     quantizer = zeros + '1'
-        # dec = Decimal(new_data).quantize(Decimal(quantizer), rounding=ROUND_UP)
-        dec = Decimal(new_data)
-        # print "decimal is: "
-        # print dec
-        # # dec = Decimal(new_data)
-        # output = dec
-        output = round(dec, int(digits))
+        quantizer = '1.'
+        print "digits:"
+        print digits
+        if int(digits) > 0:
+            zeros = '.'
+            for i in range(int(digits - 1)):
+                zeros += '0'
+            quantizer = zeros + '1'
+        dec = Decimal(new_data).quantize(Decimal(quantizer), rounding=ROUND_UP)
+        print "decimal is: "
+        print dec
+        output = str(dec)
+        # output = float(round(dec, digits))
         print "float is: "
         print output
+    if not labels:
+        output = float(output)
     return output
 
 def get_winner(data_list, display_value):
@@ -264,14 +266,27 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
                     if viz_type == 'pietable':
                         color = color_list[color_counter]
                         color_counter += 1
-                        combined_list.append(
-                            [
+                        report_data = [
                                 str(value_for(analyte + '.display.name', data, encoding='utf-8')),
                                 str(make_number(value_for(analyte + '.display.' + display_unit + '.value', data), digits, labels=True)),
                                 str(make_number(value_for(analyte + '.display.' + display_unit2 + '.value', data), digits, labels=True)),
                                 '<div id="colorkey" class="right" style="background:' + color + ';"></div>'
                             ]
-                        )
+                        if analyte == "thca":
+                            # new_list = combined_list[:0] + report_data + combined_list[0:]
+                            special_list[0:0] = [report_data]
+
+                        elif analyte == "d9_thc":
+                            special_list[1:1] = [report_data]
+
+                        elif analyte == "cbda":
+                            special_list[2:2] = [report_data]
+                        elif analyte == "cbd":
+                            special_list[3:3] = [report_data]
+                        else:
+                            combined_list.append(
+                                report_data
+                            )
                     if viz_type == 'datatable_sparkline':
                         status = ''
                         if category in ['microbials', 'solvents', 'mycotoxins', 'pesticides', 'metals']:
@@ -603,32 +618,33 @@ def setup(server_data):
     if r_units != '%':
         new_unit = ' ' + r_units
     if special_cbd_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
-        special_cbd_total = round(float(special_cbd_total), 1)
+        special_cbd_total = make_number(special_cbd_total, digits, labels=True)
         special_cbd_total = str(special_cbd_total)
         special_cbd_total = special_cbd_total + str(new_unit)
     special_thc_total = str(value_for('lab_data.thc.thc_total.display.' + r_units + '.value', server_data))
     if special_thc_total not in ['<LOQ', 'ND', 'NT', 'TNC', '<LOD']:
-        special_thc_total = round(float(special_thc_total), 1)
+        special_thc_total = make_number(special_thc_total, digits, labels=True)
         special_thc_total = str(special_thc_total)
         special_thc_total = special_thc_total + str(new_unit)
 
 
     special_moisture = str(value_for('lab_data.moisture.tests.percent_moisture.display.%.value', server_data))
     if str(special_moisture) != '' and str(special_moisture) not in ['ND', 'NR']:
-        special_moisture = round(float(special_moisture), 1)
+        moisture_digits = value_for('lab_data.moisture.digits', server_data)
+        special_moisture = make_number(special_moisture, moisture_digits, labels=True)
         special_moisture = str(special_moisture)
         special_moisture = str(special_moisture) + '%'
 
 
 
-
+    wa_digits = value_for('lab_data.water_activity.digits', server_data)
 
     special = {
         'total_thc': str(special_thc_total),
         'total_cbd': str(special_cbd_total),
         'moisture': str(special_moisture),
         'total_cannabinoids': str(special_total_cannabinoids),
-        'water_activity': str(value_for('lab_data.water_activity.tests.aw.value', server_data))
+        'water_activity': str(make_number(value_for('lab_data.water_activity.tests.aw.value', server_data), wa_digits, labels=True))
     }
 
     status_map = {
