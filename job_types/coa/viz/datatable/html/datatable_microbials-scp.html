@@ -47,6 +47,12 @@ font-family: treb;
 		text-align:right;
 		padding: 2px 2px !important;
 	}
+	/*td{
+		text-align:right;
+
+		width: 200px;
+		height: 50px;
+	}*/
 	.total{
 		font: 800 10px/16px "Trebuchet MS" !important;
 	}
@@ -153,10 +159,10 @@ $(document).ready(function() {
 		$(".secondary_report_units").html(secondary_report_units)
 		$('#example td').attr('id', 'valuetd');
 		$("#example td").wrapInner("<span></span>");
-		$('#example #valuetd').textfill({
-			minFontPixels: 22,
-	    maxFontPixels: 34
-	});
+	// 	$('#example #valuetd').textfill({
+	// 		minFontPixels: 8,
+	//     maxFontPixels: 10
+	// });
 } );
 </script>
 

@@ -229,6 +229,22 @@ def get_colors(how_many):
 
     return colorlist
 
+def resort_colors(color_list, pietable, piechart):
+    resorted_color_list = []
+    if len(color_list) > 0:
+        pietable_key = {}
+        for i, e in enumerate(pietable):
+            analyte = e[0]
+            color = e[3].split('background:')[1].split(';')[0]
+            pietable_key[analyte] = color
+        for j, k in enumerate(piechart):
+            if j != 0:
+                analyte = k[0]
+                color = pietable_key[analyte]
+                resorted_color_list.append(color)
+    return resorted_color_list
+
+
 
 def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%', display_unit2='mg/g', total_concentration=None, color_list=None):
     combined_list = []
@@ -247,14 +263,6 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
                 if 'total' not in analyte:
                     if viz_type == 'piechart':
                         color = color_list[color_counter2]
-                        if color_counter2 == 0:
-                            combined_list.append(
-                                [
-                                    'Cannabinoid',
-                                    'Concentration'
-
-                                ]
-                            )
                         color_counter2 += 1
                         combined_list.append(
                             [
@@ -710,6 +718,7 @@ def setup(server_data):
                     ],
                     category, 'sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
+
                 print "combined cannabinoid sl"
                 combined_cannabinoids_dt_sl = combine_tests_for_viz(
                     [
@@ -720,7 +729,8 @@ def setup(server_data):
                     total_concentration=highest)
                 data_list = [cannabinoid_data, thc_data]
                 num_of_items = sum(len(x.keys()) for x in data_list)
-                color_list = get_colors(num_of_items)
+                if num_of_items > 0:
+                    color_list = get_colors(num_of_items)
                 combined_category_pie = combine_tests_for_viz(
                     [
                         cannabinoid_data,
@@ -735,7 +745,11 @@ def setup(server_data):
                     ],
                     category, 'piechart', digits, report_units, secondary_report_units,
                     total_concentration=highest, color_list=color_list)
-
+                if len(combined_category_pie2) > 0:
+                    if len(combined_category_pie2[0]) > 0:
+                        combined_category_pie2.sort(key=lambda x: make_number(x[1]), reverse=True)
+                        combined_category_pie2.insert(0, ['Cannabinoid', 'Concentration'])
+                        color_list = resort_colors(color_list, combined_category_pie, combined_category_pie2)
                 add_cannabinoid_totals(combined_cannabinoids_dt_sl, report_units, secondary_report_units, digits, combined=True)
                 viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
                 viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
@@ -793,7 +807,9 @@ def setup(server_data):
                         category_data
                     ],
                     category, 'datatable', digits, report_units, secondary_report_units)
-                category_dt.sort(key=lambda x: x[0])
+                if len(category_dt) > 0:
+                    if len(category_dt[0]) > 0:
+                        category_dt.sort(key=lambda x: x[0])
                 print "yay for category dt"
                 category_sl = combine_tests_for_viz(
                     [
@@ -808,15 +824,25 @@ def setup(server_data):
                     ],
                     category, 'datatable_sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
+
                 data_list = [category_data]
+                print "data_list:"
+                print data_list
+                print "num_of_items:"
                 num_of_items = sum(len(x.keys()) for x in data_list)
-                color_list = get_colors(num_of_items)
+                print num_of_items
+                color_list = []
+                if num_of_items > 0:
+                    color_list = get_colors(num_of_items)
+
                 combined_category_pie = combine_tests_for_viz(
                     [
                         category_data
                     ],
-                    category, 'piechart', digits, report_units, secondary_report_units,
+                    category, 'pietable', digits, report_units, secondary_report_units,
                     total_concentration=highest, color_list=color_list)
+                print "pietable:"
+                print combined_category_pie
                 viztypes['datatable_' + category + '_with_sparkline'] = combined_category_dt_sl
                 combined_category_pie2 = combine_tests_for_viz(
                     [
@@ -824,6 +850,14 @@ def setup(server_data):
                     ],
                     category, 'piechart', digits, report_units, secondary_report_units,
                     total_concentration=highest, color_list=color_list)
+                print "piechart:"
+                print combined_category_pie2
+                if len(combined_category_pie2) > 0:
+                    if len(combined_category_pie2[0]) > 0:
+                        combined_category_pie.sort(key=lambda x: make_number(x[0]))
+                        combined_category_pie2.sort(key=lambda x: make_number(x[1]), reverse=True)
+                        combined_category_pie2.insert(0, ['Microbial', 'Concentration'])
+                        color_list = resort_colors(color_list, combined_category_pie, combined_category_pie2)
                 print "yay for category sl"
                 viztypes['datatable_' + category] = category_dt
                 viztypes['sparkline_' + category] = category_sl
@@ -890,7 +924,9 @@ def setup(server_data):
                 )
                 data_list = [category_data]
                 num_of_items = sum(len(x.keys()) for x in data_list)
-                color_list = get_colors(num_of_items)
+                color_list = []
+                if num_of_items > 0:
+                    color_list = get_colors(num_of_items)
                 combined_category_pie = combine_tests_for_viz(
                     [
                         category_data
@@ -904,13 +940,32 @@ def setup(server_data):
                     category, 'piechart', digits, report_units, secondary_report_units,
                     total_concentration=highest, color_list=color_list)
                 if category == 'terpenes':
-                    category_dt.sort(key=lambda x: make_number(x[2]), reverse=True)
-                    category_sl.sort(key=lambda x: make_number(x[1]), reverse=True)
-                    combined_category_pie.sort(key=lambda x: make_number(x[1]), reverse=True)
+                    if len(combined_category_pie2) > 0:
+                        if len(combined_category_pie2[0]) > 0:
+                            combined_category_pie2.sort(key=lambda x: make_number(x[1]), reverse=True)
+                            combined_category_pie2.insert(0, ['Terpene', 'Concentration'])
+                            combined_category_pie.sort(key=lambda x: make_number(x[1]), reverse=True)
+                            color_list = resort_colors(color_list, combined_category_pie, combined_category_pie2)
+                    if len(category_dt) > 0:
+                        if len(category_dt[0]) > 0:
+                            category_dt.sort(key=lambda x: make_number(x[2]), reverse=True)
+                    if len(category_sl) > 0:
+                        if len(category_sl[0]) > 0:
+                            category_sl.sort(key=lambda x: make_number(x[1]), reverse=True)
+
                 else:
-                    category_dt.sort(key=lambda x: x[0])
-                    category_sl.sort(key=lambda x: x[0])
-                    combined_category_pie.sort(key=lambda x: x[0])
+                    if len(category_dt) > 0:
+                        if len(category_dt[0]) > 0:
+                            category_dt.sort(key=lambda x: x[0])
+                    if len(category_sl) > 0:
+                        if len(category_sl[0]) > 0:
+                            category_sl.sort(key=lambda x: x[0])
+                    if len(combined_category_pie2) > 0:
+                        if len(combined_category_pie2[0]) > 0:
+                            combined_category_pie.sort(key=lambda x: x[0])
+                            combined_category_pie2.sort(key=lambda x: make_number(x[1]), reverse=True)
+                            combined_category_pie2.insert(0, [category[:-1], 'Concentration'])
+                            color_list = resort_colors(color_list, combined_category_pie, combined_category_pie2)
                 print "yay for category sl"
                 combined_category_dt_sl = combine_tests_for_viz(
                     [

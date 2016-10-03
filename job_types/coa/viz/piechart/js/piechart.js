@@ -1,9 +1,9 @@
 var reportdata =
-[{"color": "#79f3b5", "value": 4.3, "label": "CBC"}, {"color": "#f39279", "value": 1.0, "label": "CBG"}, {"color": "#7984f3", "value": 2.0, "label": "CBD"}, {"color": "#a7f379", "value": 2.0, "label": "CBDa"}, {"color": "#f379cb", "value": 2.0, "label": "CBN"}, {"color": "#4cbcc0", "value": 1.0, "label": "CBGa"}, {"color": "#c0a24c", "value": 1.0, "label": "CBDV"}, {"color": "#79f3de", "value": 12.0, "label": "THCa"}, {"color": "#f3ba79", "value": 3.0, "label": "\u03948-THC"}, {"color": "#9779f3", "value": 2.0, "label": "THCV"}, {"color": "#7ff379", "value": 11.0, "label": "\u03949-THC"}];
+[["Terpene", "Concentration"], ["\u03b1-Pinene", 12.0], ["Camphene", 10.0], ["Fenchone", 5.0], ["Terpinolene", 5.0], ["\u03b1-Terpinene", 5.0], ["Isopulegol", 4.0], ["\u03b1-Phellandrene", 4.0], ["p-Cymene", 4.0], ["Sabinene", 3.0], ["Endo-Fenchyl Alcohol", 3.0], ["Caryophyllene Oxide", 3.0], ["\u03b1-Terpineol", 3.0], ["Borneol", 3.0], ["\u03b2-Pinene", 2.0], ["Menthol", 2.0], ["3-Carene", 2.0], ["Geranyl Acetate", 2.0], ["Linalool", 2.0], ["Cedrol", 2.0], ["\u03b2-Myrcene", 2.0], ["Isoborneol", 2.0], ["Eucalyptol", 2.0], ["Pulegone", 2.0], ["Geraniol", 2.0], ["\u03b1-Bisabolol", 2.0], ["\u03b1-Humulene", 0.0], ["\u03b2-Caryophyllene", 0.0], ["Valencene", 0.0], ["\u03b1-Cedrene", 0.0], ["Ocimene", 0.0], ["cis-Nerolidol", 0.0], ["trans-Nerolidol", 0.0], ["\u03b4-Limonene", 0.0], ["Guaiol", 0.0]];
 var reportdimensions =
-[245, 189];
+[176, 205];
 var reportcoords =
-[317, 164];
+[270, 261];
 
 var collection = [reportdata, reportdimensions, reportcoords]
 
