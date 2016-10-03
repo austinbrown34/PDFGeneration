@@ -5,10 +5,13 @@
 <link rel="stylesheet" type="text/css" href="../css/dataTables.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css"> -->
 <!-- <script type='text/javascript' src='data.json'></script> -->
+<!-- <script type="text/javascript" language="javascript" src="../js/datatable.js">
+</script> -->
 <script type="text/javascript" language="javascript" src="/tmp/job_types/coa/viz/datatable/js/datatable.js">
 </script>
 <script type="text/javascript" language="javascript" src="../js/jquery.js">
 	</script>
+		<script src="../js/jquery.textfill.min.js"></script>
 <script type="text/javascript" language="javascript" src="../js/dataTables.min.js">
 	</script>
   <script type="text/javascript" language="javascript" src="../js/uikit.min.js">
@@ -148,6 +151,12 @@ $(document).ready(function() {
 			}
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
+		$('#example td').attr('id', 'valuetd');
+		$("#example td").wrapInner("<span></span>");
+		$('#example #valuetd').textfill({
+			minFontPixels: 22,
+	    maxFontPixels: 22
+	});
 } );
 </script>
 

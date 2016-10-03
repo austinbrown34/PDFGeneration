@@ -17,6 +17,9 @@ from decimal import *
 import copy
 from random import *
 import json
+import random
+
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -210,16 +213,19 @@ def add_units_to_values(tests):
     return formatted_tests
 
 def get_colors(how_many):
-    colors = []
-    h, s, v = random() * 6, .5, 243.2
+    colorlist = []
+    cf = open('job_types/coa/colors.yaml')
+    colors = yaml.safe_load(cf)
+    cf.close()
+    counter = 0
     for i in range(how_many):
-        h += 3.708
-        color = '#' + '%02x' * 3 % ((v, v - v * s * abs(1 - h % 2), v - v * s) * 3)[5 ** int(h)/3 % 3::int(h) % 2 + 1][:3]
-        colors.append(color)
-        if i % 5/4:
-            s += .1
-            v -= 51.2
-    return colors
+        if not counter < len(colors['colors']) - 1:
+            counter = 0
+        color = colors['colors'][counter]
+        colorlist.append(color)
+        counter += 1
+
+    return colorlist
 
 
 def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%', display_unit2='mg/g', total_concentration=None, color_list=None):
@@ -884,9 +890,11 @@ def setup(server_data):
                 if category == 'terpenes':
                     category_dt.sort(key=lambda x: x[2], reverse=True)
                     category_sl.sort(key=lambda x: x[1], reverse=True)
+                    combined_category_pie.sort(key=lambda x: x[1], reverse=True)
                 else:
-                    category_dt.sort(key=lambda x: x[0], reverse=True)
-                    category_sl.sort(key=lambda x: x[0], reverse=True)
+                    category_dt.sort(key=lambda x: x[0])
+                    category_sl.sort(key=lambda x: x[0])
+                    combined_category_pie.sort(key=lambda x: x[0])
                 print "yay for category sl"
                 combined_category_dt_sl = combine_tests_for_viz(
                     [
