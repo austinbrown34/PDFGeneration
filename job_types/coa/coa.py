@@ -248,7 +248,8 @@ def resort_colors(color_list, pietable, piechart):
 
 def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%', display_unit2='mg/g', total_concentration=None, color_list=None):
     combined_list = []
-
+    if color_list is None:
+        color_list = []
     try:
         special_list = []
 
@@ -729,6 +730,7 @@ def setup(server_data):
                     total_concentration=highest)
                 data_list = [cannabinoid_data, thc_data]
                 num_of_items = sum(len(x.keys()) for x in data_list)
+                color_list = []
                 if num_of_items > 0:
                     color_list = get_colors(num_of_items)
                 combined_category_pie = combine_tests_for_viz(
@@ -807,6 +809,7 @@ def setup(server_data):
                         category_data
                     ],
                     category, 'datatable', digits, report_units, secondary_report_units)
+                print category_dt
                 if len(category_dt) > 0:
                     if len(category_dt[0]) > 0:
                         category_dt.sort(key=lambda x: x[0])
@@ -818,13 +821,14 @@ def setup(server_data):
                     category, 'sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest
                 )
+                print category_sl
                 combined_category_dt_sl = combine_tests_for_viz(
                     [
                         category_data
                     ],
                     category, 'datatable_sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
-
+                print combined_category_dt_sl
                 data_list = [category_data]
                 print "data_list:"
                 print data_list

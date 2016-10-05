@@ -1,9 +1,9 @@
 var reportdata =
 [["Bacteria", "", "", "Tested"], ["Coliforms", "", "", "Tested"], ["E. Coli", "", "", "Tested"], ["Mold/Mildew/Yeast", "", "", "Tested"], ["Salmonella", "", "", "Tested"]];
 var reportdimensions =
-[428, 285];
+[430, 343];
 var reportcoords =
-[89, 224];
+[91, 178];
 
 var collection = [reportdata, reportdimensions, reportcoords]
 

@@ -184,20 +184,49 @@ $(document).ready(function() {
 		}
 		$(".report_units").html(report_units)
 		$(".secondary_report_units").html(secondary_report_units)
+		var multiplier = 1 / parseFloat($("#stuff table").css("zoom"));
+		var fontsize = (9 * multiplier);
+		var thfontsize = (10 * multiplier);
+		var ifontsize = (8 * multiplier);
+		fontsize = Math.floor(fontsize)
+		$('#stuff table tr').each(function(){
+
+
+				$(this).css({
+					'font-size': fontsize + 'px'
+				});
+
+		})
+		$('#stuff table th').each(function(){
+
+
+				$(this).css({
+					'font-size': thfontsize + 'px'
+				});
+
+		})
+		$('#stuff table th i').each(function(){
+
+
+				$(this).css({
+					'font-size': ifontsize + 'px'
+				});
+
+		})
 } );
 </script>
 
 </head>
 <body>
 <div id="stuff-wrapper">
-	<div id="stuff" class="uk-table uk-table-hover uk-table-condensed uk-overflow-container">
+	<div id="stuff">
 		<table id="example" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="left">Cannabinoid</th>
+                <th class="left" style="font-size: 9px;">Cannabinoid</th>
                 <!-- <th style="color: #808080; font-size: 10px;">LOQ<span><i style="font-size: 9px;position: relative;margin-left: 8px;color: #808080;" class='report_units'></i></span></th> -->
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 9px;color: #808080;" class='report_units'></i></span></th>
-                <th>Mass<span><i style="font-size: 8px;position: relative;margin-left: 9px;color: #808080;" class='secondary_report_units'></i></span></th>
+                <th style="font-size: 9px;">Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class='report_units'></i></span></th>
+                <th style="font-size: 9px;">Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class='secondary_report_units'></i></span></th>
             </tr>
 				</thead>
     </table>
