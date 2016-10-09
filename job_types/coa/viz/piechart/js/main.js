@@ -15,7 +15,25 @@ $(document).ready(function() {
         'bottom': reportcoords[1]
     });
 
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(reportdata);
 
+        var options = {
+            title: '',
+            is3D: true,
+            legend: 'none',
+            pieSliceText: 'label',
+            colors: reportcolors
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+        chart.draw(data, options);
+    }
+    $.loadScript('/tmp/job_types/coa/viz/piechart/js/' + report_category + '_colors.js', function(){
+      google.charts.load("current", {
+          packages: ["corechart"]
+      });
+      google.charts.setOnLoadCallback(drawChart);
 
     var HeightDiv = $('#stuff-wrapper').height();
     var HeightTable = $('#stuff').height();
@@ -35,23 +53,5 @@ $(document).ready(function() {
 });
 
 
-function drawChart() {
-    var data = google.visualization.arrayToDataTable(reportdata);
 
-    var options = {
-        title: '',
-        is3D: true,
-        legend: 'none',
-        pieSliceText: 'label',
-        colors: reportcolors
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('chart'));
-    chart.draw(data, options);
-}
-$.loadScript('/tmp/job_types/coa/viz/piechart/js/' + report_category + '_colors.js', function(){
-  google.charts.load("current", {
-      packages: ["corechart"]
-  });
-  google.charts.setOnLoadCallback(drawChart);
 });

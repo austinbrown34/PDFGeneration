@@ -1,6 +1,6 @@
-lab: KR
+lab: SCP
 packages:
-  - name: "OAR 333-007-0400: Pesticide Screen"
-    package_key: '3442'
   - name:
-    package_key: '3716'
+    package_key: '1766'
+  - name:
+    package_key:

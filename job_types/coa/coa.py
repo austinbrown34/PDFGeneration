@@ -525,7 +525,7 @@ def add_cannabinoid_totals(combined_list, display_unit, display_unit2, digits, c
     if combined:
         combined_list.append(
             [
-                'Total Cannabinoids',
+                'Total',
                 '',
                 primary_total,
                 secondary_total,
@@ -536,7 +536,7 @@ def add_cannabinoid_totals(combined_list, display_unit, display_unit2, digits, c
     else:
         combined_list.append(
             [
-                'Total Cannabinoids',
+                'Total',
                 '',
                 primary_total,
                 secondary_total
@@ -814,8 +814,8 @@ def setup(server_data):
             if category == 'cannabinoids':
                 print "Setting up Visualizaiton Data..."
                 report_columns = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="secondary_report_units"></i></span>', 'width': '25%'}]
-                report_columns2 = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '75%'}]
-                report_columns3 = [{'title': 'Analyte', 'className': 'left', 'width': '20%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="secondary_report_units"></i></span>', 'width': '20%'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '20%'}];
+                report_columns2 = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': ' ', 'className': 'right', 'width': '75%'}]
+                report_columns3 = [{'title': 'Analyte', 'className': 'left', 'width': '20%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="secondary_report_units"></i></span>', 'width': '20%'}, {'title': ' ', 'className': 'right', 'width': '20%'}];
                 server_data = set_value(category + '_report_columns3', report_columns3, server_data)
                 server_data = set_value(category + '_report_columns2', report_columns2, server_data)
                 server_data = set_value(category + '_report_columns', report_columns, server_data)
@@ -939,8 +939,8 @@ def setup(server_data):
             elif category == 'microbials':
                 print "Setting up Visualizaiton Data..."
                 report_columns = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': 'Limit<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}, {'title': 'Status<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;"></i></span>', 'width': '25%'}]
-                report_columns2 = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '75%'}]
-                report_columns3 = [{'className': 'left', 'width': '20%', 'title': 'Analyte'}, {'width': '20%', 'title': 'Limit<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Status<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;"></i></span>'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '20%'}];
+                report_columns2 = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': ' ', 'className': 'right', 'width': '75%'}]
+                report_columns3 = [{'className': 'left', 'width': '20%', 'title': 'Analyte'}, {'width': '20%', 'title': 'Limit<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Status<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;"></i></span>'}, {'title': ' ', 'className': 'right', 'width': '20%'}];
                 server_data = set_value(category + '_report_columns3', report_columns3, server_data)
                 server_data = set_value(category + '_report_columns2', report_columns2, server_data)
 
@@ -1070,9 +1070,9 @@ def setup(server_data):
                 print "Setting up Visualizaiton Data..."
                 report_columns = [{'title': 'Analyte', 'className': 'left', 'width': '20%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'},  {'title': 'Limit<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Status<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;"></i></span>', 'width': '20%'}]
                 category_data = value_for('lab_data.' + category + '.tests', server_data, default={})
-                report_columns2 = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '75%'}]
+                report_columns2 = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': ' ', 'className': 'right', 'width': '75%'}]
                 server_data = set_value(category + '_report_columns2', report_columns2, server_data)
-                report_columns3 = [{'className': 'left', 'width': '20%', 'title': 'Analyte'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'},  {'width': '20%', 'title': 'Limit<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Status<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;"></i></span>'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '20%'}];
+                report_columns3 = [{'className': 'left', 'width': '20%', 'title': 'Analyte'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'},  {'width': '20%', 'title': 'Limit<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>'}, {'width': '20%', 'title': 'Status<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;"></i></span>'}, {'title': ' ', 'className': 'right', 'width': '20%'}];
                 # server_data = set_value(category + '_report_columns3', report_columns3, server_data)
                 # print "yay for category data"
                 print "Setting up Ordered Data..."
@@ -1131,7 +1131,7 @@ def setup(server_data):
                     total_concentration=highest, color_list=color_list)
                 if category == 'terpenes':
                     report_columns = [{'title': 'Analyte', 'className': 'left', 'width': '25%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '25%'}]
-                    report_columns3 = [{'title': 'Analyte', 'className': 'left', 'width': '20%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Relative Concentration', 'className': 'right', 'width': '20%'}]
+                    report_columns3 = [{'title': 'Analyte', 'className': 'left', 'width': '20%'}, {'title': 'LOQ<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': 'Mass<span><i style="font-size: 7px;position: relative;margin-left: 7px;color: #808080;" class="report_units"></i></span>', 'width': '20%'}, {'title': ' ', 'className': 'right', 'width': '20%'}]
                     if len(combined_category_pie2) > 0:
                         if len(combined_category_pie2[0]) > 0:
                             combined_category_pie2.sort(key=lambda x: make_number(x[1]), reverse=True)

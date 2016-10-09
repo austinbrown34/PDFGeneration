@@ -15,10 +15,12 @@ th {
     text-align: right;
     padding: 0px 0px !important;
     font-family: btreb;
+    /*vertical-align: bottom !important;*/
 }
 td {
     text-align: right;
-    width: 20%;
+    padding: 2px 2px !important;
+    /*width: 20%;*/
     /*padding: 2px 2px !important;*/
 }
 .left {
@@ -27,10 +29,10 @@ td {
 .right {
     text-align: right;
 }
-.right td {
+/*.right td {
     padding-right: 2%;
     padding-left: 2%;
-}
+}*/
 #stuff {
     width: 100%;
     zoom: 1;

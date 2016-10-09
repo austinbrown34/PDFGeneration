@@ -106,6 +106,12 @@ $(document).ready(function() {
 		var thfontsize = (10 * multiplier);
 		var ifontsize = (8 * multiplier);
 		fontsize = Math.floor(fontsize)
+    $('#stuff table th:contains("LOQ"),#stuff table th:contains("Limit")').each(function(){
+      $(this).css({
+          'font-size': ifontsize + 'px',
+          'color': '#808080'
+      });
+    })
 		$('#stuff table tr').each(function(){
 
 
