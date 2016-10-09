@@ -33,21 +33,27 @@ $(document).ready(function() {
         $('#example tr td:nth-child(2)').each(function() {
             if (!$(this).text() == '') {
                 if (!$(this).text().match(/[a-z]/i)) {
-                    $(this).append(report_units)
+                  if(!$(this).text() == '%'){
+                    $(this).append(report_units);
+                  }
                 }
             }
 
         })
         $('#example tr td:nth-child(3)').each(function() {
             if (!$(this).text().match(/[a-z]/i)) {
-                $(this).append(report_units)
+              if(!$(this).text() == '%'){
+                $(this).append(report_units);
+              }
             }
         })
     }
     if (secondary_report_units == '%') {
         $('#example tr td:nth-child(4)').each(function() {
             if (!$(this).text().match(/[a-z]/i)) {
+              if(!$(this).text() == '%'){
                 $(this).append(secondary_report_units)
+              }
             }
         })
     }
@@ -132,18 +138,24 @@ $(document).ready(function() {
         });
 
     })
+
     // $('#stuff table th').each(function(){
     //
     //     $(this).append('<br><i>-</i>');
     //
     // })
     $('#stuff table th i').each(function() {
-      $( "<br>" ).insertBefore(this);
+
         $(this).css({
             'font-size': ifontsize + 'px'
         });
+        // $(this).remove('span');
 
     })
+    // $('#stuff table th').each(function(){
+    //   $(this).next('span').remove();
+    //   $(this).next('i').remove();
+    // })
     $('#example tr td:nth-child(2)').each(function() {
 
         $(this).css({
@@ -151,11 +163,13 @@ $(document).ready(function() {
             'font-size': ifontsize + 'px'
         });
     })
-    $('#stuff table th:contains("LOQ"),#stuff table th:contains("Limit")').each(function(){
+
+    $('#stuff table th:contains("LOQ"),#stuff table th:contains("Limit"),#stuff table th:contains("Spike")').each(function(){
       $(this).css({
           'font-size': ifontsize + 'px',
           'color': '#808080'
       });
+
       var columnNo = $(this).index();
       $(this).closest("table")
           .find("tr td:nth-child(" + (columnNo+1) + ")")
@@ -163,5 +177,17 @@ $(document).ready(function() {
             'font-size': ifontsize + 'px',
             'color': '#808080'
           });
+      })
+      $('#stuff table th:contains("LOQ")').each(function(){
+        $(this).html("LOQ")
+      })
+      $('#stuff table th:contains("Limit")').each(function(){
+        $(this).html("Limit")
+      })
+      $('#stuff table th:contains("Spike")').each(function(){
+        $(this).html("Spike")
+      })
+      $('#stuff table th:contains("Mass")').each(function(){
+        $(this).html("Mass")
       })
 });

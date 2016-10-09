@@ -270,13 +270,17 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
 
         color_counter = 0
         color_counter2 = 0
+        datatable_first = True
+        datatable_sparkline_first = True
+        pietable_first = True
+
         for d in data_list:
             data = copy.deepcopy(d)
 
 
             for a in data:
                 analyte = copy.deepcopy(a)
-                if 'total' not in analyte:
+                if 'total' not in analyte or category != "cannabinoids":
                     if viz_type == 'piechart':
                         color = color_list[color_counter2]
                         color_counter2 += 1
@@ -458,6 +462,54 @@ def combine_tests_for_viz(data_list, category, viz_type, digits, display_unit='%
         print "------------------------------------------"
     return combined_list
 
+def add_units_to_tables(table, columns, display_unit, display_unit2):
+    units_row = []
+    mass_counter = 0
+    units = ['mass', 'loq', 'limit', 'spike']
+    match = False
+    for i, e in enumerate(columns):
+        # print display_unit
+        for unit in units:
+            display_unit = str(display_unit)
+            display_unit2 = str(display_unit2)
+            # if display_unit == "%%":
+            #     display_unit = "%"
+            # if display_unit2 == "%%":
+            #     display_unit2 = "%"
+            if e['title'].lower().find(unit) != -1:
+                if unit == "mass" and mass_counter == 0:
+                    units_row.append(display_unit)
+                    mass_counter += 1
+                    match = True
+                elif unit == "mass" and mass_counter > 0:
+                    units_row.append(display_unit2)
+                    match = True
+                elif unit == "spike":
+                    units_row.append('%')
+                    match = True
+                else:
+                    units_row.append(display_unit)
+                    match = True
+        if match:
+            match = False
+        else:
+            units_row.append('')
+    formatted_units_row = []
+    for i, e in enumerate(units_row):
+        if e == "%%%%":
+            e = "%"
+        if e in ['ppm', 'ppb']:
+            e = e.upper()
+        if e == 'cfu/g':
+            e = 'CFU/g'
+        if e == 'mg/ml':
+            e = 'mg/mL'
+        formatted_units_row.append(e)
+        # print form
+    new_table = table.insert(0, formatted_units_row)
+
+    return new_table
+
 def add_cannabinoid_totals(combined_list, display_unit, display_unit2, digits, combined=False):
     primary_total = 0.0
     secondary_total = 0.0
@@ -495,6 +547,7 @@ def add_cannabinoid_totals(combined_list, display_unit, display_unit2, digits, c
 def high_to_low(tested_analytes, report_units):
     analytes_and_values = {}
     for test in tested_analytes:
+        # print test
         for analyte in test:
             analytes_and_values = set_value(str(analyte), make_number(value_for(analyte + '.display.' + report_units + '.value', test)), analytes_and_values)
     sorted_analytes_and_values = OrderedDict(sorted(analytes_and_values.items(), key=itemgetter(1), reverse=True))
@@ -520,6 +573,7 @@ def get_aromas():
 def numberize(ordered_tuples, category):
     if category == 'terpenes':
         aromas = get_aromas()
+        # print ordered_tuples
         ordered_and_numbered = {}
         for i, e in enumerate(ordered_tuples):
             smell = ''
@@ -567,6 +621,7 @@ def setup(server_data):
 
     test_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals']
     server_data = set_value('category_units', {}, server_data)
+
 
     months = {
         'Jan': '01',
@@ -731,7 +786,7 @@ def setup(server_data):
         '3': 'Complete'
         }
 
-    status_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals', 'thc', 'foreign_matter']
+    status_categories = ['cannabinoids', 'terpenes', 'solvents', 'microbials', 'mycotoxins', 'pesticides', 'metals', 'thc', 'foreign_matter', 'moisture']
     for category in status_categories:
         status_value = str(value_for('lab_data.' + category + '.status', server_data))
         print "Formatting " + category.title() + " Status Message..."
@@ -795,7 +850,9 @@ def setup(server_data):
                     ],
                     category, 'datatable', digits, report_units, secondary_report_units)
                 print "Adding Totals to Datatable Data..."
+
                 add_cannabinoid_totals(combined_cannabinoids_dt, report_units, secondary_report_units, digits)
+                add_units_to_tables(combined_cannabinoids_dt, report_columns, report_units, secondary_report_units)
                 # print "combined cannabinoid dt"
                 print "Preparing Sparkline Data..."
                 combined_cannabinoids_sl = combine_tests_for_viz(
@@ -817,6 +874,7 @@ def setup(server_data):
                     ],
                     category, 'datatable_sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
+
                 data_list = [cannabinoid_data, thc_data]
                 num_of_items = sum(len(x.keys()) for x in data_list)
                 color_list = []
@@ -845,6 +903,7 @@ def setup(server_data):
                         color_list = resort_colors(color_list, combined_category_pie, combined_category_pie2)
                 print "Adding Totals to Datatable/Sparkline..."
                 add_cannabinoid_totals(combined_cannabinoids_dt_sl, report_units, secondary_report_units, digits, combined=True)
+                add_units_to_tables(combined_cannabinoids_dt_sl, report_columns, report_units, secondary_report_units)
                 viztypes['datatable_cannabinoids'] = combined_cannabinoids_dt
                 viztypes['sparkline_cannabinoids'] = combined_cannabinoids_sl
                 viztypes['datatable_cannabinoids_with_sparkline'] = combined_cannabinoids_dt_sl
@@ -919,6 +978,7 @@ def setup(server_data):
                     if len(category_dt[0]) > 0:
                         category_dt.sort(key=lambda x: x[0])
                 # print "yay for category dt"
+                add_units_to_tables(category_dt, report_columns, report_units, secondary_report_units)
                 print "Preparing Sparkline Data..."
                 category_sl = combine_tests_for_viz(
                     [
@@ -941,6 +1001,7 @@ def setup(server_data):
                 # print "data_list:"
                 # print data_list
                 # print "num_of_items:"
+                add_units_to_tables(combined_category_dt_sl, report_columns, report_units, secondary_report_units)
                 num_of_items = sum(len(x.keys()) for x in data_list)
                 # print num_of_items
                 color_list = []
@@ -1015,15 +1076,19 @@ def setup(server_data):
                 # server_data = set_value(category + '_report_columns3', report_columns3, server_data)
                 # print "yay for category data"
                 print "Setting up Ordered Data..."
+                # print category_data
                 ordered = high_to_low([category_data], report_units)
+                # print ordered
                 # print "ordered:"
                 # print ordered
+                # print "Ordering and Numerization..."
                 ordered_and_numbered = numberize(ordered, category)
                 # print "ordered_and_numbered:"
                 # print ordered_and_numbered
                 server_data = set_value(category + '_ordered', ordered_and_numbered, server_data)
                 # print "server_data[category + '_ordered']:"
                 # print value_for(category + '_ordered', server_data)
+                # print "Finding Total Concentration..."
                 total_category_concentration = get_concentration_total([category_data], str(report_units))
                 # print "yay for total_category_concentration"
                 print "Finding Analyte with Highest Concentration..."
@@ -1103,6 +1168,8 @@ def setup(server_data):
                     ],
                     category, 'datatable_sparkline', digits, report_units, secondary_report_units,
                     total_concentration=highest)
+                add_units_to_tables(category_dt, report_columns, report_units, secondary_report_units)
+                add_units_to_tables(combined_category_dt_sl, report_columns, report_units, secondary_report_units)
                 viztypes['datatable_' + category + '_with_sparkline'] = combined_category_dt_sl
                 viztypes['datatable_' + category] = category_dt
                 viztypes['sparkline_' + category] = category_sl

@@ -1,0 +1,2277 @@
+api_key: 147c383a-970b-4ceb-8bdf-9dba3f73bd3a
+api_secret: 684bdbfe-8bb5-4aca-addd-80855852df14
+delivery_method: POST_FILE
+job_type: LABELS
+key: 68c55c41-59a3-4a42-93d6-7aa725e6eed2
+pdf_data:
+  sample_labels:
+    - Large Labels
+    - Medium Labels
+    - Small Labels A
+    - Small Labels B
+  additional_info:
+    batch_number: '100'
+    batch_size: 10
+    lot_number: '100'
+    lot_size: 10
+  category:
+    id: 1
+    name: Plant
+  classification:
+    id: 2
+    name: Sativa
+  client:
+    id: 21
+    name: Confident Cannabis
+  client_address: null
+  client_info:
+    address_line_1: 123 Main Street
+    address_line_2: ''
+    city: stanford
+    email: sa@confidentcannabis.com
+    phone: ''
+    state: CA
+    url: ''
+    zipcode: '94305'
+  client_license:
+    designation:
+      id: 3
+      name: Other
+    id: 164
+    license_code: C987
+    license_number: '1234567890'
+    license_type:
+      id: 1
+      name: MME
+    nickname: Steve's Grow Shack
+  coa: false
+  coa_latest: false
+  cover: null
+  created: Mon, 26 Sep 2016 00:16:29 GMT
+  date_completed: null
+  date_recieved: Mon, 26 Sep 2016 00:16:43 GMT
+  has_data_warnings: true
+  id: 179366
+  images: []
+  initial_weight: 50
+  is_bad: true
+  is_ratio: false
+  lab:
+    abbreviation: MML
+    address_line_1: 4100 West Flamingo Rd
+    address_line_2: Suite 2500
+    city: las vegas
+    email: benchew@mmalabtesting.com
+    id: 26
+    name: MM Lab, Inc
+    phone: '7027985555'
+    slug: mmlab
+    state: NV
+    url: http://www.mmlabtesting.com
+    zipcode: '89103'
+  lab_data_latest:
+    cannabinoids:
+      cbd_total:
+        display:
+          '%':
+            value: '3.75'
+          mg/g:
+            value: '37.5'
+          mg/ml:
+            value: '375.4'
+          mg/unit:
+            value: '375.4'
+          ppb:
+            value: '37540000.00'
+          ppm:
+            value: '37540.00'
+        value: '0.03754'
+      digits: 2
+      divisor: 1
+      footnote: "Total THC = THCa * 0.877 + \\u03949-THC \nTotal CBD = CBDa * 0.877\
+        \ + CBD\nLOQ = Limit of Quantitation; The reported result is based on a sample\
+        \ weight with the applicable moisture content for that sample; Unless otherwise\
+        \ stated all quality control samples performed within specifications established\
+        \ by the Laboratory."
+      input_units: '%'
+      report_units: '%'
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 3
+      tests:
+        cbc:
+          display:
+            '%':
+              loq: '0.01'
+              value: '4.30'
+            mg/g:
+              loq: '0.1'
+              value: '43.0'
+            mg/ml:
+              loq: '1.0'
+              value: '430.0'
+            mg/unit:
+              loq: '1.0'
+              value: '430.0'
+            name: CBC
+            ppb:
+              loq: '100000.00'
+              value: '43000000.00'
+            ppm:
+              loq: '100.00'
+              value: '43000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.043'
+        cbd:
+          display:
+            '%':
+              loq: '0.01'
+              value: '2.00'
+            mg/g:
+              loq: '0.1'
+              value: '20.0'
+            mg/ml:
+              loq: '1.0'
+              value: '200.0'
+            mg/unit:
+              loq: '1.0'
+              value: '200.0'
+            name: CBD
+            ppb:
+              loq: '100000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '100.00'
+              value: '20000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.02'
+        cbda:
+          display:
+            '%':
+              loq: '0.01'
+              value: '2.00'
+            mg/g:
+              loq: '0.1'
+              value: '20.0'
+            mg/ml:
+              loq: '1.0'
+              value: '200.0'
+            mg/unit:
+              loq: '1.0'
+              value: '200.0'
+            name: CBDa
+            ppb:
+              loq: '100000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '100.00'
+              value: '20000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.02'
+        cbdv:
+          display:
+            '%':
+              loq: '0.01'
+              value: '1.00'
+            mg/g:
+              loq: '0.1'
+              value: '10.0'
+            mg/ml:
+              loq: '1.0'
+              value: '100.0'
+            mg/unit:
+              loq: '1.0'
+              value: '100.0'
+            name: CBDV
+            ppb:
+              loq: '100000.00'
+              value: '10000000.00'
+            ppm:
+              loq: '100.00'
+              value: '10000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.01'
+        cbg:
+          display:
+            '%':
+              loq: '0.01'
+              value: '1.00'
+            mg/g:
+              loq: '0.1'
+              value: '10.0'
+            mg/ml:
+              loq: '1.0'
+              value: '100.0'
+            mg/unit:
+              loq: '1.0'
+              value: '100.0'
+            name: CBG
+            ppb:
+              loq: '100000.00'
+              value: '10000000.00'
+            ppm:
+              loq: '100.00'
+              value: '10000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.01'
+        cbga:
+          display:
+            '%':
+              loq: '0.01'
+              value: '1.00'
+            mg/g:
+              loq: '0.1'
+              value: '10.0'
+            mg/ml:
+              loq: '1.0'
+              value: '100.0'
+            mg/unit:
+              loq: '1.0'
+              value: '100.0'
+            name: CBGa
+            ppb:
+              loq: '100000.00'
+              value: '10000000.00'
+            ppm:
+              loq: '100.00'
+              value: '10000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.01'
+        cbn:
+          display:
+            '%':
+              loq: '0.01'
+              value: '2.00'
+            mg/g:
+              loq: '0.1'
+              value: '20.0'
+            mg/ml:
+              loq: '1.0'
+              value: '200.0'
+            mg/unit:
+              loq: '1.0'
+              value: '200.0'
+            name: CBN
+            ppb:
+              loq: '100000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '100.00'
+              value: '20000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.02'
+      unit_description: ''
+      unit_weight: '10'
+    date_reported: null
+    foreign_matter:
+      digits: 2
+      footnote: Amscope Microscope and Stereoscope
+      input_units: '%'
+      report_units: '%'
+      status: 3
+      tests: {}
+    homogeneity: {}
+    metals:
+      digits: 0
+      footnote: LOQ = Limit of Quantitation; The reported result is based on a sample
+        weight with the applicable moisture content for that sample; Unless otherwise
+        stated all quality control samples performed within specifications established
+        by the Laboratory.
+      input_units: ppb
+      report_units: ppm
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 3
+      tests:
+        arsenic:
+          display:
+            '%':
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/g:
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Arsenic
+            ppb:
+              limit: ''
+              loq: ''
+              value: '100'
+            ppm:
+              limit: ''
+              loq: ''
+              value: '0'
+          limit: ''
+          loq: ''
+          spike: ''
+          value: '100'
+        cadmium:
+          display:
+            '%':
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/g:
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Cadmium
+            ppb:
+              limit: ''
+              loq: ''
+              value: '200'
+            ppm:
+              limit: ''
+              loq: ''
+              value: '0'
+          limit: ''
+          loq: ''
+          spike: ''
+          value: '200'
+        lead:
+          display:
+            '%':
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/g:
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Lead
+            ppb:
+              limit: ''
+              loq: ''
+              value: '500'
+            ppm:
+              limit: ''
+              loq: ''
+              value: '1'
+          limit: ''
+          loq: ''
+          spike: ''
+          value: '500'
+        mercury:
+          display:
+            '%':
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/g:
+              limit: ''
+              loq: ''
+              value: '0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Mercury
+            ppb:
+              limit: ''
+              loq: ''
+              value: '300'
+            ppm:
+              limit: ''
+              loq: ''
+              value: '0'
+          limit: ''
+          loq: ''
+          spike: ''
+          value: '300'
+    microbials:
+      digits: 0
+      footnote: LOQ = Limit of Quantitation; TNC = Too Numerous to Count; Unless otherwise
+        stated all quality control samples performed within specifications established
+        by the Laboratory
+      input_units: cfu/g
+      report_units: ppm
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 2
+      tests:
+        bacteria:
+          display:
+            cfu/g:
+              limit: '1000'
+              loq: ''
+              value: '5000'
+            name: Bacteria
+          limit: '1000'
+          loq: ''
+          value: '5000'
+        coliforms:
+          display:
+            cfu/g:
+              limit: '1000'
+              loq: ''
+              value: '10'
+            name: Coliforms
+          limit: '1000'
+          loq: ''
+          value: '10'
+        ecoli:
+          display:
+            cfu/g:
+              limit: '1000'
+              loq: ''
+              value: '2000'
+            name: E. Coli
+          limit: '1000'
+          loq: ''
+          value: '2000'
+        mold:
+          display:
+            cfu/g:
+              limit: '1000'
+              loq: ''
+              value: '20'
+            name: Mold/Mildew/Yeast
+          limit: '1000'
+          loq: ''
+          value: '20'
+        salmonella:
+          display:
+            cfu/g:
+              limit: '1000'
+              loq: ''
+              value: '200'
+            name: Salmonella
+          limit: '1000'
+          loq: ''
+          value: '200'
+    misc: null
+    moisture:
+      digits: 1
+      input_units: '%'
+      moisture_divisor: 1
+      report_units: '%'
+      status: 3
+      tests:
+        percent_moisture:
+          display:
+            '%':
+              limit: ''
+              value: NR
+            mg/g:
+              limit: ''
+              value: NR
+            mg/ml: {}
+            mg/unit: {}
+            name: '% Moisture'
+            ppb:
+              limit: ''
+              value: NR
+            ppm:
+              limit: ''
+              value: NR
+          limit: ''
+          spike: ''
+          value: NR
+    mycotoxins:
+      digits: 2
+      footnote: LOQ = Limit of Quantitation; The reported result is based on a sample
+        weight with the applicable moisture content for that sample; Unless otherwise
+        stated all quality control samples performed within specifications established
+        by the Laboratory.
+      input_units: ppb
+      report_units: ppb
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 2
+      tests:
+        aflatoxins:
+          display:
+            '%':
+              limit: '0.00'
+              loq: ''
+              value: '0.00'
+            mg/g:
+              limit: '0.05'
+              loq: ''
+              value: '0.05'
+            mg/ml: {}
+            mg/unit: {}
+            name: Aflatoxins
+            ppb:
+              limit: '500.00'
+              loq: ''
+              value: '500.00'
+            ppm:
+              limit: '0.50000'
+              loq: ''
+              value: '0.50000'
+          limit: '500'
+          loq: ''
+          value: '500'
+        b1:
+          display:
+            '%':
+              limit: '0.00'
+              loq: ''
+              value: '0.00'
+            mg/g:
+              limit: '0.05'
+              loq: ''
+              value: '0.01'
+            mg/ml: {}
+            mg/unit: {}
+            name: B1
+            ppb:
+              limit: '500.00'
+              loq: ''
+              value: '100.00'
+            ppm:
+              limit: '0.50000'
+              loq: ''
+              value: '0.10000'
+          limit: '500'
+          loq: ''
+          value: '100'
+        b2:
+          display:
+            '%':
+              limit: '0.00'
+              loq: ''
+              value: '0.00'
+            mg/g:
+              limit: '0.05'
+              loq: ''
+              value: '0.02'
+            mg/ml: {}
+            mg/unit: {}
+            name: B2
+            ppb:
+              limit: '500.00'
+              loq: ''
+              value: '200.00'
+            ppm:
+              limit: '0.50000'
+              loq: ''
+              value: '0.20000'
+          limit: '500'
+          loq: ''
+          value: '200'
+        g1:
+          display:
+            '%':
+              limit: '0.00'
+              loq: ''
+              value: '0.00'
+            mg/g:
+              limit: '0.05'
+              loq: ''
+              value: '0.03'
+            mg/ml: {}
+            mg/unit: {}
+            name: G1
+            ppb:
+              limit: '500.00'
+              loq: ''
+              value: '300.00'
+            ppm:
+              limit: '0.50000'
+              loq: ''
+              value: '0.30000'
+          limit: '500'
+          loq: ''
+          value: '300'
+        g2:
+          display:
+            '%':
+              limit: '0.00'
+              loq: ''
+              value: '0.00'
+            mg/g:
+              limit: '0.05'
+              loq: ''
+              value: '0.02'
+            mg/ml: {}
+            mg/unit: {}
+            name: G2
+            ppb:
+              limit: '500.00'
+              loq: ''
+              value: '200.00'
+            ppm:
+              limit: '0.50000'
+              loq: ''
+              value: '0.20000'
+          limit: '500'
+          loq: ''
+          value: '200'
+        ochratoxin_a:
+          display:
+            '%':
+              limit: '0.00'
+              loq: ''
+              value: '0.00'
+            mg/g:
+              limit: '0.05'
+              loq: ''
+              value: '0.01'
+            mg/ml: {}
+            mg/unit: {}
+            name: Ochratoxin A
+            ppb:
+              limit: '500.00'
+              loq: ''
+              value: '100.00'
+            ppm:
+              limit: '0.50000'
+              loq: ''
+              value: '0.10000'
+          limit: '500'
+          loq: ''
+          value: '100'
+    other:
+      environment: Room Temperature
+      notes:
+        '1': Super plant!
+      report_footer: This product has been tested by MM Lab using valid testing methodologies
+        and a quality system as required by state law. Values reported relate only
+        to the product tested. MM Lab makes no claims as to the efficacy, safety or
+        other risks associated with any detected or non-detected levels of any compounds
+        reported herein. This Certificate shall not be reproduced except in full,
+        without the written approval of MM Lab.
+      sampling: Random
+    pesticides:
+      digits: 3
+      footnote: LOQ = Limit of Quantitation; The reported result is based on a sample
+        weight with the applicable moisture content for that sample; Unless otherwise
+        stated all quality control samples performed within specifications established
+        by the Laboratory.
+      input_units: ppm
+      report_units: ppm
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 2
+      tests:
+        abamectin:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.050'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '50.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Abamectin
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '500000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '500.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '500'
+        acequinocyl:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.010'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '10.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Acequinocyl
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '100000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '100.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '100'
+        bifenazate:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.010'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '10.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Bifenazate
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '100000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '100.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '100'
+        bifenthrin:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.020'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '20.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Bifenthrin
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '200000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '200.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '200'
+        captan:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Captan
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        cyfluthrin:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Cyfluthrin
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        cypermethrin:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Cypermethrin
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        dimethomorph:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.030'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '30.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Dimethomorph
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '300000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '300.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '300'
+        etoxazole:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.020'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '20.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Etoxazole
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '200000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '200.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '200'
+        fenhexamid:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.100'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '100.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Fenhexamid
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '1000000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '1000.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '1000'
+        flonicamid:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Flonicamid
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        fludioxonil:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Fludioxonil
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        imidacloprid:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Imidacloprid
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        myclobutanil:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.050'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '50.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Myclobutanil
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '500000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '500.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '500'
+        pentachloronitrobenzene:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.020'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '20.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Pentachloronitrobenzene
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '200000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '200.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '200'
+        piperonyl_butoxide:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: '0.020'
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: '20.000'
+            mg/ml: {}
+            mg/unit: {}
+            name: Piperonyl Butoxide
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: '200000'
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: '200.000'
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '200'
+        pyrethrins:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Pyrethrins
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        spinetoram:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Spinetoram
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        spinosad:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Spinosad
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        spirotetramat:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Spirotetramat
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        thiamethoxam:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: <LOQ
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Thiamethoxam
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: <LOQ
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: <LOQ
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: '0'
+        trifloxystrobin:
+          display:
+            '%':
+              limit: '0.000'
+              loq: '0.000'
+              value: NR
+            mg/g:
+              limit: '0.300'
+              loq: '0.010'
+              value: NR
+            mg/ml: {}
+            mg/unit: {}
+            name: Trifloxystrobin
+            ppb:
+              limit: '3000'
+              loq: '100'
+              value: NR
+            ppm:
+              limit: '3.000'
+              loq: '0.100'
+              value: NR
+          limit: '3'
+          loq: '0.1'
+          spike: ''
+          value: NR
+    reports: null
+    solvents:
+      digits: 3
+      footnote: LOQ = Limit of Quantitation; The reported result is based on a sample
+        weight with the applicable moisture content for that sample; Unless otherwise
+        stated all quality control samples performed within specifications established
+        by the Laboratory.
+      input_units: ppm
+      report_units: ppm
+      status: -1
+      tests: {}
+    status: 2
+    terpenes:
+      digits: 2
+      divisor: 1
+      footnote: LOQ = Limit of Quantitation; The reported result is based on a sample
+        weight with the applicable moisture content for that sample; Unless otherwise
+        stated all quality control samples performed within specifications established
+        by the Laboratory.
+      input_units: '%'
+      report_units: '%'
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 3
+      tests:
+        3_carene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Eucalyptus
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: 3-Carene
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        alpha_bisabolol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Chamomile
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Bisabolol
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        alpha_cedrene:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Wood
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Cedrene
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        alpha_humulene:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Hops
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Humulene
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        alpha_phellandrene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '4.00'
+            aroma: Mint
+            mg/g:
+              loq: '20.0'
+              value: '40.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Phellandrene
+            ppb:
+              loq: '20000000.00'
+              value: '40000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '40000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.04'
+        alpha_pinene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '12.00'
+            aroma: Pine
+            mg/g:
+              loq: '20.0'
+              value: '120.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Pinene
+            ppb:
+              loq: '20000000.00'
+              value: '120000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '120000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.12'
+        alpha_terpinene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '5.00'
+            aroma: Lime
+            mg/g:
+              loq: '20.0'
+              value: '50.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Terpinene
+            ppb:
+              loq: '20000000.00'
+              value: '50000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '50000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.05'
+        alpha_terpineol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '3.00'
+            aroma: Pine
+            mg/g:
+              loq: '20.0'
+              value: '30.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b1-Terpineol
+            ppb:
+              loq: '20000000.00'
+              value: '30000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '30000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.03'
+        beta_caryophyllene:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Cinnamon
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b2-Caryophyllene
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        beta_myrcene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Skunk
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b2-Myrcene
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        beta_pinene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Pine
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b2-Pinene
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        borneol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '3.00'
+            aroma: Fresh
+            mg/g:
+              loq: '20.0'
+              value: '30.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Borneol
+            ppb:
+              loq: '20000000.00'
+              value: '30000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '30000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.03'
+        camphene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '10.00'
+            aroma: Sweet
+            mg/g:
+              loq: '20.0'
+              value: '100.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Camphene
+            ppb:
+              loq: '20000000.00'
+              value: '100000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '100000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.1'
+        caryophyllene_oxide:
+          display:
+            '%':
+              loq: '2.00'
+              value: '3.00'
+            aroma: Wood
+            mg/g:
+              loq: '20.0'
+              value: '30.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Caryophyllene Oxide
+            ppb:
+              loq: '20000000.00'
+              value: '30000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '30000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.03'
+        cedrol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Wood
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Cedrol
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        cis_nerolidol:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Orange
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: cis-Nerolidol
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0'
+        delta_limonene:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Orange
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: \u03b4-Limonene
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        endo_fenchyl_alcohol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '3.00'
+            aroma: Basil
+            mg/g:
+              loq: '20.0'
+              value: '30.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Endo-Fenchyl Alcohol
+            ppb:
+              loq: '20000000.00'
+              value: '30000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '30000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.03'
+        eucalyptol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Eucalyptus
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Eucalyptol
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        fenchone:
+          display:
+            '%':
+              loq: '2.00'
+              value: '5.00'
+            aroma: Licorice
+            mg/g:
+              loq: '20.0'
+              value: '50.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Fenchone
+            ppb:
+              loq: '20000000.00'
+              value: '50000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '50000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.05'
+        geraniol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Flowers
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Geraniol
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        geranyl_acetate:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Flowers
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Geranyl Acetate
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        guaiol:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Wood
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Guaiol
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        isoborneol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Earthy
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Isoborneol
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        isopulegol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '4.00'
+            aroma: Mint
+            mg/g:
+              loq: '20.0'
+              value: '40.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Isopulegol
+            ppb:
+              loq: '20000000.00'
+              value: '40000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '40000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.04'
+        linalool:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Lavender
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Linalool
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        menthol:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Menthol
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Menthol
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        ocimene:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Earthy
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Ocimene
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        pulegone:
+          display:
+            '%':
+              loq: '2.00'
+              value: '2.00'
+            aroma: Mint
+            mg/g:
+              loq: '20.0'
+              value: '20.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Pulegone
+            ppb:
+              loq: '20000000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '20000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.02'
+        ro_cymene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '4.00'
+            aroma: Sweet
+            mg/g:
+              loq: '20.0'
+              value: '40.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: p-Cymene
+            ppb:
+              loq: '20000000.00'
+              value: '40000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '40000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.04'
+        sabinene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '3.00'
+            aroma: Clove
+            mg/g:
+              loq: '20.0'
+              value: '30.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Sabinene
+            ppb:
+              loq: '20000000.00'
+              value: '30000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '30000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.03'
+        terpinolene:
+          display:
+            '%':
+              loq: '2.00'
+              value: '5.00'
+            aroma: Turpentine
+            mg/g:
+              loq: '20.0'
+              value: '50.0'
+            mg/ml: {}
+            mg/unit: {}
+            name: Terpinolene
+            ppb:
+              loq: '20000000.00'
+              value: '50000000.00'
+            ppm:
+              loq: '20000.00'
+              value: '50000.00'
+          loq: '0.02'
+          spike: ''
+          value: '0.05'
+        trans_nerolidol:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Orange
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: trans-Nerolidol
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+        valencene:
+          display:
+            '%':
+              loq: '2.00'
+              value: <LOQ
+            aroma: Orange
+            mg/g:
+              loq: '20.0'
+              value: <LOQ
+            mg/ml: {}
+            mg/unit: {}
+            name: Valencene
+            ppb:
+              loq: '20000000.00'
+              value: <LOQ
+            ppm:
+              loq: '20000.00'
+              value: <LOQ
+          loq: '0.02'
+          spike: ''
+          value: '0.01'
+    thc:
+      digits: 2
+      divisor: 1
+      footnote: "Total THC = THCa * 0.877 + \\u03949-THC \nTotal CBD = CBDa * 0.877\
+        \ + CBD\nLOQ = Limit of Quantitation; The reported result is based on a sample\
+        \ weight with the applicable moisture content for that sample; Unless otherwise\
+        \ stated all quality control samples performed within specifications established\
+        \ by the Laboratory."
+      input_units: '%'
+      report_units: '%'
+      signatory_name: John Hancock
+      signatory_title: Lab Director
+      signature: https://s3.amazonaws.com/confident-static/labs/CC1/john_hancock_sig.jpg
+      status: 3
+      tests:
+        d8_thc:
+          display:
+            '%':
+              loq: '0.01'
+              value: '3.00'
+            mg/g:
+              loq: '0.1'
+              value: '30.0'
+            mg/ml:
+              loq: '1.0'
+              value: '300.0'
+            mg/unit:
+              loq: '1.0'
+              value: '300.0'
+            name: \u03948-THC
+            ppb:
+              loq: '100000.00'
+              value: '30000000.00'
+            ppm:
+              loq: '100.00'
+              value: '30000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.03'
+        d9_thc:
+          display:
+            '%':
+              loq: '0.01'
+              value: '11.00'
+            mg/g:
+              loq: '0.1'
+              value: '110.0'
+            mg/ml:
+              loq: '1.0'
+              value: '1100.0'
+            mg/unit:
+              loq: '1.0'
+              value: '1100.0'
+            name: \u03949-THC
+            ppb:
+              loq: '100000.00'
+              value: '110000000.00'
+            ppm:
+              loq: '100.00'
+              value: '110000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.11'
+        thca:
+          display:
+            '%':
+              loq: '0.01'
+              value: '12.00'
+            mg/g:
+              loq: '0.1'
+              value: '120.0'
+            mg/ml:
+              loq: '1.0'
+              value: '1200.0'
+            mg/unit:
+              loq: '1.0'
+              value: '1200.0'
+            name: THCa
+            ppb:
+              loq: '100000.00'
+              value: '120000000.00'
+            ppm:
+              loq: '100.00'
+              value: '120000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.12'
+        thcv:
+          display:
+            '%':
+              loq: '0.01'
+              value: '2.00'
+            mg/g:
+              loq: '0.1'
+              value: '20.0'
+            mg/ml:
+              loq: '1.0'
+              value: '200.0'
+            mg/unit:
+              loq: '1.0'
+              value: '200.0'
+            name: THCV
+            ppb:
+              loq: '100000.00'
+              value: '20000000.00'
+            ppm:
+              loq: '100.00'
+              value: '20000.00'
+          loq: '0.0001'
+          spike: ''
+          value: '0.02'
+      thc_total:
+        display:
+          '%':
+            value: '21.52'
+          mg/g:
+            value: '215.2'
+          mg/ml:
+            value: '2152.4'
+          mg/unit:
+            value: '2152.4'
+          ppb:
+            value: '215240000.00'
+          ppm:
+            value: '215240.00'
+        value: '0.21524'
+      unit_description: ''
+      unit_weight: '10'
+    warnings:
+      cbd_raw: {}
+      metals: {}
+      microbials: {}
+      moisture: {}
+      mycotoxins: {}
+      pesticides: {}
+      solvents: {}
+      terpenes:
+        3_carene:
+        - LOQ for 3_carene seems high
+        alpha_bisabolol:
+        - LOQ for alpha_bisabolol seems high
+        alpha_cedrene:
+        - LOQ for alpha_cedrene seems high
+        alpha_humulene:
+        - LOQ for alpha_humulene seems high
+        alpha_phellandrene:
+        - LOQ for alpha_phellandrene seems high
+        alpha_pinene:
+        - LOQ for alpha_pinene seems high
+        - Value for alpha_pinene seems high
+        alpha_terpinene:
+        - LOQ for alpha_terpinene seems high
+        alpha_terpineol:
+        - LOQ for alpha_terpineol seems high
+        beta_caryophyllene:
+        - LOQ for beta_caryophyllene seems high
+        beta_myrcene:
+        - LOQ for beta_myrcene seems high
+        beta_pinene:
+        - LOQ for beta_pinene seems high
+        borneol:
+        - LOQ for borneol seems high
+        camphene:
+        - LOQ for camphene seems high
+        - Value for camphene seems high
+        caryophyllene_oxide:
+        - LOQ for caryophyllene_oxide seems high
+        cedrol:
+        - LOQ for cedrol seems high
+        cis_nerolidol:
+        - LOQ for cis_nerolidol seems high
+        delta_limonene:
+        - LOQ for delta_limonene seems high
+        endo_fenchyl_alcohol:
+        - LOQ for endo_fenchyl_alcohol seems high
+        eucalyptol:
+        - LOQ for eucalyptol seems high
+        fenchone:
+        - LOQ for fenchone seems high
+        geraniol:
+        - LOQ for geraniol seems high
+        geranyl_acetate:
+        - LOQ for geranyl_acetate seems high
+        guaiol:
+        - LOQ for guaiol seems high
+        isoborneol:
+        - LOQ for isoborneol seems high
+        isopulegol:
+        - LOQ for isopulegol seems high
+        linalool:
+        - LOQ for linalool seems high
+        menthol:
+        - LOQ for menthol seems high
+        ocimene:
+        - LOQ for ocimene seems high
+        pulegone:
+        - LOQ for pulegone seems high
+        ro_cymene:
+        - LOQ for ro_cymene seems high
+        sabinene:
+        - LOQ for sabinene seems high
+        terpinolene:
+        - LOQ for terpinolene seems high
+        trans_nerolidol:
+        - LOQ for trans_nerolidol seems high
+        valencene:
+        - LOQ for valencene seems high
+      thc_raw: {}
+    water_activity:
+      digits: 0
+      input_units: aw
+      report_units: aw
+      status: 3
+      tests:
+        water_activity:
+          display:
+            aw:
+              limit: ''
+              value: NR
+            name: Water Activity
+          limit: ''
+          spike: ''
+          value: NR
+  lab_internal_id: 1609MML0002.0002
+  lab_license: {}
+  labels:
+  - vial_lg
+  last_modified: Mon, 26 Sep 2016 00:27:21 GMT
+  logs: []
+  method:
+    id: 1
+    name: Indoor
+  minimum_quantity: 0
+  name: Big Sample
+  order_address:
+    address_line_1: 234 Main street
+    address_line_2: ''
+    city: beverly hills
+    id: 1464
+    name: Steve Albarran
+    notes: ''
+    phone: '9999999999'
+    published: true
+    state: CA
+    zipcode: '90210'
+  order_internal_id: 1609MML0002
+  order_pickup: true
+  price: 0
+  public_key: d6918182-d07c-4782-924e-6d6f2ad9a2de
+  regulator_submitted: false
+  reporting_format:
+    id: 1
+    name: Grams
+  run_local: /vagrant/pdf-templates-config/
+  strain_name: Super Blue Dream
+  test_packages:
+  - name: Potency
+    package_key: ''
+  - description: Moisture, Potency, Terpenes, Foreign Matter Inspection, Microbial
+      Screening Mycotoxin Screening, Heavy Metals, Pesticides
+    id: 2964
+    minimum_quantity: 0
+    name: Usable Marijuana (flower)
+    package_key: ''
+    price: 0
+    sample_categories:
+      Plant: true
+    test_types:
+      CAN: true
+      FMI: true
+      H20: true
+      HVY: true
+      MIC-R: true
+      MYC: true
+      PES-R: true
+      TER: true
+  test_types:
+  - abbreviation: MIC-R
+    id: 4
+    name: Required Microbials
+  - abbreviation: MYC
+    id: 6
+    name: Mycotoxins
+  - abbreviation: CAN
+    id: 1
+    name: Cannabinoids
+  - abbreviation: HVY
+    id: 7
+    name: Heavy Metals
+  - abbreviation: H20
+    id: 10
+    name: Moisture
+  - abbreviation: TER
+    id: 2
+    name: Terpenes
+  - abbreviation: FMI
+    id: 16
+    name: Foreign Matter
+  - abbreviation: PES-R
+    id: 5
+    name: Required Pesticides
+  type:
+    id: 1
+    name: Flower - Cured
+  weight_changes:
+  - change_amount: 50
+    change_reason: initial
+    change_user_name: Confident Cannabis
+    changed_time: '2016-09-26T00:16:42.159905'
+  weight_on_hand: 50
+post_data:
+  fields:
+    AWSAccessKeyId: AKIAJ6GBDBUYEBCYTJEQ
+    Content-Type: application/pdf
+    key: samples/1609MML0002.0002/coas/68c55c41-59a3-4a42-93d6-7aa725e6eed2
+    policy: eyJjb25kaXRpb25zIjogW1siY29udGVudC1sZW5ndGgtcmFuZ2UiLCAxLCAyMDk3MTUyMF0sIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS1maWxlbmFtZSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS12ZXJzaW9uIiwgIiJdLCB7ImJ1Y2tldCI6ICJ1cGxvYWRzLm9yZGVycy5jb25maWRlbnRjYW5uYWJpcy5jb20ifSwgeyJrZXkiOiAic2FtcGxlcy8xNjA5TU1MMDAwMi4wMDAyL2NvYXMvNjhjNTVjNDEtNTlhMy00YTQyLTkzZDYtN2FhNzI1ZTZlZWQyIn1dLCAiZXhwaXJhdGlvbiI6ICIyMDE2LTA5LTI2VDAxOjI3OjIxWiJ9
+    signature: xwtiha47bsXM4QkCTfGCSRae6Z0=
+    x-amz-meta-filename: 1609MML0002.0002 - Confident Cannabis - Big Sample.pdf
+    x-amz-meta-version: 1
+  url: https://s3-us-west-1.amazonaws.com/uploads.orders.confidentcannabis.com
+redirect_url: /samples/api/1609MML0002.0002/file/complete
+redirect_url_base: api.confidentcannabis.com

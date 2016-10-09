@@ -43,7 +43,9 @@ class TemplateService(object):
         # print "these are our template keys:"
         # print str(template_keys)
         logo = cfg_obj['template_logo']
-        lab = logo.split('assets/img/labs/')[1].split('/')[0]
+        lab = ' ? '
+        if logo is not None:
+            lab = logo.split('assets/img/labs/')[1].split('/')[0]
         temp_templates = []
         template_rules = cfg_obj['template_rules']
         unmatched = []
@@ -81,6 +83,7 @@ class TemplateService(object):
                     })
 
         message = 'The following packages for ' + lab + ' are missing templates: \n\n'
+        # unmatched = list(set(unmatched))
         for i, e in enumerate(unmatched):
             message += 'PKG NAME: ' + str(e['template_name']) + '\nPKG KEY: ' + str(e['template_key']) + '\n\n'
 
