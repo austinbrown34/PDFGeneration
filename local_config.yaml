@@ -1,6 +1,6 @@
-lab: CIQ
+lab: SQA
 packages:
-  - name: Residual Solvents
-    package_key:
+  - name:
+    package_key: '3241'
   - name:
     package_key:
