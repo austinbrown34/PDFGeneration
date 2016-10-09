@@ -1,6 +1,6 @@
-lab: SCP
+lab: CIQ
 packages:
-  - name:
-    package_key: '1766'
+  - name: Residual Solvents
+    package_key:
   - name:
     package_key:
