@@ -1,6 +1,6 @@
-lab: SQA
+lab: KR
 packages:
   - name:
-    package_key: '3241'
+    package_key: '3429'
   - name:
     package_key:

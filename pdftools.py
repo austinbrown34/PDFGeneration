@@ -273,6 +273,12 @@ def remove_placeholder_images(
         placeholder = range_end + 1
     mynewpdf.write(pdf[placeholder:sys.getsizeof(pdf)])
     mynewpdf.close()
+    pdfnew = file(newpdf.replace('.pdf', '_temp.pdf'), "rb").read()
+    print "Size of PDF with Placeholders..."
+    print sys.getsizeof(pdf)
+    print "Size of PDF without Placeholders..."
+    print sys.getsizeof(pdfnew)
+
     repair_pdf(newpdf.replace('.pdf', '_temp.pdf'), newpdf)
 
 
