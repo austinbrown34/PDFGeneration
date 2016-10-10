@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, make_response, request, abort
 from pdfmanager import PDFManager
+import shutil
 
 app = Flask(__name__)
 import sys
@@ -42,6 +43,9 @@ def generate_reports():
     if not (request.json):
         abort(400)
     # print "this is request.json"
+    if os.path.exists('/tmp/Final_PDF_fixed.pdf'):
+        os.remove('/tmp/Final_PDF_fixed.pdf')
+    shutil.rmtree('/tmp/work')p/work')
     if not os.path.exists('/tmp'):
         os.makedirs('/tmp')
     # print str(request.json)
