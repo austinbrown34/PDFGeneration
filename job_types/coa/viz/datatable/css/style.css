@@ -1,0 +1,40 @@
+@font-face {
+    font-family: treb;
+    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS.ttf');
+}
+@font-face {
+    font-family: btreb;
+    src: url('/tmp/fontconfig/usr/share/fonts/Trebuchet MS Bold.ttf');
+    font-weight: bold;
+}
+body {
+    color: #000000;
+    font-family: treb;
+}
+th {
+    text-align: right;
+    padding: 0px 0px !important;
+    font-family: btreb;
+    vertical-align: bottom !important;
+}
+td {
+    text-align: right;
+    padding: 2px 2px !important;
+}
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+#stuff {
+    width: 100%;
+    zoom: 1;
+}
+#stuff-wrapper {
+    width: 400;
+    height: 250;
+    overflow: hidden;
+    position: absolute;
+}

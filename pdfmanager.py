@@ -22,18 +22,21 @@ class PDFManager(object):
         self.error = None
 
         if 'run_local' not in self.server_data:
+            print "------------------------------------------"
+            print "Setting Lambda Environment Variables"
+            print "------------------------------------------"
             os.environ['PATH'] = os.environ['PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/bin'
             os.environ['LD_LIBRARY_PATH'] = os.environ['LAMBDA_TASK_ROOT'] + '/bin'
             # os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + '/tmp/fontconfig/usr/lib'
             os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':' + os.environ['LAMBDA_TASK_ROOT'] + '/fontconfig/usr/lib'
 
-
+        FNULL = open(os.devnull, 'w')
         args = ['cp', '-r', 'fontconfig', '/tmp']
-        subprocess.call(args)
+        subprocess.call(args, stdout=FNULL, stderr=subprocess.STDOUT)
         args = ['/tmp/fontconfig/usr/bin/fc-cache', '-fs']
-        subprocess.call(args)
+        subprocess.call(args, stdout=FNULL, stderr=subprocess.STDOUT)
         args = ['/tmp/fontconfig/usr/bin/fc-cache', '-fv']
-        subprocess.call(args)
+        subprocess.call(args, stdout=FNULL, stderr=subprocess.STDOUT)
 
     def get_job(self, job_type=None, server_data=None):
         if job_type is None:
@@ -78,6 +81,14 @@ class PDFManager(object):
                     'status': self.status
                 }
             else:
+                print
+                print bcolors.OKBLUE
+                print bcolors.BOLD
+                print "------------------------------------------"
+                print "STEP 10: DELIVERING PDF"
+                print "------------------------------------------"
+                print bcolors.ENDC
+                print
                 if self.delivery_method == 'POST_FILE':
                     response = self.deliver_pdf_file(pdf_response['pdf'])
                 if self.delivery_method == 'POST_LINK':
@@ -119,30 +130,31 @@ class PDFManager(object):
                     'file': pdf
                 }
             )
-            print "first post info:"
-            print "first post url"
-            print url
-            print "first post fields"
-            print str(fields)
+            # print "first post info:"
+            # print "first post url"
+            # print url
+            # print "first post fields"
+            # print str(fields)
             # print "printing first post"
             # print first.text
+            # print "Successfully "
             this_data = {'key': file_key}
             if api_key and api_secret:
                 this_data['API_KEY'] = api_key
                 this_data['API_SECRET'] = api_secret
-            print "this is this_data"
-            print this_data
+            # print "this is this_data"
+            # print this_data
             if not redirect_url_base.startswith('http'):
                 redirect_url_base = 'https://' + redirect_url_base
             second = requests.post(
                 self.get_url(redirect_url_base, redirect_url),
                 this_data
             )
-            print "second post info:"
-            print "this is the get_url result"
-            print self.get_url(redirect_url_base, redirect_url)
+            # print "second post info:"
+            # print "this is the get_url result"
+            # print self.get_url(redirect_url_base, redirect_url)
             # print second.text
-            print "this is the post_data"
+            # print "this is the post_data"
             # print callback
 
             self.status = 'Successfully Generated and Delivered PDF.'
@@ -197,7 +209,7 @@ class PDFManager(object):
         try:
             this_data = {'url': file_url}
             new_url = self.get_url(redirect_url_base, redirect_url)
-            print "Posting to: " + new_url
+            # print "Posting to: " + new_url
             if api_key and api_secret:
                 this_data['API_KEY'] = api_key
                 this_data['API_SECRET'] = api_secret

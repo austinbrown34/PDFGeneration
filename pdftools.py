@@ -22,12 +22,21 @@ import shutil
 import requests
 import json
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def get_fonts():
     args = ['fc-list']
     process = subprocess.Popen(args, stdout=subprocess.PIPE)
     out, err = process.communicate()
-    print(out)
+    # print(out)
 
 def test_binaries():
     args = ['pdftk', '--version']
@@ -36,26 +45,31 @@ def test_binaries():
     subprocess.call(args2)
 
 def get_acroform_fields_pdftk(filename):
-    print filename
+    # print filename
     args = ['pdftk', filename, 'dump_data_fields', 'output', '/tmp/work/dump_data_fields.txt']
 
     try:
-        print "setup pdftk ran"
+        print "Running PDFTk to Retrieve Form Fields..."
         subprocess.call(args)
     except Exception as e:
+        print "-----------------------------------------------"
+        print bcolors.FAIL + "PDFTk Exception" + bcolors.ENDC
         print str(e)
-        print "made it to the exception for pdftk"
+        print "-----------------------------------------------"
+        # print "made it to the exception for pdftk"
     field_names = []
     with open('/tmp/work/dump_data_fields.txt') as ddf:
         for i, line in enumerate(ddf):
             if 'FieldName:' in line:
                 field_names.append(line.split('FieldName: ')[1].strip())
-    print "field names:"
-    print field_names
+    # print "field names:"
+    # print field_names
     return field_names
 
 
 def get_acroform_fields(filename):
+    # print "------------------------------------------"
+    print "Trying to Resolve Form Fields..."
     fp = open(filename, 'rb')
     parser = PDFParser(fp)
     doc = PDFDocument(parser)
@@ -63,7 +77,7 @@ def get_acroform_fields(filename):
     fields = resolve1(doc.catalog['AcroForm'])['Fields']
     for i in fields:
         field = resolve1(i)
-        print field
+        # print field
         name = field.get('T')
         field_names.append(name)
     fp.close()
@@ -88,8 +102,11 @@ def get_image_tag(filename):
             tag = exif_dict['Exif'][
                 piexif.ExifIFD.UserComment].strip(' \t\r\n\0')
     except Exception as e:
+        print "------------------------------------------"
+        print bcolors.FAIL + "Getting Image Tag Exception" + bcolors.ENDC
         print filename + " has an unsupported format - setting tag to None"
         print "Error: " + str(e)
+        print "------------------------------------------"
 
     return tag
 
@@ -161,12 +178,13 @@ def get_placeholder_image_info(filename, xmlfile, outputdir):
     for i, e in enumerate(found_images):
         imgpth = os.path.join(outputdir, e.attrib['src'])
         if not os.path.exists(imgpth):
-            print "path doesnt exist - tag is none for " + imgpth
+            print bcolors.FAIL + "Missing Image Path" + bcolors.ENDC
+            print "Path doesnt exist - tag is none for " + imgpth
             tag = None
         else:
             tag = get_image_tag(imgpth)
-            print "printing tag:"
-            print tag
+            # print "printing tag:"
+            # print tag
             image_info.append({
                 "id": i,
                 "src": imgpth,
@@ -290,16 +308,24 @@ def update_data_visualization(
         dimensions,
         coordinates,
         report_units,
-        secondary_report_units):
+        secondary_report_units,
+        reportcolumns,
+        report_category,
+        reportcolumns2,
+        reportcolumns3):
     with open(data_vis_name, 'r') as file:
         content = file.readlines()
-    print "read the js file"
-    print data_vis_name
+    print "Reading the Visualization JS File..."
+    # print data_vis_name
     content[1] = json.dumps(data) + ';\n'
     content[3] = str(dimensions) + ';\n'
     content[5] = str(coordinates) + ';\n'
     content[10] = '"' + str(report_units) + '"' + ';\n'
     content[12] = '"' + str(secondary_report_units) + '"' + ';\n'
+    content[15] = str(reportcolumns) + ';\n'
+    content[17] = '"' + str(report_category) + '"' + ';\n'
+    content[19] = str(reportcolumns2) + ';\n'
+    content[21] = str(reportcolumns3) + ';\n'
     data_vis_name_split = data_vis_name.split("/")
     data_vis_name_split.pop()
     data_vis_location = '/tmp/'
@@ -309,17 +335,17 @@ def update_data_visualization(
             os.makedirs(data_vis_location)
     with open(os.path.join('/tmp', data_vis_name), 'w') as file:
         file.writelines(content)
-    print "wrote the js file"
+    print "Writing Variables to Visualization JS File..."
     with open(os.path.join('/tmp', data_vis_name), 'r') as file:
         content = file.readlines()
-    print content
+    # print content
 
 def generate_visualizations(viz_files, controljs, out_dir, vizpdfs=None):
     for i, viz in enumerate(viz_files):
-        print "from generate viz - viz, controljs, out_dir"
-        print viz
-        print controljs
-        print out_dir
+        # print "from generate viz - viz, controljs, out_dir"
+        # print viz
+        # print controljs
+        # print out_dir
         try:
             pdfout = out_dir + viz.split('/')[-1].replace('.html', '.pdf')
             if vizpdfs is not None:
@@ -333,18 +359,21 @@ def generate_visualizations(viz_files, controljs, out_dir, vizpdfs=None):
             ]
             subprocess.call(call)
             temp_dirs = os.listdir(out_dir)
-            print "out_dir"
-            print str(temp_dirs)
+            # print "out_dir"
+            # print str(temp_dirs)
         except Exception as e:
+            print "------------------------------------------"
+            print bcolors.FAIL + "PhantomJS Exception" + bcolors.ENDC
             print str(e)
-            print "exception for phantomjs"
+            print "------------------------------------------"
+            # print "exception for phantomjs"
 
 
 def generate_visualization(viz_file, controljs, out_dir, vizpdf):
-    print "from generate viz - viz, controljs, out_dir"
-    print viz_file
-    print controljs
-    print out_dir
+    # print "from generate viz - viz, controljs, out_dir"
+    # print viz_file
+    # print controljs
+    # print out_dir
     try:
         # pdfout = out_dir + viz_file.split('/')[-1].replace('.html', '.pdf')
 
@@ -358,11 +387,14 @@ def generate_visualization(viz_file, controljs, out_dir, vizpdf):
         ]
         subprocess.call(call)
         temp_dirs = os.listdir(out_dir)
-        print "out_dir"
-        print str(temp_dirs)
+        # print "out_dir"
+        # print str(temp_dirs)
     except Exception as e:
+        print "------------------------------------------"
+        print bcolors.FAIL + "PhantomJS Exception" + bcolors.ENDC
         print str(e)
-        print "exception for phantomjs"
+        print "------------------------------------------"
+        # print "exception for phantomjs"
 
 
 def draw_images_on_pdf(
@@ -375,20 +407,20 @@ def draw_images_on_pdf(
     for image in images:
         ext = '.' + image['serversource'].split('.')[-1]
         # if ext == ".jpg":
-        print "opening serversource img"
+        # print "opening serversource img"
         im = IMG.open(image['serversource'])
         size = int(image['width']), int(image['height'])
         im.thumbnail(size, IMG.ANTIALIAS)
         im.save(os.path.join(work_dir, image['serversource'].replace(ext, '') +
                 '_temp' + ext))
-        print "saving thumbnail @ " + os.path.join(work_dir, image['serversource'].replace(ext, '') +
-                '_temp' + ext)
+        print "Saving thumbnail @ " + os.path.join(work_dir, image['serversource'].replace(ext, '') +
+                '_temp' + ext) + '...'
         # image['serversource'] = os.path.join(work_dir, image['serversource'].replace(ext, '') +
         #         '_temp' + ext)
         # print "setting serversource"
         with IMG.open(os.path.join(work_dir, image['serversource'].replace(ext, '') + '_temp' + ext)) as im:
             width, height = im.size
-        print "opened the new serversource to set width and height -> " + image['serversource']
+        # print "Opened the  to set width and height -> " + image['serversource']
         diff = int(image['width']) - width
         if diff != 0:
             diff = diff/2
@@ -410,14 +442,14 @@ def draw_images_on_pdf(
                     height=int(height),
                     mask='auto')
         c.save()
-        print "drew canvas image"
+        # print "drew canvas image"
         temp_imgs.append(work_dir + 'tempimage' +
                          str(counter) + '.pdf')
         counter += 1
     counter = 1
     for tempimg in temp_imgs:
-        print "printing tempimg"
-        print tempimg
+        # print "printing tempimg"
+        # print tempimg
         try:
             imagepdf = PdfFileReader(open(tempimg, 'rb'))
             output_file = PdfFileWriter()
@@ -436,14 +468,17 @@ def draw_images_on_pdf(
             currentpdf = os.path.join(work_dir, 'temp' + str(counter) + '.pdf')
             counter += 1
         except Exception as e:
+            print "------------------------------------------"
+            print bcolors.FAIL + "Draw Images on PDF Exception" + bcolors.ENDC
             print str(e)
-            print "made it to the draw_images_on_pdf exception"
+            print "------------------------------------------"
+            # print "made it to the draw_images_on_pdf exception"
             pass
 
     if len(completed_temps) > 0:
-        print completed_temps
-        print
-        print pdf_with_images
+        # print completed_temps
+        # print
+        # print pdf_with_images
         os.rename(completed_temps[
                   len(completed_temps) - 1], pdf_with_images)
     else:
@@ -460,7 +495,7 @@ def draw_visualization_on_pdf(
     first = True
     try:
         for viz in vizs:
-            print "working on " + str(viz)
+            print "Working on " + str(viz) + '...'
             if first is False:
                 currentpdf = work_dir + 'temp' + \
                     str(counter - 1) + '.pdf'
@@ -481,8 +516,11 @@ def draw_visualization_on_pdf(
             counter += 1
             first = False
     except Exception as e:
+        print "------------------------------------------"
+        print bcolors.FAIL + "Drawing Visualization on PDF Exception" + bcolors.ENDC
         print str(e)
-        print "exception for drawing viz"
+        print "------------------------------------------"
+        # print "exception for drawing viz"
 
 
 def merge_all_pages(pages, final):
@@ -494,64 +532,70 @@ def merge_all_pages(pages, final):
     call.append('cat')
     call.append('output')
     call.append(final)
-    print "this is the call"
-    print call
+    # print "this is the call"
+    # print call
     try:
         subprocess.call(call)
     except Exception as e:
-        print "made it to the merge_all_pages exception"
+        print "------------------------------------------"
+        print bcolors.FAIL + "Merge All Pages Exception" + bcolors.ENDC
+        # print "made it to the merge_all_pages exception"
         print str(e)
+        print "------------------------------------------"
 
 
 
 def map_variables(var_list, data):
     value_list = []
     p_o_p = 0
-    print "checking out page_of_pages for issues"
+    # print "checking out page_of_pages for issues"
     for i, var in enumerate(var_list):
-        print "this is the var:"
-        print var
+        # print "this is the var:"
+        # print var
         if var == 'page_of_pages':
-            print "on page_of_pages"
+            # print "on page_of_pages"
             p_o_p = 1
         else:
             p_o_p = 0
         if var is None:
-            print "var is none so appending blank "
+            # print "var is none so appending blank "
             value_list.append('')
         else:
             var = var.replace('::', '.')
             var_parts = var.split('.')
-            print "these are the var parts:"
-            print str(var_parts)
-            if p_o_p == 1:
-                print "var_parts"
-                print var_parts
+            # print "these are the var parts:"
+            # print str(var_parts)
+            # if p_o_p == 1:
+                # print "var_parts"
+                # print var_parts
             data_chunk = data
             for i2, var_part in enumerate(var_parts):
                 try:
                     if var_part in data_chunk:
-                        if p_o_p == 1:
-                            print "var_part"
-                            print var_part
-                            print "this is in data_chunk"
+                        # if p_o_p == 1:
+                            # print "var_part"
+                            # print var_part
+                            # print "this is in data_chunk"
                         new_chunk = data_chunk[var_part]
                         data_chunk = new_chunk
                         if i2 == len(var_parts) - 1:
                             if data_chunk in [{},[],'null',()] or data_chunk is None:
-                                print "value was empty or null or none - setting value to blank"
+                                # print "Value was empty or null or none - setting value to blank"
                                 data_chunk = ''
                             value_list.append(data_chunk)
                     else:
-                        print "var part not in server data - adding blank"
+                        # print "var part not in server data - adding blank"
                         value_list.append('')
                         break
                 except TypeError:
-                    print "There was a type error... adding blank"
+                    print "------------------------------------------"
+                    print bcolors.FAIL + "Map Variables TypeError Exception" + bcolors.ENDC
+                    print "There was a TypeError... adding blank"
+                    print "------------------------------------------"
                     value_list.append('')
                     break
-    print "this is the value list:"
-    print value_list
+    # print "this is the value list:"
+    # print value_list
     return value_list
 
 
@@ -591,12 +635,12 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
     for image in image_info:
         with_spark = False
         img_spec = image
-        print "tag:"
-        print img_spec['tag']
+        # print "tag:"
+        # print img_spec['tag']
         if img_spec['tag'] is None:
             continue
         if img_spec['tag'].startswith('viz_'):
-            print "tag starts with viz_"
+            # print "tag starts with viz_"
             viz_pieces = img_spec['tag'].split('_')
             if img_spec['tag'].endswith('_split'):
                 split_code = viz_pieces[len(viz_pieces) - 2]
@@ -605,25 +649,32 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                 # split_code = viz_pieces[len(viz_pieces) - 2]
                 with_spark = True
                 viz_pieces = viz_pieces[:-2]
+                # viz_pieces[1] = viz_pieces[1] + '-sparkline'
             if len(viz_pieces) == 3:
-                print "tag has 3 pieces"
+                # print "tag has 3 pieces"
                 viz_folder = viz_pieces[0]
-                print "viz_folder:"
-                print viz_folder
+                # print "Visualization Folder:"
+                # print viz_folder
                 viz_type = viz_pieces[1]
-                print "viz_type:"
+                # print "------------------------------------------"
+                print "Visualization Tag Found..."
+                # print "------------------------------------------"
+                print "Type of Visualization:"
                 print viz_type
                 viz_specific = viz_pieces[1] + '_' + viz_pieces[2]
-                print "viz_specific:"
+                print "Visualization Specific:"
                 print viz_specific
-                viz_file = viz_specific + '.html'
+                # viz_file = viz_specific + '.html'
+                viz_file = viz_type + '.html'
                 if with_spark:
-                    viz_file = viz_specific + '_with_sparkline.html'
-                print "viz_file:"
+                    viz_file = viz_type + '-sparkline.html'
+                # if with_spark:
+                #     viz_file = viz_specific + '_with_sparkline.html'
+                print "Visualization File:"
                 print viz_file
                 viz_dimensions = [int(img_spec['width']),
                                 int(img_spec['height'])]
-                print "viz_dimensions:"
+                print "Visualization Dimensions:"
                 print viz_dimensions
                 x = img_spec['bbox'].split(",")[0].split('.')[0]
                 print "x:"
@@ -632,19 +683,21 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                 print "y:"
                 print y
                 viz_coords = [int(x), int(y)]
-                print "viz_coords:"
+                print "Visualization Coordinates:"
                 print viz_coords
+                # print "------------------------------------------"
                 # print "serverdata['viz']:"
                 # print server_data['viz']
                 try:
+
                     viz_data = server_data['viz'][viz_specific]
                     if with_spark:
                         viz_data = server_data['viz'][viz_specific + '_with_sparkline']
-                    print "viz_data:"
+                    # print "viz_data:"
 
                     if split_code is not None:
                         viz_data = split_viz_into_parts(viz_data, split_code)
-                    print viz_data
+                    # print viz_data
                     visualizations.append({
                         'viz_folder': viz_folder,
                         'viz_type': viz_type,
@@ -654,23 +707,26 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                         'viz_coords': viz_coords,
                         'viz_data': viz_data
                     })
-                    print "appended to visualizations"
+                    # print "appended to visualizations"
                 except Exception as e:
-                    print "issue with a viz"
+                    print "------------------------------------------"
+                    print bcolors.FAIL + "Issue Interpreting Visualization Exception" + bcolors.ENDC
+                    # print "issue with a viz"
                     print str(e)
+                    print "------------------------------------------"
                     continue
         else:
             value = map_variables([img_spec['tag']], server_data)
-            print "this is the value"
-            print value
+            # print "this is the value"
+            # print value
             if value[0] is not None and value[0] != '':
                 try:
-                    print "image value is:"
-                    print value[0]
+                    # print "image value is:"
+                    # print value[0]
                     ext = '.' + value[0].split(".")[-1]
                     if ext not in ['.jpg', '.png', '.gif']:
                         ext = '.jpg'
-                    print "ext: " + ext
+                    # print "ext: " + ext
                     remote_file = requests.get(value[0])
                     with open(
                         os.path.join(
@@ -679,15 +735,20 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                             img_spec['tag'] + page_count + ext
                         ), 'wb') as local_file:
                         local_file.write(remote_file.content)
-                    print "wrote local file"
+                    # print "------------------------------------------"
+                    print "Downloaded Remote Image..."
                     img_spec['serversource'] = os.path.join(
                         work_dir,
                         'temp',
                         img_spec['tag'] + page_count + ext)
-                    print "serversource is:"
+                    print "Local Image Path:"
                     print img_spec['serversource']
+                    # print "------------------------------------------"
                 except Exception as e:
-                    print "can't download " + str(value[0]) + str(e)
+                    print "------------------------------------------"
+                    print bcolors.FAIL + "Remote Image Download Exception" + bcolors.ENDC
+                    print "Can't download " + str(value[0]) + str(e)
+                    print "------------------------------------------"
                     if not os.path.isdir('/tmp/work'):
                         os.makedirs('/tmp/work')
                     if not os.path.isdir('/tmp/work/temp'):
@@ -709,7 +770,7 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
                     img_spec['serversource'] = 'placeholders/sample.jpg'
                     pass
             else:
-                print "value is None"
+                # print "value is None"
                 if not os.path.isdir('/tmp/work'):
                     os.makedirs('/tmp/work')
                 if not os.path.isdir('/tmp/work/temp'):
@@ -734,5 +795,5 @@ def translate_placeholders(image_info, server_data, work_dir, page_count):
         'Visualizations': visualizations,
         'ServerImages': server_images
     }
-    print "returning from translate_placeholders"
+    # print "Returning from translate_placeholders"
     return organized_image_info
