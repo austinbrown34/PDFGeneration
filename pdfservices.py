@@ -270,12 +270,12 @@ class S3TemplateService(object):
             print "--------------------------------------"
             print bcolors.FAIL + message + bcolors.ENDC
             print "--------------------------------------"
-        requests.post(
-            'https://hooks.slack.com/services/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',
-            data={
-                'payload': json.dumps({'text': message})
-                }
-            )
+        # requests.post(
+        #     'https://hooks.slack.com/services/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',
+        #     data={
+        #         'payload': json.dumps({'text': message})
+        #         }
+        #     )
         template_list_builder(temp_templates)
         return templates
 
