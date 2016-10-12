@@ -1,6 +1,6 @@
-lab: MML
+lab: KR
 packages:
-  - name: Potency
-    package_key:
-  - name: Usable Marijuana (flower)
-    package_key:
+  - name: "OAR 333-007-0400: Pesticide Screen"
+    package_key: '3442'
+  - name:
+    package_key: '3716'
