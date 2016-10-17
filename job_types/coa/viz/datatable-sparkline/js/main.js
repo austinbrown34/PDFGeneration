@@ -172,4 +172,7 @@ $(document).ready(function() {
       $('#stuff table th:contains("Mass")').each(function(){
         $(this).html("Mass")
       })
+      $('#stuff table th:contains("Amount")').each(function(){
+        $(this).html("Amount")
+      })
 } );

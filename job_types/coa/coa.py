@@ -737,14 +737,20 @@ def setup(server_data):
     server_data = set_value('date_received', date_received, server_data)
     print "Formatting Last Modified..."
     server_data = set_value('last_modified', last_modified, server_data)
+    # try:
+    #     metric_lot_number = value_for('additional_info.metric_lot_number', server_data, default='')
+    #     metric_manifest_number = value_for('additional_info.metric_manifest_number', server_data, default='')
+    #     metric_package_number = value_for('additional_info.metric_package_number', server_data, default='')
+    #
+    #     metric_info = "METRC Lot #: " + str(metric_lot_number) + '; METRC Manifest #: ' + metric_manifest_number + '; METRC Package Tag #: ' + metric_package_number
+    # except Exception as e:
+    #     print "------------------------------------------"
+    #     print bcolors.FAIL + "Metric Fields Exception" + bcolors.ENDC
+    #     print str(e)
+    #     print "------------------------------------------"
+    #     pass
 
-    metric_lot_number = value_for('additional_info.metric_lot_number', server_data)
-    metric_manifest_number = value_for('additional_info.metric_manifest_number', server_data)
-    metric_package_number = value_for('additional_info.metric_package_number', server_data)
-
-    metric_info = "METRC Lot #: " + str(metric_lot_number) + '; METRC Manifest #: ' + metric_manifest_number + '; METRC Package Tag #: ' + metric_package_number
-
-    server_data = set_value('metric_info', metric_info, server_data)
+    # server_data = set_value('metric_info', metric_info, server_data)
     r_units = value_for('lab_data.cannabinoids.report_units', server_data)
     client_license_number = 'Lic. # ' + str(value_for('client_license.license_number', server_data))
     print "Formatting Client License Number..."
