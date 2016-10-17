@@ -68,6 +68,8 @@ class TemplateService(object):
                     pass
                 # print "template_key"
                 # print template_key
+                print rule['rule']['package_name']
+                print template_key[1]
                 if rule['rule']['package_key'] is not None:
                     if template_key[0] == rule['rule']['package_key']:
                         temp_templates.append(rule['rule']['included_templates'])
@@ -231,6 +233,7 @@ class S3TemplateService(object):
         logo = cfg_obj['template_logo']
         lab = logo.split('assets/img/labs/')[1].split('/')[0]
         unmatched = []
+        # print template_rules
         for i, rule in enumerate(template_rules):
             matched = False
             # print "rule:"
@@ -250,6 +253,8 @@ class S3TemplateService(object):
                     pass
                 # print "template_key"
                 # print template_key
+                # print rule['rule']['package_name']
+                # print template_key[1]
                 if rule['rule']['package_key'] is not None:
                     if template_key[0] == rule['rule']['package_key']:
                         temp_templates.append(rule['rule']['included_templates'])

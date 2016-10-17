@@ -181,7 +181,8 @@ $(document).ready(function() {
       $('#stuff table th:contains("LOQ")').each(function(){
         $(this).html("LOQ")
       })
-      $('#stuff table th:contains("Limit")').each(function(){
+      $('#stuff table th:contains("Limit<")').each(function(){
+
         $(this).html("Limit")
       })
       $('#stuff table th:contains("Spike")').each(function(){
