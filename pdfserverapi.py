@@ -45,7 +45,8 @@ def generate_reports():
     # print "this is request.json"
     if os.path.exists('/tmp/Final_PDF_fixed.pdf'):
         os.remove('/tmp/Final_PDF_fixed.pdf')
-    shutil.rmtree('/tmp/work')p/work')
+    if os.path.exists('/tmp/work'):
+        shutil.rmtree('/tmp/work')
     if not os.path.exists('/tmp'):
         os.makedirs('/tmp')
     # print str(request.json)

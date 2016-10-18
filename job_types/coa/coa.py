@@ -1316,6 +1316,13 @@ def setup(server_data):
     print "Finding Templates for the Test Packages..."
     templates = s3templates.get_templates('/tmp/work/config.yaml', '/tmp/', template_keys)
     # print "--------------------------------------"
+    if len(templates) < 1:
+        print "No Matching Templates Found..."
+        response = {
+            'status': 'PDF Generation Terminated!',
+            'error': 'No templates were found to be used with this data.'
+        }
+        return response
     print "Matched Templates:"
     templates = list(set(templates))
     templates.sort()

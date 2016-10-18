@@ -23,7 +23,14 @@ class TemplateService(object):
         self.directory = directory
 
     def download_config(self, config_folder, config, destination):
-        copyfile(os.path.join(self.directory, config_folder, config), destination)
+        try:
+            copyfile(os.path.join(self.directory, config_folder, config), destination)
+        except Exception as e:
+            print "--------------------------------------"
+            print bcolors.FAIL + "Download Config Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue with downloading config.yaml..."
+            print "--------------------------------------"
 
     def get_templates(self, config, template_folder, template_keys):
         templates = []
@@ -34,127 +41,168 @@ class TemplateService(object):
                     template_list_builder(temp)
                     continue
                 templates.append(temp)
-
-        cfg = open(config)
-        cfg_obj = yaml.safe_load(cfg)
-        cfg.close()
+        try:
+            cfg = open(config)
+            cfg_obj = yaml.safe_load(cfg)
+            cfg.close()
         # print "this is the yaml obj:"
         # print str(cfg_obj)
         # print "these are our template keys:"
         # print str(template_keys)
-        logo = cfg_obj['template_logo']
-        lab = ' ? '
-        if logo is not None:
-            lab = logo.split('assets/img/labs/')[1].split('/')[0]
-        temp_templates = []
-        template_rules = cfg_obj['template_rules']
-        unmatched = []
-        for i, rule in enumerate(template_rules):
-            matched = False
-            # print "rule:"
-            # print rule
-            for j, template_key in enumerate(template_keys):
-                # template_key[0] = unicode(template_key[0], 'utf-8')
-                try:
-                    template_key[0] = template_key[0].replace(u'\u2013', '-')
-                except Exception as e:
-                    # print str(e)
-                    pass
-                    # template_key[1] = unicode(template_key[1], 'utf-8')
-                try:
-                    template_key[1] = template_key[1].replace(u'\u2013', '-')
-                except Exception as e:
-                    # print str(e)
-                    pass
-                # print "template_key"
-                # print template_key
-                print rule['rule']['package_name']
-                print template_key[1]
-                if rule['rule']['package_key'] is not None:
-                    if template_key[0] == rule['rule']['package_key']:
-                        temp_templates.append(rule['rule']['included_templates'])
-                        matched = True
-                else:
-                    if template_key[1] == rule['rule']['package_name']:
-                        temp_templates.append(rule['rule']['included_templates'])
-                        matched = True
-                if not matched:
-                    unmatched.append({
-                        'template_key': template_key[0],
-                        'template_name': template_key[1],
-                    })
+            logo = cfg_obj['template_logo']
+            lab = ' ? '
+            if logo is not None:
+                lab = logo.split('assets/img/labs/')[1].split('/')[0]
+            temp_templates = []
+            template_rules = cfg_obj['template_rules']
+            unmatched = []
+            for i, rule in enumerate(template_rules):
+                matched = False
+                # print "rule:"
+                # print rule
+                for j, template_key in enumerate(template_keys):
+                    # template_key[0] = unicode(template_key[0], 'utf-8')
+                    try:
+                        template_key[0] = template_key[0].replace(u'\u2013', '-')
+                    except Exception as e:
+                        # print str(e)
+                        pass
+                        # template_key[1] = unicode(template_key[1], 'utf-8')
+                    try:
+                        template_key[1] = template_key[1].replace(u'\u2013', '-')
+                    except Exception as e:
+                        # print str(e)
+                        pass
+                    # print "template_key"
+                    # print template_key
+                    print rule['rule']['package_name']
+                    print template_key[1]
+                    if rule['rule']['package_key'] is not None:
+                        if template_key[0] == rule['rule']['package_key']:
+                            temp_templates.append(rule['rule']['included_templates'])
+                            matched = True
+                    else:
+                        if template_key[1] == rule['rule']['package_name']:
+                            temp_templates.append(rule['rule']['included_templates'])
+                            matched = True
+                    if not matched:
+                        unmatched.append({
+                            'template_key': template_key[0],
+                            'template_name': template_key[1],
+                        })
 
-        message = 'The following packages for ' + lab + ' are missing templates: \n\n'
-        # unmatched = list(set(unmatched))
-        for i, e in enumerate(unmatched):
-            message += 'PKG NAME: ' + str(e['template_name']) + '\nPKG KEY: ' + str(e['template_key']) + '\n\n'
+            message = 'The following packages for ' + lab + ' are missing templates: \n\n'
+            # unmatched = list(set(unmatched))
+            for i, e in enumerate(unmatched):
+                message += 'PKG NAME: ' + str(e['template_name']) + '\nPKG KEY: ' + str(e['template_key']) + '\n\n'
 
-        # requests.post(
-        #     'https://hooks.slack.com/services/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',
-        #     data={
-        #         'payload': json.dumps({'text': message})
-        #         }
-        #     )
-        if len(unmatched) > 0:
+            # requests.post(
+            #     'https://hooks.slack.com/services/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',
+            #     data={
+            #         'payload': json.dumps({'text': message})
+            #         }
+            #     )
+            if len(unmatched) > 0:
+                print "--------------------------------------"
+                print bcolors.FAIL + message + bcolors.ENDC
+                print "--------------------------------------"
+            # print message
+            template_list_builder(temp_templates)
+        except Exception as e:
             print "--------------------------------------"
-            print bcolors.FAIL + message + bcolors.ENDC
+            print bcolors.FAIL + "Get Templates Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue with parsing config.yaml..."
             print "--------------------------------------"
-        # print message
-        template_list_builder(temp_templates)
+            pass
         return templates
 
     def get_logo(self, config):
-        cfg = open(config)
-        cfg_obj = yaml.safe_load(cfg)
-        cfg.close()
-        logo = cfg_obj['template_logo']
+        logo = ''
+        try:
+            cfg = open(config)
+            cfg_obj = yaml.safe_load(cfg)
+            cfg.close()
+            logo = cfg_obj['template_logo']
+        except Exception as e:
+            print "--------------------------------------"
+            print bcolors.FAIL + "Get Logo Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue parsing logo from config.yaml..."
+            print "--------------------------------------"
+            pass
         return logo
 
     def get_scripts(self, config):
         scripts = []
-        cfg = open(config)
-        cfg_obj = yaml.safe_load(cfg)
-        cfg.close()
-        # print str(cfg_obj)
-        if cfg_obj is not None:
-            template_scripts = cfg_obj['template_scripts']
-        if template_scripts is None:
-            scripts = []
-        else:
-            for script in template_scripts:
-                scripts.append(script)
+        try:
+            cfg = open(config)
+            cfg_obj = yaml.safe_load(cfg)
+            cfg.close()
+            # print str(cfg_obj)
+            if cfg_obj is not None:
+                template_scripts = cfg_obj['template_scripts']
+            if template_scripts is None:
+                scripts = []
+            else:
+                for script in template_scripts:
+                    scripts.append(script)
+        except Exception as e:
+            print "--------------------------------------"
+            print bcolors.FAIL + "Get Scripts Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue with parsing scripts from config.yaml..."
+            print "--------------------------------------"
+            pass
         return scripts
 
     def download_templates(self, template_folder, templates):
         for template in templates:
-            copyfile(
-                os.path.join(
-                    self.directory,
-                    template_folder,
-                    template
-                    ),
-                os.path.join(
-                    '/tmp',
-                    'work',
-                    template
+            try:
+                copyfile(
+                    os.path.join(
+                        self.directory,
+                        template_folder,
+                        template
+                        ),
+                    os.path.join(
+                        '/tmp',
+                        'work',
+                        template
+                        )
                     )
-                )
+            except Exception as e:
+                print "--------------------------------------"
+                print bcolors.FAIL + "Download Templates Exception" + bcolors.ENDC
+                print str(e)
+                print "Issue downloading templates..."
+                print "--------------------------------------"
+                pass
 
     def download_scripts(self, template_folder, scripts):
         for script in scripts:
-            copyfile(
-                os.path.join(
-                    self.directory,
-                    template_folder,
-                    script
-                    ),
-                os.path.join(
-                    '/tmp',
-                    'work',
-                    script
+            try:
+                copyfile(
+                    os.path.join(
+                        self.directory,
+                        template_folder,
+                        script
+                        ),
+                    os.path.join(
+                        '/tmp',
+                        'work',
+                        script
+                        )
                     )
-                )
-        print "Downloaded Scripts..."
+                print "Downloaded Scripts..."
+            except Exception as e:
+                print "--------------------------------------"
+                print bcolors.FAIL + "Download Scripts Exception" + bcolors.ENDC
+                print str(e)
+                print "Issue downloading scripts..."
+                print "--------------------------------------"
+                pass
+
 
 
 class S3TemplateService(object):
@@ -220,89 +268,112 @@ class S3TemplateService(object):
                     template_list_builder(temp)
                     continue
                 templates.append(temp)
-
-        cfg = open(config)
-        cfg_obj = yaml.safe_load(cfg)
-        cfg.close()
-        # print "this is the yaml obj:"
-        # print str(cfg_obj)
-        # print "these are our template keys:"
-        # print str(template_keys)
-        temp_templates = []
-        template_rules = cfg_obj['template_rules']
-        logo = cfg_obj['template_logo']
-        lab = logo.split('assets/img/labs/')[1].split('/')[0]
-        unmatched = []
-        # print template_rules
-        for i, rule in enumerate(template_rules):
-            matched = False
-            # print "rule:"
-            # print rule
-            for j, template_key in enumerate(template_keys):
-                # template_key[0] = unicode(template_key[0], 'utf-8')
-                try:
-                    template_key[0] = template_key[0].replace(u'\u2013', '-')
-                except Exception as e:
-                    # print str(e)
-                    pass
-                    # template_key[1] = unicode(template_key[1], 'utf-8')
-                try:
-                    template_key[1] = template_key[1].replace(u'\u2013', '-')
-                except Exception as e:
-                    # print str(e)
-                    pass
-                # print "template_key"
-                # print template_key
-                # print rule['rule']['package_name']
-                # print template_key[1]
-                if rule['rule']['package_key'] is not None:
-                    if template_key[0] == rule['rule']['package_key']:
-                        temp_templates.append(rule['rule']['included_templates'])
-                        matched = True
-                else:
-                    if template_key[1] == rule['rule']['package_name']:
-                        temp_templates.append(rule['rule']['included_templates'])
-                        matched = True
-                if not matched:
-                    unmatched.append({
-                        'template_key': template_key[0],
-                        'template_name': template_key[1],
-                    })
-        message = 'The following packages for ' + lab + ' are missing templates: \n\n'
-        for i, e in enumerate(unmatched):
-            message += 'PKG NAME: ' + str(e['template_name']) + '\nPKG KEY: ' + str(e['template_key']) + '\n\n'
-        if len(unmatched) > 0:
+        try:
+            cfg = open(config)
+            cfg_obj = yaml.safe_load(cfg)
+            cfg.close()
+            # print "this is the yaml obj:"
+            # print str(cfg_obj)
+            # print "these are our template keys:"
+            # print str(template_keys)
+            temp_templates = []
+            template_rules = cfg_obj['template_rules']
+            logo = cfg_obj['template_logo']
+            lab = logo.split('assets/img/labs/')[1].split('/')[0]
+            unmatched = []
+            # print template_rules
+            for i, rule in enumerate(template_rules):
+                matched = False
+                # print "rule:"
+                # print rule
+                for j, template_key in enumerate(template_keys):
+                    # template_key[0] = unicode(template_key[0], 'utf-8')
+                    try:
+                        template_key[0] = template_key[0].replace(u'\u2013', '-')
+                    except Exception as e:
+                        # print str(e)
+                        pass
+                        # template_key[1] = unicode(template_key[1], 'utf-8')
+                    try:
+                        template_key[1] = template_key[1].replace(u'\u2013', '-')
+                    except Exception as e:
+                        # print str(e)
+                        pass
+                    # print "template_key"
+                    # print template_key
+                    # print rule['rule']['package_name']
+                    # print template_key[1]
+                    if rule['rule']['package_key'] is not None:
+                        if template_key[0] == rule['rule']['package_key']:
+                            temp_templates.append(rule['rule']['included_templates'])
+                            matched = True
+                    else:
+                        if template_key[1] == rule['rule']['package_name']:
+                            temp_templates.append(rule['rule']['included_templates'])
+                            matched = True
+                    if not matched:
+                        unmatched.append({
+                            'template_key': template_key[0],
+                            'template_name': template_key[1],
+                        })
+            message = 'The following packages for ' + lab + ' are missing templates: \n\n'
+            for i, e in enumerate(unmatched):
+                message += 'PKG NAME: ' + str(e['template_name']) + '\nPKG KEY: ' + str(e['template_key']) + '\n\n'
+            if len(unmatched) > 0:
+                print "--------------------------------------"
+                print bcolors.FAIL + message + bcolors.ENDC
+                print "--------------------------------------"
+            # requests.post(
+            #     'https://hooks.slack.com/services/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',
+            #     data={
+            #         'payload': json.dumps({'text': message})
+            #         }
+            #     )
+            template_list_builder(temp_templates)
+        except Exception as e:
             print "--------------------------------------"
-            print bcolors.FAIL + message + bcolors.ENDC
+            print bcolors.FAIL + "Get Templates Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue with parsing config.yaml..."
             print "--------------------------------------"
-        # requests.post(
-        #     'https://hooks.slack.com/services/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',
-        #     data={
-        #         'payload': json.dumps({'text': message})
-        #         }
-        #     )
-        template_list_builder(temp_templates)
+            pass
         return templates
 
     def get_logo(self, config):
-        cfg = open(config)
-        cfg_obj = yaml.safe_load(cfg)
-        cfg.close()
-        logo = cfg_obj['template_logo']
+        logo = ''
+        try:
+            cfg = open(config)
+            cfg_obj = yaml.safe_load(cfg)
+            cfg.close()
+            logo = cfg_obj['template_logo']
+        except Exception as e:
+            print "--------------------------------------"
+            print bcolors.FAIL + "Get Logo Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue parsing logo from config.yaml..."
+            print "--------------------------------------"
+            pass
         return logo
     def get_scripts(self, config):
         scripts = []
-        cfg = open(config)
-        cfg_obj = yaml.safe_load(cfg)
-        cfg.close()
-        # print str(cfg_obj)
-	if cfg_obj is not None:
-	    template_scripts = cfg_obj['template_scripts']
-            if template_scripts is None:
-                scripts = []
-	    else:
-                for script in template_scripts:
-                    scripts.append(script)
+        try:
+            cfg = open(config)
+            cfg_obj = yaml.safe_load(cfg)
+            cfg.close()
+            if cfg_obj is not None:
+                template_scripts = cfg_obj['template_scripts']
+                if template_scripts is None:
+                    scripts = []
+                else:
+                    for script in template_scripts:
+                        scripts.append(script)
+        except Exception as e:
+            print "--------------------------------------"
+            print bcolors.FAIL + "Get Scripts Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue with parsing scripts from config.yaml..."
+            print "--------------------------------------"
+            pass
         return scripts
 
     def download_templates(self, template_folder, templates):
@@ -326,11 +397,19 @@ class S3TemplateService(object):
                         print str(e)
                         print "--------------------------------------"
                 return (bucket_name, key)
-            self.s3.meta.client.download_file(
-                self.bucket,
-                os.path.join(template_folder, template),
-                os.path.join('/tmp', 'work', template)
-            )
+            try:
+                self.s3.meta.client.download_file(
+                    self.bucket,
+                    os.path.join(template_folder, template),
+                    os.path.join('/tmp', 'work', template)
+                )
+            except Exception as e:
+                print "--------------------------------------"
+                print bcolors.FAIL + "Download Templates Exception" + bcolors.ENDC
+                print str(e)
+                print "Issue with downloading templates..."
+                print "--------------------------------------"
+                pass
 
     def download_scripts(self, template_folder, scripts):
         for script in scripts:
@@ -353,20 +432,38 @@ class S3TemplateService(object):
                         print str(e)
                         print "--------------------------------------"
                 return (bucket_name, key)
-            self.s3.meta.client.download_file(
-                self.bucket,
-                os.path.join(template_folder, script),
-                os.path.join('/tmp', 'work', script)
-            )
-        print "Downloaded Scripts..."
+            try:
+                self.s3.meta.client.download_file(
+                    self.bucket,
+                    os.path.join(template_folder, script),
+                    os.path.join('/tmp', 'work', script)
+                )
+                print "Downloaded Scripts..."
+            except Exception as e:
+                print "--------------------------------------"
+                print bcolors.FAIL + "Download Scripts Exception" + bcolors.ENDC
+                print str(e)
+                print "Issue with downloading scripts..."
+                print "--------------------------------------"
+                pass
+
     def get_presigned_url(self, pdf):
-        presigned_url = self.s3_client.generate_presigned_url(
-            ClientMethod='get_object',
-            Params={
-                'Bucket': self.Bucket,
-                'Key': pdf
-            }
-        )
+        presigned_url = ''
+        try:
+            presigned_url = self.s3_client.generate_presigned_url(
+                ClientMethod='get_object',
+                Params={
+                    'Bucket': self.Bucket,
+                    'Key': pdf
+                }
+            )
+        except Exception as e:
+            print "--------------------------------------"
+            print bcolors.FAIL + "Get Presigned URL Exception" + bcolors.ENDC
+            print str(e)
+            print "Issue generating presigned URL..."
+            print "--------------------------------------"
+            pass
         return presigned_url
 
 

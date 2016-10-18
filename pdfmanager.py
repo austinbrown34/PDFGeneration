@@ -71,7 +71,7 @@ class PDFManager(object):
         message = {
             'status': self.status,
             'error': self.error
-        }
+            }
 
         return message
 

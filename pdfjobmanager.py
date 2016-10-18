@@ -36,11 +36,14 @@ class PDFJobManager(object):
     def get_instructions(self, job, server_data):
 
         templates_and_data = job.setup(server_data)
-        response = {
-            'status': 'Job loaded and instructions received.',
-            'details': {
-                'templates': templates_and_data['templates'],
-                'data': templates_and_data['data']
-            }
-        }
+        if 'error' in templates_and_data:
+            response = templates_and_data
+        else:
+            response = {
+                'status': 'Job loaded and instructions received.',
+                'details': {
+                    'templates': templates_and_data['templates'],
+                    'data': templates_and_data['data']
+                    }
+                }
         return response
