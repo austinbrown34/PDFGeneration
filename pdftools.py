@@ -21,6 +21,10 @@ import urllib2
 import shutil
 import requests
 import json
+import codecs
+# import iconv_codecs
+import io
+# import chardet
 
 class bcolors:
     HEADER = '\033[95m'
@@ -31,6 +35,22 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+def create_utf8_fdf(data, filename):
+    args = ['node', 'fdf/make_fdf.js', str(data), filename]
+    subprocess.call(args)
+
+def smart_encode_str(s):
+    """Create a UTF-16 encoded PDF string literal for `s`."""
+    try:
+        utf16 = s.encode('utf_16_be')
+    except AttributeError:  # ints and floats
+        utf16 = str(s).encode('utf_16_be')
+    safe = utf16.replace(b'\x00)', b'\x00\\)').replace(b'\x00(', b'\x00\\(')
+    return b''.join((codecs.BOM_UTF16_BE, safe))
+
+
 
 def encrypt_pdf(unsafe, safe):
     args = [
@@ -306,15 +326,26 @@ def remove_placeholder_images(
     repair_pdf(newpdf.replace('.pdf', '_temp.pdf'), newpdf)
 
 
+# def convert_encoding(data, new_coding='UTF-8'):
+#   encoding = chardet.detect(data)['encoding']
+#   print encoding
+#   if new_coding.upper() != encoding.upper():
+#     data = data.decode(encoding, data).encode(new_coding)
+#
+#   return data
+
 def generate_fdf(fields, data, fdfname):
+    # iconv_codecs.register()
     field_value_tuples = []
+    new_data = {}
     for field in fields:
+        # new_data[field] = data['field']
         field_value = (field, data[field])
         field_value_tuples.append(field_value)
+    # create_utf8_fdf(new_data, fdfname)
     fdf = forge_fdf("", field_value_tuples, [], [], [])
-    fdf_file = open(fdfname, "wb")
-    fdf_file.write(fdf)
-    fdf_file.close()
+    with io.open(fdfname, 'wb') as fdf_file:
+        fdf_file.write(fdf)
 
 
 def fill_out_form(fdfname, template, filledname):

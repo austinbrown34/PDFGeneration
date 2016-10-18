@@ -2207,7 +2207,7 @@ pdf_data:
     id: 1
     name: Grams
   run_local: /vagrant/pdf-templates-config/
-  strain_name: Super Blue Dream
+  strain_name: Super Blue Dream Laȝamon
   test_packages:
   - name: Potency
     package_key: ''

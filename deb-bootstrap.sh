@@ -6,9 +6,15 @@ sudo pip install --upgrade virtualenv
 sudo apt-get -y install git-all
 virtualenv env
 . env/bin/activate
+pip install nodeenv
+nodeenv -p
 pip install -r requirements.txt
 sudo apt-get -y install build-essential chrpath libssl-dev libxft-dev
 sudo cp bin/phantomjs /usr/local/share/
 sudo ln -sf /usr/local/share/phantomjs /usr/local/bin
 sudo apt-get -y install pdftk
 sudo apt-get install -y libxml2-dev libxslt-dev python-dev
+# curl http://nodejs.org/dist/node-latest.tar.gz | tar xvz
+# cd node-v*
+# ./configure --prefix=$VIRTUAL_ENV
+# make install
