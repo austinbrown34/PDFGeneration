@@ -8,7 +8,7 @@ import requests
 import yaml
 from data_access import *
 import copy
-
+import shutil
 
 class bcolors:
     HEADER = '\033[95m'
@@ -73,6 +73,10 @@ lab = cfg_obj['lab']
 packages = cfg_obj['packages']
 data['pdf_data']['lab']['abbreviation'] = lab
 data['pdf_data']['test_packages'] = packages
+
+if os.path.exists('/tmp/Final_PDF_fixed.pdf'):
+    os.remove('/tmp/Final_PDF_fixed.pdf')
+shutil.rmtree('/tmp/work')
 
 if not os.path.exists('/tmp'):
     os.makedirs('/tmp')

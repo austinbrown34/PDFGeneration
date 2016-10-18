@@ -32,6 +32,30 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+def encrypt_pdf(unsafe, safe):
+    args = [
+        'pdftk',
+        unsafe,
+        'output',
+        safe,
+        'owner_pw',
+        'password',
+        'allow',
+        'printing'
+        ]
+    subprocess.call(args)
+
+def full_repair(corrupt, repaired):
+    args = [
+        'gs',
+        '-o',
+        repaired,
+        '-sDEVICE=pdfwrite',
+        '-dPDFSETTINGS=/prepress',
+        corrupt
+        ]
+    subprocess.call(args)
+
 def get_fonts():
     args = ['fc-list']
     process = subprocess.Popen(args, stdout=subprocess.PIPE)
@@ -146,7 +170,7 @@ def get_placeholder_image_info(filename, xmlfile, outputdir):
         os.makedirs(outputdir)
 
     image_info, placeholder_imgs = [], []
-    password = ''
+    password = 'longlivethegreen'
     caching = True
     rotation, maxpages, jpg_count = 0, 0, 0
     fname = filename
