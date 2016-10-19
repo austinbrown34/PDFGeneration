@@ -66,8 +66,8 @@ class PDFMaker(object):
         # pdftools.get_fonts()
         print "Merged Successfully ----> Running Precautionary Repair on Final PDF..."
         # pdftools.repair_pdf('/tmp/Final_PDF.pdf', '/tmp/Final_PDF_fixed.pdf')
-        pdftools.full_repair('/tmp/' + lab_internal_id + '/Final_PDF.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed_unsafe.pdf')
-        pdftools.encrypt_pdf('/tmp/' + lab_internal_id + '/Final_PDF_fixed_unsafe.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf')
+        pdftools.full_repair('/tmp/' + lab_internal_id + '/Final_PDF.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf')
+        # pdftools.encrypt_pdf('/tmp/' + lab_internal_id + '/Final_PDF_fixed_unsafe.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf')
         final_pdf = open('/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',

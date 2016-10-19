@@ -309,7 +309,7 @@ class S3TemplateService(object):
                             matched = True
                     if 'package_key' in rule['rule']:
                         if rule['rule']['package_key'] is not None and not matched:
-                            if template_key[0] == rule['rule']['package_key'] or template_key[2] == rule['rule']['package_key']:
+                            if template_key[0] == rule['rule']['package_key'] or str(template_key[2]) == rule['rule']['package_key']:
                                 temp_templates.append(rule['rule']['included_templates'])
                                 matched = True
                     if not matched:
