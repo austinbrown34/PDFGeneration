@@ -76,7 +76,10 @@ data['pdf_data']['test_packages'] = packages
 
 if os.path.exists('/tmp/Final_PDF_fixed.pdf'):
     os.remove('/tmp/Final_PDF_fixed.pdf')
-shutil.rmtree('/tmp/work')
+if os.path.exists('/tmp/work'):
+    shutil.rmtree('/tmp/work')
+if os.path.exists('/tmp/fdf'):
+    shutil.rmtree('/tmp/fdf')
 
 if not os.path.exists('/tmp'):
     os.makedirs('/tmp')

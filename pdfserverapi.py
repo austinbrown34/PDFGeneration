@@ -61,6 +61,7 @@ def generate_reports():
     # print "made it to the end"
     # ghostdir = os.listdir('/usr/share/fonts/default/ghostscript')
     # print str(ghostdir)
+    print response
     return jsonify(response)
 
 
