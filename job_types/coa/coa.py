@@ -20,6 +20,7 @@ import json
 import random
 import requests
 import re
+import datetime
 
 class bcolors:
     HEADER = '\033[95m'
@@ -560,7 +561,9 @@ def get_test_packages(server_data):
     for i, package in enumerate(server_data):
         if 'package_key' not in package:
             package = set_value('package_key', None, package)
-        test_names.append([value_for('package_key', package), value_for('name', package)])
+        if 'internal_id' not in package:
+            package = set_value('internal_id', None, package)
+        test_names.append([value_for('package_key', package), value_for('name', package), value_for('internal_id', package)])
     return test_names
 
 
@@ -599,6 +602,13 @@ def setup(server_data):
     print bcolors.OKBLUE
     print "Preparing COA for " + template_folder + '...'
     print bcolors.ENDC
+    print bcolors.BOLD
+    print "--------------------------------------"
+    print "Sample ID: " + value_for('lab_internal_id', server_data)
+    print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
+    print "--------------------------------------"
+    print bcolors.ENDC
+    # lab_internal_id = value_for('lab_internal_id', server_data)
     print "Setting up Preformatted Values..."
     server_data = set_value('date_received', value_for('date_recieved', server_data), server_data)
     server_data = set_value('viz', {}, server_data)

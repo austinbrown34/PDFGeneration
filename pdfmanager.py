@@ -72,7 +72,7 @@ class PDFManager(object):
             'status': self.status,
             'error': self.error
             }
-
+        print message
         return message
 
     def run_job(self, templates, data, delivery_method=None):

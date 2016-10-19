@@ -24,6 +24,18 @@ import json
 import codecs
 # import iconv_codecs
 import io
+import errno
+
+def copy(src, dest):
+    try:
+        shutil.copytree(src, dest)
+    except OSError as e:
+        # If the error was caused because the source wasn't a directory
+        if e.errno == errno.ENOTDIR:
+            shutil.copy(src, dest)
+        else:
+            print('Directory not copied. Error: %s' % e)
+
 # import chardet
 
 class bcolors:
@@ -38,8 +50,23 @@ class bcolors:
 
 
 def create_utf8_fdf(data, filename):
-    args = ['node', 'fdf/make_fdf.js', str(data), filename]
-    subprocess.call(args)
+    if os.path.exists('/tmp/fdf'):
+        shutil.rmtree('/tmp/fdf')
+    copy('fdf', '/tmp/fdf')
+    # args = ['npm', 'install', 'iconv']
+    # subprocess.call(args)
+    # args = ['npm', 'uninstall', '/tmp/fdf']
+    # subprocess.call(args)
+    args = ['npm', 'install', '/tmp/fdf']
+    p = subprocess.Popen(args, cwd='/tmp/fdf')
+    p.wait()
+    # subprocess.call(args, shell=True)
+    # iargs = ['node-gyp', 'configure', 'build']
+    # subprocess.call(iargs)
+    args2 = ['node', '/tmp/fdf/make_fdf.js', str(data), filename]
+    p = subprocess.Popen(args2, cwd='/tmp/fdf')
+    p.wait()
+    # subprocess.call(args2, shell=True)
 
 def smart_encode_str(s):
     """Create a UTF-16 encoded PDF string literal for `s`."""
@@ -339,7 +366,7 @@ def generate_fdf(fields, data, fdfname):
     field_value_tuples = []
     new_data = {}
     for field in fields:
-        # new_data[field] = data['field']
+        new_data[field] = data[field]
         field_value = (field, data[field])
         field_value_tuples.append(field_value)
     # create_utf8_fdf(new_data, fdfname)

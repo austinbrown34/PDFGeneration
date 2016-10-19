@@ -57,13 +57,18 @@ class PDFMaker(object):
         # print os.listdir('/tmp/work/')
         # print "contents of work/temp dir:"
         # print os.listdir('/tmp/work/temp/')
-        pdftools.merge_all_pages(pdfs, '/tmp/Final_PDF.pdf')
+        lab_internal_id = server_data['lab_internal_id']
+        # lab_internal_id = value_for('lab_internal_id', server_data)
+        if os.path.exists('/tmp/' + lab_internal_id):
+            shutil.rmtree('/tmp/' + lab_internal_id)
+        os.makedirs('/tmp/' + lab_internal_id)
+        pdftools.merge_all_pages(pdfs, '/tmp/' + lab_internal_id + '/Final_PDF.pdf')
         # pdftools.get_fonts()
         print "Merged Successfully ----> Running Precautionary Repair on Final PDF..."
         # pdftools.repair_pdf('/tmp/Final_PDF.pdf', '/tmp/Final_PDF_fixed.pdf')
-        pdftools.full_repair('/tmp/Final_PDF.pdf', '/tmp/Final_PDF_fixed_unsafe.pdf')
-        pdftools.encrypt_pdf('/tmp/Final_PDF_fixed_unsafe.pdf', '/tmp/Final_PDF_fixed.pdf')
-        final_pdf = open('/tmp/Final_PDF_fixed.pdf', 'rb')
+        pdftools.full_repair('/tmp/' + lab_internal_id + '/Final_PDF.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed_unsafe.pdf')
+        pdftools.encrypt_pdf('/tmp/' + lab_internal_id + '/Final_PDF_fixed_unsafe.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf')
+        final_pdf = open('/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf', 'rb')
         response = {
             'status': 'PDF Generated Successfully',
             'pdf': final_pdf

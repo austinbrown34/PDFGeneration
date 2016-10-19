@@ -8,7 +8,7 @@ sys.path.append('../..')
 import collections
 import time
 import shutil
-from pdfservices import S3TemplateService
+from pdfservices import S3TemplateService, TemplateService
 from pdfservices import TemplateService
 from collections import OrderedDict
 from operator import itemgetter

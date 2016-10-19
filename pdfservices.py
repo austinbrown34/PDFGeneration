@@ -303,11 +303,15 @@ class S3TemplateService(object):
                     # print template_key
                     # print rule['rule']['package_name']
                     # print template_key[1]
-                    if rule['rule']['package_key'] is not None:
+                    if 'internal_id' in rule['rule']:
+                        if template_key[2] == rule['rule']['internal_id']:
+                            temp_templates.append(rule['rule']['included_templates'])
+                            matched = True
+                    if rule['rule']['package_key'] is not None and not matched:
                         if template_key[0] == rule['rule']['package_key']:
                             temp_templates.append(rule['rule']['included_templates'])
                             matched = True
-                    else:
+                    if not matched:
                         if template_key[1] == rule['rule']['package_name']:
                             temp_templates.append(rule['rule']['included_templates'])
                             matched = True
