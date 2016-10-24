@@ -286,41 +286,42 @@ class S3TemplateService(object):
                 matched = False
                 # print "rule:"
                 # print rule
-                for j, template_key in enumerate(template_keys):
-                    # template_key[0] = unicode(template_key[0], 'utf-8')
-                    try:
-                        template_key[0] = template_key[0].replace(u'\u2013', '-')
-                    except Exception as e:
-                        # print str(e)
-                        pass
-                        # template_key[1] = unicode(template_key[1], 'utf-8')
-                    try:
-                        template_key[1] = template_key[1].replace(u'\u2013', '-')
-                    except Exception as e:
-                        # print str(e)
-                        pass
-                    # print "template_key"
-                    # print template_key
-                    # print rule['rule']['package_name']
-                    # print template_key[1]
-                    if 'internal_id' in rule['rule']:
-                        if template_key[2] == rule['rule']['internal_id']:
-                            temp_templates.append(rule['rule']['included_templates'])
-                            matched = True
-                    if 'package_key' in rule['rule']:
-                        if rule['rule']['package_key'] is not None and not matched:
-                            if template_key[0] == rule['rule']['package_key'] or str(template_key[2]) == rule['rule']['package_key']:
+                if rule['rule']['included_templates'] is not None:
+                    for j, template_key in enumerate(template_keys):
+                        # template_key[0] = unicode(template_key[0], 'utf-8')
+                        try:
+                            template_key[0] = template_key[0].replace(u'\u2013', '-')
+                        except Exception as e:
+                            # print str(e)
+                            pass
+                            # template_key[1] = unicode(template_key[1], 'utf-8')
+                        try:
+                            template_key[1] = template_key[1].replace(u'\u2013', '-')
+                        except Exception as e:
+                            # print str(e)
+                            pass
+                        # print "template_key"
+                        # print template_key
+                        # print rule['rule']['package_name']
+                        # print template_key[1]
+                        if 'internal_id' in rule['rule']:
+                            if template_key[2] == rule['rule']['internal_id']:
                                 temp_templates.append(rule['rule']['included_templates'])
                                 matched = True
-                    if not matched:
-                        if template_key[1] == rule['rule']['package_name']:
-                            temp_templates.append(rule['rule']['included_templates'])
-                            matched = True
-                    if not matched:
-                        unmatched.append({
-                            'template_key': template_key[0],
-                            'template_name': template_key[1],
-                        })
+                        if 'package_key' in rule['rule']:
+                            if rule['rule']['package_key'] is not None and not matched:
+                                if template_key[0] == rule['rule']['package_key'] or str(template_key[2]) == rule['rule']['package_key']:
+                                    temp_templates.append(rule['rule']['included_templates'])
+                                    matched = True
+                        if not matched:
+                            if template_key[1] == rule['rule']['package_name']:
+                                temp_templates.append(rule['rule']['included_templates'])
+                                matched = True
+                        if not matched:
+                            unmatched.append({
+                                'template_key': template_key[0],
+                                'template_name': template_key[1],
+                            })
             message = 'The following packages for ' + lab + ' are missing templates: \n\n'
             for i, e in enumerate(unmatched):
                 message += 'PKG NAME: ' + str(e['template_name']) + '\nPKG KEY: ' + str(e['template_key']) + '\n\n'

@@ -86,7 +86,7 @@ def encrypt_pdf(unsafe, safe):
         'output',
         safe,
         'owner_pw',
-        'password',
+        'longlivethegreen',
         'allow',
         'printing'
         ]
@@ -102,6 +102,8 @@ def full_repair(corrupt, repaired):
         corrupt
         ]
     subprocess.call(args)
+    # process = subprocess.Popen(args, stdout=subprocess.PIPE)
+    # out, err = process.communicate()
 
 def get_fonts():
     args = ['fc-list']

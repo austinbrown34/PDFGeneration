@@ -66,9 +66,37 @@ class PDFMaker(object):
         # pdftools.get_fonts()
         print "Merged Successfully ----> Running Precautionary Repair on Final PDF..."
         # pdftools.repair_pdf('/tmp/Final_PDF.pdf', '/tmp/Final_PDF_fixed.pdf')
-        pdftools.full_repair('/tmp/' + lab_internal_id + '/Final_PDF.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf')
-        # pdftools.encrypt_pdf('/tmp/' + lab_internal_id + '/Final_PDF_fixed_unsafe.pdf', '/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf')
-        final_pdf = open('/tmp/' + lab_internal_id + '/Final_PDF_fixed.pdf', 'rb')
+        pdftools.full_repair(
+            os.path.join(
+                '/tmp',
+                lab_internal_id,
+                'Final_PDF.pdf'),
+            os.path.join(
+                '/tmp',
+                lab_internal_id,
+                'Final_PDF_fixed_unsafe.pdf'
+            )
+        )
+        pdftools.encrypt_pdf(
+            os.path.join(
+                '/tmp',
+                lab_internal_id,
+                'Final_PDF_fixed_unsafe.pdf'
+                ),
+            os.path.join(
+                '/tmp',
+                lab_internal_id,
+                'Final_PDF_fixed.pdf'
+            )
+            )
+
+        final_pdf = open(
+            os.path.join(
+                '/tmp',
+                lab_internal_id,
+                'Final_PDF_fixed.pdf'
+            ), 'rb'
+        )
         response = {
             'status': 'PDF Generated Successfully',
             'pdf': final_pdf
@@ -339,7 +367,7 @@ class PDFMaker(object):
         print
         if fixed_vizpdfs == []:
             # print "Image"
-            with open(os.path.join(work_dir, 'work_complete' + page_count + '.pdf'), 'wb') as output:
+            with open(os.path.join(work_dir, 'work_complete_temp' + page_count + '.pdf'), 'wb') as output:
                 output.write(open(os.path.join(work_dir, 'temp', 'work_filled_with_images' + page_count + '.pdf'), 'rb').read())
         else:
             "Attempting to Draw Visualization on PDF..."
@@ -352,7 +380,7 @@ class PDFMaker(object):
                 ),
                 os.path.join(
                     work_dir,
-                    'work_complete' + page_count + '.pdf'
+                    'work_complete_temp' + page_count + '.pdf'
                 ),
                 os.path.join(work_dir, 'temp')
             )
@@ -364,4 +392,9 @@ class PDFMaker(object):
         print "------------------------------------------"
         print bcolors.ENDC
         print
+        pdftools.repair_pdf(os.path.join(work_dir, 'work_complete_temp' + page_count + '.pdf'), os.path.join(work_dir, 'work_complete' + page_count + '.pdf'))
+        # pdftools.full_repair(
+        #     os.path.join(work_dir, 'work_complete_temp2' + page_count + '.pdf'),
+        #     os.path.join(work_dir, 'work_complete' + page_count + '.pdf')
+        # )
         return os.path.join(work_dir, 'work_complete' + page_count + '.pdf')
