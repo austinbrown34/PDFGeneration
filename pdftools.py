@@ -25,6 +25,7 @@ import codecs
 # import iconv_codecs
 import io
 import errno
+import StringIO
 
 def copy(src, dest):
     try:
@@ -300,15 +301,34 @@ def remove_placeholder_images(
         newpdf,
         placeholder_imgs,
         jpg_dir):
+    prepdf = file(orig, "rb").readlines()
+    for line, chunk in enumerate(prepdf):
+        if 'BitsPerComponent' in chunk:
+            print chunk
+            print str(line)
     pdf = file(orig, "rb").read()
+    # for p in pdf:
+    #     if '\xff\xd8' in p:
+    #         print "yay"
+
+    jpg_ranges = []
+    extracted_images = []
+    mynewpdf = file(newpdf.replace('.pdf', '_temp.pdf'), "wb")
+
+        # pdf = file(orig, "rb").read()
     startmark = "\xff\xd8"
     startfix, i, njpg, placeholder = 0, 0, 0, 0
     endmark = "\xff\xd9"
     endfix = 2
-    jpg_ranges = []
-    mynewpdf = file(newpdf.replace('.pdf', '_temp.pdf'), "wb")
     while True:
+        # newlines = pdf.find("\n")
+        # newlines = pdf.count("\n")
+        # print "newlines:"
+        # l = pdf.find('BitsPerComponent')
+        # print l
+        # print newlines
         istream = pdf.find("stream", i)
+        # print istream
         if istream < 0:
             break
         istart = pdf.find(startmark, istream, istream + 20)
@@ -323,24 +343,52 @@ def remove_placeholder_images(
             raise Exception("Didn't find end of JPG!")
         istart += startfix
         iend += endfix
+        # print "found"
+        # print "found! on line: " + str(index)
+        # print pdflines[index-1]
         if njpg in placeholder_imgs:
             jpg_ranges.append([njpg, istart, iend])
             jpg = pdf[istart:iend]
             jpgfile = file(jpg_dir + "jpg%d.jpg" % njpg, "wb")
+
+            extracted_images.append(jpg_dir + "jpg%d.jpg" % njpg)
             jpgfile.write(jpg)
             jpgfile.close()
         njpg += 1
         i = iend
-
-    for jpg_item in jpg_ranges:
+    pdf = file(orig, "rb").read()
+    for i, jpg_item in enumerate(jpg_ranges):
         range_start = jpg_item[1]
         range_end = jpg_item[2]
         mynewpdf.write(pdf[placeholder:range_start])
         counter = range_start
         while counter < range_end + 1:
-            empty_bytes = bytes(1)
-            mynewpdf.write(empty_bytes)
+            # empty_bytes = bytes(1)
+            # # empty_bytes = '\n'
+            mynewpdf.write(b'\n')
             counter += 1
+
+
+        # img = IMG.open(extracted_images[i])
+        # img = img.convert("RGBA")
+        # datas = img.getdata()
+        #
+        # newData = []
+        # for item in datas:
+        #     newData.append((255, 255, 255, 0))
+        #
+        #
+        # img.putdata(newData)
+        # img.save("white.png", "PNG")
+
+        # im = Image.new("RGB", (512, 512), "white")
+        # im.save('white.jpg')
+        # buffer = StringIO.StringIO()
+        # buffer.write(open('white.png', 'rb').read())
+        # buffer.seek(0)
+        # contents = buffer.getvalue()
+        # image = Image.open(buffer)
+        # mynewpdf.write(contents)
         placeholder = range_end + 1
     mynewpdf.write(pdf[placeholder:sys.getsizeof(pdf)])
     mynewpdf.close()
@@ -384,7 +432,8 @@ def fill_out_form(fdfname, template, filledname):
         fdfname,
         'output',
         filledname,
-        'flatten'
+        'flatten',
+        'need_appearances'
     ]
 
     subprocess.call(call)

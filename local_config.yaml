@@ -1,6 +1,6 @@
 lab: MML
 packages:
-  - name:
-    package_key: '3197'
-  - name:
-    package_key:
+  - name: 'Potency'
+    package_key: '3470'
+  - name: ''
+    package_key: '3431'

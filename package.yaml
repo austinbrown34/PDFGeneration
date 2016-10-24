@@ -1,0 +1,2250 @@
+template_logo: ''
+template_rules:
+- rule:
+    included_templates: []
+    package_key: '"27"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"67"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"68"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"71"'
+    package_name: '"Oregon Compliance Panel (Infused Foods)"'
+- rule:
+    included_templates: []
+    package_key: '"72"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"73"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"74"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"75"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"76"'
+    package_name: '"Oregon Compliance Package (Infused Foods) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"77"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"78"'
+    package_name: '"Batch Sealing Option ($7 per bag)"'
+- rule:
+    included_templates: []
+    package_key: '"79"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"80"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"81"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"82"'
+    package_name: '"Cannabinoid Potency (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"83"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"84"'
+    package_name: '"THC:CBD Ratio for Leaves (less than 5 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"85"'
+    package_name: '"THC:CBD Ratio for Leave (+5 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"86"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"87"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"88"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"89"'
+    package_name: '"Basic Pesticide Panel (Food Oil)"'
+- rule:
+    included_templates: []
+    package_key: '"90"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"91"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"92"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"93"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"94"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"95"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"96"'
+    package_name: '"Immature Plant Inspection"'
+- rule:
+    included_templates: []
+    package_key: '"97"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"98"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"99"'
+    package_name: '"Cannabinoid Potency"'
+- rule:
+    included_templates: []
+    package_key: '"100"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"101"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"102"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"103"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"218"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"219"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"220"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"221"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"222"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"433"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"434"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"435"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"475"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"690"'
+    package_name: '"THC:CBD Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"1187"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1188"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1189"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1190"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1191"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1192"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1193"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1194"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1195"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1196"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1201"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1202"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1203"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1204"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1205"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1238"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1516"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1517"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1518"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1519"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1520"'
+    package_name: '"Oregon Compliance Panel (Infused Foods)"'
+- rule:
+    included_templates: []
+    package_key: '"1521"'
+    package_name: '"Oregon Compliance Package (Infused Foods) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1522"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1523"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1524"'
+    package_name: '"Cannabinoid Potency (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1525"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1526"'
+    package_name: '"Immature Plant Inspection"'
+- rule:
+    included_templates: []
+    package_key: '"1527"'
+    package_name: '"THC:CBD Ratio for Leave (+5 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"1528"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1529"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1530"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1531"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1532"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1533"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1534"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1535"'
+    package_name: '"Batch Sealing Option ($7 per bag)"'
+- rule:
+    included_templates: []
+    package_key: '"1536"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1537"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1538"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1539"'
+    package_name: '"Cannabinoid Potency"'
+- rule:
+    included_templates: []
+    package_key: '"1540"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1541"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1542"'
+    package_name: '"Basic Pesticide Panel (Food Oil)"'
+- rule:
+    included_templates: []
+    package_key: '"1543"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1544"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1545"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1546"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1547"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1548"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1549"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1550"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1551"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"1552"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"1553"'
+    package_name: '"THC:CBD Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"1554"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1555"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1556"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1557"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1558"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1559"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1560"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1561"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1562"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1563"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1564"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1565"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1566"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1567"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1568"'
+    package_name: '"Batch Sealing Option ($7 per bag)"'
+- rule:
+    included_templates: []
+    package_key: '"1569"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1570"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1571"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1572"'
+    package_name: '"Cannabinoid Potency"'
+- rule:
+    included_templates: []
+    package_key: '"1573"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1574"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1575"'
+    package_name: '"Basic Pesticide Panel (Food Oil)"'
+- rule:
+    included_templates: []
+    package_key: '"1576"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1577"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1578"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1579"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1580"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1581"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1582"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1583"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1584"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"1585"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"1586"'
+    package_name: '"THC:CBD Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"1587"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1588"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1589"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1590"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1591"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1592"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1593"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1594"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1595"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1596"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1597"'
+    package_name: '"Batch Sealing Option ($7 per bag)"'
+- rule:
+    included_templates: []
+    package_key: '"1598"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1599"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1600"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1601"'
+    package_name: '"Cannabinoid Potency"'
+- rule:
+    included_templates: []
+    package_key: '"1602"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1603"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1604"'
+    package_name: '"Basic Pesticide Panel (Food Oil)"'
+- rule:
+    included_templates: []
+    package_key: '"1605"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1606"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1607"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1608"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1609"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1610"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1611"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1612"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1613"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"1614"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"1615"'
+    package_name: '"THC:CBD Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"1616"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1617"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1618"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1619"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1620"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1621"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1622"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1623"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"1624"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"1625"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"1626"'
+    package_name: '"THC:CBD Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"1627"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1628"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1629"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1630"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1631"'
+    package_name: '"THC:CBD Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"1632"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1633"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1634"'
+    package_name: '"Basic Pesticide Panel (Food Oil)"'
+- rule:
+    included_templates: []
+    package_key: '"1635"'
+    package_name: '"Basic Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1636"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1637"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1638"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1639"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1640"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1641"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1642"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"1643"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1644"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1645"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"1646"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"1647"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1648"'
+    package_name: '"Batch Sealing Option ($7 per bag)"'
+- rule:
+    included_templates: []
+    package_key: '"1649"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1650"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1651"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1652"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1653"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1654"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1655"'
+    package_name: '"Oregon Compliance Package (Food Oils) + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1656"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1657"'
+    package_name: '"Extended Pesticide Panel (Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1658"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1659"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1660"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"1661"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1662"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"1663"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"1664"'
+    package_name: '"Oregon Compliance Package (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"1665"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1666"'
+    package_name: '"Oregon Compliance Panel + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1667"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"1668"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1669"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1697"'
+    package_name: '"Pesticide + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1699"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"1700"'
+    package_name: '"Pesticide + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1768"'
+    package_name: '"CBD:THC Ratio by GC"'
+- rule:
+    included_templates: []
+    package_key: '"1769"'
+    package_name: '"Oregon Compliance Panel + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"1770"'
+    package_name: '"Oregon Compliance Panel"'
+- rule:
+    included_templates: []
+    package_key: '"1771"'
+    package_name: '"CBD:THC Ratio by GC"'
+- rule:
+    included_templates: []
+    package_key: '"1772"'
+    package_name: '"CBD:THC Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"2362"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2363"'
+    package_name: '"Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2364"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2365"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2366"'
+    package_name: '"Yeast & Mold Count (Alcohol Tincture)"'
+- rule:
+    included_templates: []
+    package_key: '"2367"'
+    package_name: '"Yeast & Mold Count (Food Oils)"'
+- rule:
+    included_templates: []
+    package_key: '"2368"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2369"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"2370"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2371"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2373"'
+    package_name: '"Extended Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2399"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2400"'
+    package_name: '"Oregon Compliance Package + Extended Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2401"'
+    package_name: '"Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2402"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2403"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2404"'
+    package_name: '"Pesticides + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"2405"'
+    package_name: '"Extended Pesticide Panel"'
+- rule:
+    included_templates: []
+    package_key: '"2409"'
+    package_name: '"CBD:THC Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"2410"'
+    package_name: '"CBD:THC Ratio by GC"'
+- rule:
+    included_templates: []
+    package_key: '"2463"'
+    package_name: '"CBD:THC Ratio"'
+- rule:
+    included_templates: []
+    package_key: '"2513"'
+    package_name: '"OAR 333-008 Compliance Panel + Mold (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"2514"'
+    package_name: '"OAR 333-008 Compliance Panel + Mold (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"2515"'
+    package_name: '"OAR 333-008 Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2516"'
+    package_name: '"OAR 333-008 Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2517"'
+    package_name: '"OAR 333-008 Compliance Panel + Ext. Pesticide Panel (Potency +
+      Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2518"'
+    package_name: '"OAR 333-008 Compliance Panel + Ext. Pesticide Panel (Potency +
+      Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2519"'
+    package_name: '"OAR 333-008 Compliance Panel + Ext. Pesticide Panel (Potency +
+      Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2520"'
+    package_name: '"OAR 333-008 Compliance Panel + Ext. Pesticide Panel (Potency +
+      Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2521"'
+    package_name: '"Cannabinoid Profile via HPLC-UV"'
+- rule:
+    included_templates: []
+    package_key: '"2522"'
+    package_name: '"Cannabinoid Profile via HPLC-UV"'
+- rule:
+    included_templates: []
+    package_key: '"2523"'
+    package_name: '"Cannabinoid Profile via HPLC-UV"'
+- rule:
+    included_templates: []
+    package_key: '"2524"'
+    package_name: '"Cannabinoid Profile via HPLC-UV"'
+- rule:
+    included_templates: []
+    package_key: '"2525"'
+    package_name: '"CBD:THC Ratio via GC-FID"'
+- rule:
+    included_templates: []
+    package_key: '"2526"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2527"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2528"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2529"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2530"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2531"'
+    package_name: '"CBD:THC Ratio by GC"'
+- rule:
+    included_templates: []
+    package_key: '"2532"'
+    package_name: '"OAR 333-007 Compliance Panel (Moisture Content + Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2533"'
+    package_name: '"OAR 333-007 Compliance Panel (Potency + Pesticides + Residual
+      Solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"2534"'
+    package_name: '"Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2535"'
+    package_name: '"OAR 333-007 Compliance Panel (Potency + Residual Solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"2536"'
+    package_name: '"OAR 333-007 Compliance Panel (Moisture Content + Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2537"'
+    package_name: '"OAR 333-007 Compliance Panel (Potency + Pesticides + Residual
+      Solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"2538"'
+    package_name: '"Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2539"'
+    package_name: '"OAR 333-007 Compliance Panel (Potency + Residual Solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"2540"'
+    package_name: '"OAR 333-007 Compliant Pesticide Screen (Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2541"'
+    package_name: '"OAR 333-007 Compliant Residual Solvent Screen (Residual Solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"2542"'
+    package_name: '"OAR 333-007 Compliant Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2543"'
+    package_name: '"OAR 333-007 Compliant Pesticide Screen (Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2544"'
+    package_name: '"OAR 333-007 Compliant Residual Solvent Screen (Residual Solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"2545"'
+    package_name: '"OAR 333-007 Compliant Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2546"'
+    package_name: '"OAR 333-007 Compliant Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"2547"'
+    package_name: '"OAR 333-007 Compliant Cannabinoid Potency Analysis (Potency)"'
+- rule:
+    included_templates: []
+    package_key: '"2548"'
+    package_name: '"OAR 333-007 Compliant Moisture Content Analysis (Moisture Content)"'
+- rule:
+    included_templates: []
+    package_key: '"2549"'
+    package_name: '"Residual Solvents via GC-MS"'
+- rule:
+    included_templates: []
+    package_key: '"2644"'
+    package_name: '"OAR 333-008 Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"2645"'
+    package_name: '"OAR 333-008 Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"2646"'
+    package_name: '"OAR 333-008: Pesticides + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"2647"'
+    package_name: '"Water Activity (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2648"'
+    package_name: '"Moisture Content (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2649"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2650"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2651"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2652"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2653"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2654"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2655"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2656"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2657"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2658"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2659"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2660"'
+    package_name: '"Residual Solvents (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2661"'
+    package_name: '"Yeast & Mold Count (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2662"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2663"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2664"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2665"'
+    package_name: '"Yeast & Mold Count"'
+- rule:
+    included_templates: []
+    package_key: '"2666"'
+    package_name: '"Other Microbial Screens"'
+- rule:
+    included_templates: []
+    package_key: '"2667"'
+    package_name: '"Basic Terpene Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2668"'
+    package_name: '"Extended Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2669"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2670"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2671"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2672"'
+    package_name: '"OAR 333-007: Potency + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2673"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2674"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"2675"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2676"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2677"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2678"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"2679"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"2680"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2681"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2682"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2683"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2684"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2685"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"2686"'
+    package_name: '"Basic Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2687"'
+    package_name: '"Extended Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2688"'
+    package_name: '"Chemotype Profile: Cannabinoids + Terpenes (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2689"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2690"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2691"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2692"'
+    package_name: '"OAR 333-007: Potency + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2693"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2694"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"2695"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2696"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2697"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2698"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2699"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"2700"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2701"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2702"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2703"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2704"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2707"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2708"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2709"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2710"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"2711"'
+    package_name: '"OAR 333-008: Pesticides + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"2712"'
+    package_name: '"Water Activity (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2713"'
+    package_name: '"Moisture Content (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2714"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2715"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2716"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2717"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2718"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2719"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2720"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2721"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2722"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2723"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2724"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2725"'
+    package_name: '"Residual Solvents (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2726"'
+    package_name: '"Yeast & Mold Count (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2727"'
+    package_name: '"Basic Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2728"'
+    package_name: '"Extended Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2729"'
+    package_name: '"Chemotype Profile: Cannabinoids + Terpenes (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2730"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2731"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2732"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2733"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2734"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"2735"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2736"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2737"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2738"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2747"'
+    package_name: '"OAR 333-008: Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2748"'
+    package_name: '"Water Activity (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2749"'
+    package_name: '"Moisture Content (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2750"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2751"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2752"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2753"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2754"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2755"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2756"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2757"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2758"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2759"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2760"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2761"'
+    package_name: '"Residual Solvents (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2762"'
+    package_name: '"Yeast & Mold Count (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2763"'
+    package_name: '"Basic Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2764"'
+    package_name: '"Extended Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2765"'
+    package_name: '"Chemotype Profile: Cannabinoids + Terpenes (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2766"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"2767"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"2768"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"2769"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"2770"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"2771"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"2772"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"2773"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3414"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"3415"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"3416"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3417"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3418"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3419"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3420"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3421"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3422"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"3423"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"3424"'
+    package_name: '"OAR 333-008: Pesticides + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"3425"'
+    package_name: '"OAR 333-008: Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3426"'
+    package_name: '"Water Activity (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3427"'
+    package_name: '"Moisture Content (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3428"'
+    package_name: '"Transportation Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3429"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"3430"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides + Mold)"'
+- rule:
+    included_templates: []
+    package_key: '"3431"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3432"'
+    package_name: '"OAR 333-008: Compliance Panel (Potency + Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3433"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3434"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3435"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3436"'
+    package_name: '"OAR 333-008: Compliance Panel + Ext. Pesticide Panel (Potency
+      + Extended Pesticides)"'
+- rule:
+    included_templates: []
+    package_key: '"3437"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"3438"'
+    package_name: '"OAR 333-008: Cannabinoid Profile"'
+- rule:
+    included_templates: []
+    package_key: '"3439"'
+    package_name: '"OAR 333-008: Pesticides + Mold"'
+- rule:
+    included_templates: []
+    package_key: '"3440"'
+    package_name: '"OAR 333-008: Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3441"'
+    package_name: '"Water Activity (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3442"'
+    package_name: '"Moisture Content (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3443"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3444"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3445"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3446"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3447"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3448"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3449"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3450"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3451"'
+    package_name: '"Basic Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3452"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3453"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3454"'
+    package_name: '"Residual Solvents (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3455"'
+    package_name: '"Yeast & Mold Count (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3456"'
+    package_name: '"Basic Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3457"'
+    package_name: '"Extended Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3458"'
+    package_name: '"Chemotype Profile: Cannabinoids + Terpenes (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3459"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3460"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3461"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3462"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"3463"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"3464"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3465"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3466"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3467"'
+    package_name: '"Transportation Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3468"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3469"'
+    package_name: '"OAR 333-007: Cannabinoid Potency"'
+- rule:
+    included_templates: []
+    package_key: '"3470"'
+    package_name: '"Water Activity (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3471"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3472"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3473"'
+    package_name: '"Cannabinoid Profile (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3474"'
+    package_name: '"Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3475"'
+    package_name: '"Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3476"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3477"'
+    package_name: '"Extended Pesticide Panel (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3478"'
+    package_name: '"Residual Solvents (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3479"'
+    package_name: '"Basic Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3480"'
+    package_name: '"Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3481"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3482"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3483"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3484"'
+    package_name: '"Transportation Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3485"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3486"'
+    package_name: '"Terpene Analysis (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3487"'
+    package_name: '"Chemotype Profile: Cannabinoids + Terpenes (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3488"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3489"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3490"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3491"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"3492"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"3493"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3494"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3495"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3496"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3497"'
+    package_name: '"Transportation Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3498"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3499"'
+    package_name: '"Sampling Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3500"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3501"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3502"'
+    package_name: '"Sampling Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3503"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3504"'
+    package_name: '"OAR 333-007: Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3505"'
+    package_name: '"OAR 333-007: Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3506"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"3507"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"3508"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3509"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3510"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3511"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3512"'
+    package_name: '"OAR 333-007: Process Validation - THC"'
+- rule:
+    included_templates: []
+    package_key: '"3513"'
+    package_name: '"OAR 333-007: Process Validation - Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3514"'
+    package_name: '"OAR 333-007: Process Validation - Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3515"'
+    package_name: '"Transportation Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3516"'
+    package_name: '"Sampling Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3517"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3518"'
+    package_name: '"Sampling Fee (1-4 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3519"'
+    package_name: '"Sampling Fee (5-10 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3520"'
+    package_name: '"Sampling Fee (11+ samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3521"'
+    package_name: '"Sampling Fee (5-10 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3522"'
+    package_name: '"Sampling Fee (11+ samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3523"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3689"'
+    package_name: '"CBD:THC Ratio (Informational Use)"'
+- rule:
+    included_templates: []
+    package_key: '"3690"'
+    package_name: '"OAR 333-007: Moisture Content + Potency + Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3691"'
+    package_name: '"OAR 333-007: Potency + Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3692"'
+    package_name: '"OAR 333-007: Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3693"'
+    package_name: '"OAR 333-007: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"3694"'
+    package_name: '"OAR 333-007: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"3695"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3696"'
+    package_name: '"OAR 333-007: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3697"'
+    package_name: '"OAR 333-007: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3698"'
+    package_name: '"OAR 333-007: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3699"'
+    package_name: '"OAR 333-007: Process Validation - THC"'
+- rule:
+    included_templates: []
+    package_key: '"3700"'
+    package_name: '"OAR 333-007: Process Validation - Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3701"'
+    package_name: '"OAR 333-007: Process Validation - Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3702"'
+    package_name: '"OAR 333-007-0400: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3703"'
+    package_name: '"OAR 333-007-0410: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3704"'
+    package_name: '"OAR 333-007-0440: Process Validation - THC"'
+- rule:
+    included_templates: []
+    package_key: '"3705"'
+    package_name: '"OAR 333-007-0440: Process Validation - Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3706"'
+    package_name: '"OAR 333-007-0440: Process Validation - Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3707"'
+    package_name: '"OAR 333-007-0420: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"3708"'
+    package_name: '"OAR 333-007-0420: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"3709"'
+    package_name: '"OAR 333-007-0430: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3710"'
+    package_name: '"OAR 333-007-0430: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3711"'
+    package_name: '"Oregon Testing Panel for Useable Marijuana (Flower)"'
+- rule:
+    included_templates: []
+    package_key: '"3712"'
+    package_name: '"Testing Panel for Concentrates & Extracts (with solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"3713"'
+    package_name: '"Testing Panel for Concentrates & Extracts (without solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"3714"'
+    package_name: '"OAR 333-007: Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3715"'
+    package_name: '"OAR 333-007-0420: Water Activity"'
+- rule:
+    included_templates: []
+    package_key: '"3716"'
+    package_name: '"OAR 333-007-0420: Moisture Content"'
+- rule:
+    included_templates: []
+    package_key: '"3717"'
+    package_name: '"OAR 333-007-0430: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3718"'
+    package_name: '"OAR 333-007-0430: Cannabinoid Potency Analysis"'
+- rule:
+    included_templates: []
+    package_key: '"3719"'
+    package_name: '"OAR 333-007-0400: Pesticide Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3720"'
+    package_name: '"OAR 333-007-0410: Residual Solvent Screen"'
+- rule:
+    included_templates: []
+    package_key: '"3721"'
+    package_name: '"OAR 333-007-0440: Process Validation - THC"'
+- rule:
+    included_templates: []
+    package_key: '"3722"'
+    package_name: '"OAR 333-007-0440: Process Validation - Pesticides"'
+- rule:
+    included_templates: []
+    package_key: '"3723"'
+    package_name: '"OAR 333-007-0440: Process Validation - Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '"3724"'
+    package_name: '"Transportation Fee"'
+- rule:
+    included_templates: []
+    package_key: '"3725"'
+    package_name: '"OAR 333-007-0360: Sampling Service (1-4 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3726"'
+    package_name: '"OAR 333-007-0360: Sampling Service (5-10 samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3727"'
+    package_name: '"OAR 333-007-0360: Sampling Service (11+ samples)"'
+- rule:
+    included_templates: []
+    package_key: '"3728"'
+    package_name: '"Batch Sealing"'
+- rule:
+    included_templates: []
+    package_key: '"3729"'
+    package_name: '"OAR 333-007: Testing Panel for Useable Marijuana (Flower)"'
+- rule:
+    included_templates: []
+    package_key: '"3730"'
+    package_name: '"OAR 333-007: Testing Panel for Concentrates & Extracts (with solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"3731"'
+    package_name: '"OAR 333-007: Testing Panel for Concentrates & Extracts (without
+      solvents)"'
+- rule:
+    included_templates: []
+    package_key: '"3732"'
+    package_name: '"OAR 333-007: Pesticides + Residual Solvents"'
+- rule:
+    included_templates: []
+    package_key: '""'
+    package_name: '""'
+template_scripts: []

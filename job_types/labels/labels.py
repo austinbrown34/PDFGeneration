@@ -116,7 +116,15 @@ def setup(server_data):
     print bcolors.OKBLUE
     print "Preparing Labels for " + template_folder + '...'
     print bcolors.ENDC
+    strain_name = value_for('strain_name', server_data)
+    # new_strain_name = repr(strain_name)
+    print strain_name
+    new_strain_name = u' '.join(strain_name).strip()
+    # new_strain_name = u' '.join(strain_name).decode().encode('utf-8').strip()
 
+    # new_strain_name = strain_name.decode('UTF-16BE').encode("utf-8")
+    print new_strain_name
+    server_data = set_value('strain_name', new_strain_name, server_data)
     print "Setting up Preformatted Values..."
     server_data = set_value('viz', {}, server_data)
     viztypes = server_data['viz']
