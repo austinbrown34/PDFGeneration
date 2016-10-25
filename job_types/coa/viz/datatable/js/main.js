@@ -181,9 +181,14 @@ $(document).ready(function() {
       $('#stuff table th:contains("LOQ")').each(function(){
         $(this).html("LOQ")
       })
-      $('#stuff table th:contains("Limit<")').each(function(){
+      $('#stuff table th:contains("Limit")').each(function(){
+        if ($(this.contains('Suggested'))){
+          $(this).html("Suggested Limit");
+        }
+        else{
+          $(this).html("Limit");
+        }
 
-        $(this).html("Limit")
       })
       $('#stuff table th:contains("Spike")').each(function(){
         $(this).html("Spike")
