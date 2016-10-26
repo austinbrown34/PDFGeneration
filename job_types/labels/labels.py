@@ -107,6 +107,7 @@ def make_number(data, digits=None, labels=False):
 
 def setup(server_data):
     # print value_for('sample_labels', server_data)
+    # print str(server_data)
     print bcolors.BOLD
     print "--------------------------------------"
     print "Running Setup for Job Type: LABELS"
@@ -121,7 +122,8 @@ def setup(server_data):
     server_data = set_value('viz', {}, server_data)
     viztypes = server_data['viz']
     viztypes['job_type'] = 'labels'
-    server_data = set_value('lab_data', value_for('lab_data_latest', server_data), server_data)
+    if 'lab_data_latest' in server_data:
+        server_data = set_value('lab_data', value_for('lab_data_latest', server_data), server_data)
 
     qr_base = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl="
     lab_slug = value_for('lab.slug', server_data)
@@ -324,7 +326,7 @@ def setup(server_data):
     try:
         print "Attempting to Download Config..."
         s3templates.download_config(
-            os.path.join('labels', template_folder),
+            os.path.join('labels', 'generic'),
             'config.yaml',
             '/tmp/work/config.yaml'
         )
@@ -338,8 +340,10 @@ def setup(server_data):
     print "Successfully Downloaded Config..."
     print "Labels Found:"
     # print server_data['sample_labels']
+    sample_label = value_for('sample_label', server_data)
+    sample_labels = [sample_label]
     print value_for('sample_labels', server_data)
-    template_keys = get_test_packages(value_for('sample_labels', server_data))
+    template_keys = get_test_packages(sample_labels)
     print "Finding Templates for the Labels..."
     templates = s3templates.get_templates('/tmp/work/config.yaml', '/tmp/', template_keys)
     # print "--------------------------------------"
@@ -356,9 +360,9 @@ def setup(server_data):
     try:
         print "Downloading Matched Templates..."
         # print str(templates)
-        s3templates.download_templates(os.path.join('labels', template_folder), templates)
+        s3templates.download_templates(os.path.join('labels', 'generic'), templates)
         print "Downloading Special Scripts..."
-        s3templates.download_scripts(os.path.join('labels', template_folder), scripts)
+        s3templates.download_scripts(os.path.join('labels', 'generic'), scripts)
     except Exception as e:
         print "---------------------------------------"
         print str(e)

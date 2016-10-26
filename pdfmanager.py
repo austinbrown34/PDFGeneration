@@ -148,7 +148,14 @@ class PDFManager(object):
             # print "printing first post"
             # print first.text
             # print "Successfully "
-            this_data = {'key': file_key}
+            if self.job_type.upper() == 'LABELS':
+                this_data = {
+                    'key': file_key,
+                    'job_type': self.job_type.upper(),
+                    'sample_label': self.server_data['sample_label']
+                    }
+            else:
+                this_data = {'key': file_key}
             if api_key and api_secret:
                 this_data['API_KEY'] = api_key
                 this_data['API_SECRET'] = api_secret
