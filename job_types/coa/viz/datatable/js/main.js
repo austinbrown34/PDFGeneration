@@ -182,9 +182,10 @@ $(document).ready(function() {
         $(this).html("LOQ")
       })
       $('#stuff table th:contains("Limit")').each(function(){
-        if ($(this.contains('Suggested'))){
-          $(this).html("Suggested Limit");
+        if ($(this).is(':contains("Suggested")')){
+          $(this).html("Suggested Limit")
         }
+
         else{
           $(this).html("Limit");
         }
